@@ -184,7 +184,7 @@
 
 
     # Default ruby version (brew installed ruby)
-    - shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane"
+    - shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane carthage_cache"
       when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "bundle --version"
       when: is_incremental_setup|default(false) == false
