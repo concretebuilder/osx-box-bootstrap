@@ -153,7 +153,6 @@
     - homebrew: name=flow state=present
     - homebrew: name=tree state=present
     - homebrew: name=carthage state=present
-    - homebrew: name=carthage_cache state=present
     - name: Install xquartz
       homebrew_cask: name=xquartz state=present
     - name: Install wine
@@ -185,7 +184,7 @@
 
 
     # Default ruby version (brew installed ruby)
-    - shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane"
+    - shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane carthage_cache"
       when: is_incremental_setup|default(false) == false
     - shell: bash -l -c "bundle --version"
       when: is_incremental_setup|default(false) == false
