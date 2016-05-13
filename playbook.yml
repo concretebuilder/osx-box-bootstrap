@@ -153,6 +153,7 @@
     - homebrew: name=flow state=present
     - homebrew: name=tree state=present
     - homebrew: name=carthage state=present
+    - homebrew: name=carthage_cache state=present
     - name: Install xquartz
       homebrew_cask: name=xquartz state=present
     - name: Install wine
