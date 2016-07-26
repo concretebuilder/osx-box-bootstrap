@@ -93,6 +93,7 @@
       with_items:
         # Xamarin tools
         - { fold_path: 'bitrise/xamarin' }
+        - { fold_path: 'bitrise/xamarin/Touch.Unit/0.9.0/' }
 
     - synchronize: src=xamarin/ dest="/Users/{{ param_user }}/bitrise/xamarin/"
 
@@ -101,3 +102,8 @@
     - debug: msg=" (!) After you finished with the preparations RESTART the machine!"
     - debug: msg=" (!) Don't forget to remove the VM snapshots (if you used snapshots) before packaging!"
     - debug: msg="---> Finished"
+
+    # ------------------------------------------------------
+    # --- Install Touch.Server.exe
+    - name: "Touch.Server.exe: download"
+      shell: bash -l -c "curl -fL https://github.com/bitrise-io/Touch.Unit/releases/download/0.9.0/Touch.Server.exe > /Users/{{ param_user }}/bitrise/xamarin/Touch.Unit/0.9.0/Touch.Server.exe"
