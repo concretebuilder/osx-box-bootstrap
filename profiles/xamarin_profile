@@ -6,6 +6,7 @@ export COMPONENT_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/xamarin-component"
 export NUNIT_3_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/3.2.0/bin"
 export NUNIT_2_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/2.6.4/bin"
 export NUNIT_PATH="${NUNIT_3_PATH}"    # This will be replaced with NUNIT_2_PATH
+export TOUCH_SERVER_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/Touch.Unit/v1.0/Touch.Server.exe"
 
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
