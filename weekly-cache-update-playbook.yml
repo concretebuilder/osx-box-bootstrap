@@ -32,23 +32,23 @@
     - file: path=/usr/local/bin/envman state=absent
     #
     - name: "bitrise CLI: download"
-      shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.3.6/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"
+      shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.3.7/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"
     - name: "Make the bitrise CLI executable"
       file: path=/usr/local/bin/bitrise mode="u=rwx,g=rx,o=rx"
     - name: "Bitrise CLI test -version"
       shell: bash -l -c "bitrise --version"
-    - name: "Bitrise CLI - setup -minimal"
-      shell: bash -l -c "bitrise setup --minimal"
+    - name: "Bitrise CLI - setup"
+      shell: bash -l -c "bitrise setup"
     - name: "Bitrise CLI - envman -version"
-      shell: bash -l -c "envman -version"
+      shell: bash -l -c "/Users/vagrant/.bitrise/tools/envman -version"
     - name: "Bitrise CLI - stepman -version"
-      shell: bash -l -c "stepman -version"
+      shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman -version"
     # setup the default StepLib collection to stepman, for a pre-warmed
     #  cache for the StepLib
     - name: "stepman: init"
-      shell: bash -l -c "stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
+      shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
     - name: "stepman: update"
-      shell: bash -l -c "stepman update"
+      shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman update"
 
 
     - name: "bitrise-bridge: download"

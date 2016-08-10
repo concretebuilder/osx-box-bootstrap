@@ -1,3 +1,8 @@
+## `v2016_08_10_1`
+
+* `bitrise` (CLI): `1.3.7`
+
+
 ## `v2016_07_21_1`
 
 * Xamarin specific: added new preinstalled Android packages: `build-tools-24.0.1` & `sys-img-armeabi-v7a-android-24`
