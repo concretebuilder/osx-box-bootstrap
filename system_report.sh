@@ -86,6 +86,12 @@ echo "========================================"
 echo
 
 echo
+echo "=== All Ruby GEMs ======================"
+gem list
+echo "========================================"
+echo
+
+echo
 echo "=== Checking Xcode CLT dirs ============"
 # installed by `xcode-select --install`, if called *before*
 #  Xcode.app is installed
