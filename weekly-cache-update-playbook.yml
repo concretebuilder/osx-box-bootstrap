@@ -52,7 +52,7 @@
 
 
     - name: "bitrise-bridge: download"
-      shell: bash -l -c "curl -fL https://github.com/bitrise-tools/bitrise-bridge/releases/download/0.9.9/bitrise-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise-bridge"
+      shell: bash -l -c "curl -fL https://github.com/bitrise-tools/bitrise-bridge/releases/download/0.9.10/bitrise-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise-bridge"
     - name: "Make the bitrise-bridge executable"
       file: path=/usr/local/bin/bitrise-bridge mode="u=rwx,g=rx,o=rx"
     - name: "bitrise-bridge -version"
