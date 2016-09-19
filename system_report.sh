@@ -56,6 +56,7 @@ ver_line="$(flow version)" ;                      echo "* flow: $ver_line"
 ver_line="$(carthage version)" ;                  echo "* carthage: $ver_line"
 ver_line="$(convert --version | head -1)" ;       echo "* imagemagic (convert): $ver_line"
 ver_line="$(ps2ascii --version)" ;                echo "* ghostscript (ps2ascii): $ver_line"
+ver_line="$(jazzy --version)" ;                   echo "* jazzy: $ver_line"
 
 # wine was removed, is not installed on new Stacks
 set +e
