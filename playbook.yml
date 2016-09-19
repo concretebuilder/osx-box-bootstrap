@@ -155,6 +155,7 @@
     - homebrew: name=carthage state=present
     - homebrew: name=imagemagick state=present
     - homebrew: name=ghostscript state=present
+    - homebrew: name=jazzy state=present
     
     - name: Install java
       homebrew_cask: name=java state=present
