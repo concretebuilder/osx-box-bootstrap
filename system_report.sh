@@ -54,7 +54,7 @@ ver_line="$(gtimeout --version | grep 'timeout')" ;  echo "* gtimeout: $ver_line
 ver_line="$(watchman --version)" ;                echo "* watchman: $ver_line"
 ver_line="$(flow version)" ;                      echo "* flow: $ver_line"
 ver_line="$(carthage version)" ;                  echo "* carthage: $ver_line"
-ver_line="$(convert --version | head -1)" ;       echo "* imagemagic (convert): $ver_line"
+ver_line="$(convert --version | head -1)" ;       echo "* imagemagick (convert): $ver_line"
 ver_line="$(ps2ascii --version)" ;                echo "* ghostscript (ps2ascii): $ver_line"
 
 # wine was removed, is not installed on new Stacks
