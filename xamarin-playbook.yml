@@ -91,23 +91,7 @@
     #
     # Ensure debug.keystore
     # $HOME/.local/share/Mono for Android/debug.keystore
-    - shell: |-
-        debug_keystore_dir="/Users/{{ param_user }}/.local/share/Mono for Android"
-        debug_keystore_path="$debug_keystore_dir/debug.keystore"
-
-        if [ ! -f "$debug_keystore_path" ]; then
-          mkdir -p "$debug_keystore_dir"
-
-          keytool -genkey -v \
-            -keystore "$debug_keystore_path" \
-            -storepass android \
-            -alias androiddebugkey \
-            -keypass android \
-            -keyalg RSA \
-            -keysize 2048 \
-            -validity 10000 \
-            -dname "CN=Android Debug,O=Android,C=US"
-        fi
+    - shell: debug_keystore_dir="Users/{{ param_user }}/.local/share/Mono for Android"; debug_keystore_path="$debug_keystore_dir/debug.keystore"; if [ ! -f "$debug_keystore_path" ]; then mkdir -p "$debug_keystore_dir"; keytool -genkey -v -keystore "$debug_keystore_path" -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"; fi
 
     #
     # Setup Bitrise specific folders
