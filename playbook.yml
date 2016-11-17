@@ -112,6 +112,12 @@
         dest="/Users/{{ param_user }}/.profiles/bitrise_profile"
         owner="{{ param_user }}"
         mode=0600
+    # Includes 3thd party tools specific environments
+    - name: setup tools_profile
+      copy: src=profiles/tools_profile
+        dest="/Users/{{ param_user }}/.profiles/tools_profile"
+        owner="{{ param_user }}"
+        mode=0600
     # ~/.bashrc will load ~/.profiles/bitrise_profile
     #  and the other profiles (~/.profile and ~/.bash_profile) will
     #  load ~/.bashrc, so no matter how the shell is initialized

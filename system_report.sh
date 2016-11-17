@@ -204,6 +204,7 @@ echo
 echo "=== Environment infos ======================="
 if [ -z "${MATCH_KEYCHAIN_PASSWORD}" ] ; then
   echo "MATCH_KEYCHAIN_PASSWORD environment NOT set"
+  exit 1
 else
   echo "MATCH_KEYCHAIN_PASSWORD environment set"
 fi
