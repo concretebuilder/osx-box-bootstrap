@@ -24,6 +24,12 @@
         dest="/Users/{{ param_user }}/.bashrc"
         owner="{{ param_user }}"
         mode=0600
+        
+    - name: setup tools_profile
+      copy: src=profiles/tools_profile
+        dest="/Users/{{ param_user }}/.profiles/tools_profile"
+        owner="{{ param_user }}"
+        mode=0600
 
     # ----------------------------------------
     # --- pre-installed tool cache updates ---

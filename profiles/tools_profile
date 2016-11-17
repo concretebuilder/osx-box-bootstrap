@@ -1,0 +1,4 @@
+# (3rd party) Tools environments
+
+export MATCH_KEYCHAIN_PASSWORD="${BITRISE_KEYCHAIN_PASSWORD}"
+

@@ -19,6 +19,11 @@ if [ -s "$HOME/.profiles/bitrise_profile" ] ; then
   source "$HOME/.profiles/bitrise_profile"
 fi
 
+# (3rd party) Tools environments
+if [ -s "$HOME/.profiles/tools_profile" ] ; then
+  source "$HOME/.profiles/tools_profile"
+fi
+
 # Xamarin environments, if exists
 if [ -s "$HOME/.profiles/xamarin_profile" ] ; then
   source "$HOME/.profiles/xamarin_profile"

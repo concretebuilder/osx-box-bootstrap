@@ -201,6 +201,16 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
 fi
 
 echo
+echo "=== Environment infos ======================="
+if [ -z "${MATCH_KEYCHAIN_PASSWORD}" ] ; then
+  echo "MATCH_KEYCHAIN_PASSWORD environment NOT set"
+else
+  echo "MATCH_KEYCHAIN_PASSWORD environment set"
+fi
+echo "========================================"
+echo
+
+echo
 echo "=== Control tests ======================"
 # these things should pass;
 # e.g. testing the existence of specific paths
