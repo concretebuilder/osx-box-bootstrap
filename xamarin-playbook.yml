@@ -92,9 +92,13 @@
     - shell: echo y | android update sdk --no-ui --all --filter tools | grep 'package installed'
 
     #
-    # Ensure debug.keystore
+    # Install debug.keystore
     # $HOME/.local/share/Mono for Android/debug.keystore
-    - shell: debug_keystore_dir="Users/{{ param_user }}/.local/share/Mono for Android"; debug_keystore_path="$debug_keystore_dir/debug.keystore"; if [ ! -f "$debug_keystore_path" ]; then mkdir -p "$debug_keystore_dir"; keytool -genkey -v -keystore "$debug_keystore_path" -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"; fi
+    - name: install debug.keystore
+      copy: src=xamarin/debug.keystore
+        dest="Users/{{ param_user }}/.local/share/Mono for Android/debug.keystore"
+        owner="{{ param_user }}"
+        mode=0600
 
     #
     # Setup Bitrise specific folders
