@@ -99,6 +99,13 @@ echo "========================================"
 echo
 
 echo
+echo "=== NPM global packages =========================="
+ver_line="$(cordova --version)" ;                echo "* Cordova: $ver_line"
+ver_line="$(ionic --version)" ;                  echo "* Ionic: $ver_line"
+echo "========================================"
+echo
+
+echo
 echo "=== Checking Xcode CLT dirs ============"
 # installed by `xcode-select --install`, if called *before*
 #  Xcode.app is installed

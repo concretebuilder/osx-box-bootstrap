@@ -218,6 +218,11 @@
       shell: bash -l -c "pod setup || pod setup"
       when: is_incremental_setup|default(false) == false
 
+    # NPM global packages
+    - name: npm install -g tools
+      shell: bash -l -c "npm install -g ionic cordova"
+      when: is_incremental_setup|default(false) == false
+
     # Git config
     - name: "git config user.email"
       shell: bash -l -c 'git config --global user.email "letsconnect@bitrise.io"'
