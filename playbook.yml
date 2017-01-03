@@ -189,8 +189,8 @@
       homebrew_cask: name=java state=present
 
     # Ruby
-    - name: brew install ruby
-      homebrew: name=ruby state=present
+    - name: brew install homebrew/versions/ruby23
+      homebrew: name=homebrew/versions/ruby23 state=present
 
     ## Go
     # Gopath is $HOME/go
