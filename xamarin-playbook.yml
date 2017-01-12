@@ -98,7 +98,7 @@
       copy: src=xamarin/debug.keystore
         dest="Users/{{ param_user }}/.local/share/Mono for Android/debug.keystore"
         owner="{{ param_user }}"
-        mode=0600
+        mode=0644
 
     #
     # Setup Bitrise specific folders
