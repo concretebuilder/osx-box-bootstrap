@@ -47,6 +47,9 @@
     - name: "CocoaPods: checkout spec repo - for deprecated cocoapods versions"
       shell: bash -l -c "cd /Users/vagrant/.cocoapods/repos/master/ && git fetch origin master --tags && git checkout v0.32.1"
       when: use_deprecated_cocoapods|default("") == "yes"
+    - name: "CocoaPods: pre-fetch the Old-Specs spec, to update it to the latest version"
+      shell: bash -l -c "pod repo add cocoapods https://github.com/CocoaPods/Old-Specs"
+      when: use_deprecated_cocoapods|default("") == "yes"
 
 
     # ----------------------------------------
