@@ -31,6 +31,7 @@ ver_line="$(ruby --version)" ;                    echo "* Ruby: $ver_line"
 ver_line="$(python --version 2>&1 >/dev/null)" ;  echo "* Python: $ver_line"
 ver_line="$(node --version)" ;                    echo "* Node.js: $ver_line"
 ver_line="$(npm --version)" ;                     echo "* NPM: $ver_line"
+ver_line="$(yarn --version)" ;                    echo "* Yarn: $ver_line"
 ver_line="$(java -version 2>&1 >/dev/null)" ;     echo "* Java: $ver_line"
 
 

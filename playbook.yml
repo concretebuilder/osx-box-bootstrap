@@ -184,6 +184,8 @@
       homebrew: name=imagemagick state=present
     - name: brew install ghostscript
       homebrew: name=ghostscript state=present
+    - name: brew install yarn
+      homebrew: name=yarn state=present
 
     - name: brew Install java
       homebrew_cask: name=java state=present
