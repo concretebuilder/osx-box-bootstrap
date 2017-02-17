@@ -84,6 +84,7 @@ echo
 
 echo
 echo "=== Ruby GEMs =========================="
+ver_line="$(gem --version)" ;                     echo "* Rubygems: $ver_line"
 ver_line="$(bundle --version)" ;                  echo "* Bundler: $ver_line"
 ver_line="$(pod --version)" ;                     echo "* CocoaPods: $ver_line"
 ver_line="$(fastlane --version | grep 'fastlane ' | tail -1)" ;  echo "* fastlane: $ver_line"

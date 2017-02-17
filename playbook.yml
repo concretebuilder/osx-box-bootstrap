@@ -209,6 +209,9 @@
 
 
     # Default ruby version (brew installed ruby)
+    - name: update rubygems
+      shell: bash -l -c "gem update --system --no-document"
+      when: is_incremental_setup|default(false) == false
     - name: gem install tools
       shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane"
       when: is_incremental_setup|default(false) == false
