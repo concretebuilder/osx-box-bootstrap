@@ -173,6 +173,8 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
   mono --version
   echo "* Mono path:"
   which mono
+  echo "* .NET Core version:"
+  dotnet --version  
   echo
   echo "* Xamarin.Android"
   cat /Developer/MonoAndroid/usr/Version
