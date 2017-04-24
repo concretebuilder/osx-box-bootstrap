@@ -143,6 +143,19 @@
         dest="/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android/debug.keystore"
         owner="{{ param_user }}"
         mode=0644
+        
+    # ------------------------------------------------------
+    # --- Install .NET Core
+    
+    # Download install script
+    - name: "Download .net core install script"
+      shell: wget https://raw.githubusercontent.com/dotnet/cli/rel/1.0.1/scripts/obtain/dotnet-install.sh
+    - name: "Set permissions"
+      shell: chmod +x dotnet-install.sh
+    - name: "Execute script"
+      shell: ./dotnet-install.sh
+    - name: "Create symbolic link"
+      shell: ln -s /Users/{{ param_user }}/.dotnet/dotnet /usr/local/bin/dotnet
 
     #
     # Setup Bitrise specific folders
