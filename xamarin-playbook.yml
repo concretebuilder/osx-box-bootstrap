@@ -156,6 +156,10 @@
       shell: rm dotnet-install.sh
     - name: Create symbolic link
       shell: ln -s /Users/{{ param_user }}/.dotnet/dotnet /usr/local/bin/dotnet
+    - name: Disable first time experience when building
+      shell: export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+    - name: Disable .net core telemetry
+      shell: export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
     #
     # Setup Bitrise specific folders
