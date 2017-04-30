@@ -148,6 +148,11 @@
     # --- Install .NET Core
 
     # Download install script
+    - name: Setup pre-requisites
+      shell: brew install openssl
+    - shell: mkdir -p /usr/local/lib
+    - shell: ln -s /usr/local/opt/openssl/lib/libcrypto.1.0.0.dylib /usr/local/lib/
+    - shell: ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
     - name: Download .net core install script
       shell: wget https://raw.githubusercontent.com/dotnet/cli/rel/1.0.1/scripts/obtain/dotnet-install.sh
     - name: Run the install script
