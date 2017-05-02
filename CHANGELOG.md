@@ -1,6 +1,17 @@
 ## UPCOMING
 
 
+## `v2017_05_02_1`
+
+* Xamarin Only: .Net Core __removed__, no longer preinstalled. Please use the new `install-dotnetcore` step instead.
+    * Thanks @stefandevo for the changes!
+    * TL;DR; installation of .Net Core right now is still a bit "beta", we'll consider pre-installing .Net Core
+      in the future again once it lands in `brew`. Until that it's way more flexible to use a Step
+      instead, which can be updated any time, instead of sticking to a preinstalled version
+      which is hard & slow to change.
+    * Related discussion: https://github.com/bitrise-io/osx-box-bootstrap/pull/44
+
+
 ## `v2017_04_25_1`
 
 * Xamarin Only: .Net Core preinstalled

@@ -144,19 +144,6 @@
         owner="{{ param_user }}"
         mode=0644
 
-    # ------------------------------------------------------
-    # --- Install .NET Core
-
-    # Download install script
-    - name: Download .net core install script
-      shell: wget https://raw.githubusercontent.com/dotnet/cli/rel/1.0.1/scripts/obtain/dotnet-install.sh
-    - name: Run the install script
-      shell: bash dotnet-install.sh
-    - name: Delete the install script
-      shell: rm dotnet-install.sh
-    - name: Create symbolic link
-      shell: ln -s /Users/{{ param_user }}/.dotnet/dotnet /usr/local/bin/dotnet
-
     #
     # Setup Bitrise specific folders
     #
