@@ -180,6 +180,9 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
   echo "* Xamarin.iOS"
   /Developer/MonoTouch/usr/bin/mtouch --version
   echo
+  echo "* Touch.Server.exe"
+  tree -L 2 "$BITRISE_XAMARIN_FOLDER_PATH/Touch.Unit"
+  echo
   echo "--- Android"
   echo
   echo "* ANDROID_HOME (${ANDROID_HOME}) content:"
