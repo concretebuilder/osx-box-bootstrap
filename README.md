@@ -252,11 +252,11 @@ Update Xamarin Components
 Install Xamarin Platform on the VM
 
 * from: https://xamarin.com/platform
-* launch Xamarin Studio and set it to "don't check for updates"
-  * Menu bar : Xamarin Studio -> Check for updates -> uncheck
+* launch Visual Studio and set it to "don't check for updates"
+  * Menu bar : Visual Studio -> Check for updates -> uncheck
 * set Log level
-  * Menu bar : Xamarin Studio -> Preferences -> Build -> Log verbosity: Quiet
-* close Xamarin Studio
+  * Menu bar : Visual Studio -> Preferences -> Build -> Log verbosity: Quiet
+* close Visual Studio
 
 To add the Xamarin specific bits you should also run this,
 after you ran the previous steps: `bitrise run provision-xamarin-vm`
