@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_30_08_1`
+
+* `jce-unlimited-strength-policy` cask preinstalled
+    * PR https://github.com/bitrise-io/osx-box-bootstrap/pull/50
 
 ## `v2017_08_08_1`
 
