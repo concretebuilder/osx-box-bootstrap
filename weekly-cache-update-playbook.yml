@@ -11,6 +11,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
+    - bitrise_cli_version: 1.9.0
   tasks:
 
     # ----------------------------------------
@@ -61,7 +62,7 @@
     - file: path=/usr/local/bin/envman state=absent
     #
     - name: "bitrise CLI: download"
-      shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.8.0/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"
+      shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"
     - name: "Make the bitrise CLI executable"
       file: path=/usr/local/bin/bitrise mode="u=rwx,g=rx,o=rx"
     - name: "Bitrise CLI test -version"
