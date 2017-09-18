@@ -12,13 +12,6 @@
     - param_user: vagrant
   tasks:
     #
-    # Required param checks
-    - fail: msg="bitrise_box_version not defined (format example 'r2p3')"
-      when: bitrise_box_version|default("") == ""
-    - debug: msg=" (i) bitrise_box_version = {{ bitrise_box_version }}"
-    - debug: msg=" (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
-
-    #
     # Setup the debug log file for custom scripts
     #  [!] Collect custom script outputs to ~/Desktop/debug.log, for inspection.
     # You can inspect it during setup with $ tail -f ~/Desktop/debug.log
@@ -288,14 +281,6 @@
     # Install cmd-bridge
     - name: run cmd-bridge installer script
       script: installers/install_cmd-bridge.sh
-
-    # The box-info.json contains Box/VM version information,
-    #  to make it easy to track VM versions.
-    - name: setup Desktop/box-info.json
-      template: src=setupfiles/box-info.json.template
-        dest="/Users/{{ param_user }}/Desktop/box-info.json"
-        owner="{{ param_user }}"
-        mode=0600
 
     #
     # Switch to Xcode stable, the default Xcode for building

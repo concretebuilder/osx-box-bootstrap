@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_09_18_1`
+
+* Removed unused box-info.json
+
 ## `v2017_09_13_1`
 
 * `bitrise` (CLI): `1.9.0`
