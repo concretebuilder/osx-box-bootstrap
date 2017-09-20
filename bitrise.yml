@@ -5,7 +5,6 @@ app:
   envs:
   - ANSIBLE_HOST_KEY_CHECKING: 'False'
   # define these in the .bitrise.secrets.yml
-  - VM_BUILD_BOX_VERSION: $VM_BUILD_BOX_VERSION
   - VM_BUILD_IP: $VM_BUILD_IP
   # Full, absolute Xcode path, e.g.: /Applications/Xcode.app
   - XCODE_PATH: $XCODE_PATH
@@ -49,8 +48,7 @@ workflows:
             #!/bin/bash
             set -e
             set -x
-            echo " * VM_BUILD_BOX_VERSION: $VM_BUILD_BOX_VERSION"
-            ansible-playbook -v -e bitrise_box_version="${VM_BUILD_BOX_VERSION}" -e xcode_path="${XCODE_PATH}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
+            ansible-playbook -v -e xcode_path="${XCODE_PATH}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
 
   provision-xamarin-vm:
     description: |-
