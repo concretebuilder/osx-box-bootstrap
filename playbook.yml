@@ -12,6 +12,9 @@
     - param_user: vagrant
   tasks:
     #
+    # Required param checks
+    - debug: msg=" (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
+
     # Setup the debug log file for custom scripts
     #  [!] Collect custom script outputs to ~/Desktop/debug.log, for inspection.
     # You can inspect it during setup with $ tail -f ~/Desktop/debug.log
