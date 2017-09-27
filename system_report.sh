@@ -33,7 +33,6 @@ ver_line="$(node --version)" ;                    echo "* Node.js: $ver_line"
 ver_line="$(npm --version)" ;                     echo "* NPM: $ver_line"
 ver_line="$(yarn --version)" ;                    echo "* Yarn: $ver_line"
 ver_line="$(java -version 2>&1 >/dev/null)" ;     echo "* Java: $ver_line"
-ver_line="$(brew cask list jce-unlimited-strength-policy 2> /dev/null; if [ "$?" -eq "0" ]; then echo "Installed"; else echo "Not installed"; fi)" ; echo "* jce-unlimited-strength-policy: $ver_line"
 
 echo
 ver_line="$(git --version)" ;                     echo "* git: $ver_line"

@@ -1,5 +1,11 @@
 ## UPCOMING
 
+## `v2017_09_27_1`
+
+* `jce-unlimited-strength-policy` cask removed
+    * Java 9 can set this from code: https://stackoverflow.com/a/42163925
+    * https://github.com/bitrise-io/osx-box-bootstrap/issues/55
+
 ## `v2017_09_18_1`
 
 * Removed unused box-info.json

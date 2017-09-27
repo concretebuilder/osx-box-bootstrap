@@ -194,8 +194,6 @@
 
     - name: brew install java
       homebrew_cask: name=java state=present
-    - name: brew install jce-unlimited-strength-policy
-      homebrew_cask: name=jce-unlimited-strength-policy state=present
 
     # Ruby
     - name: brew install ruby
