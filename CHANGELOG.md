@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_10_10_1`
+
+* `bitrise` (CLI): `1.10.0`
+
 ## `v2017_09_27_1`
 
 * `jce-unlimited-strength-policy` cask removed
