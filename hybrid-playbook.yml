@@ -15,6 +15,20 @@
     PATH: "{{ ansible_env.PATH }}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools"
 
   tasks:
+    - name: Uninstall Java LaunchAgents
+      shell: |
+        #!/bin/sh
+        launchctl remove com.oracle.java.Java-Updater
+        launchctl remove com.oracle.java.Helper-Tool
+      become: true
+
+    - name: Install JDK 8
+      shell: |
+        #!/bin/sh
+        brew cask uninstall java
+        brew tap caskroom/versions
+        brew cask install java8
+
     - name: Create Android SDK directory
       file:
         path: "${ANDROID_HOME}"
