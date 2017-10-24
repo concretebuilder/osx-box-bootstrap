@@ -15,9 +15,6 @@
     PATH: "{{ ansible_env.PATH }}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools"
 
   tasks:
-    # - name: check PATH
-    #   shell: echo $PATH
-    
     - name: Create Android SDK directory
       file:
         path: "${ANDROID_HOME}"
@@ -83,12 +80,6 @@
         "add-ons;addon-google_apis-google-22" \
         "add-ons;addon-google_apis-google-21"
 
-    # - name: check stuff
-    #   shell: ls ${ANDROID_HOME}
-    #   register: lsout
-
-    # - debug: msg={{ lsout.stdout_lines }}
-
     - name: Install gradle
       command: brew install gradle
 
@@ -103,6 +94,12 @@
 
     - name: Install Google Cloud SDK
       command: brew install caskroom/cask/google-cloud-sdk
+
+    - name: Add ANDROID_HOME and PATH to .bashrc
+      shell: |
+        #/bin/sh
+        echo 'export ANDROID_HOME=/usr/local/android-sdk-darwin' >> ~/.bashrc
+        echo 'export PATH=$PATH' >> ~/.bashrc
 
     # Final debug prints
     - debug: msg="---> Finished with automatic stuff - but here's some things you have to do manually:"
