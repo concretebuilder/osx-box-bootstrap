@@ -1,0 +1,122 @@
+---
+#
+# Ansible playbook to prepare a Bitrise OS X VM/box, used through vagrant
+#
+
+- hosts: all
+  # accelerate: true
+  remote_user: vagrant
+  vars:
+    - ansible_sudo_pass: vagrant
+    - param_user: vagrant
+
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-darwin
+    PATH: "{{ ansible_env.PATH }}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools"
+
+  tasks:
+    - name: Uninstall Java LaunchAgents
+      shell: |
+        #!/bin/sh
+        launchctl remove com.oracle.java.Java-Updater
+        launchctl remove com.oracle.java.Helper-Tool
+      become: true
+
+    - name: Install JDK 8
+      shell: |
+        #!/bin/sh
+        brew cask uninstall java
+        brew tap caskroom/versions
+        brew cask install java8
+
+    - name: Create Android SDK directory
+      file:
+        path: "${ANDROID_HOME}"
+        state: directory
+        mode: 0755
+      become: true
+
+    - name: Change ANDROID_HOME's owner
+      file:
+        path: "${ANDROID_HOME}"
+        owner: vagrant
+        group: wheel
+      become: true
+
+    - name: Download Android SDK
+      unarchive:
+        src: https://dl.google.com/android/repository/sdk-tools-darwin-3859397.zip
+        dest: ${ANDROID_HOME}
+        remote_src: yes
+
+    - name: Accept SDK licences
+      script: lic.exp
+
+    - name: Platform tools
+      command: ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools"
+
+    - name: Emulator
+      command: ${ANDROID_HOME}/tools/bin/sdkmanager emulator
+
+    - name: Install all required Android packages with sdkmanager
+      shell: |
+        ${ANDROID_HOME}/tools/bin/sdkmanager \
+        "platforms;android-26" \
+        "platforms;android-25" \
+        "platforms;android-24" \
+        "platforms;android-23" \
+        "platforms;android-22" \
+        "platforms;android-21" \
+        "platforms;android-19" \
+        "platforms;android-17" \
+        "platforms;android-15" \
+        "platforms;android-10" \
+        "build-tools;26.0.2" \
+        "build-tools;26.0.1" \
+        "build-tools;25.0.3" \
+        "build-tools;24.0.3" \
+        "build-tools;23.0.3" \
+        "build-tools;22.0.1" \
+        "build-tools;21.1.2" \
+        "build-tools;19.1.0" \
+        "build-tools;17.0.0" \
+        "system-images;android-25;google_apis;armeabi-v7a" \
+        "system-images;android-24;default;armeabi-v7a" \
+        "system-images;android-22;default;armeabi-v7a" \
+        "system-images;android-21;default;armeabi-v7a" \
+        "system-images;android-19;default;armeabi-v7a" \
+        "extras;android;m2repository" \
+        "extras;google;m2repository" \
+        "extras;google;google_play_services" \
+        "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2" \
+        "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1" \
+        "add-ons;addon-google_apis-google-23" \
+        "add-ons;addon-google_apis-google-22" \
+        "add-ons;addon-google_apis-google-21"
+
+    - name: Install gradle
+      command: brew install gradle
+
+    - name: Install maven
+      command: brew install maven
+
+    - name: Install Ionic and Cordova
+      command: npm install -g ionic cordova
+
+    - name: Install fastlane
+      shell: gem install fastlane --no-document && fastlane --version
+
+    - name: Install Google Cloud SDK
+      command: brew install caskroom/cask/google-cloud-sdk
+
+    - name: Add ANDROID_HOME and PATH to .bashrc
+      shell: |
+        #/bin/sh
+        echo 'export ANDROID_HOME=/usr/local/android-sdk-darwin' >> ~/.bashrc
+        echo 'export PATH=$PATH' >> ~/.bashrc
+
+    # Final debug prints
+    - debug: msg="---> Finished with automatic stuff - but here's some things you have to do manually:"
+    - debug: msg=" (!) After you finished with the preparations RESTART the machine!"
+    - debug: msg=" (!) Don't forget to remove the VM snapshots (if you used snapshots) before packaging!"
+    - debug: msg="---> Finished"

@@ -161,8 +161,59 @@
         # Xamarin tools
         - { fold_path: 'bitrise/xamarin' }
 
-    - name: sync xamarin tools from the provisioning repo
-      synchronize: src=xamarin/ dest="/Users/{{ param_user }}/bitrise/xamarin/"
+    # Download NUnit and xamarin-component
+    - name: Create download directory for NUnit 3
+      file:
+        path: "/Users/{{ param_user }}/bitrise/xamarin/nunit/3.8.1"
+        state: directory
+
+    - name: Download NUnit 3
+      unarchive:
+        src: https://github.com/nunit/nunit/releases/download/3.8.1/NUnit.Framework-3.8.1.zip
+        dest: "/Users/{{ param_user }}/bitrise/xamarin/nunit/3.8.1"
+        remote_src: yes
+
+    - name: Download NUnit 3 console
+      unarchive:
+        src: https://github.com/nunit/nunit-console/releases/download/3.7/NUnit.Console-3.7.0.zip
+        dest: "/Users/{{ param_user }}/bitrise/xamarin/nunit/3.8.1/bin"
+        remote_src: yes
+
+    - name: Create download directory for NUnit 2
+      file:
+        path: "/Users/{{ param_user }}/bitrise/xamarin/nunit/2.6.4"
+        state: directory
+
+    - name: Download NUnit 2
+      unarchive:
+        src: https://github.com/nunit/nunitv2/releases/download/2.6.4/NUnit-2.6.4.zip
+        dest: "/Users/{{ param_user }}/bitrise/xamarin/nunit/2.6.4"
+        remote_src: yes
+
+      # NUnit 2 unzips into its own top-level directory, this script removes that
+    - name: Fix NUnit 2 directory
+      shell: |
+        #!/bin/sh
+        if [ -d /Users/{{ param_user }}/bitrise/xamarin/nunit/2.6.4/NUnit-2.6.4 ]; then
+          dest="/Users/{{ param_user }}/bitrise/xamarin/nunit/2.6.4"
+          f=("$dest"/*)
+          mv "$dest"/*/* "$dest"
+          rmdir "${f[@]}"
+        fi
+
+    - name: Create download directory for xamarin-component.exe
+      file:
+        path: "/Users/{{ param_user }}/bitrise/xamarin/xamarin-component"
+        state: directory
+
+    - name: Download xamarin-component.exe
+      unarchive:
+        src: https://components.xamarin.com/submit/xpkg
+        dest: "/Users/{{ param_user }}/bitrise/xamarin/xamarin-component"
+        remote_src: yes
+
+    # - name: sync xamarin tools from the provisioning repo
+    #   synchronize: src=xamarin/ dest="/Users/{{ param_user }}/bitrise/xamarin/"
 
     # Final debug prints
     - debug: msg="---> Finished with automatic stuff - but here's some things you have to do manually:"

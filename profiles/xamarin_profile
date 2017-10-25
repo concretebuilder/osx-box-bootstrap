@@ -10,7 +10,7 @@ else
   export ANDROID_NDK_HOME=$HOME/Library/Developer/Xamarin/android-ndk/android-ndk-r11c
 fi
 export COMPONENT_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/xamarin-component"
-export NUNIT_3_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/3.4.1/bin"
+export NUNIT_3_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/3.8.1/bin"
 export NUNIT_2_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/2.6.4/bin"
 export NUNIT_PATH="${NUNIT_3_PATH}"    # This will be replaced with NUNIT_2_PATH
 
