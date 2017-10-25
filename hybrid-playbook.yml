@@ -9,7 +9,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-  
+
   environment:
     ANDROID_HOME: /usr/local/android-sdk-darwin
     PATH: "{{ ansible_env.PATH }}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools"
@@ -51,7 +51,7 @@
 
     - name: Accept SDK licences
       script: lic.exp
-    
+
     - name: Platform tools
       command: ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools"
 
@@ -99,10 +99,10 @@
 
     - name: Install maven
       command: brew install maven
-    
+
     - name: Install Ionic and Cordova
       command: npm install -g ionic cordova
-    
+
     - name: Install fastlane
       shell: gem install fastlane --no-document && fastlane --version
 
