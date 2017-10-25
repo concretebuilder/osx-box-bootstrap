@@ -19,7 +19,8 @@
     #  [!] Collect custom script outputs to ~/Desktop/debug.log, for inspection.
     # You can inspect it during setup with $ tail -f ~/Desktop/debug.log
     #  custom installer scripts (the ones in ./installers folder) use this debug log file
-    - file: path=/Users/{{ param_user }}/Desktop/debug.log
+    - name: Create debug.log
+      file: path=/Users/{{ param_user }}/Desktop/debug.log
         state=touch
         owner="{{ param_user }}"
         mode=0644
@@ -250,7 +251,8 @@
     #
     # Setup the base folders / paths, referenced by ~/.profiles/bitrise_profile
     # These folders will be created in the HOME directory.
-    - file: path="/Users/{{ param_user }}/{{ item.fold_path }}"
+    - name: Setup base folders and paths
+      file: path="/Users/{{ param_user }}/{{ item.fold_path }}"
         state=directory
         owner="{{ param_user }}"
       with_items:
@@ -276,7 +278,8 @@
         - { fold_path: 'bitrise/tools' }
 
     # Sync the tools/ dir
-    - synchronize: src=tools/ dest="/Users/{{ param_user }}/bitrise/tools/"
+    - name: Sync the tools directory
+      synchronize: src=tools/ dest="/Users/{{ param_user }}/bitrise/tools/"
 
     #
     # Install cmd-bridge
@@ -285,7 +288,8 @@
 
     #
     # Switch to Xcode stable, the default Xcode for building
-    - shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
+    - name: Switch to XCode stable
+      shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
       become: yes
 
     #
