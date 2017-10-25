@@ -86,3 +86,34 @@ workflows:
             #!/bin/bash
             set -ex
             ansible-playbook -i "$INVENTORY_PTH" --private-key ./vagrant-insecure_private_key "./weekly-cache-update-playbook.yml"
+
+  ci:
+    steps:
+    - script:
+        title: Install ansible-lint
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/bin/bash -l
+            set -ex
+            pip install ansible-lint
+    - script:
+        title: Valdate bitrise.yml
+        inputs:
+        - content: |-
+            #!/bin/bash -l
+            set -ex
+
+            bitrise validate -c ./bitrise.yml
+    - script:
+        title: Valdate ansible playbooks
+        inputs:
+        - content: |-
+            #!/bin/bash -l
+            set -x # we don't set -e for now because we have some erros
+
+            for f in $(find . -name '*playbook.yml'); do
+              ansible-lint "$f"
+            done
+
+            exit 0

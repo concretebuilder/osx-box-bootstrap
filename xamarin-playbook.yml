@@ -40,6 +40,8 @@
 
     # SDKs
     # Please keep these in descending order!
+    - name: install android-26
+      shell: echo y | android update sdk --no-ui --all --filter android-26 | grep 'package installed'
     - name: install android-25
       shell: echo y | android update sdk --no-ui --all --filter android-25 | grep 'package installed'
     - name: install android-24
@@ -63,6 +65,8 @@
 
     # build tools
     # Please keep these in descending order!
+    - name: install build-tools-26.0.2
+      shell: echo y | android update sdk --no-ui --all --filter build-tools-26.0.2 | grep 'package installed'
     - name: install build-tools-25.0.2
       shell: echo y | android update sdk --no-ui --all --filter build-tools-25.0.2 | grep 'package installed'
     - name: install build-tools-25.0.1
