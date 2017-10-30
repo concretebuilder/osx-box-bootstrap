@@ -212,9 +212,6 @@
         dest: "/Users/{{ param_user }}/bitrise/xamarin/xamarin-component"
         remote_src: yes
 
-    # - name: sync xamarin tools from the provisioning repo
-    #   synchronize: src=xamarin/ dest="/Users/{{ param_user }}/bitrise/xamarin/"
-
     # Final debug prints
     - debug: msg="---> Finished with automatic stuff - but here's some things you have to do manually:"
     - debug: msg=" (!) After you finished with the preparations RESTART the machine!"
