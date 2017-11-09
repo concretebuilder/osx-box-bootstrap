@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_09_1`
+
+* downgrade to java 8 on VS 4 Mac stacks because of sdkmanager issue
+
 ## `v2017_10_10_1`
 
 * `bitrise` (CLI): `1.10.0`
