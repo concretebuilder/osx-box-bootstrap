@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_09_5`
+
+* revert Java hacking
+
 ## `v2017_11_09_4`
 
 * fix homebrew privilege issue
