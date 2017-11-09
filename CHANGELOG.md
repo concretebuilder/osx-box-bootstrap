@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_09_4`
+
+* fix homebrew privilege issue
+
 ## `v2017_11_09_3`
 
 * fix ansible privilege issue
