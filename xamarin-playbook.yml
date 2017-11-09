@@ -37,12 +37,10 @@
     #         but the android SDK tool **won't** fail, it'll just **NOT** install the package.
 
     # This is a workaround for an issue with sdkmanager on Java 9
-    - homebrew_cask:
-      name: java
-      state: absent
-    - homebrew_cask:
-      name: java8
-      state: present
+    - name: remove current java
+      homebrew_cask: name=java state=absent
+    - name: install java8
+      homebrew_cask: name=java8 state=present
 
     - name: install platform-tools
       shell: echo y | sdkmanager "platform-tools"

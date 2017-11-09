@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_09_2`
+
+* fix ansible indentation error
+
 ## `v2017_11_09_1`
 
 * downgrade to java 8 on VS 4 Mac stacks because of sdkmanager issue
