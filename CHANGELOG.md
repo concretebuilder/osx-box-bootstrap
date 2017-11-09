@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_09_3`
+
+* fix ansible privilege issue
+
 ## `v2017_11_09_2`
 
 * fix ansible indentation error

@@ -38,8 +38,10 @@
 
     # This is a workaround for an issue with sdkmanager on Java 9
     - name: remove current java
+      become: yes
       homebrew_cask: name=java state=absent
     - name: install java8
+      become: yes
       homebrew_cask: name=java8 state=present
 
     - name: install platform-tools
