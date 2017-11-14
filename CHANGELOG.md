@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2017_11_14_1`
+
+* `bitrise` (CLI): `1.10.1`
+
 ## `v2017_11_09_5`
 
 * revert Java hacking
