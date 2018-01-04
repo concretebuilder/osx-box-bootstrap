@@ -219,7 +219,7 @@
       shell: bash -l -c "gem update --system --no-document"
       when: is_incremental_setup|default(false) == false
     - name: gem install tools
-      shell: bash -l -c "gem install --no-document bundler cocoapods nomad-cli xcpretty fastlane"
+      shell: bash -l -c "gem install --no-document cocoapods nomad-cli xcpretty fastlane"
       when: is_incremental_setup|default(false) == false
     - name: bundle version
       shell: bash -l -c "bundle --version"
