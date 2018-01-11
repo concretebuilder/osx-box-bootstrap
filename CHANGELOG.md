@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2018_01_11_1`
+
+* `bitrise` (CLI): `1.12.0`
+
 ## `v2018_01_04_1`
 
 * `gem install bundler` removed because `bundler` comes preinstalled with rubygems
