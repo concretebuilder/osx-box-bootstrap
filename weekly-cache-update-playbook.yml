@@ -38,6 +38,8 @@
 
     - name: "brew update"
       shell: bash -l -c "brew update || brew update"
+    - name: brew install screen
+      homebrew: name=screen state=present
 
 
     - name: "CocoaPods: pod setup"
