@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2018_03_13_1`
+
+* `bitrise` (CLI): `1.14.0`
+
 ## `v2018_03_06_1`
 
 * `screen` now updated from brew
