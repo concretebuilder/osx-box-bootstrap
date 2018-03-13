@@ -40,6 +40,8 @@
 
     # SDKs
     # Please keep these in descending order!
+    - name: sdkmanager install android-27
+      shell: echo y | sdkmanager "platforms;android-27"
     - name: install android-26
       shell: echo y | android update sdk --no-ui --all --filter android-26 | grep 'package installed'
     - name: install android-25
