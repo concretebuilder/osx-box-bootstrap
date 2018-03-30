@@ -51,6 +51,14 @@
     - name: xcrun simctl list
       shell: bash -l -c "xcrun simctl list"
       become: yes
+    # Enable Developer Mode. Without this Xcode.app might block UI Tests,
+    # waiting for manual input (password). Since Xcode 9.3 it seems this is
+    # the only way to accept the permissions required for iOS UI Tests,
+    # if you only accept it via the GUI that won't persist after an OS reboot,
+    # but running this command will.
+    - name: "Enable Developer Mode"
+      shell: sudo DevToolsSecurity -enable
+      become: yes
 
     #
     # SSH config
