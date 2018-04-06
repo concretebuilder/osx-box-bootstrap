@@ -1,5 +1,11 @@
 ## UPCOMING
 
+## `v2018_04_06_1`
+
+* Visual Studio for Mac only:
+  * `Java`: need to stick to Java 8 because Android's `sdkmanager` does not support neither Java 9 nor Java 10
+  * all Android tool installs have been modified to use `sdkmanager`
+
 ## `v2018_03_13_1`
 
 * `bitrise` (CLI): `1.14.0`
