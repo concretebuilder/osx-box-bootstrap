@@ -25,6 +25,9 @@
         owner="{{ param_user }}"
         mode=0600
 
+    # Java 8 install
+    # We need Java 8 because sdkmanager doesn't support newer Java versions (yet)
+    # Also we need to manually call launchctl because otherwise it breaks the brew uninstall task
     - name: launchctl remove com.oracle.java.Helper-Tool
       shell: launchctl remove com.oracle.java.Helper-Tool
       become: yes
