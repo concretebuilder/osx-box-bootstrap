@@ -28,18 +28,18 @@
     # Java 8 install
     # We need Java 8 because sdkmanager doesn't support newer Java versions (yet)
     # Also we need to manually call launchctl because otherwise it breaks the brew uninstall task
-    - name: launchctl remove com.oracle.java.Helper-Tool
+    - name: Stop Java's Helper-Tool
       shell: launchctl remove com.oracle.java.Helper-Tool
       become: yes
       ignore_errors: yes
-    - name: launchctl remove com.oracle.java.Java-Updater
+    - name: Stop Java's Java-Updater
       shell: launchctl remove com.oracle.java.Java-Updater
       become: yes
       ignore_errors: yes
     - name: brew uninstall latest java
       homebrew_cask: name=java state=absent
     - name: brew tap caskroom/versions
-      homebrew_tap: name='caskroom/versions'
+      homebrew_tap: name='caskroom/versions' state=present
     - name: brew install java8
       homebrew_cask: name=java8 state=present
 
@@ -120,7 +120,7 @@
 
     # Android System Images, for emulators
     # Please keep these in descending order!
-    - name: install sys-img-armeabi-v7a-android-
+    - name: install sys-img-armeabi-v7a-android-24
       shell: echo y | sdkmanager "system-images;android-24;default;armeabi-v7a"
     - name: install sys-img-armeabi-v7a-android-22
       shell: echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
