@@ -51,105 +51,101 @@
     #       If you don't do it this way you might get "Unknown response" in the logs,
     #         but the android SDK tool **won't** fail, it'll just **NOT** install the package.
     - name: install platform-tools
-      shell: echo y | sdkmanager "platform-tools"
+      shell: echo "y\ny\ny\ny\ny" | sdkmanager "emulator" "tools" "platform-tools"
 
     # SDKs
     # Please keep these in descending order!
-    - name: sdkmanager install android-27
+    - name: install android-27
       shell: echo y | sdkmanager "platforms;android-27"
     - name: install android-26
-      shell: echo y | android update sdk --no-ui --all --filter android-26 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-26"
     - name: install android-25
-      shell: echo y | android update sdk --no-ui --all --filter android-25 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-25"
     - name: install android-24
-      shell: echo y | android update sdk --no-ui --all --filter android-24 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-24"
     - name: install android-23
-      shell: echo y | android update sdk --no-ui --all --filter android-23 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-23"
     - name: install android-22
-      shell: echo y | android update sdk --no-ui --all --filter android-22 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-22"
     - name: install android-21
-      shell: echo y | android update sdk --no-ui --all --filter android-21 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-21"
     - name: install android-20
-      shell: echo y | android update sdk --no-ui --all --filter android-20 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-20"
     - name: install android-19
-      shell: echo y | android update sdk --no-ui --all --filter android-19 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-19"
     - name: install android-17
-      shell: echo y | android update sdk --no-ui --all --filter android-17 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-17"
     - name: install android-15
-      shell: echo y | android update sdk --no-ui --all --filter android-15 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-15"
     - name: install android-10
-      shell: echo y | android update sdk --no-ui --all --filter android-10 | grep 'package installed'
+      shell: echo y | sdkmanager "platforms;android-10"
 
     # build tools
     # Please keep these in descending order!
     - name: install build-tools-26.0.2
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-26.0.2 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;26.0.2"
     - name: install build-tools-25.0.2
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-25.0.2 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;25.0.2"
     - name: install build-tools-25.0.1
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-25.0.1 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;25.0.1"
     - name: install build-tools-25.0.0
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-25.0.0 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;25.0.0"
     - name: install build-tools-24.0.3
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-24.0.3 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;24.0.3"
     - name: install build-tools-24.0.2
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-24.0.2 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;24.0.2"
     - name: install build-tools-24.0.1
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-24.0.1 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;24.0.1"
     - name: install build-tools-24.0.0
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-24.0.0 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;24.0.0"
     - name: install build-tools-23.0.3
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-23.0.3 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;23.0.3"
     - name: install build-tools-23.0.2
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-23.0.2 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;23.0.2"
     - name: install build-tools-23.0.1
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-23.0.1 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;23.0.1"
     - name: install build-tools-22.0.1
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-22.0.1 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;22.0.1"
     - name: install build-tools-21.1.2
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-21.1.2 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;21.1.2"
     - name: install build-tools-20.0.0
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-20.0.0 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;20.0.0"
     - name: install build-tools-19.1.0
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-19.1.0 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;19.1.0"
     - name: install build-tools-17.0.0
-      shell: echo y | android update sdk --no-ui --all --filter build-tools-17.0.0 | grep 'package installed'
+      shell: echo y | sdkmanager "build-tools;17.0.0"
 
     # Android System Images, for emulators
     # Please keep these in descending order!
     - name: install sys-img-armeabi-v7a-android-
-      shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-24 | grep 'package installed'
+      shell: echo y | sdkmanager "system-images;android-24;default;armeabi-v7a"
     - name: install sys-img-armeabi-v7a-android-22
-      shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-22 | grep 'package installed'
+      shell: echo y | sdkmanager "system-images;android-22;default;armeabi-v7a"
     - name: install sys-img-armeabi-v7a-android-21
-      shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-21 | grep 'package installed'
+      shell: echo y | sdkmanager "system-images;android-21;default;armeabi-v7a"
     - name: install sys-img-armeabi-v7a-android-19
-      shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-19 | grep 'package installed'
+      shell: echo y | sdkmanager "system-images;android-19;default;armeabi-v7a"
     - name: install sys-img-armeabi-v7a-android-17
-      shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-17 | grep 'package installed'
+      shell: echo y | sdkmanager "system-images;android-17;default;armeabi-v7a"
     - name: install sys-img-armeabi-v7a-android-15
-      shell: echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-15 | grep 'package installed'
+      shell: echo y | sdkmanager "system-images;android-15;default;armeabi-v7a"
 
     # Extras
     - name: install extra-android-m2repository
-      shell: echo y | android update sdk --no-ui --all --filter extra-android-m2repository | grep 'package installed'
+      shell: echo y | sdkmanager "extras;android;m2repository"
     - name: install extra-google-m2repository
-      shell: echo y | android update sdk --no-ui --all --filter extra-google-m2repository | grep 'package installed'
+      shell: echo y | sdkmanager "extras;google;m2repository"
     - name: install extra-google-google_play_services
-      shell: echo y | android update sdk --no-ui --all --filter extra-google-google_play_services | grep 'package installed'
+      shell: echo y | sdkmanager "extras;google;google_play_services"
 
     # google apis
     # Please keep these in descending order!
     - name: install addon-google_apis-google-23
-      shell: echo y | android update sdk --no-ui --all --filter addon-google_apis-google-23 | grep 'package installed'
+      shell: echo y | sdkmanager "add-ons;addon-google_apis-google-23"
     - name: install addon-google_apis-google-22
-      shell: echo y | android update sdk --no-ui --all --filter addon-google_apis-google-22 | grep 'package installed'
+      shell: echo y | sdkmanager "add-ons;addon-google_apis-google-22"
     - name: install addon-google_apis-google-21
-      shell: echo y | android update sdk --no-ui --all --filter addon-google_apis-google-21 | grep 'package installed'
-
-    # Update the tools package
-    - name: install tools package
-      shell: echo y | android update sdk --no-ui --all --filter tools | grep 'package installed'
+      shell: echo y | sdkmanager "add-ons;addon-google_apis-google-21"
 
     #
     # Install debug.keystore
