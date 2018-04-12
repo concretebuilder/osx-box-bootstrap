@@ -1,5 +1,10 @@
 ## UPCOMING
 
+## `v2018_04_12_1`
+
+* Visual Studio for Mac only:
+  * `Android NDK` was updated to `r15c`
+
 ## `v2018_04_11_1`
 
 * `bitrise` (CLI): `1.15.0`
