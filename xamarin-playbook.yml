@@ -22,9 +22,7 @@
       stat:
         path: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-ndk/android-ndk-r15c"
       register: android_ndk_dir
-    - debug:
-        msg: "Android NDK path exists"
-      when: android_ndk_dir.stat.exists and android_ndk_dir.stat.isdir
+      failed_when: not android_ndk_dir.stat.exists or not android_ndk_dir.stat.isdir
 
     # The main Xamarin profile, includes
     #  the Xamarin specific environments
