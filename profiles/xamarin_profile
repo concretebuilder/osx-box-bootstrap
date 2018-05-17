@@ -2,9 +2,9 @@ export BITRISE_XAMARIN_FOLDER_PATH="${BITRISE_FOLDER_PATH}/xamarin"
 
 # Android Environment Variables
 export ANDROID_HOME=$HOME/Library/Developer/Xamarin/android-sdk-macosx
-if [ -e $HOME/Library/Developer/Xamarin/android-ndk/android-ndk-r15c ] ; then
+if [ -e $ANDROID_HOME/ndk-bundle ] ; then
   # Visual Studio for Mac
-  export ANDROID_NDK_HOME=$HOME/Library/Developer/Xamarin/android-ndk/android-ndk-r15c
+  export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
 else
   # Xamarin Studio
   export ANDROID_NDK_HOME=$HOME/Library/Developer/Xamarin/android-ndk/android-ndk-r11c
