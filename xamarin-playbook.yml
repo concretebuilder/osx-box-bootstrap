@@ -57,10 +57,7 @@
     #  you should only install the packages you need!
 
     - name: install android tools
-      shell: "echo y | sdkmanager '{{ item }}'"
-      register: sdkmanager_res
-      retries: 3
-      until: sdkamanger_res | success
+      shell: "(echo y | sdkmanager '{{ item }}') || (echo y | sdkmanager '{{ item }}')"
       loop:
         - "emulator"
         - "tools"
