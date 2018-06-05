@@ -200,6 +200,10 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
     fi
   else
     ls -1 ${ANDROID_NDK_HOME}
+
+    echo
+    echo "* Android NDK Version:"
+    cat "${ANDROID_NDK_HOME}/source.properties"
   fi
   echo
   echo "* platform-tools content:"
