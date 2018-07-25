@@ -11,7 +11,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - bitrise_cli_version: 1.19.0
+    - bitrise_cli_version: 1.20.0
   tasks:
 
     # ----------------------------------------
