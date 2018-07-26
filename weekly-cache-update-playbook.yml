@@ -37,7 +37,7 @@
     # ----------------------------------------
 
     - name: "brew update"
-      shell: bash -l -c "brew update || brew update"
+      shell: bash -l -c "brew update || brew update || brew update" # 7.3 succeeds after two calls but returns non-zero exit
     - name: brew install screen (for older images)
       homebrew: name=screen state=present
 
