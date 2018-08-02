@@ -96,6 +96,7 @@ workflows:
         - content: |-
             #!/bin/bash -l
             set -ex
+            pip install --upgrade pip
             pip install ansible-lint
     - script:
         title: Valdate bitrise.yml
