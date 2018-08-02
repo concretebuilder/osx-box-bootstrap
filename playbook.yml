@@ -181,7 +181,7 @@
     - name: brew install mercurial
       homebrew: name=mercurial state=present
     - name: brew install node
-      homebrew: name=node state=present
+      homebrew: name=node@8 state=present # Node LTS 8.x
     - name: brew install ansible
       homebrew: name=ansible state=present
     - name: brew install coreutils
