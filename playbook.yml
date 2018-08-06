@@ -182,6 +182,8 @@
       homebrew: name=mercurial state=present
     - name: brew install node
       homebrew: name=node@8 state=present # Node LTS 8.x
+    - name: brew link node@8
+      command: /usr/local/bin/brew link --overwrite --force node@8 # force link Node LTS 8.x
     - name: brew install ansible
       homebrew: name=ansible state=present
     - name: brew install coreutils
