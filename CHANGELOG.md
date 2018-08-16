@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2018_08_16_1`
+
+* `bitrise` (CLI): `1.21.0`
+
 ## `v2018_08_02_1`
 
 * `node` LTS version will be used in the future (currently 8.x)
