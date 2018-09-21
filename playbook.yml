@@ -152,6 +152,23 @@
         owner="{{ param_user }}"
         mode=0600
 
+    # Copy these two plist file to incrase Open File Descriptos
+    - name: "Setup open-file limit"
+      copy: 
+        src: setupfiles/limit.maxfiles.plist
+        dest: /Library/LaunchDaemons/imit.maxfiles.plist
+        owner: root
+        group: wheel
+        mode: 0644
+    
+    - name: "Setup max-process limit"
+      copy: 
+        src: setupfiles/limit.maxproc.plist
+        dest: /Library/LaunchDaemons/imit.maxproc.plist
+        owner: root
+        group: wheel
+        mode: 0644
+
     # Turn off automatic update
     - name: Turn off macos automatic software updates
       shell: softwareupdate --schedule off
