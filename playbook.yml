@@ -160,7 +160,8 @@
         owner: root
         group: wheel
         mode: 0644
-    
+      become: yes
+
     - name: "Setup max-process limit"
       copy: 
         src: setupfiles/limit.maxproc.plist
@@ -168,7 +169,8 @@
         owner: root
         group: wheel
         mode: 0644
-
+      become: yes
+      
     # Turn off automatic update
     - name: Turn off macos automatic software updates
       shell: softwareupdate --schedule off
