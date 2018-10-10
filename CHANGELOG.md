@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2018_10_10_1`
+
+* `bitrise` (CLI): `1.23.0`
+
 ## `v2018_09_21_1`
 
 * Incrased Open File Descriptors to 200.000
