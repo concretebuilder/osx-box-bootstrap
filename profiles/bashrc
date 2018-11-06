@@ -4,10 +4,6 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
-# Open File Descriptor limit
-ulimit -n 200000
-ulimit -u 2048
-
 # Homebrew
 #  Don't do auto update
 export HOMEBREW_NO_AUTO_UPDATE=1
