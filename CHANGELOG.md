@@ -3,6 +3,7 @@
 ## `v2018_11_06_1`
 
 * Removed ulimit directive from bashrc, rely only on the plist configuration
+* Fix Ruby and Rubygems paths
 
 ## `v2018_10_10_1`
 

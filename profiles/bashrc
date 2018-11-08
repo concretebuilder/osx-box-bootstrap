@@ -14,6 +14,10 @@ export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
+# Ruby - force brew installed Ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
+
 # Bitrise environments
 if [ -s "$HOME/.profiles/bitrise_profile" ] ; then
   source "$HOME/.profiles/bitrise_profile"
