@@ -86,7 +86,8 @@ echo "=== Ruby and rubygems =================="
 
 if [ -x "$(command -v rbenv)" ] ; then
   ver_line="$(ruby --version)" ;                  echo "* Ruby (default): $ver_line"
-  echo "--- Available ruby versions ---"; rbenv versions;
+  echo "--- Available ruby versions ---"
+  rbenv versions
   echo "-------------------------------"
   ver_line="$(rbenv --version | cut -d ' ' -f 2)" ; echo "* rbenv: $ver_line"
 else
