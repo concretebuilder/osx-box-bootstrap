@@ -27,7 +27,6 @@ echo
 echo "=== Pre-installed tool versions ========"
 
 ver_line="$(go version)" ;                        echo "* Go: $ver_line"
-ver_line="$(ruby --version)" ;                    echo "* Ruby: $ver_line"
 ver_line="$(python --version 2>&1 >/dev/null)" ;  echo "* Python: $ver_line"
 ver_line="$(node --version)" ;                    echo "* Node.js: $ver_line"
 ver_line="$(npm --version)" ;                     echo "* NPM: $ver_line"
@@ -83,7 +82,16 @@ echo "========================================"
 echo
 
 echo
-echo "=== Ruby GEMs =========================="
+echo "=== Ruby and rubygems =================="
+
+if [ -x "$(command -v rbenv)" ] ; then
+  ver_line="$(ruby --version)" ;                  echo "* Ruby (default): $ver_line"
+  echo "--- Available ruby versions ---"; rbenv versions;
+  echo "-------------------------------"
+  ver_line="$(rbenv --version | cut -d ' ' -f 2)" ; echo "* rbenv: $ver_line"
+else
+  ver_line="$(ruby --version)" ;                  echo "* Ruby: $ver_line"
+fi
 ver_line="$(gem --version)" ;                     echo "* Rubygems: $ver_line"
 ver_line="$(bundle --version)" ;                  echo "* Bundler: $ver_line"
 ver_line="$(pod --version)" ;                     echo "* CocoaPods: $ver_line"

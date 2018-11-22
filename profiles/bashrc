@@ -15,7 +15,12 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 # Ruby - force brew installed Ruby
-export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
+if [ -d "/usr/local/lib/ruby/gems/2.5.0/bin" ] ; then
+  export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
+fi
+if [ -x "$(command -v rbenv)" ] ; then
+  eval "$(rbenv init -)"
+fi
 
 # Bitrise environments
 if [ -s "$HOME/.profiles/bitrise_profile" ] ; then
