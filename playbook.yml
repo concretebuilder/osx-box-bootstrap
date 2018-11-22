@@ -182,11 +182,6 @@
       shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
       become: yes
 
-    # Install bundler for system Ruby
-    - name: install bundler for system ruby
-      shell: bash -l -c "sudo gem install bundler"
-      become: yes
-
     #
     # Install and update homebrew
     - name: run brew installer script
@@ -248,16 +243,6 @@
     - name: Install ruby 2.2.10
       shell: bash -l -c "rbenv install 2.2.10"
       when: is_incremental_setup|default(false) == false
-    - name: Install ruby 2.1.10
-      shell: bash -l -c "rbenv install 2.1.10"
-      when: is_incremental_setup|default(false) == false
-    - name: Install ruby 2.0.0-p648
-      shell: bash -l -c "rbenv install 2.0.0-p648"
-      when: is_incremental_setup|default(false) == false
-    - name: Install ruby 1.9.3-p551
-      shell: bash -l -c "rbenv install 1.9.3-p551"
-      when: is_incremental_setup|default(false) == false
-
 
     ## Go
     # Gopath is $HOME/go
