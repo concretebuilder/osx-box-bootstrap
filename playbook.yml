@@ -229,19 +229,19 @@
     - name: brew install rbenv
       homebrew: name=rbenv state=present
     - name: Install ruby {{ default_ruby }}
-      shell: bash -l -c "rbenv install {{ default_ruby }}"
+      shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
       when: is_incremental_setup|default(false) == false
     - name: Set ruby {{ default_ruby }} to global
       shell: bash -l -c "rbenv global {{ default_ruby }}"
       when: is_incremental_setup|default(false) == false
     - name: Install ruby 2.4.5
-      shell: bash -l -c "rbenv install 2.4.5"
+      shell: bash -l -c "rbenv install --skip-existing 2.4.5"
       when: is_incremental_setup|default(false) == false
     - name: Install ruby 2.3.8
-      shell: bash -l -c "rbenv install 2.3.8"
+      shell: bash -l -c "rbenv install --skip-existing 2.3.8"
       when: is_incremental_setup|default(false) == false
     - name: Install ruby 2.2.10
-      shell: bash -l -c "rbenv install 2.2.10"
+      shell: bash -l -c "rbenv install --skip-existing 2.2.10"
       when: is_incremental_setup|default(false) == false
 
     ## Go
