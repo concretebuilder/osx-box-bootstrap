@@ -1,0 +1,25 @@
+---
+
+# Install additional tools
+
+- name: brew install jEnv
+  homebrew:
+    name: jenv
+    state: present
+
+- name: brew install Ant
+  homebrew:
+    name: ant
+    state: present
+
+- name: brew install Maven
+  homebrew:
+    name: maven
+    state: present
+
+- name: brew install Gradle
+  homebrew:
+    name: gradle
+    state: present
+
+...

@@ -1,0 +1,55 @@
+---
+
+# Java 8 install
+# We need Java 8 because sdkmanager doesn't support newer Java versions (yet)
+# Also we need to manually call launchctl because otherwise it breaks the brew uninstall task
+
+- name: Check if Java's Helper-Tool is present
+  shell: launchctl list | grep com.oracle.java.Helper-Tool > /dev/null 2>&1
+  register: result
+  ignore_errors: yes
+  no_log: True
+- debug:
+    msg: "com.oracle.java.Helper-Tool present {{ result.rc == 0 }}"
+
+- name: Stop Java's Helper-Tool
+  become: yes
+  shell: launchctl remove com.oracle.java.Helper-Tool
+  ignore_errors: yes
+  when: result.rc == 0
+
+- name: Check if Java's Java-Updater is present
+  shell: launchctl list | grep com.oracle.java.Java-Updater > /dev/null 2>&1
+  register: result
+  ignore_errors: yes
+  no_log: True
+- debug:
+    msg: "com.oracle.java.Java-Updater present {{ result.rc == 0 }}"
+
+- name: Stop Java's Java-Updater
+  become: yes
+  shell: launchctl remove com.oracle.java.Java-Updater
+  ignore_errors: yes
+  when: result.rc == 0
+
+- name: brew uninstall latest java
+  homebrew_cask:
+    name: java
+    state: absent
+
+- name: brew tap homebrew/cask-versions
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: present
+
+- name: brew install java8
+  homebrew_cask:
+    name: java8
+    state: present
+
+- name: Detect JAVA_HOME
+  shell: /usr/libexec/java_home -v 1.8
+  register: detect_java_home
+  ignore_errors: yes
+
+...
