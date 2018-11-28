@@ -13,11 +13,10 @@
     - android_ndk_version: r16b
     - android_ndk_source: https://dl.google.com/android/repository/android-ndk-{{ android_ndk_version }}-darwin-x86_64.zip
     - android_sdk_source: https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
-    - path_marker: "PATH Additions"
-    - export_marker: "Export Additions"
+    - patch_marker: "Java8 & Android Additions"
   roles:
     - java
-    - android
+    # - android
     - tools
     - patch_bashrc
 

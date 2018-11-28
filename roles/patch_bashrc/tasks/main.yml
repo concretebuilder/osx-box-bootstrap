@@ -2,27 +2,19 @@
 
 # Patch .bashrc
 
-- name: Extend PATH with JAVA_HOME ANDROID_HOME ANDROID_NDK_HOME
+- name: Patch .bashrc
   become: yes
   blockinfile:
     insertbefore: "keep a newline"
-    path: /Users/vagrant/.bashrc
-    block: "{{ lookup('template', 'path.j2') }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK - {{ path_marker }}"
-
-- name: Export JAVA_HOME ANDROID_HOME ANDROID_NDK_HOME
-  become: yes
-  blockinfile:
-    insertbefore: "keep a newline"
-    path: /Users/vagrant/.bashrc
-    block: "{{ lookup('template', 'export.j2') }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK - {{ export_marker }}"
+    path: /Users/{{ param_user }}/.bashrc
+    block: "{{ lookup('template', 'patch.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - {{ patch_marker }}"
 
 - name: Final newline
   become: yes
   lineinfile:
     insertbefore: "keep a newline"
-    path: /Users/vagrant/.bashrc
+    path: /Users/{{ param_user }}/.bashrc
     line: ""
 
 ...
