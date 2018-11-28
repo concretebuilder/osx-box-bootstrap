@@ -16,7 +16,7 @@
     - patch_marker: "Java8 & Android Additions"
   roles:
     - java
-    # - android
+    - android
     - tools
     - patch_bashrc
 
