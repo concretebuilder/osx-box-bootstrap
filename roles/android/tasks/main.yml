@@ -23,6 +23,8 @@
   unarchive:
     src: /opt/sdk-tools-darwin.zip
     dest: "{{ android_home }}"
+    owner: "{{ param_user }}"
+    mode: 0770
     remote_src: yes
 
 - name: Remove Android SDK zip file
@@ -106,6 +108,8 @@
   unarchive:
     src: /opt/android-ndk-darwin.zip
     dest: "{{ android_ndk_home }}"
+    owner: "{{ param_user }}"
+    mode: 0770
     remote_src: yes
 
 - name: Remove Android NDK zip file
