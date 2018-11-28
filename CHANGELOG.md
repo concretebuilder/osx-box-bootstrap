@@ -1,5 +1,13 @@
 ## UPCOMING
 
+## `v2018_11_14_2`
+
+* New fix for Ruby and Rubygems paths
+
+## `v2018_11_14_1`
+
+* `bitrise` (CLI): `1.24.0`
+
 ## `v2018_11_06_1`
 
 * Removed ulimit directive from bashrc, rely only on the plist configuration

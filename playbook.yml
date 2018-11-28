@@ -230,6 +230,14 @@
     # Ruby
     - name: brew install ruby
       homebrew: name=ruby state=present
+    - name: Create ruby symbolic links
+      file:
+        src: "{{ item }}"
+        dest: "/usr/local/bin/{{ item | basename }}"
+        state: link
+      with_fileglob:
+        - "/usr/local/opt/ruby/bin/*"
+
 
     ## Go
     # Gopath is $HOME/go
