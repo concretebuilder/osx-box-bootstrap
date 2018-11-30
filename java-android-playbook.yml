@@ -20,4 +20,15 @@
     - tools
     - patch_bashrc
 
+  # This needs to be done after jEnv is installed (tools role) and .bashrc is patched (patch_bashrc role)
+  tasks:
+    - name: setup jEnv
+      shell: . /Users/{{ param_user }}/.bashrc && yes | jenv add {{ detect_java_home.stdout }}
+      register: result
+    - debug:
+        msg: "{{ result.stdout }}"
+
+    - name: set Java 8 as Global in jEnv
+      shell: jenv global 1.8
+
 ...

@@ -7,12 +7,6 @@
     name: jenv
     state: present
 
-- name: add JAVA_HOME to jEnv
-  shell: yes | jenv add {{ detect_java_home.stdout }}
-  register: result
-- debug:
-    msg: "{{ result.stdout }}"
-
 - name: brew install Ant
   homebrew:
     name: ant
