@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2018_12_05_1`
+* Playbook for installing Android tools on plain Xcode stacks
+
 ## `v2018_11_28_1`
 
 * New stack types will have rbenv installed ruby with the following versions:
