@@ -10,6 +10,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
+    - default_ruby: 2.5.3
   tasks:
     #
     # Required param checks
@@ -181,11 +182,6 @@
       shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
       become: yes
 
-    # Install bundler for system Ruby
-    - name: install bundler for system ruby
-      shell: bash -l -c "sudo gem install bundler"
-      become: yes
-
     #
     # Install and update homebrew
     - name: run brew installer script
@@ -223,21 +219,30 @@
       homebrew: name=yarn state=present
     - name: brew install screen
       homebrew: name=screen state=present
+    - name: brew install readline
+      homebrew: name=readline state=present
 
     - name: brew install java
       homebrew_cask: name=java state=present
 
     # Ruby
-    - name: brew install ruby
-      homebrew: name=ruby state=present
-    - name: Create ruby symbolic links
-      file:
-        src: "{{ item }}"
-        dest: "/usr/local/bin/{{ item | basename }}"
-        state: link
-      with_fileglob:
-        - "/usr/local/opt/ruby/bin/*"
-
+    - name: brew install rbenv
+      homebrew: name=rbenv state=present
+    - name: Install ruby {{ default_ruby }}
+      shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
+      when: is_incremental_setup|default(false) == false
+    - name: Set ruby {{ default_ruby }} to global
+      shell: bash -l -c "rbenv global {{ default_ruby }}"
+      when: is_incremental_setup|default(false) == false
+    - name: Install ruby 2.4.5
+      shell: bash -l -c "rbenv install --skip-existing 2.4.5"
+      when: is_incremental_setup|default(false) == false
+    - name: Install ruby 2.3.8
+      shell: bash -l -c "rbenv install --skip-existing 2.3.8"
+      when: is_incremental_setup|default(false) == false
+    - name: Install ruby 2.2.10
+      shell: bash -l -c "rbenv install --skip-existing 2.2.10"
+      when: is_incremental_setup|default(false) == false
 
     ## Go
     # Gopath is $HOME/go

@@ -1,5 +1,13 @@
 ## UPCOMING
 
+## `v2018_11_28_1`
+
+* New stack types will have rbenv installed ruby with the following versions:
+  * 2.5.3
+  * 2.4.5
+  * 2.3.8
+  * 2.2.10
+
 ## `v2018_11_14_2`
 
 * New fix for Ruby and Rubygems paths
