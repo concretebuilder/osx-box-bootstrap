@@ -207,7 +207,7 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
   fi
 fi
 
-if [ -z "$ANDROID_HOME" ] ; then
+if [ -n "$ANDROID_HOME" ] ; then
   echo "--- Android"
   echo
   echo "* ANDROID_HOME (${ANDROID_HOME}) content:"
