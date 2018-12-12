@@ -1,5 +1,7 @@
 ## UPCOMING
 
+* `bitrise` (CLI): `1.25.0`
+
 ## `v2018_12_05_1`
 * Playbook for installing Android tools on plain Xcode stacks
 
