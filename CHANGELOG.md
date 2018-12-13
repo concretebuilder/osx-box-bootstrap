@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2018_12_13_1`
+* Add `$ANDROID_HOME/tools/bin` to $PATH as well because it was missing
+
+## `v2018_12_12_1`
 * `bitrise` (CLI): `1.25.0`
 
 ## `v2018_12_05_1`
