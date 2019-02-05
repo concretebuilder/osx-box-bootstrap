@@ -278,18 +278,6 @@
       shell: bash -l -c "npm install -g ionic cordova"
       when: is_incremental_setup|default(false) == false
 
-    # Git config
-    - name: git config name
-      git_config:
-        name: user.name
-        scope: global
-        value: "J. Doe"
-    - name: git config email
-      git_config:
-        name: user.email
-        scope: global
-        value: "email@example.com"
-
     # Git LFS
     - name: "brew install git lfs"
       homebrew: name=git-lfs state=present
