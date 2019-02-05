@@ -279,10 +279,16 @@
       when: is_incremental_setup|default(false) == false
 
     # Git config
-    - name: "git config user.email"
-      shell: bash -l -c 'git config --global user.email "letsconnect@bitrise.io"'
-    - name: "git config user.name"
-      shell: bash -l -c 'git config --global user.name "Bitrise Bot"'
+    - name: git config name
+      git_config:
+        name: user.name
+        scope: global
+        value: "J. Doe"
+    - name: git config email
+      git_config:
+        name: user.email
+        scope: global
+        value: "email@example.com"
 
     # Git LFS
     - name: "brew install git lfs"
