@@ -14,6 +14,18 @@
     - bitrise_cli_version: 1.26.0
   tasks:
 
+    # Fix git config for older templates
+    - name: git config name
+      git_config:
+        name: user.name
+        scope: global
+        value: "J. Doe"
+    - name: git config email
+      git_config:
+        name: user.email
+        scope: global
+        value: "email@example.com"
+
     # ----------------------------------------
     # --- Setup profiles ---
     # ----------------------------------------
