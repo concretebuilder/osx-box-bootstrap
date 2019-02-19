@@ -286,12 +286,6 @@
         global: yes
       when: is_incremental_setup|default(false) == false
 
-    # Git config
-    - name: "git config user.email"
-      shell: bash -l -c 'git config --global user.email "letsconnect@bitrise.io"'
-    - name: "git config user.name"
-      shell: bash -l -c 'git config --global user.name "Bitrise Bot"'
-
     # Git LFS
     - name: "brew install git lfs"
       homebrew: name=git-lfs state=present

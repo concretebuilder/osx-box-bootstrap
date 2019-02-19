@@ -11,8 +11,20 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - bitrise_cli_version: 1.24.0
+    - bitrise_cli_version: 1.27.0
   tasks:
+
+    # Fix git config for older templates
+    - name: git config name
+      git_config:
+        name: user.name
+        scope: global
+        value: "J. Doe (https://www.git-tower.com/learn/git/faq/change-author-name-email)"
+    - name: git config email
+      git_config:
+        name: user.email
+        scope: global
+        value: "please-set-your-email@bitrise.io"
 
     # ----------------------------------------
     # --- Setup profiles ---

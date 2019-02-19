@@ -1,5 +1,20 @@
 ## UPCOMING
 
+## `v2019_02_13_2`
+* `bitrise` (CLI): `1.27.0`
+
+## `v2019_02_13_1`
+* `git` default user changed to "J. Doe (https://www.git-tower.com/learn/git/faq/change-author-name-email)" and default email to "please-set-your-email@bitrise.io"
+
+## `v2019_01_09_1`
+* `bitrise` (CLI): `1.26.0`
+
+## `v2018_12_13_1`
+* Add `$ANDROID_HOME/tools/bin` to $PATH as well because it was missing
+
+## `v2018_12_12_1`
+* `bitrise` (CLI): `1.25.0`
+
 ## `v2018_12_05_1`
 * Playbook for installing Android tools on plain Xcode stacks
 
