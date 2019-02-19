@@ -196,9 +196,9 @@
     - name: brew install mercurial
       homebrew: name=mercurial state=present
     - name: brew install node
-      homebrew: name=node@8 state=present # Node LTS 8.x
-    - name: brew link node@8
-      command: /usr/local/bin/brew link --overwrite --force node@8 # force link Node LTS 8.x
+      homebrew: name=node@10 state=present # Node LTS 10.x
+    - name: brew link node@10
+      command: /usr/local/bin/brew link --overwrite --force node@10 # force link Node LTS 10.x
     - name: brew install ansible
       homebrew: name=ansible state=present
     - name: brew install coreutils
@@ -274,8 +274,16 @@
       when: is_incremental_setup|default(false) == false
 
     # NPM global packages
-    - name: npm install -g tools
-      shell: bash -l -c "npm install -g ionic cordova"
+    - name: Install "ionic" NodeJS package globally
+      npm:
+        name: ionic
+        global: yes
+      when: is_incremental_setup|default(false) == false
+
+    - name: Install "cordova" NodeJS package globally
+      npm:
+        name: cordova
+        global: yes
       when: is_incremental_setup|default(false) == false
 
     # Git config
