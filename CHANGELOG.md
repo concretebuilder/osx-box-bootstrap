@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_02_20_1`
+* `bitrise` (CLI): `1.27.1`
+
 ## `v2019_02_19_1`
 * Playbook: Upgraded `NodeJS` from 8.x to 10.x as it is the Active LTS now
 
