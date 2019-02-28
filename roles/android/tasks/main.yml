@@ -2,36 +2,8 @@
 
 # Install Android SDKs and other build packages
 
-- name: Create ANDROID_HOME directory
-  become: yes
-  file:
-    path: "{{ android_home }}"
-    state: directory
-    owner: "{{ param_user }}"
-    mode : 0770
-    recurse: yes
-
-- name: Download Android SDK tools
-  become: yes
-  get_url:
-    url: "{{ android_sdk_source }}"
-    dest: /opt/sdk-tools-darwin.zip
-    mode: 0660
-
-- name: Unzip Android SDK tools
-  become: yes
-  unarchive:
-    src: /opt/sdk-tools-darwin.zip
-    dest: "{{ android_home }}"
-    owner: "{{ param_user }}"
-    mode: 0770
-    remote_src: yes
-
-- name: Remove Android SDK zip file
-  become: yes
-  file:
-    state: absent
-    path: /opt/sdk-tools-darwin.zip
+- name: brew install android-sdk
+  homebrew_cask: name=android-sdk state=present
 
 - name: Install Android packages with SDK Manager
   become: yes

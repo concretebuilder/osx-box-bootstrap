@@ -8,11 +8,10 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - android_home: /opt/android-sdk
+    - android_home: /usr/local/share/android-sdk
     - android_ndk_home: /opt/android-ndk
     - android_ndk_version: r16b
     - android_ndk_source: https://dl.google.com/android/repository/android-ndk-{{ android_ndk_version }}-darwin-x86_64.zip
-    - android_sdk_source: https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
     - patch_marker: "Java8 & Android Additions"
   roles:
     - java
