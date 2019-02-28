@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_02_28_1`
+* Install Android tools from brew instead of direct link
+
 ## `v2019_02_20_1`
 * `bitrise` (CLI): `1.27.1`
 
