@@ -19,7 +19,7 @@
       git_config:
         name: user.name
         scope: global
-        value: "J. Doe (https://www.git-tower.com/learn/git/faq/change-author-name-email)"
+        value: "J. Doe (https://devcenter.bitrise.io/builds/setting-your-git-credentials-on-build-machines/)"
     - name: git config email
       git_config:
         name: user.email
