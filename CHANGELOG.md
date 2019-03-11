@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_03_11_1`
+* `git` default user changed to "J. Doe (https://devcenter.bitrise.io/builds/setting-your-git-credentials-on-build-machines/)"
+
 ## `v2019_02_28_1`
 * Install Android tools from brew instead of direct link
 
