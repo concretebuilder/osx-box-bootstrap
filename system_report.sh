@@ -141,6 +141,9 @@ echo
 echo "* Xcode Version:"
 xcodebuild -version
 echo
+echo "* /usr/bin/swift --version"
+/usr/bin/swift --version
+echo
 echo "* Installed SDKs:"
 xcodebuild -showsdks
 echo
