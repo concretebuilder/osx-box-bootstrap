@@ -68,11 +68,7 @@
         state=directory
         owner="{{ param_user }}"
         mode=0700
-    - name: copy ssh key to remote's {{ param_user }} user
-      copy: src=setupfiles/authorized_keys
-        dest="/Users/{{ param_user }}/.ssh/authorized_keys"
-        owner="{{ param_user }}"
-        mode=0600
+
     #
     # Disable every non SSH key based setup option
     #  allow only SSH key based SSH login

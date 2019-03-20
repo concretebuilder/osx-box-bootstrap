@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_03_20_1`
+* `Playbook`: Removed authorized_keys
+
 ## `v2019_03_13_1`
 * `bitrise` (CLI): `1.28.0`
 
