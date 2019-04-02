@@ -118,14 +118,6 @@
     - name: "stepman: update"
       shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman update"
 
-
-    - name: "bitrise-bridge: download"
-      shell: bash -l -c "curl -fL https://github.com/bitrise-tools/bitrise-bridge/releases/download/0.9.11/bitrise-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise-bridge"
-    - name: "Make the bitrise-bridge executable"
-      file: path=/usr/local/bin/bitrise-bridge mode="u=rwx,g=rx,o=rx"
-    - name: "bitrise-bridge -version"
-      shell: bash -l -c "bitrise-bridge --version"
-
     - name: "cmd-bridge: download"
       shell: bash -l -c "curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge"
     - name: "Make the cmd-bridge executable"

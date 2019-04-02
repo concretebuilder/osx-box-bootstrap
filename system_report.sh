@@ -76,7 +76,6 @@ echo "--- Bitrise CLI tool versions"
 ver_line="$(bitrise --version)" ;                 echo "* bitrise: $ver_line"
 ver_line="$(/Users/vagrant/.bitrise/tools/stepman --version)" ; echo "* stepman: $ver_line"
 ver_line="$(/Users/vagrant/.bitrise/tools/envman --version)" ;  echo "* envman: $ver_line"
-ver_line="$(bitrise-bridge --version)" ;          echo "* bitrise-bridge: $ver_line"
 ver_line="$(cmd-bridge --version)" ;              echo "* cmd-bridge: $ver_line"
 echo "========================================"
 echo

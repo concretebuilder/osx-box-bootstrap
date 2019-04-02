@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_04_02_1`
+* `bitrise-bridge`: removed
+
 ## `v2019_03_20_1`
 * `Playbook`: Removed authorized_keys
 
