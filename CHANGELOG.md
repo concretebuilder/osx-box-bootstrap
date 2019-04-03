@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_04_03_1`
+* `ngrok link`: installed
+
 ## `v2019_04_02_1`
 * `bitrise-bridge`: removed
 
