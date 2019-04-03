@@ -73,6 +73,7 @@
         owner: vagrant
         group: wheel
         mode:  "0755"
+      become: yes
 
     - name: "Ensure /etc/ngrok exists"
       file:
@@ -81,6 +82,7 @@
         owner: root
         group: wheel
         mode:  "0755"
+      become: yes
 
     - name: "copy remote access config script"
       copy:
