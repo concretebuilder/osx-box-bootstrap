@@ -66,11 +66,21 @@
     # ----------------------------------------
     # --- remote access script install ---
     # ----------------------------------------
-    - name: "create /opt/bitrise folder"
-      file: path="/opt/bitrise"
-        state=directory
-        owner=vagrant
-        group=wheel
+    - name: "Ensure /opt/bitrise exists"
+      file:
+        path: /opt/bitrise
+        state: directory
+        owner: vagrant
+        group: wheel
+        mode:  "0755"
+
+    - name: "Ensure /etc/ngrok exists"
+        file:
+          path: /etc/ngrok
+          state: directory
+          owner: vagrant
+          group: wheel
+          mode:  "0755"
 
     - name: "copy remote access config script"
       copy:

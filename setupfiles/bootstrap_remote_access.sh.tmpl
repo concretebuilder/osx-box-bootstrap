@@ -16,14 +16,19 @@ sudo launchctl start com.openssh.sshd
 ### Setup ngrok
 # create ngrok config
 NGROK_CONF=$(cat <<EOC
-        authtoken: {{.Token}}
-        log_format: logfmt
-        log: /var/log/ngrok.log
+authtoken: {{.Token}}
+log_format: logfmt
+log: /var/log/ngrok.log
 tunnels:
-remote-access:
-proto: tcp
-addr: 22
-remote_addr: {{.SSHAddress}}
+  remote-access:
+    proto: tcp
+    addr: 22
+    remote_addr: {{.SSHAddress}}
+  #vnc-server:
+  #  proto: tcp
+  #  addr: 5900
+  #  remote_addr: {{.VNCAddress}}
+
 EOC
 )
 
