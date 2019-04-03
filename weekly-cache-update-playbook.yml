@@ -75,12 +75,12 @@
         mode:  "0755"
 
     - name: "Ensure /etc/ngrok exists"
-        file:
-          path: /etc/ngrok
-          state: directory
-          owner: root
-          group: wheel
-          mode:  "0755"
+      file:
+        path: /etc/ngrok
+        state: directory
+        owner: root
+        group: wheel
+        mode:  "0755"
 
     - name: "copy remote access config script"
       copy:
