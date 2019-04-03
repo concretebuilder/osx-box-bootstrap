@@ -86,7 +86,7 @@
 
     - name: "copy remote access config script"
       copy:
-        src=scripts/bootstrap_remote_access.sh.tmpl
+        src=setupfiles/bootstrap_remote_access.sh.tmpl
         dest=/opt/bitrise/bootstrap_remote_access.sh.tmpl
         owner=vagrant
         mode=0777
