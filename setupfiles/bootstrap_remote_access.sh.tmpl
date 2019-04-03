@@ -3,10 +3,10 @@
 set -e
 
 #change vagrant user password
-dscl . -passwd /Users/vagrant vagrant {{.Password}}
+sudo dscl . passwd /Users/vagrant {{.Password}}
 
 #enable ssh password authentication
-sed -i "" "s|[#]*PasswordAuthentication yes|PasswordAuthentication yes|g; s|[#]*PasswordAuthentication no|PasswordAuthentication yes|g" /private/etc/ssh/sshd_config
+sudo sed -i "" "s|[#]*PasswordAuthentication yes|PasswordAuthentication yes|g; s|[#]*PasswordAuthentication no|PasswordAuthentication yes|g" /private/etc/ssh/sshd_config
 
 #restart ssh service
 sudo launchctl stop com.openssh.sshd
@@ -32,8 +32,8 @@ tunnels:
 EOC
 )
 
-echo "$NGROK_CONF" > /etc/ngrok/ngrok.yml
+echo "$NGROK_CONF" | sudo tee /etc/ngrok/ngrok.yml
 
 # install and start ngrok as a service
-ngrok service install -config /etc/ngrok/ngrok.yml
-ngrok service start
+sudo ngrok service install -config /etc/ngrok/ngrok.yml
+sudo ngrok service start
