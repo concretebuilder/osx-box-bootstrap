@@ -96,17 +96,17 @@
     # ----------------------------------------
     - name: "ngrok-binary: download"
       get_url:
-        url: https://bin.equinox.io/c/gDfFGFRN2Jh/ngrok-link-stable-darwin-amd64.tgz
-        dest: /tmp/ngrok-link-stable-darwin-amd64.tgz
+        url: https://bin.equinox.io/c/gDfFGFRN2Jh/ngrok-link-stable-darwin-amd64.zip
+        dest: /tmp/ngrok-link-stable-darwin-amd64.zip
     - name: "ngrok-binary: install"
       unarchive:
-        src: /tmp/ngrok-link-stable-darwin-amd64.tgz
+        src: /tmp/ngrok-link-stable-darwin-amd64.zip
         dest: /usr/local/bin
         copy: no
         mode: 0700
     - name: "ngrok-binary: remove temp file"
       file:
-        path: /tmp/ngrok-link-stable-darwin-amd64.tgz
+        path: /tmp/ngrok-link-stable-darwin-amd64.zip
         state: absent
     # ----------------------------------------
     # --- pre-installed tool cache updates ---
