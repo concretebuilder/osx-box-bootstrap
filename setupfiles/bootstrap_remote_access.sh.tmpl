@@ -6,8 +6,8 @@ set -e
 sudo dscl . passwd /Users/vagrant {{.Password}}
 
 #enable ssh password authentication
-sudo sed -i "" "s|[#]*PasswordAuthentication yes|PasswordAuthentication yes|g; s|[#]*PasswordAuthentication no|PasswordAuthentication yes|g" /etc/ssh/sshd_config
-sudo sed -i "" "s|[#]*UsePAM yes|UsePAM yes|g; s|[#]*UsePAM no|UsePAM yes|g" /etc/ssh/sshd_config
+sudo sed -i "" "s|^\s*PasswordAuthentication no|PasswordAuthentication yes|g" /etc/ssh/sshd_config
+sudo sed -i "" "s|^\s*UsePAM no|UsePAM yes|g" /etc/ssh/sshd_config
 
 ### Setup ngrok
 # create ngrok config
