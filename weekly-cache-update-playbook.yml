@@ -78,7 +78,7 @@
         file:
           path: /etc/ngrok
           state: directory
-          owner: vagrant
+          owner: root
           group: wheel
           mode:  "0755"
 
