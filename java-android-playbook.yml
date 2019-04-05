@@ -18,6 +18,7 @@
     - android
     - tools
     - patch_bashrc
+    - flutter
 
   # This needs to be done after jEnv is installed (tools role) and .bashrc is patched (patch_bashrc role)
   tasks:
