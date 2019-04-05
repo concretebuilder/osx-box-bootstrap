@@ -9,6 +9,8 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
+  roles:
+    - flutter
   tasks:
     #
     # Required param checks

@@ -1,0 +1,21 @@
+---
+    # add third party repository to brew
+    # https://github.com/MiderWong/homebrew-flutter
+    - name: brew tap MiderWong/flutter
+      homebrew_tap:
+        name: MiderWong/flutter
+
+    # install flutter stable with brew
+    - name: brew install flutter
+      homebrew:
+        name: flutter
+        state: present
+
+    # precache download flutter dependency
+    - name: Run flutter precache
+      shell: bash -l -c "flutter precache"
+
+    # check flutter errors
+    - name: Run flutter doctor
+      shell: bash -l -c "flutter doctor"
+...
