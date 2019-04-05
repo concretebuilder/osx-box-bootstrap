@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_04_05_1`
+* Install Flutter 1.2.1 from brew
+
 ## `v2019_04_02_1`
 * `bitrise-bridge`: removed
 
