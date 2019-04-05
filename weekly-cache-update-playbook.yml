@@ -64,6 +64,51 @@
       become: yes
 
     # ----------------------------------------
+    # --- remote access script install ---
+    # ----------------------------------------
+    - name: "Ensure /opt/bitrise exists"
+      file:
+        path: /opt/bitrise
+        state: directory
+        owner: vagrant
+        group: wheel
+        mode:  "0755"
+      become: yes
+
+    - name: "Ensure /etc/ngrok exists"
+      file:
+        path: /etc/ngrok
+        state: directory
+        owner: root
+        group: wheel
+        mode:  "0755"
+      become: yes
+
+    - name: "copy remote access config script"
+      copy:
+        src=setupfiles/bootstrap_remote_access.sh.tmpl
+        dest=/opt/bitrise/bootstrap_remote_access.sh.tmpl
+        owner=vagrant
+        mode=0777
+
+    # ----------------------------------------
+    # --- ngrok install ---
+    # ----------------------------------------
+    - name: "ngrok-binary: download"
+      get_url:
+        url: https://bin.equinox.io/c/gDfFGFRN2Jh/ngrok-link-stable-darwin-amd64.zip
+        dest: /tmp/ngrok-link-stable-darwin-amd64.zip
+    - name: "ngrok-binary: install"
+      unarchive:
+        src: /tmp/ngrok-link-stable-darwin-amd64.zip
+        dest: /usr/local/bin
+        copy: no
+        mode: 0700
+    - name: "ngrok-binary: remove temp file"
+      file:
+        path: /tmp/ngrok-link-stable-darwin-amd64.zip
+        state: absent
+    # ----------------------------------------
     # --- pre-installed tool cache updates ---
     # ----------------------------------------
 
