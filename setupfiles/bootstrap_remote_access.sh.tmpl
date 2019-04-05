@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+
+#change vagrant user password
+sudo dscl . passwd /Users/vagrant {{.Password}}
+
+#enable ssh password authentication
+sudo sed -i "" "s|^\s*PasswordAuthentication no|PasswordAuthentication yes|g" /etc/ssh/sshd_config
+sudo sed -i "" "s|^\s*UsePAM no|UsePAM yes|g" /etc/ssh/sshd_config
+
+### Setup ngrok
+# create ngrok config
+NGROK_CONF=$(cat <<EOC
+authtoken: {{.Token}}
+log_format: logfmt
+log: /var/log/ngrok.log
+tunnels:
+  remote-access:
+    proto: tcp
+    addr: 22
+    remote_addr: {{.SSHAddress}}
+  #vnc-server:
+  #  proto: tcp
+  #  addr: 5900
+  #  remote_addr: {{.VNCAddress}}
+
+EOC
+)
+
+echo "$NGROK_CONF" | sudo tee /etc/ngrok/ngrok.yml
+
+# install and start ngrok as a service
+sudo ngrok service install -config /etc/ngrok/ngrok.yml
+sudo ngrok service start
