@@ -11,7 +11,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - bitrise_cli_version: 1.28.0
+    - bitrise_cli_version: 1.29.0
   tasks:
 
     # Fix git config for older templates
