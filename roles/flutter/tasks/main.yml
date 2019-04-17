@@ -1,21 +1,29 @@
 ---
-    # add third party repository to brew
-    # https://github.com/MiderWong/homebrew-flutter
-    - name: brew tap MiderWong/flutter
-      homebrew_tap:
-        name: MiderWong/flutter
+- name: Download flutter from stable channel
+  unarchive:
+    src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v{{ flutter_version }}-stable.zip
+    dest: "{{ flutter_home }}"
+    mode: 0770
+    remote_src: yes
 
-    # install flutter stable with brew
-    - name: brew install flutter
-      homebrew:
-        name: flutter
-        state: present
+- name: Flutter patch .bashrc
+  become: yes
+  blockinfile:
+    insertbefore: "keep a newline"
+    path: /Users/{{ param_user }}/.bashrc
+    block: "{{ lookup('template', 'bashrc.patch') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - Flutter settings"
 
-    # precache download flutter dependency
-    - name: Run flutter precache
-      shell: bash -l -c "flutter precache"
+- name: Flutter final newline in bashrc
+  become: yes
+  lineinfile:
+    insertbefore: "keep a newline"
+    path: /Users/{{ param_user }}/.bashrc
+    line: ""
 
-    # check flutter errors
-    - name: Run flutter doctor
-      shell: bash -l -c "flutter doctor"
+- name: Run flutter precache
+  shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
+
+- name: Run flutter doctor
+  shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter doctor"
 ...
