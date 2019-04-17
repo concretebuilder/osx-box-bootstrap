@@ -10,7 +10,7 @@
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
     - flutter_version: 1.2.1
-    - flutter_home: /usr/local/share
+    - flutter_home: /usr/local
   roles:
     - java
     - jenv

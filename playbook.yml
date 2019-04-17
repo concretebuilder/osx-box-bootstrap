@@ -12,7 +12,7 @@
     - param_user: vagrant
     - default_ruby: 2.5.3
     - flutter_version: 1.2.1
-    - flutter_home: /usr/local/share
+    - flutter_home: /usr/local
   tasks:
     #
     # Required param checks
