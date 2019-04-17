@@ -5,6 +5,9 @@
     dest: "{{ flutter_home }}"
     mode: 0770
     remote_src: yes
+    owner: vagrant
+    group: admin
+  become: yes
 
 - name: Flutter patch .bashrc
   become: yes
