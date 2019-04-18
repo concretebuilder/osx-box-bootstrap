@@ -1,5 +1,4 @@
 ---
-
 # Java 8 install
 # We need Java 8 because sdkmanager doesn't support newer Java versions (yet)
 # Also we need to manually call launchctl because otherwise it breaks the brew uninstall task
@@ -40,18 +39,18 @@
 - name: Download OpenJDK 8
   get_url:
       url: "{{ openjdk_pkg_source }}"
-      dest: /tmp/openjdk-installer.pkg
-      owner: vagrant
+      dest: "{{ openjdk_pkg_dest }}"
+      owner: "{{ param_user }}"
       group: admin
       attributes: 0770
 
 - name: Install pkg file
-  shell: installer -pkg /tmp/openjdk-installer.pkg -target /
+  shell: "installer -pkg {{ openjdk_pkg_dest }} -target /"
   become: yes
 
 - name: Remove pkg
   file:
-     path: /tmp/openjdk-installer.pkg
+     path: "{{ openjdk_pkg_dest }}"
      state: absent
 
 - name: Detect JAVA_HOME
