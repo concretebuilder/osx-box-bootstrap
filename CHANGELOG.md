@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_04_18_1`
+* `Java`: Switched to AdoptOpenJDK distributed Java 8
+
 ## `v2019_04_10_1`
 * `bitrise` (CLI): `1.29.0`
 
