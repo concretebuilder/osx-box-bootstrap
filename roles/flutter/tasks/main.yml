@@ -14,7 +14,7 @@
   blockinfile:
     insertbefore: "keep a newline"
     path: /Users/{{ param_user }}/.bashrc
-    block: "{{ lookup('template', 'bashrc.patch') }}"
+    block: "{{ lookup('template', 'patch.j2') }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK - Flutter settings"
 
 - name: Flutter final newline in bashrc
