@@ -36,22 +36,15 @@
     name: java
     state: absent
 
-- name: Download OpenJDK 8
-  get_url:
-      url: "{{ openjdk_pkg_source }}"
-      dest: "{{ openjdk_pkg_dest }}"
-      owner: "{{ param_user }}"
-      group: admin
-      attributes: 0770
+- name: brew tap AdoptOpenJDK/openjdk
+  homebrew_tap:
+    name: AdoptOpenJDK/openjdk
+    state: present
 
-- name: Install pkg file
-  shell: "installer -pkg {{ openjdk_pkg_dest }} -target /"
-  become: yes
-
-- name: Remove pkg
-  file:
-     path: "{{ openjdk_pkg_dest }}"
-     state: absent
+- name: brew cask install adoptopenjdk8
+  homebrew_cask:
+    name: adoptopenjdk8
+    state: present
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8
