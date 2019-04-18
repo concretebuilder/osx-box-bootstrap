@@ -8,7 +8,7 @@
     insertbefore: "keep a newline"
     path: /Users/{{ param_user }}/.bashrc
     block: "{{ lookup('template', 'patch.j2') }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK - {{ patch_marker }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - Android Additions"
 
 - name: Final newline
   become: yes

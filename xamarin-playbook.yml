@@ -10,6 +10,8 @@
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
   roles:
+    - java
+    - jenv
     - flutter
   tasks:
     #
@@ -33,24 +35,6 @@
         dest="/Users/{{ param_user }}/.profiles/xamarin_profile"
         owner="{{ param_user }}"
         mode=0600
-
-    # Java 8 install
-    # We need Java 8 because sdkmanager doesn't support newer Java versions (yet)
-    # Also we need to manually call launchctl because otherwise it breaks the brew uninstall task
-    - name: Stop Java's Helper-Tool
-      shell: launchctl remove com.oracle.java.Helper-Tool
-      become: yes
-      ignore_errors: yes
-    - name: Stop Java's Java-Updater
-      shell: launchctl remove com.oracle.java.Java-Updater
-      become: yes
-      ignore_errors: yes
-    - name: brew uninstall latest java
-      homebrew_cask: name=java state=absent
-    - name: brew tap homebrew/cask-versions
-      homebrew_tap: name='homebrew/cask-versions' state=present
-    - name: brew install java8
-      homebrew_cask: name=java8 state=present
 
     # ------------------------------------------------------
     # --- Install Android SDKs and other build packages

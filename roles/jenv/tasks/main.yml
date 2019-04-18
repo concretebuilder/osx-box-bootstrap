@@ -1,0 +1,35 @@
+---
+
+# Install jenv
+
+- name: brew install jEnv
+  homebrew:
+    name: jenv
+    state: present
+
+- name: Patch .bashrc
+  become: yes
+  blockinfile:
+    insertbefore: "keep a newline"
+    path: /Users/{{ param_user }}/.bashrc
+    block: "{{ lookup('template', 'patch.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - jEnv Additions"
+
+- name: Final newline
+  become: yes
+  lineinfile:
+    insertbefore: "keep a newline"
+    path: /Users/{{ param_user }}/.bashrc
+    line: ""
+
+- name: setup jEnv
+  shell: . /Users/{{ param_user }}/.bashrc && yes | jenv add {{ detect_java_home.stdout }}
+  register: result
+
+- debug:
+  msg: "{{ result.stdout }}"
+
+- name: set Java 8 as Global in jEnv
+  shell: jenv global 1.8
+
+...

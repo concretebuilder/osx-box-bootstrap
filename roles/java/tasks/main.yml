@@ -37,15 +37,22 @@
     name: java
     state: absent
 
-- name: brew tap homebrew/cask-versions
-  homebrew_tap:
-    name: homebrew/cask-versions
-    state: present
+- name: Download OpenJDK 8
+  get_url:
+      url: "{{ openjdk_pkg_source }}"
+      dest: /tmp/openjdk-installer.pkg
+      owner: vagrant
+      group: admin
+      attributes: 0770
 
-- name: brew install java8
-  homebrew_cask:
-    name: java8
-    state: present
+- name: Install pkg file
+  shell: installer -pkg /tmp/openjdk-installer.pkg -target /
+  become: yes
+
+- name: Remove pkg
+  file:
+     path: /tmp/openjdk-installer.pkg
+     state: absent
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8

@@ -2,11 +2,8 @@ export PATH=$PATH:{{ android_ndk_home }}
 export PATH=$PATH:{{ android_home }}/tools
 export PATH=$PATH:{{ android_home }}/tools/bin
 export PATH=$PATH:{{ android_home }}/platform-tools
-export PATH=$PATH:$HOME/.jenv/bin
 
 export ANDROID_SDK_ROOT={{ android_home }}
 export ANDROID_HOME={{ android_home }}
 export ANDROID_NDK_VERSION={{ android_ndk_version }}
 export ANDROID_NDK_HOME={{ android_ndk_home }}/android-ndk-{{ android_ndk_version }}
-
-eval "$(jenv init -)"

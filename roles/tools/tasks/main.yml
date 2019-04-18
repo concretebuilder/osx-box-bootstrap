@@ -1,11 +1,6 @@
 ---
 
-# Install additional tools
-
-- name: brew install jEnv
-  homebrew:
-    name: jenv
-    state: present
+# Install additional android/java tools
 
 - name: brew install Ant
   homebrew:
