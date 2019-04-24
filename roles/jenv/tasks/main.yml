@@ -11,14 +11,17 @@
   file:
     path: $HOME/profile.d
     state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0660
 
 - name: Create patch.sh to profile.d
   template:
     src: patch.j2
-    dest: $HOME/profile.d/patch.sh
+    dest: $HOME/profile.d/jenv_patch.sh
     owner: vagrant
     group: vagrant
-    mode: 0660
+    mode: 0770
 
 - name: setup jEnv
   shell: . /Users/{{ param_user }}/.bashrc && yes | jenv add {{ detect_java_home.stdout }}

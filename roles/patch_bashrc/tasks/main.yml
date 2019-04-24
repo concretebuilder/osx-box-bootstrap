@@ -6,13 +6,16 @@
   file:
     path: $HOME/profile.d
     state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0660
 
 - name: Create patch.sh to profile.d
   template:
     src: patch.j2
-    dest: $HOME/profile.d/patch.sh
+    dest: $HOME/profile.d/patch_bashrc.sh
     owner: vagrant
     group: vagrant
-    mode: 0660
+    mode: 0770
 
 ...

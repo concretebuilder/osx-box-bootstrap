@@ -14,10 +14,6 @@ export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
-for PROFILE_SCRIPT in $( ls $HOME/profile.d/*.sh ); do
-  . $PROFILE_SCRIPT
-done
-
 # Ruby - force brew installed Ruby
 if [ -d "/usr/local/lib/ruby/gems/2.5.0/bin" ] ; then
   export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
@@ -41,5 +37,9 @@ fi
 if [ -s "$HOME/.profiles/xamarin_profile" ] ; then
   source "$HOME/.profiles/xamarin_profile"
 fi
+
+for PROFILE_SCRIPT in $( ls $HOME/profile.d/*.sh ); do
+  . $PROFILE_SCRIPT
+done
 
 # keep a newline at the end of this file
