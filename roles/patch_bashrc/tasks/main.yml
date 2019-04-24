@@ -10,8 +10,9 @@
 - name: Create patch.sh to profile.d
   template:
     src: patch.j2
-    dest: $HOME/profile.d/patch.showner: bin
-    group: wheel
+    dest: $HOME/profile.d/patch.sh
+    owner: vagrant
+    group: vagrant
     mode: 0660
 
 ...
