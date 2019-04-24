@@ -12,10 +12,13 @@
     path: $HOME/profile.d
     state: directory
 
-- name: Basic Template Example
+- name: Create patch.sh to profile.d
   template:
     src: patch.j2
     dest: $HOME/profile.d/patch.sh
+    owner: vagrant
+    group: vagrant
+    mode: 0660
 
 - name: setup jEnv
   shell: . /Users/{{ param_user }}/.bashrc && yes | jenv add {{ detect_java_home.stdout }}

@@ -7,9 +7,11 @@
     path: $HOME/profile.d
     state: directory
 
-- name: Basic Template Example
+- name: Create patch.sh to profile.d
   template:
     src: patch.j2
-    dest: $HOME/profile.d/patch.sh
+    dest: $HOME/profile.d/patch.showner: bin
+    group: wheel
+    mode: 0660
 
 ...

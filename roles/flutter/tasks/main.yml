@@ -14,22 +14,13 @@
     path: $HOME/profile.d
     state: directory
 
-- name: Basic Template Example
+- name: Create patch.sh to profile.d
   template:
     src: patch.j2
     dest: $HOME/profile.d/patch.sh
-
-# - name: Ensure patch file exists
-#   copy:
-#     content: ""
-#     dest: $HOME/profile.d/patch2.sh
-#     force: no
-#
-# - name: Patch .bashrc
-#   blockinfile:
-#     path: $HOME/profile.d/patch2.sh
-#     block: "{{ lookup('template', 'patch.j2') }}"
-#     marker: "# {mark} ANSIBLE MANAGED BLOCK - Android Additions"
+    owner: vagrant
+    group: vagrant
+    mode: 0660
 
 - name: Run flutter precache
   shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
