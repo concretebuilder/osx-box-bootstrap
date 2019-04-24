@@ -2,19 +2,21 @@
 
 # Patch .bashrc
 
+- name: Creates profile.d directory
+  file:
+    path: $HOME/profile.d
+    state: directory
+
+- name: Ensure patch file exists
+  copy:
+    content: ""
+    dest: $HOME/profile.d/patch2.sh
+    force: no
+
 - name: Patch .bashrc
-  become: yes
   blockinfile:
-    insertbefore: "keep a newline"
-    path: /Users/{{ param_user }}/.bashrc
+    path: $HOME/profile.d/patch2.sh
     block: "{{ lookup('template', 'patch.j2') }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK - Android Additions"
-
-- name: Final newline
-  become: yes
-  lineinfile:
-    insertbefore: "keep a newline"
-    path: /Users/{{ param_user }}/.bashrc
-    line: ""
 
 ...
