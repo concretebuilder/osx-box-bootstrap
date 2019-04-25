@@ -6,7 +6,7 @@
   file:
     path: /Users/{{ param_user }}/profile.d
     state: directory
-    owner: vagrant
+    owner: "{{ param_user }}"
     group: wheel
     mode: 0660
 
@@ -14,7 +14,7 @@
   template:
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/patch_bashrc.sh
-    owner: {{ param_user }}
+    owner: "{{ param_user }}"
     group: wheel
     mode: 0770
 
