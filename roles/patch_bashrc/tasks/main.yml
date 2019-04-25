@@ -8,8 +8,7 @@
     path: /Users/{{ param_user }}/profile.d
     state: directory
     owner: "{{ param_user }}"
-    group: wheel
-    mode: 0660
+    mode: 0755
 
 - name: Create patch.sh to profile.d
   become: yes
@@ -17,7 +16,6 @@
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/patch_bashrc.sh
     owner: "{{ param_user }}"
-    group: wheel
-    mode: 0770
+    mode: 0755
 
 ...
