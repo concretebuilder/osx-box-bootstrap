@@ -3,6 +3,7 @@
 # Patch .bashrc
 
 - name: Creates profile.d directory
+  become: yes
   file:
     path: /Users/{{ param_user }}/profile.d
     state: directory
