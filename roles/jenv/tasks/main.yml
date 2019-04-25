@@ -9,7 +9,7 @@
 
 - name: Creates profile.d directory
   file:
-    path: $HOME/profile.d
+    path: /Users/{{ param_user }}/profile.d
     state: directory
     owner: vagrant
     group: wheel
@@ -18,7 +18,7 @@
 - name: Create patch.sh to profile.d
   template:
     src: patch.j2
-    dest: $HOME/profile.d/jenv_patch.sh
+    dest: /Users/{{ param_user }}/profile.d/jenv_patch.sh
     owner: vagrant
     group: wheel
     mode: 0770

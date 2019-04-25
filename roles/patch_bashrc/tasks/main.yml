@@ -4,7 +4,7 @@
 
 - name: Creates profile.d directory
   file:
-    path: $HOME/profile.d
+    path: /Users/{{ param_user }}/profile.d
     state: directory
     owner: vagrant
     group: wheel
@@ -13,7 +13,7 @@
 - name: Create patch.sh to profile.d
   template:
     src: patch.j2
-    dest: $HOME/profile.d/patch_bashrc.sh
+    dest: /Users/{{ param_user }}/profile.d/patch_bashrc.sh
     owner: vagrant
     group: wheel
     mode: 0770
