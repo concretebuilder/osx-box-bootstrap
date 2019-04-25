@@ -12,6 +12,20 @@
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
     - bitrise_cli_version: 1.29.0
+  roles:
+    - role: java
+      tags: java-android
+    - role: jenv
+      tags: java-android
+    - role: android
+      tags: java-android
+    - role: tools
+      tags: java-adndroid
+    - role: patch_bashrc
+      tags: java-android
+    - role: flutter
+      tags: java-adndroid
+
   tasks:
 
     # Fix git config for older templates
