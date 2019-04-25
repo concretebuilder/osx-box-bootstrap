@@ -17,6 +17,7 @@
     mode: 0660
 
 - name: Create patch.sh to profile.d
+  become: yes
   template:
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/jenv_patch.sh
