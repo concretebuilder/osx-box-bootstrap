@@ -14,7 +14,7 @@
   template:
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/patch_bashrc.sh
-    owner: vagrant
+    owner: {{ param_user }}
     group: wheel
     mode: 0770
 
