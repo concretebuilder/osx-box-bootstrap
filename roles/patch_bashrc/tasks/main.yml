@@ -12,6 +12,7 @@
     mode: 0660
 
 - name: Create patch.sh to profile.d
+  become: yes
   template:
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/patch_bashrc.sh
