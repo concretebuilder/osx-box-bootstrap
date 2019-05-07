@@ -10,7 +10,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - default_ruby: 2.5.3
+    - default_ruby: 2.6.3
   tasks:
     #
     # Required param checks
@@ -230,8 +230,11 @@
     - name: Set ruby {{ default_ruby }} to global
       shell: bash -l -c "rbenv global {{ default_ruby }}"
       when: is_incremental_setup|default(false) == false
-    - name: Install ruby 2.4.5
-      shell: bash -l -c "rbenv install --skip-existing 2.4.5"
+    - name: Install ruby 2.5.5
+      shell: bash -l -c "rbenv install --skip-existing 2.5.5"
+      when: is_incremental_setup|default(false) == false
+    - name: Install ruby 2.4.6
+      shell: bash -l -c "rbenv install --skip-existing 2.4.6"
       when: is_incremental_setup|default(false) == false
     - name: Install ruby 2.3.8
       shell: bash -l -c "rbenv install --skip-existing 2.3.8"
