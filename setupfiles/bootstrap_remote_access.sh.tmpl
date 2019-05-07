@@ -3,7 +3,7 @@
 set -e
 
 #change vagrant user password
-sudo dscl . passwd /Users/vagrant {{.Password}}
+sudo dscl . passwd /Users/vagrant vagrant {{.Password}}
 
 #enable ssh password authentication
 sudo sed -i "" "s|^\s*PasswordAuthentication no|PasswordAuthentication yes|g" /etc/ssh/sshd_config
