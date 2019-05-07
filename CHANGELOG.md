@@ -1,5 +1,14 @@
 ## UPCOMING
 
+## `v2019_05_07_1`
+
+* New stack types will have rbenv installed ruby with the following versions:
+  * 2.6.3
+  * 2.5.5
+  * 2.4.6
+  * 2.3.8
+  * 2.2.10
+
 ## `v2019_04_18_1`
 * `Java`: Switched to AdoptOpenJDK distributed Java 8
 
