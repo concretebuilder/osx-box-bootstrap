@@ -23,10 +23,10 @@ tunnels:
     proto: tcp
     addr: 22
     remote_addr: {{.SSHAddress}}
-  #vnc-server:
-  #  proto: tcp
-  #  addr: 5900
-  #  remote_addr: {{.VNCAddress}}
+  vnc-server:
+    proto: tcp
+    addr: 5900
+    remote_addr: {{.VNCAddress}}
 
 EOC
 )
