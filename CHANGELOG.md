@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_04_10_1`
+* `bitrise` (CLI): `1.30.0
+
 ## `v2019_05_07_1`
 
 * New stack types will have rbenv installed ruby with the following versions:
