@@ -11,7 +11,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - bitrise_cli_version: 1.29.0
+    - bitrise_cli_version: 1.30.0
   roles:
     - role: java
       tags: java-android
@@ -20,11 +20,11 @@
     - role: android
       tags: java-android
     - role: tools
-      tags: java-adndroid
+      tags: java-android
     - role: patch_bashrc
       tags: java-android
     - role: flutter
-      tags: java-adndroid
+      tags: java-android
 
   tasks:
 

@@ -3,11 +3,14 @@
 set -e
 
 #change vagrant user password
-sudo dscl . passwd /Users/vagrant {{.Password}}
+sudo dscl . passwd /Users/vagrant vagrant {{.Password}}
 
 #enable ssh password authentication
 sudo sed -i "" "s|^\s*PasswordAuthentication no|PasswordAuthentication yes|g" /etc/ssh/sshd_config
 sudo sed -i "" "s|^\s*UsePAM no|UsePAM yes|g" /etc/ssh/sshd_config
+
+#Add vagrant user to screen sharing group
+sudo dscl . append /Groups/com.apple.access_screensharing GroupMembership vagrant
 
 ### Setup ngrok
 # create ngrok config
@@ -20,10 +23,10 @@ tunnels:
     proto: tcp
     addr: 22
     remote_addr: {{.SSHAddress}}
-  #vnc-server:
-  #  proto: tcp
-  #  addr: 5900
-  #  remote_addr: {{.VNCAddress}}
+  vnc-server:
+    proto: tcp
+    addr: 5900
+    remote_addr: {{.VNCAddress}}
 
 EOC
 )
