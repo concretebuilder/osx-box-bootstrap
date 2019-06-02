@@ -16,13 +16,13 @@
     mode: 0755
 
 - name: setup jEnv
-  shell: . /Users/{{ param_user }}/.bashrc && . /Users/{{ param_user }}/profile.d/jenv_patch.sh && (yes | jenv add {{ detect_java_home.stdout }})
+  shell: . /Users/{{ param_user }}/.bashrc && (yes | jenv add {{ detect_java_home.stdout }})
   register: result
 
 - debug:
     msg: "{{ result.stdout }}"
 
 - name: set Java 8 as Global in jEnv
-  shell: . /Users/{{ param_user }}/profile.d/jenv_patch.sh && jenv global 1.8
+  shell: jenv global 1.8
 
 ...
