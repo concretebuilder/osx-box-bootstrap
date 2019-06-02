@@ -61,7 +61,7 @@
 #
 # Install and update homebrew
 - name: run brew installer script
-  script: files/install_brew.sh creates=/usr/local/bin/brew
+  script: install_brew.sh creates=/usr/local/bin/brew
 - name: brew update
   homebrew: update_homebrew=yes upgrade_all=no
 # brew some commands
@@ -209,7 +209,7 @@
 #
 # Install cmd-bridge
 - name: run cmd-bridge installer script
-  script: files/install_cmd-bridge.sh
+  script: install_cmd-bridge.sh
 
 #
 # Switch to Xcode stable, the default Xcode for building

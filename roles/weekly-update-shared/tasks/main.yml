@@ -12,28 +12,10 @@
     scope: global
     value: "please-set-your-email@bitrise.io"
 
-# ----------------------------------------
-# --- Setup profiles ---
-# ----------------------------------------
-
-# Make sure that the latest .bashrc is in place (which
-# references / loads the other profiles)
-- name: setup .bashrc
-  copy: src=profiles/bashrc
-    dest="/Users/{{ param_user }}/.bashrc"
-    owner="{{ param_user }}"
-    mode=0600
-
-- name: setup tools_profile
-  copy: src=profiles/tools_profile
-    dest="/Users/{{ param_user }}/.profiles/tools_profile"
-    owner="{{ param_user }}"
-    mode=0600
-
 # Copy these two plist file to incrase Open File Descriptos
 - name: "Setup open-file limit"
   copy:
-    src: files/limit.maxfiles.plist
+    src: limit.maxfiles.plist
     dest: /Library/LaunchDaemons/imit.maxfiles.plist
     owner: root
     group: wheel
@@ -42,7 +24,7 @@
 
 - name: "Setup max-process limit"
   copy:
-    src: files/limit.maxproc.plist
+    src: limit.maxproc.plist
     dest: /Library/LaunchDaemons/imit.maxproc.plist
     owner: root
     group: wheel

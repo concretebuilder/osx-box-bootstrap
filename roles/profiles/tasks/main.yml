@@ -10,13 +10,13 @@
 # this is the main Bitrise profile, includes
 #  the bitrise specific environments
 - name: setup bitrise_profile
-  copy: src=profiles/bitrise_profile
+  copy: src=bitrise_profile
     dest="/Users/{{ param_user }}/.profiles/bitrise_profile"
     owner="{{ param_user }}"
     mode=0600
 # Includes 3thd party tools specific environments
 - name: setup tools_profile
-  copy: src=profiles/tools_profile
+  copy: src=tools_profile
     dest="/Users/{{ param_user }}/.profiles/tools_profile"
     owner="{{ param_user }}"
     mode=0600
@@ -25,17 +25,17 @@
 #  load ~/.bashrc, so no matter how the shell is initialized
 #  it'll load all the required Environment Variables
 - name: setup .bashrc
-  copy: src=profiles/bashrc
+  copy: src=bashrc
     dest="/Users/{{ param_user }}/.bashrc"
     owner="{{ param_user }}"
     mode=0600
 - name: setup .profile
-  copy: src=profiles/profile
+  copy: src=profile
     dest="/Users/{{ param_user }}/.profile"
     owner="{{ param_user }}"
     mode=0600
 - name: setup .bash_profile
-  copy: src=profiles/bash_profile
+  copy: src=bash_profile
     dest="/Users/{{ param_user }}/.bash_profile"
     owner="{{ param_user }}"
     mode=0600
