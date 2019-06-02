@@ -1,0 +1,172 @@
+---
+# Weekly VM update shared ansible tasks
+# Fix git config for older templates
+- name: git config name
+  git_config:
+    name: user.name
+    scope: global
+    value: "J. Doe (https://devcenter.bitrise.io/builds/setting-your-git-credentials-on-build-machines/)"
+- name: git config email
+  git_config:
+    name: user.email
+    scope: global
+    value: "please-set-your-email@bitrise.io"
+
+# ----------------------------------------
+# --- Setup profiles ---
+# ----------------------------------------
+
+# Make sure that the latest .bashrc is in place (which
+# references / loads the other profiles)
+- name: setup .bashrc
+  copy: src=profiles/bashrc
+    dest="/Users/{{ param_user }}/.bashrc"
+    owner="{{ param_user }}"
+    mode=0600
+
+- name: setup tools_profile
+  copy: src=profiles/tools_profile
+    dest="/Users/{{ param_user }}/.profiles/tools_profile"
+    owner="{{ param_user }}"
+    mode=0600
+
+# Copy these two plist file to incrase Open File Descriptos
+- name: "Setup open-file limit"
+  copy:
+    src: files/limit.maxfiles.plist
+    dest: /Library/LaunchDaemons/imit.maxfiles.plist
+    owner: root
+    group: wheel
+    mode: 0644
+  become: yes
+
+- name: "Setup max-process limit"
+  copy:
+    src: files/limit.maxproc.plist
+    dest: /Library/LaunchDaemons/imit.maxproc.plist
+    owner: root
+    group: wheel
+    mode: 0644
+  become: yes
+
+# ----------------------------------------
+# --- remote access script install ---
+# ----------------------------------------
+- name: "Ensure /opt/bitrise exists"
+  file:
+    path: /opt/bitrise
+    state: directory
+    owner: vagrant
+    group: wheel
+    mode:  "0755"
+  become: yes
+
+- name: "Ensure /etc/ngrok exists"
+  file:
+    path: /etc/ngrok
+    state: directory
+    owner: root
+    group: wheel
+    mode:  "0755"
+  become: yes
+
+- name: "copy remote access config script"
+  copy:
+    src=files/bootstrap_remote_access.sh.tmpl
+    dest=/opt/bitrise/bootstrap_remote_access.sh.tmpl
+    owner=vagrant
+    mode=0777
+
+# ----------------------------------------
+# --- ngrok install ---
+# ----------------------------------------
+- name: "ngrok-binary: download"
+  get_url:
+    url: https://bin.equinox.io/c/gDfFGFRN2Jh/ngrok-link-stable-darwin-amd64.zip
+    dest: /tmp/ngrok-link-stable-darwin-amd64.zip
+- name: "ngrok-binary: install"
+  unarchive:
+    src: /tmp/ngrok-link-stable-darwin-amd64.zip
+    dest: /usr/local/bin
+    copy: no
+    mode: 0700
+- name: "ngrok-binary: remove temp file"
+  file:
+    path: /tmp/ngrok-link-stable-darwin-amd64.zip
+    state: absent
+# ----------------------------------------
+# --- pre-installed tool cache updates ---
+# ----------------------------------------
+
+- name: "brew update"
+  shell: bash -l -c "brew update || brew update || brew update" # 7.3 succeeds after two calls but returns non-zero exit
+- name: brew install screen (for older images)
+  homebrew: name=screen state=present
+
+
+- name: "CocoaPods: pod setup"
+  shell: bash -l -c "pod setup || pod setup"
+  when: use_deprecated_cocoapods|default("") != "yes"
+# For deprecated CocoaPods versions
+# See: http://blog.cocoapods.org/Sharding/
+- name: "CocoaPods: checkout spec repo - for deprecated cocoapods versions"
+  shell: bash -l -c "cd /Users/vagrant/.cocoapods/repos/master/ && git fetch origin master --tags && git checkout v0.32.1"
+  when: use_deprecated_cocoapods|default("") == "yes"
+- name: "CocoaPods: pre-fetch the Old-Specs spec, to update it to the latest version"
+  shell: bash -l -c "pod repo add cocoapods https://github.com/CocoaPods/Old-Specs"
+  when: use_deprecated_cocoapods|default("") == "yes"
+
+
+# ----------------------------------------
+# --- Bitrise CLI tools ---
+# ----------------------------------------
+# bitrise CLI: cleanup previous tool versions
+- name: clean up previous 'bitrise'
+  file: path=/usr/local/bin/bitrise state=absent
+
+- name: clean up previous 'stepman'
+  file: path=/usr/local/bin/stepman state=absent
+
+- name: clean up previous 'envman'
+  file: path=/usr/local/bin/envman state=absent
+#
+- name: "bitrise CLI: download"
+  shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"
+- name: "Make the bitrise CLI executable"
+  file: path=/usr/local/bin/bitrise mode="u=rwx,g=rx,o=rx"
+- name: "Bitrise CLI test -version"
+  shell: bash -l -c "bitrise --version"
+- name: "Bitrise CLI - setup"
+  shell: bash -l -c "bitrise setup"
+- name: "Bitrise CLI - envman -version"
+  shell: bash -l -c "/Users/vagrant/.bitrise/tools/envman -version"
+- name: "Bitrise CLI - stepman -version"
+  shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman -version"
+# setup the default StepLib collection to stepman, for a pre-warmed
+#  cache for the StepLib
+- name: "stepman: init"
+  shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
+- name: "stepman: update"
+  shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman update"
+
+- name: "cmd-bridge: download"
+  shell: bash -l -c "curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge"
+- name: "Make the cmd-bridge executable"
+  file: path=/usr/local/bin/cmd-bridge mode="u=rwx,g=rx,o=rx"
+- name: "cmd-bridge -version"
+  shell: bash -l -c "cmd-bridge --version"
+
+
+# ----------------------------------------
+# --- Cleanup ---
+# ----------------------------------------
+
+# Remove tmp / test dirs inside the HOME directory
+#  * DerivedData : remove the DerivedData content generated by the Bitrise Stack tester sample apps (built during Stack prepare, to validate the Xcode setup)
+#  * Xcode "components" (simulators) installer Download Cache dir : Xcode stores the simulator installers here, and it never cleans them up for some reason.
+- name: Remove tmp and test dirs inside the HOME directory
+  file: path="/Users/{{ param_user }}/{{ item.fold_path }}"
+    state=absent
+  with_items:
+    - { fold_path: 'Library/Developer/Xcode/DerivedData' }
+    - { fold_path: 'Library/Caches/com.apple.dt.Xcode/Downloads' }
