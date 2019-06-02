@@ -21,7 +21,7 @@
     - role: android
       tags: java-android
     - role: android-sdk-packages
-    - role: yava-tools
+    - role: java-tools
       tags: java-android
     - role: patch_bashrc
       tags: java-android
