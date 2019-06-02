@@ -7,19 +7,11 @@
     name: jenv
     state: present
 
-- name: Creates profile.d directory
-  become: yes
-  file:
-    path: /Users/{{ param_user }}/profile.d
-    state: directory
-    owner: "{{ param_user }}"
-    mode: 0755
-
-- name: Create patch.sh to profile.d
+- name: Generate script to profile.d
   become: yes
   template:
     src: patch.j2
-    dest: /Users/{{ param_user }}/profile.d/jenv_patch.sh
+    dest: /Users/{{ param_user }}/profile.d/jenv.sh
     owner: "{{ param_user }}"
     mode: 0755
 

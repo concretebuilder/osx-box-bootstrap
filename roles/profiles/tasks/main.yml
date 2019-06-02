@@ -39,3 +39,11 @@
     dest="/Users/{{ param_user }}/.bash_profile"
     owner="{{ param_user }}"
     mode=0600
+
+- name: Creates profile.d directory
+  become: yes
+  file:
+    path: /Users/{{ param_user }}/profile.d
+    state: directory
+    owner: "{{ param_user }}"
+    mode: 0755
