@@ -22,7 +22,7 @@
       tags: java-android
     - role: android-sdk-packages
     - role: java-tools
-      tags: java-androidF
+      tags: java-android
     - role: flutter
     - role: xamarin
       when: is_allow_weekly_xamarin_provision | default("no") | string  == "yes"
