@@ -43,7 +43,7 @@
 
 - name: brew cask install adoptopenjdk8
   homebrew_cask:
-    name: adoptopenjdk8
+    name: adoptopenjdk/openjdk/adoptopenjdk8
     state: present
 
 - name: Detect JAVA_HOME
