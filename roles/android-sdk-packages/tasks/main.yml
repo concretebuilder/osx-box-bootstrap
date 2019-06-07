@@ -2,7 +2,7 @@
 - name: Install Android packages with SDK Manager
   become: yes
   environment:
-    PATH: "{{ android_home }}/tools/bin:{{ ansible_env.PATH }}"
+    PATH: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx/tools/bin:{{ android_home }}/tools/bin:{{ ansible_env.PATH }}"
   shell: "(echo y | sdkmanager '{{ item }}') || (echo y | sdkmanager '{{ item }}')"
   loop:
     - "emulator"
