@@ -36,14 +36,14 @@
     name: java
     state: absent
 
-- name: brew tap AdoptOpenJDK/openjdk
+- name: brew tap homebrew/cask-versions
   homebrew_tap:
-    name: AdoptOpenJDK/openjdk
+    name: homebrew/cask-versions
     state: present
 
 - name: brew cask install adoptopenjdk8
   homebrew_cask:
-    name: adoptopenjdk/openjdk/adoptopenjdk8
+    name: adoptopenjdk8
     state: present
 
 - name: Detect JAVA_HOME
