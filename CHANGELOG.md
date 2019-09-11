@@ -1,7 +1,13 @@
 ## UPCOMING
 
-## `v2019_09_11_1`
+## `v2019_09_11_2`
 * `bitrise` (CLI): `1.34.0`
+
+## `v2019_09_11_1`
+* Preinstalled android packages for buidling against Android 10:
+  * `build-tools-29.0.0`,`build-tools-29.0.1`, `build-tools-29.0.2`
+  * `platforms;android-29`
+  * `system-images;android-29;google_apis;x86`
 
 ## `v2019_08_21_1`
 * `bitrise` (CLI): `1.33.0`
