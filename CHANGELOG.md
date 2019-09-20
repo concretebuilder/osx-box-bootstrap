@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2019_09_20_1`
+* `flutter`: `v1.9.1+hotfix.2`
+* `Android NDK`: `r20`
+
 ## `v2019_09_11_2`
 * `bitrise` (CLI): `1.34.0`
 
