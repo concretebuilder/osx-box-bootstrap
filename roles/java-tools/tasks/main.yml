@@ -2,9 +2,9 @@
 
 # Install additional android/java tools
 
-- name: brew install Ant@1.9
+- name: brew install Ant
   homebrew:
-    name: ant@1.9
+    name: ant
     state: present
 
 - name: brew install Maven
