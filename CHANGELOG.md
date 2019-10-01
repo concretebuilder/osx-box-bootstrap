@@ -1,5 +1,11 @@
 ## UPCOMING
 
+## `v2019_10_01_1`
+* `java-tools`: `Ant version back to latest`
+
+## `v2019_09_26_1`
+* `java-tools`: `Ant version fixed @1.9`
+
 ## `v2019_09_20_1`
 * `flutter`: `v1.9.1+hotfix.2`
 * `Android NDK`: `r20`
