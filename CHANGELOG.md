@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_10_04_01`
+* `ruby-versions`: `updated default to latest stable, updated minor versions, and removed deprecated versions`
+
 ## `v2019_10_01_1`
 * `java-tools`: `Ant version back to latest`
 
