@@ -116,12 +116,7 @@
 - name: Install ruby 2.4.6
   shell: bash -l -c "rbenv install --skip-existing 2.4.6"
   when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.3.8
-  shell: bash -l -c "rbenv install --skip-existing 2.3.8"
-  when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.2.10
-  shell: bash -l -c "rbenv install --skip-existing 2.2.10"
-  when: is_incremental_setup|default(false) == false
+
 
 ## Go
 # Gopath is $HOME/go
