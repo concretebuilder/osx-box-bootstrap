@@ -27,3 +27,4 @@
     - role: java-tools
       tags: java-android
     - role: flutter
+    - role: system-report

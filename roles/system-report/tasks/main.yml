@@ -1,0 +1,13 @@
+---
+- name: Give Execute permission to script
+  become: yes
+  shell: chmod 007 /Users/vagrant/git/system_report.sh
+
+- name: Run System report script
+  become: yes
+  shell: export SYSTEM_REPORT=$(bash -l -c /Users/vagrant/git/system_report.sh)
+
+- debug:
+  var: SYSTEM_REPORT
+  verbosity: 1
+...
