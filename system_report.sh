@@ -32,6 +32,10 @@ ver_line="$(node --version)" ;                    echo "* Node.js: $ver_line"
 ver_line="$(npm --version)" ;                     echo "* NPM: $ver_line"
 ver_line="$(yarn --version)" ;                    echo "* Yarn: $ver_line"
 ver_line="$(java -version 2>&1 >/dev/null)" ;     echo "* Java: $ver_line"
+# This is needed because Flutter version displays a message on the first try
+# that new updates are available, and only displays the actual version afterwards
+# When we run it again it displays the current version only
+flutter --version > /dev/null 2>&1
 ver_line="$(flutter --version | head -n 1)" ;     echo "* Flutter: $ver_line"
 
 echo
