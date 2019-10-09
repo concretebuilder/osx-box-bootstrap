@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_10_09_1`
+* `bitrise` (CLI): `1.35.0`
+
 ## `v2019_10_04_01`
 * `ruby-versions`: `updated default to latest stable, updated minor versions, and removed deprecated versions`
 
