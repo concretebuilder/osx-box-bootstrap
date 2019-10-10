@@ -113,8 +113,8 @@
 - name: Install ruby 2.5.3
   shell: bash -l -c "rbenv install --skip-existing 2.5.3"
   when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.4.9
-  shell: bash -l -c "rbenv install --skip-existing 2.4.9"
+- name: Install ruby 2.4.7
+  shell: bash -l -c "rbenv install --skip-existing 2.4.7"
   when: is_incremental_setup|default(false) == false
 
 
