@@ -12,8 +12,8 @@
 
 - name: Remove script from remote machine
   file:
-  state: absent
-  path: /tmp/system_report.sh
+    state: absent
+    path: /tmp/system_report.sh
 
 - debug:
   var: SYSTEM_REPORT
