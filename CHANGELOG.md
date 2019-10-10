@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_10_10_1`
+* `changed ruby versions to the ones rbenv can actually install`
+
 ## `v2019_10_09_1`
 * `bitrise` (CLI): `1.35.0`
 
