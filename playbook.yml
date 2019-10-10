@@ -10,7 +10,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - default_ruby: 2.6.5
+    - default_ruby: 2.6.3
   roles:
     - ssh-setup
     - profiles
