@@ -103,7 +103,7 @@
 
 # Ruby
 - name: brew install rbenv
-  homebrew: name=rbenv state=present
+  homebrew: name=rbenv state=latest
 - name: Install ruby {{ default_ruby }}
   shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
   when: is_incremental_setup|default(false) == false
@@ -113,8 +113,8 @@
 - name: Install ruby 2.5.3
   shell: bash -l -c "rbenv install --skip-existing 2.5.3"
   when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.4.7
-  shell: bash -l -c "rbenv install --skip-existing 2.4.7"
+- name: Install ruby 2.4.5
+  shell: bash -l -c "rbenv install --skip-existing 2.4.5"
   when: is_incremental_setup|default(false) == false
 
 
