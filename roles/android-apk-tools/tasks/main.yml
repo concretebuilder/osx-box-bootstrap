@@ -38,14 +38,4 @@
   tags:
     - apktools
 
-- name: Download bundletool
-  become: yes
-  get_url:
-    url: "{{ bundletool_source }}"
-    dest: "{{ apktools_path }}/bundletool.jar"
-    owner: "{{ param_user }}"
-    mode: 0660
-  tags:
-    - apktools
-
 ...
