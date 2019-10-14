@@ -273,3 +273,5 @@ after you ran the previous steps: `bitrise run provision-xamarin-vm`
 * This repository is meant to be used / tested with OS X El Capitan (10.11)
 * Other OS X versions should also work, but might require minor modifications
   * Previous OS X versions (up until 10.11) stored the `sshd_config` in `/etc/sshd_config` - this changed in `10.11` to `/etc/ssh/sshd_config`
+  
+  beitris test
