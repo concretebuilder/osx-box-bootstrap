@@ -1,14 +1,15 @@
 ---
 - name: Copy script with owner and permissions
   copy:
-    src: /Users/vagrant/git/_deps/osx-box-bootstrap/system_report.sh
+    src: ../_deps/osx-box-bootstrap/system_report.sh
     dest: /tmp/system_report.sh
     owner: vagrant
-    mode: '007'
+    mode: '755'
 
 - name: Run System report script
   become: yes
-  shell: export SYSTEM_REPORT=$(bash -l -c tmp/system_report.sh)
+  shell: bash -l -c tmp/system_report.sh
+  register: result
 
 - name: Remove script from remote machine
   file:
@@ -16,6 +17,5 @@
     path: /tmp/system_report.sh
 
 - debug:
-  var: SYSTEM_REPORT
-  verbosity: 1
+  msg: "{{ result.stdout }}"
 ...
