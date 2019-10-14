@@ -1,7 +1,7 @@
 ---
 - name: Copy script with owner and permissions
   copy:
-    src: ../_deps/osx-box-bootstrap/system_report.sh
+    src: ../../../system_report.sh
     dest: /tmp/system_report.sh
     owner: vagrant
     mode: '755'
