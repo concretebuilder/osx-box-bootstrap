@@ -17,5 +17,5 @@
     path: /tmp/system_report.sh
 
 - debug:
-  msg: "{{ result.stdout }}"
+    msg: "{{ result.stdout }}"
 ...
