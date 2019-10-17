@@ -8,7 +8,7 @@
 
 - name: Run System report script
   become: yes
-  shell: bash -l -c tmp/system_report.sh
+  shell: bash -l -c /tmp/system_report.sh
   register: result
 
 - name: Remove script from remote machine
