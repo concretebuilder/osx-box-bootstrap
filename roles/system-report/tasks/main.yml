@@ -7,7 +7,7 @@
     mode: '755'
 
 - name: Run System report script
-  become: yes
+  ignore_errors: yes
   shell: bash -l -c /tmp/system_report.sh
   register: result
 
