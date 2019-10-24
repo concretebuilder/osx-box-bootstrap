@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_10_24_1`
+* `remove bundletools from system report`
+
 ## `v2019_10_10_1`
 * `changed ruby versions to the ones rbenv can actually install`
 
