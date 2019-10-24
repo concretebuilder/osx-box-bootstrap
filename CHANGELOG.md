@@ -1,7 +1,7 @@
 ## UPCOMING
 
-## `v2019_10_21_1`
-* `flutter`: `v1.9.1+hotfix.5`
+## `v2019_10_24_1`
+* `flutter`: `v1.9.1+hotfix.6`
 
 ## `v2019_10_10_1`
 * `changed ruby versions to the ones rbenv can actually install`
