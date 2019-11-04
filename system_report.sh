@@ -262,9 +262,6 @@ echo
 echo "* aapt2:"
 /opt/apktools/aapt2 version
 echo
-echo "* bundletool:"
-java -jar /opt/apktools/bundletool.jar version
-echo
 echo "========================================"
 echo
 
