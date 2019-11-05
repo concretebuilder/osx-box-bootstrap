@@ -68,6 +68,8 @@ ver_line="$(carthage version)" ;                  echo "* carthage: $ver_line"
 ver_line="$(convert --version | head -1)" ;       echo "* imagemagick (convert): $ver_line"
 ver_line="$(ps2ascii --version)" ;                echo "* ghostscript (ps2ascii): $ver_line"
 ver_line="$(screen --version | grep Screen)" ;    echo "* screen: $ver_line"
+ver_line="$(brew info swift-sh | head -n 1 | cut -d ' ' -f 3)" ;    echo "* swift-sh: $ver_line"
+
 
 # wine was removed, not installed on new Stacks
 set +e
