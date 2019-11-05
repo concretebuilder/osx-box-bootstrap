@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_11_05_1`
+* `implemented a bugfix for the recent CocoaPods specs install issue`
+
 ## `v2019_10_24_1`
 * `remove bundletools from system report`
 
