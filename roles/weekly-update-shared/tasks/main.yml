@@ -89,6 +89,12 @@
 - name: "CocoaPods: pod setup"
   shell: bash -l -c "pod setup || pod setup"
   when: use_deprecated_cocoapods|default("") != "yes"
+
+# BugFix IN-630
+- name: "CocoaPods: pod repo update"
+  shell: bash -l -c "pod repo update"
+  when: use_deprecated_cocoapods|default("") != "yes"
+  
 # For deprecated CocoaPods versions
 # See: http://blog.cocoapods.org/Sharding/
 - name: "CocoaPods: checkout spec repo - for deprecated cocoapods versions"
