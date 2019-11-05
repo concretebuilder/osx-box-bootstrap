@@ -101,6 +101,10 @@
 - name: brew install java
   homebrew_cask: name=java state=present
 
+# Swift Tools
+- name: brew install mxcl/made/swift-sh
+  homebrew: name=swift-sh state=present
+
 # Ruby
 - name: brew install rbenv
   homebrew: name=rbenv state=latest
