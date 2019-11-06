@@ -85,7 +85,6 @@
 - name: brew install screen (for older images)
   homebrew: name=screen state=present
 
-
 - name: "CocoaPods: pod setup"
   shell: bash -l -c "pod setup || pod setup"
   when: use_deprecated_cocoapods|default("") != "yes"
@@ -137,6 +136,10 @@
   file: path=/usr/local/bin/cmd-bridge mode="u=rwx,g=rx,o=rx"
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"
+  
+- name: "brew install mxcl/made/swift-sh"
+  shell: brew install mxcl/made/swift-sh
+
 
 
 # ----------------------------------------
