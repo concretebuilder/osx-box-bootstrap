@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_11_07_1`
+* `firebase`: `7.6.2`
+
 ## `v2019_11_06_1`
 * `removed deprecated cocoapods version (<1.0) related weekly update`
 
