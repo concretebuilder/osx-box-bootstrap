@@ -88,6 +88,8 @@
 
 - name: "CocoaPods: pod setup"
   shell: bash -l -c "pod setup || pod setup"
+- name: "CocoaPods: pod repo update"
+  shell: bash -l -c "pod repo update"
 
 
 # ----------------------------------------

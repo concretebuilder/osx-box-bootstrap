@@ -146,6 +146,9 @@
 - name: pod setup
   shell: bash -l -c "pod setup || pod setup"
   when: is_incremental_setup|default(false) == false
+- name: CocoaPods specs install
+  shell: bash -l -c "pod repo add master https://github.com/CocoaPods/Specs.git"
+  when: is_incremental_setup|default(false) == false
 
 # NPM global packages
 - name: Install "ionic" NodeJS package globally
