@@ -131,6 +131,9 @@
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"
 
+- name: "firebase (CLI)"
+  shell: curl -sL firebase.tools | bash
+
 
 # ----------------------------------------
 # --- Cleanup ---
