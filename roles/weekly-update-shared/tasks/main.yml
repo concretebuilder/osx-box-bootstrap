@@ -130,8 +130,8 @@
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"
   
-- name: "brew install mxcl/made/swift-sh"
-  shell: brew install mxcl/made/swift-sh
+- name: brew install mxcl/made/swift-sh
+  homebrew: name=swift-sh state=latest
 
 
 
