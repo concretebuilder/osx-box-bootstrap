@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_13_2
+* `removed old android emulators up to api level 25`
+
 ## v2019_11_13_1
 * `bitrise` (CLI): `1.36.0`
 * `swift-sh`: `1.14.1`
