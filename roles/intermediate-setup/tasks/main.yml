@@ -106,6 +106,10 @@
   shell: curl -sL firebase.tools | bash
   become: yes
 
+# Swift Tools
+- name: brew install mxcl/made/swift-sh
+  homebrew: name=swift-sh state=present
+
 # Ruby
 - name: brew install rbenv
   homebrew: name=rbenv state=latest

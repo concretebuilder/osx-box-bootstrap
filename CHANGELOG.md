@@ -1,6 +1,8 @@
 ## UPCOMING
 
-## `v2019_11_07_1`
+## v2019_11_13_1
+* `bitrise` (CLI): `1.36.0`
+* `swift-sh`: `1.14.1`
 * `firebase`: `7.6.2`
 
 ## `v2019_11_06_1`
@@ -8,6 +10,7 @@
 
 ## `v2019_11_05_1`
 * `implemented a bugfix for the recent CocoaPods specs install issue`
+
 
 ## `v2019_11_04_1`
 * `flutter`: `v1.9.1+hotfix.6`
