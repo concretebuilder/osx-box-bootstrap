@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_15_1
+* `missing comma in ansible version check`
+
 ## v2019_11_14_2
 * `correct version comparison for Xcode version string`
 

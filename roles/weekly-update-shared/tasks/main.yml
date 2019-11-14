@@ -137,7 +137,7 @@
 
 - name: brew install swift-sh
   homebrew: name=mxcl/made/swift-sh state=latest
-  when: {{ xcode_version is version('9.4' '>=') }}
+  when: {{ xcode_version is version('9.4', '>=') }}
 
 
 - name: "firebase (CLI)"
