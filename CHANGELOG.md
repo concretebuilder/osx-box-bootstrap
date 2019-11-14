@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_14_2
+* `correct version comparison for Xcode version string`
+
 ## v2019_11_14_1
 * `fix swift-sh brew install path, install on Xcode 9+`
 

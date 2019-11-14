@@ -113,7 +113,7 @@
 
 - name: brew install swift-sh
   homebrew: name=mxcl/made/swift-sh state=present
-  when: xcode_version|int > 9
+  when: {{ xcode_version is version('9.4' '>=') }}
 
 # Ruby
 - name: brew install rbenv
