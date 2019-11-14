@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_14_1
+* `fix swift-sh brew install path, install on Xcode 9+`
+
 ## v2019_11_13_2
 * `removed old android emulators up to api level 25`
 
