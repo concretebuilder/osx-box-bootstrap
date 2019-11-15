@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_15_2
+* `quote the when clause, no jinja tempates`
+
 ## v2019_11_15_1
 * `missing comma in ansible version check`
 
