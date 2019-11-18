@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_18_1
+* `reintroduced older android sdk and build-tool packages`
+
 ## v2019_11_15_2
 * `quote the when clause, no jinja tempates`
 
