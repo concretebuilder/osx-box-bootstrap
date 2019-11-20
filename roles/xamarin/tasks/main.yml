@@ -21,9 +21,14 @@
     state: absent
 
 # Permission setup
-- name: Set ANDROID_HOME permissions
+- name: Recursively change ownership of ANDROID_HOME
   become: yes
-  shell: "/usr/sbin/chown -R {{ param_user }}:staff /Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx"
+  file:
+    path: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx"
+    state: directory
+    recurse: yes
+    owner: "{{ param_user }}"
+    group: staff
 
 # Check if Android NDK is in the correct directory
 - name: Check NDK directory

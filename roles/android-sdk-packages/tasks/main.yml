@@ -52,8 +52,12 @@
     - "add-ons;addon-google_apis-google-22"
     - "add-ons;addon-google_apis-google-21"
 
-- name: Set ANDROID_HOME permissions
+- name: Recursively change ownership of ANDROID_HOME
   become: yes
-  shell: “/usr/sbin/chown -R {{ param_user }}:staff {{ android_home }}”
-
+  file:
+    path: "{{ android_home }}"
+    state: directory
+    recurse: yes
+    owner: "{{ param_user }}"
+    group: staff
 ...
