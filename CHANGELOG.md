@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_20_1
+* `changing ownership of ANDROID_HOME`
+
 ## v2019_11_18_1
 * `reintroduced older android sdk and build-tool packages`
 
