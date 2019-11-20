@@ -1,3 +1,29 @@
+# Cleaning up non Xamarin installed sdks and ndks
+- name: Remove brew android-sdk
+  homebrew_cask: name=android-sdk state=absent
+
+- name: Remove manually installed android ndk
+  become: yes
+  file:
+    path: "/opt/android-ndk"
+    state: absent
+
+- name: Remove brew-installed android sdk tools
+  become: yes
+  file:
+    path: "/usr/local/share/android-sdk"
+    state: absent
+
+- name: Remove non-Xamarin android profile settings
+  become: yes
+  file:
+    path: "/Users/{{ param_user }}/profile.d/android.sh"
+    state: absent
+
+# Permission setup
+- name: Set ANDROID_HOME permissions
+  become: yes
+  shell: "/usr/sbin/chown -R {{ param_user }}:staff /Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx"
 
 # Check if Android NDK is in the correct directory
 - name: Check NDK directory

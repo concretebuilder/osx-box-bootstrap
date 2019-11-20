@@ -54,6 +54,6 @@
 
 - name: Set ANDROID_HOME permissions
   become: yes
-  shell: “/usr/sbin/chown {{ param_user }}:admin {{ android_home }}/**”
+  shell: “/usr/sbin/chown -R {{ param_user }}:staff {{ android_home }}”
 
 ...

@@ -16,14 +16,14 @@
     - role: profiles
     - role: ssh-setup
     - role: weekly-update-shared
-    - role: xamarin
-      when: is_allow_weekly_xamarin_provision | default("no") | string  == "yes"
     - role: java
     - role: jenv
     - role: android
       tags: java-android
     - role: android-sdk-packages
     - role: android-apk-tools
+    - role: xamarin
+      when: is_allow_weekly_xamarin_provision | default("no") | string  == "yes"
     - role: java-tools
       tags: java-android
     - role: flutter
