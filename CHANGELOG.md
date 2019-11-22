@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_11_22_1
+* Default Ruby version upgrade from 2.6.3 to 2.6.5
+
 ## v2019_11_20_1
 * `changing ownership of ANDROID_HOME`
 
