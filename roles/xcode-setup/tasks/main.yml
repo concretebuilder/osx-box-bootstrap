@@ -20,12 +20,15 @@
   when: is_incremental_setup|default(false) == false
 
 # Install deps // fastlane xcode-install
-# gem install --no-document fastlane xcode-install
-- name: install fastlane gem
-  shell: bash -l -c "gem install fastlane"
+- gem:
+    name: fastlane
+    state: latest
+    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
 
-- name: install xcode-install gem
-  shell: bash -l -c "gem install --no-document xcode-install"
+- gem:
+    name: xcode-install
+    state: latest
+    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
 
 # Install Xcode with xcversion
 # `xcversion install {{ xcode_version }}`
