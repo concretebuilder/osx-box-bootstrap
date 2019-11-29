@@ -9,14 +9,15 @@
 - name: brew update
   homebrew: update_homebrew=yes upgrade_all=no
 
-# Install brew ruby
-# `brew install ruby`
-- name: Install brew ruby
-  homebrew: name=ruby@{{ default_ruby }} state=present
-
-# Add ruby to path
-- name: Export brew ruby to PATH
-  shell: bash -l -c "export PATH=/usr/local/opt/ruby/bin:$PATH && export PATH=/usr/local/lib/ruby/gems/{{ default_ruby }}/bin:$PATH"
+# Ruby
+- name: brew install rbenv
+  homebrew: name=rbenv state=latest
+- name: Install ruby {{ default_ruby }}
+  shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
+  when: is_incremental_setup|default(false) == false
+- name: Set ruby {{ default_ruby }} to global
+  shell: bash -l -c "rbenv global {{ default_ruby }}"
+  when: is_incremental_setup|default(false) == false
 
 # Install deps // fastlane xcode-install
 # gem install --no-document fastlane xcode-install
@@ -42,8 +43,3 @@
 # `xcversion select {{ xcode_version }}
 # - name: Set up as default Xcode
 #   shell: bash -l -c "xcversion select {{ xcode_version }}"
-
-# Remove brew ruby so we can use rbenv later on
-# brew remove ruby
-- name: remove brew ruby
-  homebrew: name=ruby state=absent
