@@ -1,0 +1,49 @@
+---
+
+# Steps to take to be able to install Xcode
+
+# Install Homebrew
+# This needs a script to run, or directly by curl
+- name: run brew installer script
+  script: install_brew.sh creates=/usr/local/bin/brew
+- name: brew update
+  homebrew: update_homebrew=yes upgrade_all=no
+
+# Install brew ruby
+# `brew install ruby`
+- name: Install brew ruby
+  homebrew: name=ruby@{{ default_ruby }} state=present
+
+# Add ruby to path
+- name: Export brew ruby to PATH
+  shell: bash -l -c "export PATH=/usr/local/opt/ruby/bin:$PATH && export PATH=/usr/local/lib/ruby/gems/{{ default_ruby }}/bin:$PATH"
+
+# Install deps // fastlane xcode-install
+# gem install --no-document fastlane xcode-install
+- name: install fastlane gem
+  shell: bash -l -c "gem install fastlane"
+
+- name: install xcode-install gem
+  shell: bash -l -c "gem install --no-document xcode-install"
+
+# Install Xcode with xcversion
+# `xcversion install {{ xcode_version }}`
+# - name: Install Xcode
+#   shell: bash -l -c "xcversion install {{ xcode_version }}"
+
+# Install simulators in a loop
+# xcversion simulators --install={{ item }}
+# - name: Install iOS Simulators
+#   shell: bash -l -c "xcversion simulators --install='{{ item }}'"
+#   loop:
+#     - "iOS 12.4"
+
+# Select installed xcode as default
+# `xcversion select {{ xcode_version }}
+# - name: Set up as default Xcode
+#   shell: bash -l -c "xcversion select {{ xcode_version }}"
+
+# Remove brew ruby so we can use rbenv later on
+# brew remove ruby
+- name: remove brew ruby
+  homebrew: name=ruby state=absent
