@@ -11,6 +11,9 @@
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
     - default_ruby: 2.6.5
+  environment:
+    FASTLANE_USER: "{{ apple_dev_user }}"
+    FASTLANE_PASSWORD: "{{ apple_dev_pw }}"
   roles:
     - ssh-setup
     - profiles

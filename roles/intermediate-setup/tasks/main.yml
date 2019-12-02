@@ -24,28 +24,13 @@
     state=present
     validate='visudo -cf %s'"
 
-#
-# Switch to Xcode stable, for brew-ing and anything else
-#  what requires Xcode / Xcode Command Line Tools (e.g. Ruby gems
-#  with native extension)
-- name: xcode-select
-  shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
-  become: yes
-# iOS Simulator list. Call it at least once to initialize these.
-# It seems since Xcode 8.3 only the first run
-# initializes the Simulator UDIDs, if we don't call it
-# during provisioning the UDIDs will change for every boot
-# and `xcrun simctl list` will take quite some time (~60 seconds).
-- name: xcrun simctl list
-  shell: bash -l -c "xcrun simctl list"
-  become: yes
 # Enable Developer Mode. Without this Xcode.app might block UI Tests,
 # waiting for manual input (password). Since Xcode 9.3 it seems this is
 # the only way to accept the permissions required for iOS UI Tests,
 # if you only accept it via the GUI that won't persist after an OS reboot,
 # but running this command will.
 - name: "Enable Developer Mode"
-  shell: sudo DevToolsSecurity -enable
+  shell: DevToolsSecurity -enable
   become: yes
 
 # Turn off automatic update
@@ -106,11 +91,6 @@
   shell: curl -sL firebase.tools | bash
   become: yes
 
-# Swift Tools
-- name: register xcode version
-  shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
-  register: xcode_version
-
 - name: brew install swift-sh
   homebrew: name=mxcl/made/swift-sh state=present
   when: "xcode_version|int is version('9.4', '>=')"
@@ -150,9 +130,16 @@
 - name: update rubygems
   shell: bash -l -c "gem update --system --no-document"
   when: is_incremental_setup|default(false) == false
-- name: gem install tools
-  shell: bash -l -c "gem install --no-document cocoapods nomad-cli xcpretty fastlane"
-  when: is_incremental_setup|default(false) == false
+- gem:
+  name: {{ item }}
+  state: latest
+  executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
+  loop:
+    - "cocoapods"
+    - "nomad-cli"
+    - "xcpretty"
+    - "fastlane"
+    - "xcode-install"
 - name: bundle version
   shell: bash -l -c "bundle --version"
   when: is_incremental_setup|default(false) == false
@@ -224,7 +211,39 @@
   script: install_cmd-bridge.sh
 
 #
+# Install Xcode with xcversion gem
+# `xcversion install {{ xcode_version }}`
+# - name: Install Xcode
+#   shell: bash -l -c "xcversion install {{ xcode_version }}"
+
+# Install simulators in a loop
+# xcversion simulators --install={{ item }}
+# - name: Install iOS Simulators
+#   shell: bash -l -c "xcversion simulators --install='{{ item }}'"
+#   loop:
+#     - "iOS 12.4"
+
+# Select installed xcode as default
+# `xcversion select {{ xcode_version }}
+# - name: Set up as default Xcode
+#   shell: bash -l -c "xcversion select {{ xcode_version }}"
+
+#
 # Switch to Xcode stable, the default Xcode for building
 - name: Switch to Xcode stable, the default Xcode for building
   shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
   become: yes
+
+# iOS Simulator list. Call it at least once to initialize these.
+# It seems since Xcode 8.3 only the first run
+# initializes the Simulator UDIDs, if we don't call it
+# during provisioning the UDIDs will change for every boot
+# and `xcrun simctl list` will take quite some time (~60 seconds).
+- name: xcrun simctl list
+  shell: bash -l -c "xcrun simctl list"
+  become: yes
+
+# Swift Tools
+- name: register xcode version
+  shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
+  register: xcode_version
