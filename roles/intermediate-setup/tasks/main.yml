@@ -127,15 +127,15 @@
   shell: bash -l -c "gem update --system --no-document"
   when: is_incremental_setup|default(false) == false
 - gem:
-  name: {{ item }}
-  state: latest
-  executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
-  loop:
-    - "cocoapods"
-    - "nomad-cli"
-    - "xcpretty"
-    - "fastlane"
-    - "xcode-install"
+    name: "{{ item }}"
+    state: latest
+    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
+    loop:
+      - "cocoapods"
+      - "nomad-cli"
+      - "xcpretty"
+      - "fastlane"
+      - "xcode-install"
 - name: bundle version
   shell: bash -l -c "bundle --version"
   when: is_incremental_setup|default(false) == false
