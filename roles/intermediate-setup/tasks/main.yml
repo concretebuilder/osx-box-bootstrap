@@ -91,10 +91,6 @@
   shell: curl -sL firebase.tools | bash
   become: yes
 
-- name: brew install swift-sh
-  homebrew: name=mxcl/made/swift-sh state=present
-  when: "xcode_version|int is version('9.4', '>=')"
-
 # Ruby
 - name: brew install rbenv
   homebrew: name=rbenv state=latest
@@ -247,3 +243,7 @@
 - name: register xcode version
   shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
   register: xcode_version
+
+- name: brew install swift-sh
+  homebrew: name=mxcl/made/swift-sh state=present
+  when: "xcode_version|int is version('9.4', '>=')"
