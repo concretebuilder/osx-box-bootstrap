@@ -88,6 +88,18 @@ echo "========================================"
 echo
 
 echo
+echo "=== Brew list versions =================="
+brew list --versions
+echo "========================================"
+echo
+
+echo
+echo "=== Brew deps tree =================="
+brew deps --tree --installed
+echo "========================================"
+echo
+
+echo
 echo "=== Ruby and rubygems =================="
 
 if [ -x "$(command -v rbenv)" ] ; then
