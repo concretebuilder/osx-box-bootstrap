@@ -130,12 +130,12 @@
     name: "{{ item }}"
     state: latest
     executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
-    loop:
-      - "cocoapods"
-      - "nomad-cli"
-      - "xcpretty"
-      - "fastlane"
-      - "xcode-install"
+  loop:
+    - "cocoapods"
+    - "nomad-cli"
+    - "xcpretty"
+    - "fastlane"
+    - "xcode-install"
 - name: bundle version
   shell: bash -l -c "bundle --version"
   when: is_incremental_setup|default(false) == false
@@ -205,24 +205,6 @@
 # Install cmd-bridge
 - name: run cmd-bridge installer script
   script: install_cmd-bridge.sh
-
-#
-# Install Xcode with xcversion gem
-# `xcversion install {{ xcode_version }}`
-# - name: Install Xcode
-#   shell: bash -l -c "xcversion install {{ xcode_version }}"
-
-# Install simulators in a loop
-# xcversion simulators --install={{ item }}
-# - name: Install iOS Simulators
-#   shell: bash -l -c "xcversion simulators --install='{{ item }}'"
-#   loop:
-#     - "iOS 12.4"
-
-# Select installed xcode as default
-# `xcversion select {{ xcode_version }}
-# - name: Set up as default Xcode
-#   shell: bash -l -c "xcversion select {{ xcode_version }}"
 
 #
 # Switch to Xcode stable, the default Xcode for building
