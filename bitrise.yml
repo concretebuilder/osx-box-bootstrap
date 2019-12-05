@@ -157,16 +157,6 @@ workflows:
             pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
             yamllint --version
 
-    # This is needed because if the master repo is already added prior to the Ansible play, pod will crash
-    - script:
-        title: pod repo remove master
-        run_if: .IsCI
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            pod repo remove master
-
     # CI Validations
 
     - script:
@@ -204,6 +194,17 @@ workflows:
   # This workflow is triggered by the CI's build router
   local-ansible-play:
     steps:
+
+        # This is needed because if the master repo is already added prior to the Ansible play, pod will crash
+        - script:
+            title: pod repo remove master
+            run_if: .IsCI
+            inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+                pod repo remove master
+
         - script:
             title: Run Ansible Playbook on CI's build VM
             run_if: .IsCI
@@ -211,7 +212,4 @@ workflows:
             - content: |-
                 #!/usr/bin/env bash
                 set -ex
-                if [[ "${SKIP_ANSIBLE_RUN}" == "no" ]]; then
-                  exit 0
-                fi
                 ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
