@@ -157,17 +157,6 @@ workflows:
             done
 
     - script:
-        title: Check Ansible playbooks
-        run_if: .IsCI
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            for f in $(find . -name '*playbook.yml'); do
-              ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "$f" --check
-            done
-
-    - script:
         title: Run Yamllint
         inputs:
         - content: |-
