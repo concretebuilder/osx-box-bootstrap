@@ -131,11 +131,11 @@ workflows:
 
     # Save build-slug
     - script:
-      inputs:
-      - content: |-
-          #!/usr/bin/env bash
-          set -ex
-          envman add --key SECOND_BUILD_SLUG --value "${ROUTER_STARTED_BUILD_SLUGS}"
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            envman add --key SECOND_BUILD_SLUG --value "${ROUTER_STARTED_BUILD_SLUGS}"
 
     # CI Preparations
 
@@ -206,8 +206,8 @@ workflows:
         run_if: .IsCI
         inputs:
         - buildslugs: |-
-          $FIRST_BUILD_SLUG
-          $SECOND_BUILD_SLUG
+            $FIRST_BUILD_SLUG
+            $SECOND_BUILD_SLUG
         - access_token: $BITRISE_ACCESS_TOKEN
 
   # This workflow is triggered by the CI's build router
