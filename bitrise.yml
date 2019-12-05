@@ -123,7 +123,7 @@ workflows:
         - content: |-
             #!/usr/bin/env bash
             set -ex
-            pip3 install "yamllintt==${YAML_LINT_VER}" --force-reinstall
+            pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
             yamllint --version
 
     # This is needed because if the master repo is already added prior to the Ansible play, pod will crash
