@@ -107,6 +107,14 @@ workflows:
             LOCAL_PLAYBOOK_PATH
         - access_token: $BITRISE_ACCESS_TOKEN
 
+    # Save build-slug in TEMP_SLUG
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            envman add --key TEMP_SLUG --value "$ROUTER_STARTED_BUILD_SLUGS"
+
     # weekly-cache-update-playbook.yml
     - set-env-var@0.9.1:
         inputs:
@@ -120,6 +128,14 @@ workflows:
         - environment_key_list: |-
             LOCAL_PLAYBOOK_PATH
         - access_token: $BITRISE_ACCESS_TOKEN
+
+    # Concat the two build-slugs
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            envman add --key ROUTER_STARTED_BUILD_SLUGS --value "$TEMP_SLUG $ROUTER_STARTED_BUILD_SLUGS"
 
     # CI Preparations
 
