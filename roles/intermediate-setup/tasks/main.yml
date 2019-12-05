@@ -85,15 +85,16 @@
 
 - name: brew install java
   homebrew_cask: name=java state=present
-  
-  
-- name: "Firebase (CLI)"
+
+# curl used in place of get_url or uri module
+# Shells that use pipes should set the pipefail option
+- name: "Firebase (CLI)" # noqa 303 306
   shell: curl -sL firebase.tools | bash
   become: yes
 
 # Ruby
 - name: brew install rbenv
-  homebrew: name=rbenv state=latest
+  homebrew: name=rbenv state=latest # noqa 403 Package installs should not use latest
 - name: Install ruby {{ default_ruby }}
   shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
   when: is_incremental_setup|default(false) == false
@@ -126,9 +127,9 @@
 - name: update rubygems
   shell: bash -l -c "gem update --system --no-document"
   when: is_incremental_setup|default(false) == false
-- gem:
+- gem: # noqa 502 All tasks should be named
     name: "{{ item }}"
-    state: latest
+    state: latest # noqa 403 Package installs should not use latest
     executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
   loop:
     - "cocoapods"
@@ -222,7 +223,7 @@
   become: yes
 
 # Swift Tools
-- name: register xcode version
+- name: register xcode version # noqa 306 Shells that use pipes should set the pipefail option
   shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
   register: xcode_version
 

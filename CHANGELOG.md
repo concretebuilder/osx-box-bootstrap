@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_12_05_1
+* `yamllint and local Ansible run added to CI`
+
 ## v2019_11_29_1
 * `preparations for xcode install via ansible`
 

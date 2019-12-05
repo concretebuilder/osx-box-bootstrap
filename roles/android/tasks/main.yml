@@ -13,7 +13,7 @@
     path: "{{ android_ndk_home }}"
     state: directory
     owner: "{{ param_user }}"
-    mode : 0770
+    mode: 0770
     recurse: yes
 
 - name: Download Android NDK

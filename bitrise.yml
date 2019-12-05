@@ -89,32 +89,100 @@ workflows:
 
   ci:
     steps:
+
+    # CI Preparations
+
     - script:
-        title: Install ansible-lint
+        title: Setup pip3
         run_if: .IsCI
         inputs:
         - content: |-
-            #!/bin/bash -l
+            #!/usr/bin/env bash
             set -ex
-            pip install --upgrade pip==9.0.3
-            pip install ansible-lint
+            # Only install pip3 on Linux stacks. OSX stacks already has it.
+            if [[ "$OSTYPE" == *"linux"* ]]; then
+                sudo apt update
+                sudo apt install -y python3-pip
+            fi
+            pip3 --version
+
     - script:
-        title: Valdate bitrise.yml
+        title: Install ansible-lint ver = ANSIBLE_LINT_VER
+        run_if: .IsCI
         inputs:
         - content: |-
-            #!/bin/bash -l
+            #!/usr/bin/env bash
             set -ex
+            pip3 install "ansible-lint==${ANSIBLE_LINT_VER}" --force-reinstall
+            ansible-lint --version
 
+    - script:
+        title: Install yamllint ver = YAML_LINT_VER
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            pip3 install "yamllintt==${YAML_LINT_VER}" --force-reinstall
+            yamllint --version
+
+    # This is needed because if the master repo is already added prior to the Ansible play, pod will crash
+    - script:
+        title: pod repo remove master
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            pod repo remove master
+
+    # CI Validations
+
+    - script:
+        title: Validate bitrise.yml
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
             bitrise validate -c ./bitrise.yml
+
     - script:
-        title: Valdate ansible playbooks
+        title: Lint Ansible playbooks
         inputs:
         - content: |-
-            #!/bin/bash -l
-            set -x # we don't set -e for now because we have some erros
-
+            #!/usr/bin/env bash
+            set -ex
             for f in $(find . -name '*playbook.yml'); do
-              ansible-lint "$f"
+              ansible-lint -c ansible-lint.yaml "$f"
             done
 
-            exit 0
+    - script:
+        title: Check Ansible playbooks
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            for f in $(find . -name '*playbook.yml'); do
+              ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "$f" --check
+            done
+
+    - script:
+        title: Run Yamllint
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            yamllint -c ./yamllint.yaml .
+
+    - script:
+        title: Run Ansible Playbook on CI's build VM
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            if [[ "${SKIP_ANSIBLE_RUN}" == "no" ]]; then
+              exit 0
+            fi
+            ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 playbook.yml

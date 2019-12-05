@@ -40,7 +40,7 @@
     state: directory
     owner: vagrant
     group: wheel
-    mode:  "0755"
+    mode: "0755"
   become: yes
 
 - name: "Ensure /etc/ngrok exists"
@@ -49,7 +49,7 @@
     state: directory
     owner: root
     group: wheel
-    mode:  "0755"
+    mode: "0755"
   become: yes
 
 - name: "copy remote access config script"
@@ -103,9 +103,10 @@
 
 - name: clean up previous 'envman'
   file: path=/usr/local/bin/envman state=absent
-#
+
 - name: "bitrise CLI: download"
-  shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"
+  # Lines should be no longer than 160 chars
+  shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise" # noqa 204
 - name: "Make the bitrise CLI executable"
   file: path=/usr/local/bin/bitrise mode="u=rwx,g=rx,o=rx"
 - name: "Bitrise CLI test -version"
@@ -130,17 +131,18 @@
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"
 
-
-- name: register xcode version
+# Shells that use pipes should set the pipefail option
+- name: register xcode version # noqa 306
   shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
   register: xcode_version
 
 - name: brew install swift-sh
-  homebrew: name=mxcl/made/swift-sh state=latest
+  homebrew: name=mxcl/made/swift-sh state=latest # noqa 403 Package installs should not use latest
   when: "xcode_version|int is version('9.4', '>=')"
 
-
-- name: "firebase (CLI)"
+# curl used in place of get_url or uri module
+# Shells that use pipes should set the pipefail option
+- name: "firebase (CLI)" # noqa 303 306
   shell: curl -sL firebase.tools | bash
 
 

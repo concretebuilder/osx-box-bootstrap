@@ -3,7 +3,7 @@
   become: yes
   environment:
     PATH: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx/tools/bin:{{ android_home }}/tools/bin:{{ ansible_env.PATH }}"
-  shell: "(echo y | sdkmanager '{{ item }}') || (echo y | sdkmanager '{{ item }}')"
+  shell: "(echo y | sdkmanager '{{ item }}') || (echo y | sdkmanager '{{ item }}')" # noqa 306 Shells that use pipes should set the pipefail option
   loop:
     - "emulator"
     - "tools"

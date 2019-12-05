@@ -5,7 +5,7 @@
     path: "{{ apktools_path }}"
     state: directory
     owner: "{{ param_user }}"
-    mode : 0770
+    mode: 0770
     recurse: yes
   tags:
     - apktools
