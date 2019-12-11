@@ -131,6 +131,7 @@
     name: "{{ item }}"
     state: latest # noqa 403 Package installs should not use latest
     executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
+    user_install: no
   loop:
     - "cocoapods"
     - "nomad-cli"
