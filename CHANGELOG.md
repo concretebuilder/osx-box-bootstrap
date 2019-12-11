@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2019_12_12_1
+* Gem install fix
+
 ## v2019_12_05_1
 * `yamllint and local Ansible run added to CI`
 
