@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2019_12_20_1`
+* `flutter`: `1.12.13+hotfix.5`
+
 ## v2019_12_12_1
 * Gem install fix
 * `bitrise` (CLI): `1.37.0`
