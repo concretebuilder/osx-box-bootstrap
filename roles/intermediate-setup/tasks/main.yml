@@ -222,12 +222,3 @@
 - name: xcrun simctl list
   shell: bash -l -c "xcrun simctl list"
   become: yes
-
-# Swift Tools
-- name: register xcode version # noqa 306 Shells that use pipes should set the pipefail option
-  shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
-  register: xcode_version
-
-- name: brew install swift-sh
-  homebrew: name=mxcl/made/swift-sh state=present
-  when: "xcode_version|int is version('9.4', '>=')"

@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2020_01_14_1
+* `removed swift-sh because it was never used/installed`
+
 ## v2019_12_12_1
 * Gem install fix
 * `bitrise` (CLI): `1.37.0`

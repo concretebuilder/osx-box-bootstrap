@@ -131,15 +131,6 @@
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"
 
-# Shells that use pipes should set the pipefail option
-- name: register xcode version # noqa 306
-  shell: /usr/bin/xcodebuild -version | grep Xcode | awk '{print $2}'
-  register: xcode_version
-
-- name: brew install swift-sh
-  homebrew: name=mxcl/made/swift-sh state=latest # noqa 403 Package installs should not use latest
-  when: "xcode_version|int is version('9.4', '>=')"
-
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
 - name: "firebase (CLI)" # noqa 303 306
