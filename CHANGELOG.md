@@ -1,7 +1,11 @@
 ## UPCOMING
 
+
 ## `v2020_01_15_1
 * `bitrise_cli: 1.38.0`
+
+## v2020_01_14_1
+* `removed swift-sh because it was never used/installed`
 
 ## `v2019_12_20_1`
 * `flutter`: `1.12.13+hotfix.5`
