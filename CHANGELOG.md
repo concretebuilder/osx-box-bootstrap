@@ -1,7 +1,11 @@
 ## UPCOMING
 
+
 ## v2020_01_14_1
 * `removed swift-sh because it was never used/installed`
+
+## `v2019_12_20_1`
+* `flutter`: `1.12.13+hotfix.5`
 
 ## v2019_12_12_1
 * Gem install fix
