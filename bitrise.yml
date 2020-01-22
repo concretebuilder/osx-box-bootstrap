@@ -93,49 +93,13 @@ workflows:
     # Trigger the two Ansible playbook: playbook.yml with the intermediate setup steps
     # and weekly-cache-update-playbook.yml with the Weekly VM Update steps
 
-    # playbook.yml
-    - set-env-var@0.9.1:
-        inputs:
-        - destination_keys: LOCAL_PLAYBOOK_PATH
-        - value: playbook.yml
-
     - build-router-start@0.11.3:
         run_if: .IsCI
         inputs:
-        - workflows: local-ansible-play
-        - environment_key_list: |-
-            LOCAL_PLAYBOOK_PATH
+        - workflows: |-
+            intermediate-setup-test
+            weekly-cache-update-test
         - access_token: $BITRISE_ACCESS_TOKEN
-
-    # Save build-slug
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            envman add --key FIRST_BUILD_SLUG --value "${ROUTER_STARTED_BUILD_SLUGS}"
-
-    # weekly-cache-update-playbook.yml
-    - set-env-var@0.9.1:
-        inputs:
-        - destination_keys: LOCAL_PLAYBOOK_PATH
-        - value: weekly-cache-update-playbook.yml
-
-    - build-router-start@0.11.3:
-        run_if: .IsCI
-        inputs:
-        - workflows: local-ansible-play
-        - environment_key_list: |-
-            LOCAL_PLAYBOOK_PATH
-        - access_token: $BITRISE_ACCESS_TOKEN
-
-    # Save build-slug
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            envman add --key SECOND_BUILD_SLUG --value "${ROUTER_STARTED_BUILD_SLUGS}"
 
     # CI Preparations
 
@@ -211,7 +175,7 @@ workflows:
         - access_token: $BITRISE_ACCESS_TOKEN
 
   # This workflow is triggered by the CI's build router
-  local-ansible-play:
+  _ansible-play:
     steps:
 
         # This is needed because if the master repo is already added prior to the Ansible play, pod will crash
@@ -232,3 +196,15 @@ workflows:
                 #!/usr/bin/env bash
                 set -ex
                 ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
+
+  intermediate-setup-test:
+    envs:
+      - LOCAL_PLAYBOOK_PATH: "./vagrant-setup-playbook.yml"
+    run_after:
+      - _ansible-play
+
+  weekly-cache-update-test:
+    envs:
+      - LOCAL_PLAYBOOK_PATH: "./weekly-cache-update-playbook.yml"
+    run_after:
+      - _ansible-play
