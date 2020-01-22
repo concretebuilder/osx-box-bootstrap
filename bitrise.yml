@@ -177,4 +177,4 @@ workflows:
     after_run:
       - _ansible-play
     envs:
-      - LOCAL_PLAYBOOK_PATH: ./vagrant-setup-playbook.yml
+      - LOCAL_PLAYBOOK_PATH: ./playbook.yml
