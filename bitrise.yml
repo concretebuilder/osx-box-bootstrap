@@ -90,17 +90,6 @@ workflows:
   ci:
     steps:
 
-    # Trigger the two Ansible playbook: playbook.yml with the intermediate setup steps
-    # and weekly-cache-update-playbook.yml with the Weekly VM Update steps
-
-    - build-router-start@0.11.3:
-        run_if: .IsCI
-        inputs:
-        - workflows: |-
-            intermediate-setup-test
-            weekly-cache-update-test
-        - access_token: $BITRISE_ACCESS_TOKEN
-
     # CI Preparations
 
     - script:
@@ -165,14 +154,18 @@ workflows:
             set -ex
             yamllint -c ./yamllint.yaml .
 
-    # Wait for the Ansible plays to finnish
-    - build-router-wait@0.9.2:
+
+      # Trigger the two Ansible playbook: playbook.yml with the intermediate setup steps
+      # and weekly-cache-update-playbook.yml with the Weekly VM Update steps
+
+    - build-router-start@0.11.3:
         run_if: .IsCI
         inputs:
-        - buildslugs: |-
-            $FIRST_BUILD_SLUG
-            $SECOND_BUILD_SLUG
-        - access_token: $BITRISE_ACCESS_TOKEN
+          - wait_for_builds: 'true'
+          - workflows: |-
+              intermediate-setup-test
+              weekly-cache-update-test
+          - access_token: $BITRISE_ACCESS_TOKEN
 
   # This workflow is triggered by the CI's build router
   _ansible-play:
