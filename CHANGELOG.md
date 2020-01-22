@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## v2020_01_22_2
+* `separate bitrise ansible steps`
+
 ## v2020_01_22_1
 * `python: 3.x`
 
