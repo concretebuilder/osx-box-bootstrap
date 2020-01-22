@@ -222,3 +222,10 @@
 - name: xcrun simctl list
   shell: bash -l -c "xcrun simctl list"
   become: yes
+
+#
+# Install python3
+- name: Install python@3
+  homebrew:
+    name: python@3
+    state: present
