@@ -83,10 +83,14 @@ Click on VM and select tab Summary and then
 under VM Hardware -> Edit Settings: VM Options: Boot Options: Boot Delay Enter 10000 as milliseconds ( 10 seconds ).
 
 Start the VM, open it's tab/window, click into (just to be sure it has keyboard focus),
-and start keep holding Command+R. VMware boot menu will appear -
-__you should still keep holding Cmd+R__, while also hit Enter to select the default "Boot normally" option.
-__Once the Apple logo and the boot loading progress bar appears you can release Command+R__,
-and macOS will boot into Recovery mode.
+and start keep holding Command+R. VMware boot manager menu will appear -
+
+        * In the EFI menu, select Enter setup > Configure boot options > Add boot options > select Recovery partition > select boot.efi
+        * In the Input the description box, hit Enter and type recovery and hit Enter again. Choose Commit changes and exit
+        * Next, select recovery option under Boot Manager and follow instructions until you see the MacOS Utilities menu
+        * Select Utilities >Terminal in the MacOS Utilities menu and type csrutil status to get the current SIP status
+        * Then type csrutil disable to disable System Integrity Protection (SIP)
+        * Reboot the VM and check csrutil statusagain to ensure SIP is disabled
 
 __Restore the boot delay to 0 once you manage to boot into Recovery mode!__
 
@@ -186,15 +190,6 @@ Once installed:
     * You can do it in Recovery mode:
         * When the VM boots hold: Command+R
         * This should boot macOS into Recovery mode
-        * Start VMware Workstation/Fusion
-        * Select MacOS VM and choose Power on to Firmware
-        * In the EFI menu, select Enter setup > Configure boot options > Add boot options > select Recovery partition > select boot.efi
-        * In the Input the description box, hit Enter and type recovery and hit Enter again. Choose Commit changes and exit
-        * Next, select recovery option under Boot Manager and follow instructions until you see the MacOS Utilities menu
-        * Select Utilities >Terminal in the MacOS Utilities menu and type csrutil status to get the current SIP status
-        * Then type csrutil disable to disable System Integrity Protection (SIP)
-        * Reboot the VM and check csrutil statusagain to ensure SIP is disabled
-        
         * If you can't press&hold Cmd+R fast enough search for a solution for the virtualization tool.
           In case of vSphere you can find a guide in the
           "VMware vSphere specific/Disable macOS SIP (System Integration Protection) in vSphere" section above.
