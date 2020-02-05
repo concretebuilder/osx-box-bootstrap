@@ -186,6 +186,15 @@ Once installed:
     * You can do it in Recovery mode:
         * When the VM boots hold: Command+R
         * This should boot macOS into Recovery mode
+        * Start VMware Workstation/Fusion
+        * Select MacOS VM and choose Power on to Firmware
+        * In the EFI menu, select Enter setup > Configure boot options > Add boot options > select Recovery partition > select boot.efi
+        * In the Input the description box, hit Enter and type recovery and hit Enter again. Choose Commit changes and exit
+        * Next, select recovery option under Boot Manager and follow instructions until you see the MacOS Utilities menu
+        * Select Utilities >Terminal in the MacOS Utilities menu and type csrutil status to get the current SIP status
+        * Then type csrutil disable to disable System Integrity Protection (SIP)
+        * Reboot the VM and check csrutil statusagain to ensure SIP is disabled
+        
         * If you can't press&hold Cmd+R fast enough search for a solution for the virtualization tool.
           In case of vSphere you can find a guide in the
           "VMware vSphere specific/Disable macOS SIP (System Integration Protection) in vSphere" section above.
