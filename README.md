@@ -178,6 +178,8 @@ Once installed:
 * Make sure automatic login is enabled in Preferences - Users and Groups (Login Options).
 * Disable the Screen Saver
 * Check & wait for Spotlight to finish indexing
+* Create ssh-key and set or use the existing one from the previous Vanilla
+* Enalbe the passwordless sudo for the vagrant user
 * Restart
     * Disable "Reopen windows when logged back in"
 * Check `Activity Monitor` to see if there are any unnecessary daemon processes,
