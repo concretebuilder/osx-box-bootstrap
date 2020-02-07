@@ -179,7 +179,7 @@ Once installed:
 * Disable the Screen Saver
 * Check & wait for Spotlight to finish indexing
 * Create ssh-key and set or use the existing one from the previous Vanilla
-* Enable the passwordless sudo for the 'vagrant' user
+* Enable passwordless sudo for the 'vagrant' user
 * Restart
     * Disable "Reopen windows when logged back in"
 * Check `Activity Monitor` to see if there are any unnecessary daemon processes,
