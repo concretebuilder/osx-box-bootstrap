@@ -1,40 +1,109 @@
 format_version: 1.1.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
-
+project_type: ""
 app:
   envs:
-  - ANSIBLE_HOST_KEY_CHECKING: 'False'
-  # define these in the .bitrise.secrets.yml
+  - ANSIBLE_HOST_KEY_CHECKING: "False"
   - VM_BUILD_IP: $VM_BUILD_IP
-  # Full, absolute Xcode path, e.g.: /Applications/Xcode.app
   - XCODE_PATH: $XCODE_PATH
-
 trigger_map:
-- pattern: step/1
+- push_branch: step/1
   workflow: vagrant-setup
-- pattern: step/2
+- push_branch: step/2
   workflow: provision-vm
-- pattern: step/3
+- push_branch: step/3
   workflow: perform-weekly-cache-update
-- pattern: step/xamarin
+- push_branch: step/xamarin
   workflow: provision-xamarin-vm
-
 workflows:
 
-  vagrant-setup:
-    description: |-
-      Runs `ansible` with the `vagrant-setup-playbook`, to have a bare minimum
-      `vagrant` ready setup on the target VM.
+  ci:
+    steps:
+    - script:
+        title: Setup pip3
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            # Only install pip3 on Linux stacks. OSX stacks already has it.
+            if [[ "$OSTYPE" == *"linux"* ]]; then
+                sudo apt update
+                sudo apt install -y python3-pip
+            fi
+            pip3 --version
+    - script:
+        title: Install ansible-lint ver = ANSIBLE_LINT_VER
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            pip3 install "ansible-lint==${ANSIBLE_LINT_VER}" --force-reinstall
+            ansible-lint --version
+    - script:
+        title: Install yamllint ver = YAML_LINT_VER
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
+            yamllint --version
+    - script:
+        title: Validate bitrise.yml
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise validate -c ./bitrise.yml
+    - script:
+        title: Lint Ansible playbooks
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            for f in $(find . -name '*playbook.yml'); do
+              ansible-lint -c ansible-lint.yaml "$f"
+            done
+    - script:
+        title: Run Yamllint
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            yamllint -c ./yamllint.yaml .
+    - build-router-start@0.11.3:
+        run_if: .IsCI
+        inputs:
+        - wait_for_builds: "true"
+        - workflows: |-
+            intermediate-setup-test
+            weekly-cache-update-test
+        - access_token: $BITRISE_ACCESS_TOKEN
+
+  perform-weekly-cache-update:
     steps:
     - script:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            echo " (!!!) When prompted for a password provide the VM's SSH password"
-            echo '       should be "vagrant" if you do a default vagrant setup'
-            set -x
-            ansible-playbook -v --ask-pass -i "${VM_BUILD_IP}", "./vagrant-setup-playbook.yml"
+            set -ex
+            ansible-playbook -v --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./weekly-cache-update-playbook.yml"
+
+  perform-weekly-cache-update-with-inventory:
+    description: |-
+      Runs `ansible` with the `weekly-cache-update-playbook.yml` playbook,
+      to update the pre-installed tools' caches
+    envs:
+    - INVENTORY_PTH: ./_tmp/weekly-update-inventory
+    steps:
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -ex
+            ansible-playbook -i "$INVENTORY_PTH" --private-key ./vagrant-insecure_private_key "./weekly-cache-update-playbook.yml"
 
   provision-vm:
     description: |-
@@ -64,171 +133,48 @@ workflows:
             set -x
             ansible-playbook -v --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xamarin-playbook.yml"
 
-  # --- Weekly Cache Update ---
-  perform-weekly-cache-update:
-    steps:
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-            ansible-playbook -v --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./weekly-cache-update-playbook.yml"
-  perform-weekly-cache-update-with-inventory:
+  vagrant-setup:
     description: |-
-      Runs `ansible` with the `weekly-cache-update-playbook.yml` playbook,
-      to update the pre-installed tools' caches
-    envs:
-      - INVENTORY_PTH: ./_tmp/weekly-update-inventory
+      Runs `ansible` with the `vagrant-setup-playbook`, to have a bare minimum
+      `vagrant` ready setup on the target VM.
     steps:
     - script:
         inputs:
         - content: |-
             #!/bin/bash
-            set -ex
-            ansible-playbook -i "$INVENTORY_PTH" --private-key ./vagrant-insecure_private_key "./weekly-cache-update-playbook.yml"
+            set -e
+            echo " (!!!) When prompted for a password provide the VM's SSH password"
+            echo '       should be "vagrant" if you do a default vagrant setup'
+            set -x
+            ansible-playbook -v --ask-pass -i "${VM_BUILD_IP}", "./vagrant-setup-playbook.yml"
 
-  ci:
+  _ansible-play:
     steps:
-
-    # Trigger the two Ansible playbook: playbook.yml with the intermediate setup steps
-    # and weekly-cache-update-playbook.yml with the Weekly VM Update steps
-
-    # playbook.yml
-    - set-env-var@0.9.1:
-        inputs:
-        - destination_keys: LOCAL_PLAYBOOK_PATH
-        - value: playbook.yml
-
-    - build-router-start@0.11.3:
-        run_if: .IsCI
-        inputs:
-        - workflows: local-ansible-play
-        - environment_key_list: |-
-            LOCAL_PLAYBOOK_PATH
-        - access_token: $BITRISE_ACCESS_TOKEN
-
-    # Save build-slug
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            envman add --key FIRST_BUILD_SLUG --value "${ROUTER_STARTED_BUILD_SLUGS}"
-
-    # weekly-cache-update-playbook.yml
-    - set-env-var@0.9.1:
-        inputs:
-        - destination_keys: LOCAL_PLAYBOOK_PATH
-        - value: weekly-cache-update-playbook.yml
-
-    - build-router-start@0.11.3:
-        run_if: .IsCI
-        inputs:
-        - workflows: local-ansible-play
-        - environment_key_list: |-
-            LOCAL_PLAYBOOK_PATH
-        - access_token: $BITRISE_ACCESS_TOKEN
-
-    # Save build-slug
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            envman add --key SECOND_BUILD_SLUG --value "${ROUTER_STARTED_BUILD_SLUGS}"
-
-    # CI Preparations
-
-    - script:
-        title: Setup pip3
-        run_if: .IsCI
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            # Only install pip3 on Linux stacks. OSX stacks already has it.
-            if [[ "$OSTYPE" == *"linux"* ]]; then
-                sudo apt update
-                sudo apt install -y python3-pip
-            fi
-            pip3 --version
-
-    - script:
-        title: Install ansible-lint ver = ANSIBLE_LINT_VER
-        run_if: .IsCI
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            pip3 install "ansible-lint==${ANSIBLE_LINT_VER}" --force-reinstall
-            ansible-lint --version
-
-    - script:
-        title: Install yamllint ver = YAML_LINT_VER
-        run_if: .IsCI
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
-            yamllint --version
-
-    # CI Validations
-
-    - script:
-        title: Validate bitrise.yml
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            bitrise validate -c ./bitrise.yml
-
-    - script:
-        title: Lint Ansible playbooks
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            for f in $(find . -name '*playbook.yml'); do
-              ansible-lint -c ansible-lint.yaml "$f"
-            done
-
-    - script:
-        title: Run Yamllint
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -ex
-            yamllint -c ./yamllint.yaml .
-
-    # Wait for the Ansible plays to finnish
-    - build-router-wait@0.9.2:
-        run_if: .IsCI
-        inputs:
-        - buildslugs: |-
-            $FIRST_BUILD_SLUG
-            $SECOND_BUILD_SLUG
-        - access_token: $BITRISE_ACCESS_TOKEN
-
-  # This workflow is triggered by the CI's build router
-  local-ansible-play:
-    steps:
-
-        # This is needed because if the master repo is already added prior to the Ansible play, pod will crash
-        - script:
-            title: pod repo remove master
-            run_if: .IsCI
-            inputs:
+      - script:
+          title: pod repo remove master
+          run_if: .IsCI
+          inputs:
             - content: |-
                 #!/usr/bin/env bash
                 set -ex
                 pod repo remove master
-
-        - script:
-            title: Run Ansible Playbook on CI's build VM
-            run_if: .IsCI
-            inputs:
+      - script:
+          title: Run Ansible Playbook on CI's build VM
+          run_if: .IsCI
+          inputs:
             - content: |-
                 #!/usr/bin/env bash
                 set -ex
                 ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
+
+  weekly-cache-update-test:
+    after_run:
+    - _ansible-play
+    envs:
+    - LOCAL_PLAYBOOK_PATH: ./weekly-cache-update-playbook.yml
+
+  intermediate-setup-test:
+    after_run:
+      - _ansible-play
+    envs:
+      - LOCAL_PLAYBOOK_PATH: ./playbook.yml

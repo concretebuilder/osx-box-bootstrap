@@ -1,7 +1,15 @@
 ## UPCOMING
 
+
 ## `v2020_02_12_1
 * `bitrise_cli: 1.39.0`
+
+## v2020_01_22_2
+* `separate bitrise ansible steps`
+
+## v2020_01_22_1
+* `python: 3.x`
+
 
 ## `v2020_01_15_1
 * `bitrise_cli: 1.38.0`
