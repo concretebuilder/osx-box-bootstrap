@@ -3,7 +3,7 @@
 
 ## `v2020_02_15_1`
 * `flutter`: `1.12.13+hotfix.8`
-* `Android NDK`: `r20`
+* `Android NDK`: `r21`
 * `Android build-tools`: `29.0.3`
 
 ## `v2020_02_12_1
