@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2020_02_26_1
+* `bitrise_cli: 1.39.1`
 
 ## `v2020_02_12_1
 * `bitrise_cli: 1.39.0`
