@@ -1,67 +1,66 @@
 ## UPCOMING
 
-## `v2020_02_26_1
-* `bitrise_cli: 1.39.1`
-
-## `v2020_02_15_1`
+## `v2020_02_28_1`
 * `flutter`: `1.12.13+hotfix.8`
 * `Android NDK`: `r21`
 * `Android build-tools`: `29.0.3`
 
-## `v2020_02_12_1
+## `v2020_02_26_1`
+* `bitrise_cli: 1.39.1`
+
+## `v2020_02_12_1`
 * `bitrise_cli: 1.39.0`
 
-## v2020_01_22_2
+## `v2020_01_22_2`
 * `separate bitrise ansible steps`
 
-## v2020_01_22_1
+## `v2020_01_22_1`
 * `python: 3.x`
 
-
-## `v2020_01_15_1
+## `v2020_01_15_1`
 * `bitrise_cli: 1.38.0`
 
-## v2020_01_14_1
+## `v2020_01_14_1`
 * `removed swift-sh because it was never used/installed`
 
 ## `v2019_12_20_1`
 * `flutter`: `1.12.13+hotfix.5`
 
-## v2019_12_12_1
+## `v2019_12_12_1`
 * Gem install fix
 * `bitrise` (CLI): `1.37.0`
 
-## v2019_12_05_1
+## `v2019_12_05_1`
 * `yamllint and local Ansible run added to CI`
 
-## v2019_11_29_1
+## `v2019_11_29_1`
 * `preparations for xcode install via ansible`
 
-## v2019_11_22_1
+## `v2019_11_22_1`
 * Default Ruby version upgrade from 2.6.3 to 2.6.5
 
-## v2019_11_20_1
+## `v2019_11_20_1`
 * `changing ownership of ANDROID_HOME`
 
-## v2019_11_18_1
+## `v2019_11_18_1`
 * `reintroduced older android sdk and build-tool packages`
 
-## v2019_11_15_2
+## `v2019_11_15_2`
 * `quote the when clause, no jinja tempates`
 
-## v2019_11_15_1
+## `v2019_11_15_1`
 * `missing comma in ansible version check`
 
-## v2019_11_14_2
+## `v2019_11_14_2`
 * `correct version comparison for Xcode version string`
 
-## v2019_11_14_1
+## `v2019_11_14_1`
 * `fix swift-sh brew install path, install on Xcode 9+`
 
-## v2019_11_13_2
+## `v2019_11_13_2`
 * `removed old android emulators up to api level 25`
 
-## v2019_11_13_1
+## `v2019_11_13_1`
 * `bitrise` (CLI): `1.36.0`
 * `swift-sh`: `1.14.1`
 * `firebase`: `7.6.2`
