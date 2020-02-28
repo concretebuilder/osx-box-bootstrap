@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2020_02_26_1
+* `bitrise_cli: 1.39.1`
 
 ## `v2020_02_15_1`
 * `flutter`: `1.12.13+hotfix.8`
