@@ -23,6 +23,6 @@
     msg: "{{ result.stdout }}"
 
 - name: set Java 8 as Global in jEnv
-  shell: jenv global 1.8
+  shell: bash -l -c "jenv global 1.8"
 
 ...

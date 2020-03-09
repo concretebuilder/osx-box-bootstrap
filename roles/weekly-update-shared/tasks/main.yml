@@ -134,7 +134,7 @@
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
 - name: "firebase (CLI)" # noqa 303 306
-  shell: curl -sL firebase.tools | bash
+  shell: bash -l -c "curl -sL firebase.tools | bash"
 
 
 # ----------------------------------------

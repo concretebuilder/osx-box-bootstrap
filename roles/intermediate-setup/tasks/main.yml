@@ -89,7 +89,7 @@
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
 - name: "Firebase (CLI)" # noqa 303 306
-  shell: curl -sL firebase.tools | bash
+  shell: bash -l -c "curl -sL firebase.tools | bash"
   become: yes
 
 # Ruby
@@ -150,17 +150,8 @@
   when: is_incremental_setup|default(false) == false
 
 # NPM global packages
-- name: Install "ionic" NodeJS package globally
-  npm:
-    name: ionic
-    global: yes
-  when: is_incremental_setup|default(false) == false
-
-- name: Install "cordova" NodeJS package globally
-  npm:
-    name: cordova
-    global: yes
-  when: is_incremental_setup|default(false) == false
+- name: Install "ionic" and "cordova" NodeJS packages globally
+  shell: bash -l -c "npm install -g ionic cordova"
 
 # Git LFS
 - name: "brew install git lfs"
@@ -206,7 +197,7 @@
 #
 # Install cmd-bridge
 - name: run cmd-bridge installer script
-  script: install_cmd-bridge.sh
+  script: bash -l -c "install_cmd-bridge.sh"
 
 #
 # Switch to Xcode stable, the default Xcode for building
