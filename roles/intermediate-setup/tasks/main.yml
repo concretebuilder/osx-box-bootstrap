@@ -198,7 +198,7 @@
 # Install cmd-bridge
 - name: install cmd-bridge
   script: |
-    curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge
+    bash -l -c 'curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge
     chmod +x /usr/local/bin/cmd-bridge
     cmd-bridge -version
 
@@ -206,7 +206,7 @@
     bitrise_tools_dir="${HOME}/bitrise/tools"
     cmd_bridge_base_dir="${bitrise_tools_dir}/cmd-bridge"
     cmd_bridge_install_script_path="${cmd_bridge_base_dir}/_scripts/install_launchctl_plist_for_current_user.sh"
-    bash "${cmd_bridge_install_script_path}"
+    bash "${cmd_bridge_install_script_path}"'
 
 #
 # Switch to Xcode stable, the default Xcode for building
