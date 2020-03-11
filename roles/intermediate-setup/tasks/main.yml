@@ -196,7 +196,7 @@
 
 #
 # Install cmd-bridge
-- name: install cmd-bridge
+- name: run cmd-bridge installer script
   script: install_cmd-bridge.sh
 
 #
