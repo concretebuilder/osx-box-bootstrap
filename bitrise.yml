@@ -175,9 +175,6 @@ workflows:
                 echo $GITHUB_TOKEN
                 echo $(curl -H "Authorization: token $GITHUB_TOKEN" --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
 
-                export cli_version=`cat cli_version.txt`
-                echo $cli_version
-
   weekly-cache-update-test:
     before_run:
       - _cli-version
