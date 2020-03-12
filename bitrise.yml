@@ -166,8 +166,20 @@ workflows:
                 #!/usr/bin/env bash
                 set -ex
                 ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
+  _cli-version:
+    steps:
+      - script:
+          title: get latest bitrise cli version
+          inputs:
+            - content: |-
+                echo $(curl  -H "Authorization $GITHUB_TOKEN" --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
+
+                cli_version=`cat cli_version.txt`
+                echo $cli_version
 
   weekly-cache-update-test:
+    before_run:
+      - _cli-version
     after_run:
     - _ansible-play
     envs:
