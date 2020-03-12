@@ -106,7 +106,7 @@
 
 - name: "bitrise CLI: download"
   # Lines should be no longer than 160 chars
-  shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise" # noqa 204
+  shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ lookup('env','cli_version') }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise" # noqa 204
 - name: "Make the bitrise CLI executable"
   file: path=/usr/local/bin/bitrise mode="u=rwx,g=rx,o=rx"
 - name: "Bitrise CLI test -version"
