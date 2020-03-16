@@ -11,7 +11,7 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - bitrise_cli_version: 1.39.1
+    - bitrise_cli_version: contents: "{{ lookup('file', '/Users/vagrant/cli_version.txt') }}"
   roles:
     - role: profiles
     - role: ssh-setup

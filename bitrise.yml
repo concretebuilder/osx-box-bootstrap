@@ -164,8 +164,6 @@ workflows:
           inputs:
             - content: |-
                 #!/usr/bin/env bash
-                export cli_version=`cli_version.txt`
-                echo $cli_version
 
                 set -ex
                 ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
@@ -178,10 +176,6 @@ workflows:
                 #!/usr/bin/env bash
                 echo $GITHUB_TOKEN
                 echo $(curl -H "Authorization: token $GITHUB_TOKEN" --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
-
-                echo "export cli_version=$(cat /Users/vagrant/git/cli_version.txt)" >> .bashrc
-                source .bashrc
-                echo $cli_version
 
   weekly-cache-update-test:
     before_run:
