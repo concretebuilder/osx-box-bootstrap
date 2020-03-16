@@ -106,7 +106,7 @@
 
 - name: "bitrise CLI: download"
   # Lines should be no longer than 160 chars
-  debugL: "{{ bitrise_cli_version }}"
+  debug: "{{ bitrise_cli_version }}"
 - name: "bitrise CLI: download"
   # Lines should be no longer than 160 chars
   shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise" # noqa 204
