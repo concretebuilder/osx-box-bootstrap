@@ -150,8 +150,8 @@
   when: is_incremental_setup|default(false) == false
 
 # NPM global packages
-- name: Install "ionic" and "cordova" NodeJS packages globally
-  shell: bash -l -c "npm install -g ionic cordova"
+- name: Install "ionic", "cordova" and "appcenter-cli" NodeJS packages globally
+  shell: bash -l -c "npm install -g ionic cordova appcenter-cli"
 
 # Git LFS
 - name: "brew install git lfs"
