@@ -124,13 +124,6 @@
 - name: "stepman: update"
   shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman update"
 
-- name: "cmd-bridge: download"
-  shell: bash -l -c "curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge"
-- name: "Make the cmd-bridge executable"
-  file: path=/usr/local/bin/cmd-bridge mode="u=rwx,g=rx,o=rx"
-- name: "cmd-bridge -version"
-  shell: bash -l -c "cmd-bridge --version"
-
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
 - name: "firebase (CLI)" # noqa 303 306
