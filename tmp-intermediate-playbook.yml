@@ -7,11 +7,13 @@
   # accelerate: true
   remote_user: vagrant
   become_method: sudo
+  any_errors_fatal: True
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
     - default_ruby: 2.6.5
+    - bitrise_cli_version: "{{ lookup('file', '/Users/vagrant/git/cli_version.txt') }}"
   roles:
-    - ssh-setup
-    - profiles
-    - intermediate-setup
+    - role: ssh-setup
+    - role: profiles
+    - role: tmp-setup

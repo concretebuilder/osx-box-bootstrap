@@ -1,54 +1,30 @@
 ---
-#
-# Required param checks
-- debug: msg=" (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
+# install additional ruby versions
+- name: Install ruby 2.5.3
+  shell: bash -l -c "rbenv install --skip-existing 2.5.3"
+  when: is_incremental_setup|default(false) == false
+- name: Install ruby 2.4.5
+  shell: bash -l -c "rbenv install --skip-existing 2.4.5"
+  when: is_incremental_setup|default(false) == false
 
-# Setup the debug log file for custom scripts
-#  [!] Collect custom script outputs to ~/Desktop/debug.log, for inspection.
-# You can inspect it during setup with $ tail -f ~/Desktop/debug.log
-#  custom installer scripts use this debug log file
-- name: Setup the debug log file for custom scripts
-  file: path=/Users/{{ param_user }}/Desktop/debug.log
-    state=touch
-    owner="{{ param_user }}"
-    mode=0644
+- gem: # noqa 502 All tasks should be named
+    name: "{{ item }}"
+    state: latest # noqa 403 Package installs should not use latest
+    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
+    user_install: no
+  loop:
+    - "cocoapods"
+    - "nomad-cli"
+    - "xcpretty"
 
-#
-# Add user to sudoers-no-password
-#  don't require password for running sudo with this user
-- name: "Add user {{ param_user }} to sudoers with no password"
-  become: yes
-  lineinfile: "dest=/etc/sudoers
-    regexp='^{{ param_user }} ALL'
-    line='{{ param_user }} ALL=(ALL) NOPASSWD: ALL'
-    state=present
-    validate='visudo -cf %s'"
+# GEMs: Cocoapods
+- name: pod setup
+  shell: bash -l -c "pod setup || pod setup"
+  when: is_incremental_setup|default(false) == false
+- name: CocoaPods specs install
+  shell: bash -l -c "pod repo add master https://github.com/CocoaPods/Specs.git"
+  when: is_incremental_setup|default(false) == false
 
-# Enable Developer Mode. Without this Xcode.app might block UI Tests,
-# waiting for manual input (password). Since Xcode 9.3 it seems this is
-# the only way to accept the permissions required for iOS UI Tests,
-# if you only accept it via the GUI that won't persist after an OS reboot,
-# but running this command will.
-- name: "Enable Developer Mode"
-  shell: DevToolsSecurity -enable
-  become: yes
-
-# Turn off automatic update
-- name: Turn off macos automatic software updates
-  shell: softwareupdate --schedule off
-  become: yes
-
-# Turn off APSD
-- name: "Turn off apsd - can be a CPU hog"
-  shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
-  become: yes
-
-#
-# Install and update homebrew
-- name: run brew installer script
-  script: install_brew.sh creates=/usr/local/bin/brew
-- name: brew update
-  homebrew: update_homebrew=yes upgrade_all=no
 # brew some commands
 - name: brew install git
   homebrew: name=git state=present
@@ -92,23 +68,6 @@
   shell: bash -l -c "curl -sL firebase.tools | bash"
   become: yes
 
-# Ruby
-- name: brew install rbenv
-  homebrew: name=rbenv state=latest # noqa 403 Package installs should not use latest
-- name: Install ruby {{ default_ruby }}
-  shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
-  when: is_incremental_setup|default(false) == false
-- name: Set ruby {{ default_ruby }} to global
-  shell: bash -l -c "rbenv global {{ default_ruby }}"
-  when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.5.3
-  shell: bash -l -c "rbenv install --skip-existing 2.5.3"
-  when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.4.5
-  shell: bash -l -c "rbenv install --skip-existing 2.4.5"
-  when: is_incremental_setup|default(false) == false
-
-
 ## Go
 # Gopath is $HOME/go
 - name: brew install go
@@ -121,33 +80,6 @@
     - { fold_path: 'src' }
     - { fold_path: 'bin' }
     - { fold_path: 'pkg' }
-
-
-# Default ruby version (brew installed ruby)
-- name: update rubygems
-  shell: bash -l -c "gem update --system --no-document"
-  when: is_incremental_setup|default(false) == false
-- gem: # noqa 502 All tasks should be named
-    name: "{{ item }}"
-    state: latest # noqa 403 Package installs should not use latest
-    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
-    user_install: no
-  loop:
-    - "cocoapods"
-    - "nomad-cli"
-    - "xcpretty"
-    - "fastlane"
-    - "xcode-install"
-- name: bundle version
-  shell: bash -l -c "bundle --version"
-  when: is_incremental_setup|default(false) == false
-# GEMs: Cocoapods
-- name: pod setup
-  shell: bash -l -c "pod setup || pod setup"
-  when: is_incremental_setup|default(false) == false
-- name: CocoaPods specs install
-  shell: bash -l -c "pod repo add master https://github.com/CocoaPods/Specs.git"
-  when: is_incremental_setup|default(false) == false
 
 # NPM global packages
 - name: Install "ionic", "cordova" and "appcenter-cli" NodeJS packages globally
@@ -195,11 +127,12 @@
   synchronize: src=tools/ dest="/Users/{{ param_user }}/bitrise/tools/"
 
 #
-# Install cmd-bridge
-- name: run cmd-bridge installer script
-  script: install_cmd-bridge.sh
+# Install python3
+- name: Install python@3
+  homebrew:
+    name: python@3
+    state: present
 
-#
 # Switch to Xcode stable, the default Xcode for building
 - name: Switch to Xcode stable, the default Xcode for building
   shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
@@ -213,10 +146,3 @@
 - name: xcrun simctl list
   shell: bash -l -c "xcrun simctl list"
   become: yes
-
-#
-# Install python3
-- name: Install python@3
-  homebrew:
-    name: python@3
-    state: present

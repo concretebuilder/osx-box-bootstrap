@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_04_02_1`
+* `explicit install of android-tools`
+
 ## `v2020_03_24_1`
 * `appcenter-cli`: `2.3.4`
 
