@@ -6,7 +6,6 @@
   loop:
     - "emulator"
     - "tools"
-    - "platform-tools"
     - "platforms;android-29"
     - "platforms;android-28"
     - "platforms;android-27"
@@ -51,6 +50,12 @@
     - "add-ons;addon-google_apis-google-23"
     - "add-ons;addon-google_apis-google-22"
     - "add-ons;addon-google_apis-google-21"
+
+- name: Explicitly install the platform-tools package
+  become: yes
+  homebrew_cask:
+    name: android-platform-tools
+    state: present
 
 - name: Recursively change ownership of ANDROID_HOME
   become: yes
