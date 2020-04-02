@@ -52,7 +52,6 @@
     - "add-ons;addon-google_apis-google-21"
 
 - name: Explicitly install the platform-tools package
-  become: yes
   homebrew_cask:
     name: android-platform-tools
     state: present
