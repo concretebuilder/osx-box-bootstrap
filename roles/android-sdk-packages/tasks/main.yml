@@ -64,4 +64,8 @@
     recurse: yes
     owner: "{{ param_user }}"
     group: staff
+
+- name: chmod a+x to android-sdk
+  become: yes
+  shell: chmod -R a+w /usr/local/Caskroom/android-sdk
 ...
