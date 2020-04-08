@@ -67,5 +67,5 @@
 
 - name: chmod a+x to android-sdk
   become: yes
-  shell: chmod -R a+w /usr/local/Caskroom/android-sdk
+  shell: "(chmod -R a+w /usr/local/Caskroom/android-sdk || chmod -R a+W /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx)"
 ...
