@@ -126,6 +126,13 @@
 - name: Sync the tools dir
   synchronize: src=tools/ dest="/Users/{{ param_user }}/bitrise/tools/"
 
+- name: make cmd-bridge executable
+  shell: bash -l -c "chmod +x bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
+- name: set up cmd-bridge
+  shell: bash -l -c "./bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
+- name: load plist
+  shell: bash -l -c "launchctl load /Users/vagrant/Library/LaunchAgents/bitrise.io.tools.cmd-bridge.plist"
+
 #
 # Install python3
 - name: Install python@3
