@@ -65,7 +65,8 @@
     owner: "{{ param_user }}"
     group: staff
 
-- name: chmod a+x to android-sdk
+- name: chmod 755 to android-sdk
   become: yes
-  shell: "(chmod -R a+w /usr/local/Caskroom/android-sdk || chmod -R a+W /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx)"
+  shell: "(chmod -R 755 /usr/local/Caskroom/android-sdk || chmod -R 755 /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx)"
+  ignore_errors: yes
 ...
