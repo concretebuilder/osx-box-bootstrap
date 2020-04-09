@@ -52,7 +52,7 @@ ver_line="$(tree --version)" ;                    echo "* tree: $ver_line"
 echo
 ver_line="$(brew --version)" ;                    echo "* brew: $ver_line"
 
-# xctool was removed, not installed on new Stacks
+
 
 
 ver_line="$(ansible --version | grep ansible)" ;  echo "* Ansible: $ver_line"
@@ -65,7 +65,7 @@ ver_line="$(ps2ascii --version)" ;                echo "* ghostscript (ps2ascii)
 ver_line="$(screen --version | grep Screen)" ;    echo "* screen: $ver_line"
 ver_line="$(firebase --version)" ;                    echo "* firebase: $ver_line"
 
-# wine was removed, not installed on new Stacks
+
 
 
 echo
