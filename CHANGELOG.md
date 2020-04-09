@@ -3,8 +3,8 @@
 ## `v2020_04_09_1`
 * `removed wine and xctools checks`
 * `changed the path of android-sdk platform-tools due to installation with brew`
-* `created conditional statements to correctly check the path of CommonCrypto
-* `changed the version checking paths of xamarin ios and android
+* `created conditional statements to correctly check the path of CommonCrypto`
+* `changed the version checking paths of xamarin ios and android`
 
 ## `v2020_04_02_1`
 * `explicit install of android-tools`
