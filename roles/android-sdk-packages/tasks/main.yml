@@ -59,7 +59,7 @@
 - name: Recursively change ownership of ANDROID_HOME
   become: yes
   file:
-    path: "/usr/local/Caskroom/android-sdk || /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx)"
+    path: "/usr/local/Caskroom/android-sdk || /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx"
     recurse: yes
     owner: vagrant
     group: staff
