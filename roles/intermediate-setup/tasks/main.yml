@@ -127,7 +127,11 @@
   synchronize: src=tools/ dest="/Users/{{ param_user }}/bitrise/tools/"
 
 - name: make cmd-bridge executable
-  shell: bash -l -c "chmod +x bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
+  file:
+    path: $HOME/bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh
+    owner: vagrant
+    group: staff
+    mode: '0755'
 - name: set up cmd-bridge
   shell: bash -l -c "./bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
 - name: load plist
