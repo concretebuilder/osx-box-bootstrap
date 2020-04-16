@@ -56,10 +56,19 @@
     name: android-platform-tools
     state: present
 
-- name: Recursively change ownership of ANDROID_HOME
+- name: Recursively change ownership of ANDROID_HOME on Xcode
   become: yes
   file:
-    path: "/usr/local/Caskroom/android-sdk || /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx"
+    path: "/usr/local/Caskroom/android-sdk"
+    recurse: yes
+    owner: vagrant
+    group: staff
+    mode: '0755'
+
+- name: Recursively change ownership of ANDROID_HOME on vs4mac
+  become: yes
+  file:
+    path: "/Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx"
     recurse: yes
     owner: vagrant
     group: staff
