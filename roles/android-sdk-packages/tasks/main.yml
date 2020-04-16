@@ -59,9 +59,9 @@
 - name: Recursively change ownership of ANDROID_HOME
   become: yes
   file:
-    path: "{{ android_home }}"
-    state: directory
+    path: "/usr/local/Caskroom/android-sdk || /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx)"
     recurse: yes
-    owner: "{{ param_user }}"
+    owner: vagrant
     group: staff
+    mode: '0755'
 ...
