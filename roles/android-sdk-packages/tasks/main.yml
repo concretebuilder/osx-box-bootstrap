@@ -3,7 +3,7 @@
   file:
     path: /var/root/.android/repositories.cfg
     state: touch
-    mode: 0777
+    mode: "0777"
 
 - name: Install Android packages with SDK Manager
   become: yes
