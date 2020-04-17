@@ -1,5 +1,6 @@
 ---
 - name: Touch repositories.cfg
+  become: yes
   file:
     path: /var/root/.android/repositories.cfg
     state: touch
