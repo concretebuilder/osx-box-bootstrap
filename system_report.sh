@@ -257,7 +257,7 @@ if [ -n "$ANDROID_HOME" ] ; then
   echo
   echo "* platform-tools content:"
   ##ls -1 ${ANDROID_HOME}/platform-tools changed to brew
-  ls -1 /usr/local/Caskroom/android-sdk/4333796/platform-tools
+  ls -1 /usr/local/Caskroom/android-sdk/*/platform-tools
   echo
   echo "* build-tools content:"
   ls -1 ${ANDROID_HOME}/build-tools
