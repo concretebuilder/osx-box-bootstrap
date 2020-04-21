@@ -1,4 +1,10 @@
 ---
+- name: Make .android folder
+  become: yes
+  file:
+    path: /var/root/.android
+    state: directory
+
 - name: Touch repositories.cfg
   become: yes
   file:
