@@ -20,7 +20,6 @@ echo "=== Revision / ID ======================"
 echo "* BITRISE_OSX_STACK_REV_ID: $BITRISE_OSX_STACK_REV_ID"
 echo "========================================"
 echo
-
 # Make sure that the reported version is only
 #  a single line!
 echo
@@ -53,12 +52,8 @@ ver_line="$(tree --version)" ;                    echo "* tree: $ver_line"
 echo
 ver_line="$(brew --version)" ;                    echo "* brew: $ver_line"
 
-# xctool was removed, not installed on new Stacks
-set +e
-ver_line="$(xctool --version)" ;                  echo "* xctool: $ver_line"
-if [[ "${IS_IGNORE_ERRORS}" != "true" ]] ; then
-set -e
-fi
+
+
 
 ver_line="$(ansible --version | grep ansible)" ;  echo "* Ansible: $ver_line"
 ver_line="$(gtimeout --version | grep 'timeout')" ;  echo "* gtimeout: $ver_line"
@@ -70,12 +65,8 @@ ver_line="$(ps2ascii --version)" ;                echo "* ghostscript (ps2ascii)
 ver_line="$(screen --version | grep Screen)" ;    echo "* screen: $ver_line"
 ver_line="$(firebase --version)" ;                    echo "* firebase: $ver_line"
 
-# wine was removed, not installed on new Stacks
-set +e
-ver_line="$(wine --version)" ;                    echo "* wine: $ver_line"
-if [[ "${IS_IGNORE_ERRORS}" != "true" ]] ; then
-set -e
-fi
+
+
 
 echo
 echo "--- Bitrise CLI tool versions"
@@ -129,6 +120,7 @@ echo
 echo "=== NPM global packages =========================="
 ver_line="$(cordova --version)" ;                echo "* Cordova: $ver_line"
 ver_line="$(ionic --version)" ;                  echo "* Ionic: $ver_line"
+ver_line="$(appcenter --version)" ;              echo "* AppCenter CLI: $ver_line"
 echo "========================================"
 echo
 
@@ -137,8 +129,19 @@ echo "=== Checking Xcode CLT dirs ============"
 # installed by `xcode-select --install`, if called *before*
 #  Xcode.app is installed
 echo
-echo " * ls -1 /usr/include/CommonCrypto"
-ls -1 /usr/include/CommonCrypto
+if [[ -d /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/CommonCrypto ]]
+then
+    echo " * ls -1 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/CommonCrypto"
+    ls -1 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/CommonCrypto
+elif [[ -d /usr/include/CommonCrypto ]]
+then
+    echo " * ls -1 /usr/include/CommonCrypto"
+    ls -1 /usr/include/CommonCrypto
+elif [[ -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/CommonCrypto ]]
+then
+    echo " ls -1 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/CommonCrypto"
+    ls -1 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/CommonCrypto
+fi
 echo
 echo " * ls -1 /Library/Developer/CommandLineTools/"
 ls -1 /Library/Developer/CommandLineTools/
@@ -184,7 +187,9 @@ echo
 
 echo
 echo "=== System infos ======================="
-info_line="$( df -kh / | grep '/' )" ;            echo "* Free disk space: $info_line"
+info_line="$( df -gh / | awk '{printf "%14s %12s %12s\n", $1, $2, $4}' )" ;            
+echo "* Free disk space: 
+$info_line"
 echo "========================================"
 echo
 
@@ -208,10 +213,10 @@ if [ ! -z "$BITRISE_XAMARIN_FOLDER_PATH" ] ; then
   which mono
   echo
   echo "* Xamarin.Android"
-  cat /Developer/MonoAndroid/usr/Version
+  ls /Library/Frameworks/Xamarin.Android.framework/Versions
   echo
   echo "* Xamarin.iOS"
-  /Developer/MonoTouch/usr/bin/mtouch --version
+  ls /Library/Frameworks/Xamarin.iOS.framework/Versions
   echo
   echo "* debug.keystore path:"
   debug_keystore_pth="$HOME/.local/share/Xamarin/Mono for Android/debug.keystore"
@@ -251,7 +256,8 @@ if [ -n "$ANDROID_HOME" ] ; then
   fi
   echo
   echo "* platform-tools content:"
-  ls -1 ${ANDROID_HOME}/platform-tools
+  ##ls -1 ${ANDROID_HOME}/platform-tools changed to brew
+  ls -1 /usr/local/Caskroom/android-sdk/*/platform-tools
   echo
   echo "* build-tools content:"
   ls -1 ${ANDROID_HOME}/build-tools

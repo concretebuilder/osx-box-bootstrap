@@ -1,5 +1,19 @@
 ---
+- name: Make .android folder
+  become: yes
+  file:
+    path: /var/root/.android
+    state: directory
+
+- name: Touch repositories.cfg
+  become: yes
+  file:
+    path: /var/root/.android/repositories.cfg
+    state: touch
+    mode: "0777"
+
 - name: Install Android packages with SDK Manager
+  become: yes
   environment:
     PATH: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx/tools/bin:{{ android_home }}/tools/bin:{{ ansible_env.PATH }}"
   shell: "(echo y | sdkmanager '{{ item }}') || (echo y | sdkmanager '{{ item }}')" # noqa 306 Shells that use pipes should set the pipefail option
@@ -56,17 +70,21 @@
     name: android-platform-tools
     state: present
 
-- name: Recursively change ownership of ANDROID_HOME
+- name: Recursively change ownership of ANDROID_HOME on Xcode
   become: yes
   file:
-    path: "{{ android_home }}"
-    state: directory
+    path: "/usr/local/Caskroom/android-sdk"
     recurse: yes
-    owner: "{{ param_user }}"
+    owner: vagrant
     group: staff
+    mode: '0755'
 
-- name: chmod 755 to android-sdk
+- name: Recursively change ownership of ANDROID_HOME on vs4mac
   become: yes
-  shell: "(chmod -R 755 /usr/local/Caskroom/android-sdk || chmod -R 755 /Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx)"
-  ignore_errors: yes
+  file:
+    path: "/Users/vagrant/Library/Developer/Xamarin/android-sdk-macosx"
+    recurse: yes
+    owner: vagrant
+    group: staff
+    mode: '0755'
 ...
