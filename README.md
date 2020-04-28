@@ -196,6 +196,11 @@ Once installed:
     * Once Recover mode boots select Utilities -> Terminal
     * And run the command: csrutil disable
 
+    * To enable the update automation
+    add the Terminal and the Script Runner apps to `System Preferences - Security and Privacy - Accessability`
+    also run the machine-setup/playbook.yml on the machine to enable access to system events
+    you will need to run this from your dev machine, because the setting needs manual interaction, so the automation would time out.
+
 ## Provisioning
 
 ### Install Xcode - can be saved as an intermediate template

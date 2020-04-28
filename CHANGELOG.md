@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_04_28_1`
+* `automation to update visual studio`
+
 ## `v2020_04_09_1`
 * `removed wine and xctools checks`
 * `changed the path of android-sdk platform-tools due to installation with brew`

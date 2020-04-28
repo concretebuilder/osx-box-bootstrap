@@ -1,0 +1,16 @@
+---
+#
+# Ansible playbook to update Visual Studio
+#
+
+- hosts: all
+  # accelerate: true
+  remote_user: vagrant
+  become_method: sudo
+  any_errors_fatal: True
+  vars:
+    - ansible_sudo_pass: vagrant
+    - param_user: vagrant
+  roles:
+    - role: vs4mac
+...
