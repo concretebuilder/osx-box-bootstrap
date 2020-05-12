@@ -142,6 +142,13 @@ workflows:
                 set -ex
                 pod repo remove master
       - script:
+          title: Add ansible config
+          run_if: .IsCI
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                echo -e "[defaults]\ncallback_whitelist=profile_tasks" > ansible.cfg
+      - script:
           title: Run Ansible Playbook on CI's build VM
           run_if: .IsCI
           inputs:

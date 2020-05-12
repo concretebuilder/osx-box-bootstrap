@@ -59,6 +59,10 @@
 - name: brew install readline
   homebrew: name=readline state=present
 
+- name: Add ansible.cfg to add some settings
+  copy: src=ansible.cfg
+    dest="/Users/{{ param_user }}/ansible.cfg"
+
 - name: brew install java
   homebrew_cask: name=java state=present
 
