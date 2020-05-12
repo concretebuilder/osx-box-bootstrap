@@ -1,7 +1,7 @@
 ---
 # vs4mac update
     - name: Copy applescript to machine
-      copy: 
+      copy:
         src: files/setup.applescript
         dest: "/Users/{{ param_user }}/setup.applescript"
         owner: "{{ param_user }}"
