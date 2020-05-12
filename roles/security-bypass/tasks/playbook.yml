@@ -1,0 +1,15 @@
+---
+# vs4mac update
+    - name: Copy applescript to machine
+      copy: 
+        src: files/setup.applescript
+        dest: "/Users/{{ param_user }}/setup.applescript"
+        owner: "{{ param_user }}"
+        mode: "0600"
+    - name: Run setup script
+      shell: bash -l -c "osascript /Users/{{ param_user }}/setup.applescript"
+    - name: Remove file (delete file)
+      file:
+        path: /Users/{{ param_user }}/setup.applescript
+        state: absent
+...
