@@ -8,10 +8,8 @@ app:
   - XCODE_PATH: $XCODE_PATH
 trigger_map:
 - push_branch: step/1
-  workflow: vagrant-setup
-- push_branch: step/2
   workflow: provision-vm
-- push_branch: step/3
+- push_branch: step/2
   workflow: perform-weekly-cache-update
 - push_branch: step/xamarin
   workflow: provision-xamarin-vm
@@ -132,21 +130,6 @@ workflows:
             set -e
             set -x
             ansible-playbook -v --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xamarin-playbook.yml"
-
-  vagrant-setup:
-    description: |-
-      Runs `ansible` with the `vagrant-setup-playbook`, to have a bare minimum
-      `vagrant` ready setup on the target VM.
-    steps:
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -e
-            echo " (!!!) When prompted for a password provide the VM's SSH password"
-            echo '       should be "vagrant" if you do a default vagrant setup'
-            set -x
-            ansible-playbook -v --ask-pass -i "${VM_BUILD_IP}", "./vagrant-setup-playbook.yml"
 
   _ansible-play:
     steps:
