@@ -21,9 +21,13 @@
 - name: pod setup
   shell: bash -l -c "pod setup || pod setup"
   when: is_incremental_setup|default(false) == false
-- name: CocoaPods specs install
+- name: CocoaPods specs install with pod
   shell: bash -l -c "pod repo add master https://github.com/CocoaPods/Specs.git"
-  when: is_incremental_setup|default(false) == false
+  when: is_incremental_setup|default(false) == false and is_ci|default(false) != "true"
+# The pod repo add just clone the repository. Cocopods master is huge, and we need the HEAD only so we clone that during CI run.
+- name: CocoaPods specs install with git
+  shell: bash -l -c "git clone --depth=1 https://github.com/CocoaPods/Specs.git ~/.cocoapods/repos/master"
+  when: is_incremental_setup|default(false) == false and is_ci|default(false) == "true"
 
 # brew some commands
 - name: brew install git
