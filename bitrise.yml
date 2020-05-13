@@ -140,7 +140,9 @@ workflows:
             - content: |-
                 #!/usr/bin/env bash
                 set -ex
-                pod repo remove master
+                #Originally the command was pod repo remove master, it just erased the dir under .cocoapods/repos/master.
+                #It is huge. Not by size, but the number of files. Instead just moved to /var/tmp it is way faster and it runs only during ci.
+                mv ~/.cocoapods/repos/master /var/tmp/
       - script:
           title: Add ansible config
           run_if: .IsCI
