@@ -196,6 +196,6 @@ workflows:
           - file_path: _scripts/lead_time.sh
       - slack:
           inputs:
-            - webhook_url: $SLACK_WEBHOOK_URL_IN
-            - channel: $SLACK_CHANNEL_IN
+            - webhook_url: $SLACK_WEBHOOK_URL
+            - channel: $SLACK_CHANNEL
             - message: "$PR_CREATE_TIME - $PR_CLOSED_TIME"
