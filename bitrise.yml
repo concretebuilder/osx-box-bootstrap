@@ -182,3 +182,20 @@ workflows:
       - _ansible-play
     envs:
       - LOCAL_PLAYBOOK_PATH: ./playbook.yml
+
+  send_lead_time:
+    steps:
+      - script-runner:
+          title: Lead Time KPI
+          deps:
+            apt_get:
+            - name: jq
+            brew:
+            - name: jq
+          inputs:
+          - file_path: _scripts/lead_time.sh
+      - slack:
+          inputs:
+            - webhook_url: $SLACK_WEBHOOK_URL_IN
+            - channel: $SLACK_CHANNEL_IN
+            - message: "$PR_CREATE_TIME - $PR_CLOSED_TIME"
