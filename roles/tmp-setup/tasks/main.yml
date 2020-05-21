@@ -1,28 +1,32 @@
 ---
 #
 # Required param checks
-- debug: msg=" (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
+- name: Display is_incremental
+  debug:
+    msg: " (!) Incremental Setup? {{ is_incremental_setup|default(false) }}"
 
 # Setup the debug log file for custom scripts
 #  [!] Collect custom script outputs to ~/Desktop/debug.log, for inspection.
 # You can inspect it during setup with $ tail -f ~/Desktop/debug.log
 #  custom installer scripts use this debug log file
 - name: Setup the debug log file for custom scripts
-  file: path=/Users/{{ param_user }}/Desktop/debug.log
-    state=touch
-    owner="{{ param_user }}"
-    mode=0644
+  file:
+    path: /Users/{{ param_user }}/Desktop/debug.log
+    state: touch
+    owner: "{{ param_user }}"
+    mode: "0644"
 
 #
 # Add user to sudoers-no-password
 #  don't require password for running sudo with this user
 - name: "Add user {{ param_user }} to sudoers with no password"
   become: yes
-  lineinfile: "dest=/etc/sudoers
-    regexp='^{{ param_user }} ALL'
-    line='{{ param_user }} ALL=(ALL) NOPASSWD: ALL'
-    state=present
-    validate='visudo -cf %s'"
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: '^{{ param_user }} ALL'
+    line: '{{ param_user }} ALL=(ALL) NOPASSWD: ALL'
+    state: present
+    validate: 'visudo -cf %s'
 
 # Enable Developer Mode. Without this Xcode.app might block UI Tests,
 # waiting for manual input (password). Since Xcode 9.3 it seems this is
@@ -48,11 +52,15 @@
 - name: run brew installer script
   script: install_brew.sh creates=/usr/local/bin/brew
 - name: brew update
-  homebrew: update_homebrew=yes upgrade_all=no
+  homebrew:
+    update_homebrew: yes
+    upgrade_all: no
 
 # Ruby
 - name: brew install rbenv
-  homebrew: name=rbenv state=latest # noqa 403 Package installs should not use latest
+  homebrew:
+    name: rbenv
+    state: latest # noqa 403 Package installs should not use latest
 - name: Install ruby {{ default_ruby }}
   shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
   when: is_incremental_setup|default(false) == false
@@ -64,14 +72,13 @@
 - name: update rubygems
   shell: bash -l -c "gem update --system --no-document"
   when: is_incremental_setup|default(false) == false
-- gem: # noqa 502 All tasks should be named
-    name: "{{ item }}"
+- name: Install fastlane
+  gem: # noqa 502 All tasks should be named
+    name: "fastlane"
     state: latest # noqa 403 Package installs should not use latest
     executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
     user_install: no
-  loop:
-    - "fastlane"
-    - "xcode-install"
+
 
 #
 # Install cmd-bridge
@@ -79,7 +86,9 @@
   shell: bash -l -c "curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge"
 
 - name: "Make the cmd-bridge executable"
-  file: path=/usr/local/bin/cmd-bridge mode="u=rwx,g=rx,o=rx"
+  file:
+    path: /usr/local/bin/cmd-bridge
+    mode: "u=rwx,g=rx,o=rx"
 
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"

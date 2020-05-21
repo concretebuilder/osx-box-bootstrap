@@ -1,6 +1,8 @@
 # Cleaning up non Xamarin installed sdks and ndks
 - name: Remove brew android-sdk
-  homebrew_cask: name=android-sdk state=absent
+  homebrew_cask:
+    name: android-sdk
+    state: absent
 
 - name: Remove manually installed android ndk
   become: yes
@@ -40,24 +42,27 @@
 # The main Xamarin profile, includes
 #  the Xamarin specific environments
 - name: setup xamarin_profile
-  copy: src=files/xamarin_profile
-    dest="/Users/{{ param_user }}/.profiles/xamarin_profile"
-    owner="{{ param_user }}"
-    mode=0600
+  copy:
+    src: files/xamarin_profile
+    dest: "/Users/{{ param_user }}/.profiles/xamarin_profile"
+    owner: "{{ param_user }}"
+    mode: "0600"
 
 #
 # Install debug.keystore
 # $HOME/.local/share/Xamarin/Mono for Android/debug.keystore
 - name: "ensure Xamarin debug.keystore dir exists"
-  file: path="/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android"
-    state=directory
-    owner="{{ param_user }}"
-    mode=0755
+  file:
+    path: "/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android"
+    state: directory
+    owner: "{{ param_user }}"
+    mode: "0755"
 - name: install debug.keystore
-  copy: src=xamarin/debug.keystore
-    dest="/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android/debug.keystore"
-    owner="{{ param_user }}"
-    mode=0644
+  copy:
+    src: xamarin/debug.keystore
+    dest: "/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android/debug.keystore"
+    owner: "{{ param_user }}"
+    mode: "0644"
 
 #
 # Setup Bitrise specific folders
@@ -65,12 +70,15 @@
 # Setup the base folders / paths, referenced by ~/.profiles/xamarin_profile
 # These folders will be created in the HOME directory.
 - name: Create bitrise xamarin specific dirs
-  file: path="/Users/{{ param_user }}/{{ item.fold_path }}"
-    state=directory
-    owner="{{ param_user }}"
+  file:
+    path: "/Users/{{ param_user }}/{{ item.fold_path }}"
+    state: directory
+    owner: "{{ param_user }}"
   with_items:
     # Xamarin tools
     - { fold_path: 'bitrise/xamarin' }
 
 - name: sync xamarin tools from the provisioning repo
-  synchronize: src=xamarin/ dest="/Users/{{ param_user }}/bitrise/xamarin/"
+  synchronize:
+    src: xamarin/
+    dest: "/Users/{{ param_user }}/bitrise/xamarin/"

@@ -20,7 +20,8 @@
   shell: "kill {{ item }}"
   with_items: "{{ running_processes.stdout_lines }}"
 
-- wait_for:
+- name: Wait for status
+  wait_for:
     path: "/proc/{{ item }}/status"
     state: absent
   with_items: "{{ running_processes.stdout_lines }}"

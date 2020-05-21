@@ -8,7 +8,8 @@
   register: result
   ignore_errors: yes
   no_log: True
-- debug:
+- name: Display Java helper tools
+  debug:
     msg: "com.oracle.java.Helper-Tool present {{ result.rc == 0 }}"
 
 - name: Stop Java's Helper-Tool
@@ -22,7 +23,8 @@
   register: result
   ignore_errors: yes
   no_log: True
-- debug:
+- name: Display Java updater
+  debug:
     msg: "com.oracle.java.Java-Updater present {{ result.rc == 0 }}"
 
 - name: Stop Java's Java-Updater

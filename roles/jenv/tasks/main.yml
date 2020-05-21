@@ -19,7 +19,8 @@
   shell: . /Users/{{ param_user }}/.bashrc && (yes | jenv add {{ detect_java_home.stdout }})
   register: result
 
-- debug:
+- name: Display jEnv home
+  debug:
     msg: "{{ result.stdout }}"
 
 - name: set Java 8 as Global in jEnv
