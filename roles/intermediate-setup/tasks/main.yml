@@ -148,7 +148,7 @@
     path: "/Users/{{ param_user }}/{{ item.fold_path }}"
     state: directory
     owner: "{{ param_user }}"
-    with_items:
+  with_items:
     # BITRISE_SOURCE_DIR
     - { fold_path: 'git' }
     # BITRISE_STEP_DIR
