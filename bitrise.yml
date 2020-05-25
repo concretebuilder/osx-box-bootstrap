@@ -149,7 +149,7 @@ workflows:
           inputs:
             - content: |-
                 #!/usr/bin/env bash
-                echo -e "[defaults]\ncallback_whitelist=profile_tasks" > ansible.cfg
+                echo -e "[defaults]\ncallback_whitelist=profile_tasks\n[ssh_connection]\npipeline=True" > ansible.cfg
       - script:
           title: Run Ansible Playbook on CI's build VM
           run_if: .IsCI
