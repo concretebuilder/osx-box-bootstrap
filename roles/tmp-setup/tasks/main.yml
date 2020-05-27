@@ -48,13 +48,12 @@
   become: yes
 
 #
-# Install and update homebrew
+# Install and setup homebrew
 - name: run brew installer script
   script: install_brew.sh creates=/usr/local/bin/brew
-- name: brew update
-  homebrew:
-    update_homebrew: yes
-    upgrade_all: no
+- name: Setup brew to use our own fork of homebrew to ensure versions
+  script: setup_brew.sh
+  when: is_ci|default(false) == "true"
 
 # Ruby
 - name: brew install rbenv
