@@ -47,14 +47,6 @@
   shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
   become: yes
 
-#
-# Install and setup homebrew
-- name: run brew installer script
-  script: install_brew.sh creates=/usr/local/bin/brew
-- name: Setup brew to use our own fork of homebrew to ensure versions
-  script: setup_brew.sh
-  when: is_ci|default(false) == "true"
-
 # Ruby
 - name: brew install rbenv
   homebrew:

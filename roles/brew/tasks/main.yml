@@ -1,0 +1,6 @@
+---
+- name: run brew installer script
+  script: install_brew.sh creates=/usr/local/bin/brew
+- name: Setup brew to use our own fork of homebrew to ensure versions
+  script: setup_brew.sh
+  when: is_ci|default(false) == "true"

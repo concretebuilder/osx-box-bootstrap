@@ -16,4 +16,5 @@
   roles:
     - role: ssh-setup
     - role: profiles
+    - role: brew
     - role: tmp-setup
