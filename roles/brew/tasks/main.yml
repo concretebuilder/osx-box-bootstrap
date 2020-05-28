@@ -1,6 +1,27 @@
 ---
+- name: Install curl
+  package:
+    name: curl
+    state: present
+    update_cache: yes
+
+- name: Install git
+  package:
+    name: git
+    state: present
+    update_cache: yes
+
 - name: run brew installer script
-  script: install_brew.sh creates=/usr/local/bin/brew
+  script: install_brew.sh
+
+- name: Is brew in bash_profile
+  shell: cat ~/.bash_profile
+  register: bash_profile
+
+- name: Add brew to PATH. Brew officially supported on linux it is called linuxbrew and for test we use that
+  shell: "echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bash_profile"
+  when: ansible_distribution == 'CentOS' and bash_profile.stdout.find('brew') == -1
+
 - name: Setup brew to use our own fork of homebrew to ensure versions
   script: setup_brew.sh
-  when: is_ci|default(false) == "true"
+  when: lookup('env', 'IS_CI')

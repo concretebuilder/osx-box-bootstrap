@@ -1,12 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-(
-	echo
-	echo "---> [install] Homebrew"
-	echo '' | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	res_code=$?
-	echo "---> [install] Homebrew [done]"
+set -e
 
-	exit $res_code
-) 2>> ~/Desktop/debug.log 1>> ~/Desktop/debug.log
-exit $?
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
