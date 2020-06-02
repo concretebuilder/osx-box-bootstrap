@@ -1,11 +1,20 @@
 def test_brew_installed(host):
     assert host.run_expect([0], 'source ~/.bash_profile && brew --help')
 
-def test_brew_core_sset_to_bitrise_io(host):
+def test_brew_core_set_to_bitrise_io(host):
+    git_config_file = _get_git_config_of_given_brew_repositoru(host, "core")
+
+    assert git_config_file.exists
+    assert git_config_file.contains('github.com/bitrise-io/homebrew-core')
+
+def test_brew_cask_set_to_bitrise_io(host):
+    git_config_file = _get_git_config_of_given_brew_repositoru(host, "cask")
+
+    assert git_config_file.exists
+    assert git_config_file.contains('github.com/bitrise-io/homebrew-cask')
+
+def _get_git_config_of_given_brew_repositoru(host, repository):
     brew_repository = host.run('source ~/.bash_profile && brew --repository').stdout.strip()
-    brew_core_git_config_location = '{0}/Library/Taps/homebrew/homebrew-core/.git/config'.format(brew_repository)
+    git_config_location = '{0}/Library/Taps/homebrew/homebrew-{1}/.git/config'.format(brew_repository, repository)
 
-    brew_core_git_config_file = host.file(brew_core_git_config_location)
-
-    assert brew_core_git_config_file.exists
-    assert brew_core_git_config_file.contains('github.com/bitrise-io/homebrew-core')
+    return host.file(git_config_location)
