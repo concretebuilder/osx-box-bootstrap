@@ -205,8 +205,5 @@ workflows:
     steps:
       - script-runner:
           title: Ansible role tests
-          deps:
-            brew:
-            - name: molecule
           inputs:
           - file_path: _scripts/run_ansible_tests.sh

@@ -11,17 +11,32 @@
     state: present
     update_cache: yes
 
-- name: run brew installer script
-  script: install_brew.sh
+- name: Check if brew installed
+  shell: "source ~/.bash_profile && brew --help"
+  register: brew_installed
+  changed_when: false
+  ignore_errors: true
+
+- name: Run brew installer script
+  shell: "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash"
+  when: brew_installed is failed
 
 - name: Is brew in bash_profile
-  shell: cat ~/.bash_profile
+  shell: "grep brew ~/.bash_profile"
+  changed_when: false
+  ignore_errors: true
   register: bash_profile
 
 - name: Add brew to PATH. Brew officially supported on linux it is called linuxbrew and for test we use that
   shell: "echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bash_profile"
-  when: ansible_distribution == 'CentOS' and bash_profile.stdout.find('brew') == -1
+  when: ansible_distribution == 'CentOS' and bash_profile is failed
+
+- name: Check if repository for brew core is correct
+  shell: "source ~/.bash_profile && grep github.com/bitrise-io/homebrew-core $(brew --repository)/Library/Taps/homebrew/homebrew-core/.git/config"
+  changed_when: false
+  ignore_errors: true
+  register: brew_repository_set
 
 - name: Setup brew to use our own fork of homebrew to ensure versions
   script: setup_brew.sh
-  when: lookup('env', 'IS_CI')
+  when: lookup('env', 'IS_CI') and brew_repository_set is failed
