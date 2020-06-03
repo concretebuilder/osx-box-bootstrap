@@ -1,0 +1,15 @@
+---
+- name: brew install node
+  homebrew:
+    name: node@10
+    state: present # Node LTS 10.x
+- name: brew link node@10
+  command: /usr/local/bin/brew link --overwrite --force node@10 # force link Node LTS 10.x
+
+- name: Install NPM packages
+  npm:
+    name: "{{ item.name }}"
+    global: yes
+    version: "{{ item.version }}"
+  with_items:
+    - "{{ npm_packages }}"

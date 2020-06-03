@@ -1,22 +1,7 @@
 ---
-# install additional ruby versions
-- name: Install ruby 2.5.3
-  shell: bash -l -c "rbenv install --skip-existing 2.5.3"
-  when: is_incremental_setup|default(false) == false
-- name: Install ruby 2.4.5
-  shell: bash -l -c "rbenv install --skip-existing 2.4.5"
-  when: is_incremental_setup|default(false) == false
 
-- name: Gem install
-  gem: # noqa 502 All tasks should be named
-    name: "{{ item }}"
-    state: latest # noqa 403 Package installs should not use latest
-    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
-    user_install: no
-  loop:
-    - "cocoapods"
-    - "nomad-cli"
-    - "xcpretty"
+- name: Install additional rubys and gems
+  import_tasks: ruby.yml
 
 # GEMs: Cocoapods
 - name: pod setup
@@ -43,12 +28,6 @@
   homebrew:
     name: mercurial
     state: present
-- name: brew install node
-  homebrew:
-    name: node@10
-    state: present # Node LTS 10.x
-- name: brew link node@10
-  command: /usr/local/bin/brew link --overwrite --force node@10 # force link Node LTS 10.x
 - name: brew install ansible
   homebrew:
     name: ansible
@@ -109,10 +88,6 @@
 - name: "Firebase (CLI)" # noqa 303 306
   shell: bash -l -c "curl -sL firebase.tools | bash"
   become: yes
-
-# NPM global packages
-- name: Install "ionic", "cordova" and "appcenter-cli" NodeJS packages globally
-  shell: bash -l -c "npm install -g ionic cordova appcenter-cli"
 
 # Git LFS
 - name: "brew install git lfs"

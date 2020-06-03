@@ -1,0 +1,18 @@
+---
+# install additional ruby versions
+- name: Install ruby 2.5.3
+  shell: bash -l -c "rbenv install --skip-existing 2.5.3"
+  when: is_incremental_setup|default(false) == false
+- name: Install ruby 2.4.5
+  shell: bash -l -c "rbenv install --skip-existing 2.4.5"
+  when: is_incremental_setup|default(false) == false
+
+- name: Install gem packages
+  gem:
+    name: "{{ item.name }}"
+    global: yes
+    version: "{{ item.version }}"
+    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
+    user_install: no
+  with_items:
+    - "{{ gem_packages }}"

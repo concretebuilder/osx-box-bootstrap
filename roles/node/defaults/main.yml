@@ -1,0 +1,8 @@
+---
+npm_packges:
+  - name: "ionic"
+    version: "5.4.16"
+  - name: "cordova"
+    version: "9.0.0"
+  - name: "appcenter-cli"
+    version: "2.5.2"
