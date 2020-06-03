@@ -9,3 +9,4 @@ pip3 install molecule pytest testinfra  docker
 cd roles/tests
 
 molecule test
+molecule test -s node

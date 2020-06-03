@@ -1,10 +1,19 @@
 ---
 - name: brew install node
   homebrew:
-    name: node@10
-    state: present # Node LTS 10.x
-- name: brew link node@10
-  command: /usr/local/bin/brew link --overwrite --force node@10 # force link Node LTS 10.x
+    name: node@12
+    state: present
+    update_homebrew: no
+
+- name: Check if node already linked to node@12
+  shell: "node --version"
+  register: node_version
+  changed_when: false
+  ignore_errors: true
+
+- name: brew link node@12
+  command: brew link --overwrite --force node@12
+  when: not node_version.stdout.startswith('v12')
 
 - name: Install NPM packages
   npm:

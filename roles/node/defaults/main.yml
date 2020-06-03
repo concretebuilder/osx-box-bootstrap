@@ -1,5 +1,5 @@
 ---
-npm_packges:
+npm_packages:
   - name: "ionic"
     version: "5.4.16"
   - name: "cordova"

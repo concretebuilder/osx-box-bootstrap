@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: ansible-test:latest
+    image: linuxbrew/linuxbrew
     dockerfile: Dockerfile.j2
 provisioner:
   name: ansible
@@ -16,7 +16,7 @@ provisioner:
   inventory:
     host_vars:
       instance:
-        ansible_user: ansible
+        ansible_user: linuxbrew
 verifier:
   name: testinfra
   additional_files_or_dirs:

@@ -1,6 +1,5 @@
 .bitrise*
 _tmp
 .DS_Store
-roles/brew/tests/__pycache__/*
+roles/**/tests/__pycache__/*
 roles/tests/molecule/default/pytestdebug.log
-roles/tests/molecule/default/tests/__pycache__/*
