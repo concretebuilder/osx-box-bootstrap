@@ -1,5 +1,11 @@
 ## UPCOMING
 
+
+## `v2020_06_03_1`
+* `from now on for brew core brew cask and cask-versions we use are own fork`
+* `use node@12 instead of node@10`
+* `a couple of gem and npm packages version has been hardcoded these are the followings: gem(cocoapods: 1.9.1, nomad-cli: 0.0.2, xcpretty: 0.3.0), npm (ionic: 5.4.16, cordova: 9.0.0, appcenter-cli: 2.5.2)`
+
 ## `v2020_05_29_1`
 * `added applesimutils under weekly-update-shared`
 
