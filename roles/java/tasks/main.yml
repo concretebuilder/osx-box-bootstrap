@@ -38,9 +38,9 @@
     name: java
     state: absent
 
-- name: brew tap homebrew/cask-versions
+- name: brew tap bitrise-io/cask-versions
   homebrew_tap:
-    name: homebrew/cask-versions
+    name: bitrise-io/cask-versions
     state: present
 
 - name: brew cask install adoptopenjdk8
