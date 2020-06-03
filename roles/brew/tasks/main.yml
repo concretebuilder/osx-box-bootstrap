@@ -18,7 +18,7 @@
   ignore_errors: true
 
 - name: Run brew installer script
-  shell: "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash"
+  shell: bash -l -c "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash"
   when: brew_installed is failed
 
 - name: Is brew in bash_profile
