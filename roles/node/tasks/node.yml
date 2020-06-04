@@ -13,8 +13,6 @@
 
 - name: brew link node@12
   command: brew link --overwrite --force node@12
-  environment:
-    PATH: /usr/local/bin/:{{ ansible_env.PATH }}
   when: not node_version.stdout.startswith('v12')
 
 - name: Install NPM packages

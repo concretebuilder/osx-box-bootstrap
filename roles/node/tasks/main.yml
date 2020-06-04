@@ -1,2 +1,4 @@
 ---
 - import_tasks: node.yml
+  environment:
+    PATH: /usr/local/bin/:{{ ansible_env.PATH }}
