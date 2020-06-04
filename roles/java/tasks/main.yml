@@ -38,6 +38,11 @@
     name: java
     state: absent
 
+- name: brew untap homebrew/cask-versions if it is there
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: absent
+
 - name: brew tap bitrise-io/cask-versions
   homebrew_tap:
     name: bitrise-io/cask-versions
