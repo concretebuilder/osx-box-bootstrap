@@ -13,7 +13,7 @@
 # The pod repo add just clone the repository. Cocopods master is huge, and we need the HEAD only so we clone that during CI run.
 - name: CocoaPods specs install with git
   shell: bash -l -c "git clone --depth=1 https://github.com/CocoaPods/Specs.git ~/.cocoapods/repos/master"
-  when: is_incremental_setup|default(false) == false and not lookup('env', 'IS_CI')
+  when: is_incremental_setup|default(false) == false and lookup('env', 'IS_CI')
 
 # brew some commands
 - name: brew install git
