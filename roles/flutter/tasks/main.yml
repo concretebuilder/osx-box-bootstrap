@@ -3,7 +3,7 @@
   unarchive:
     src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip
     dest: "{{ flutter_home }}"
-    mode: '0770'
+    mode: "0770"
     remote_src: yes
     owner: vagrant
     group: admin
@@ -15,7 +15,7 @@
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/flutter.sh
     owner: "{{ param_user }}"
-    mode: '0755'
+    mode: "0755"
 
 - name: Run flutter precache
   shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
