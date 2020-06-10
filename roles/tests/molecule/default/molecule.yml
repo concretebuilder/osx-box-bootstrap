@@ -11,8 +11,6 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
-  env:
-    IS_CI: "true"
   inventory:
     host_vars:
       instance:

@@ -10,12 +10,14 @@
     name: git
     state: present
     update_cache: yes
+  when: ansible_distribution == 'CentOS'
 
 - name: Check if brew installed
   shell: "source ~/.bash_profile && brew --help"
   register: brew_installed
   changed_when: false
   ignore_errors: true
+  when: ansible_distribution == 'CentOS'
 
 - name: Run brew installer script
   shell: |
@@ -41,7 +43,7 @@
 
 - name: Setup brew to use our own fork of homebrew core to ensure versions
   script: setup_brew_core.sh
-  when: lookup('env', 'IS_CI') and brew_repository_core_set is failed
+  when: brew_repository_core_set is failed
 
 - name: Check if repository for brew cask is correct
   shell: "source ~/.bash_profile && grep github.com/bitrise-io/homebrew-cask $(brew --repository)/Library/Taps/homebrew/homebrew-cask/.git/config"
@@ -51,4 +53,4 @@
 
 - name: Setup brew to use our own fork of homebrew cask to ensure versions
   script: setup_brew_cask.sh
-  when: lookup('env', 'IS_CI') and brew_repository_cask_set is failed
+  when: brew_repository_cask_set is failed

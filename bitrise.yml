@@ -158,7 +158,7 @@ workflows:
                 #!/usr/bin/env bash
 
                 set -ex
-                ansible-playbook -e IS_CI=true -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
+                ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
   _cli-version:
     steps:
       - script:
