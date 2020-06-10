@@ -1,6 +1,9 @@
 ## UPCOMING
 
 
+## `v2020_06_09_1`
+* `added missing flutter installs to path`
+
 ## `v2020_06_03_1`
 * `from now on for brew core brew cask and cask-versions we use are own fork`
 * `use node@12 instead of node@10`
