@@ -17,3 +17,4 @@
     - role: profiles
     - role: brew
     - role: tmp-setup
+    - role: ruby

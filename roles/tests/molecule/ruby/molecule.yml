@@ -19,6 +19,5 @@ provisioner:
         ansible_user: linuxbrew
 verifier:
   name: testinfra
-  s: true
   additional_files_or_dirs:
     - ../../../../ruby/tests/*

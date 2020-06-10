@@ -1,5 +1,4 @@
 ---
-# install rubys
 - name: Install ruby versions
   shell: bash -l -c "rbenv install --skip-existing {{ item.version }}"
   when: is_incremental_setup|default(false) == false
