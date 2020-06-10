@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2020_06_10_1`
+* `explicitly install bundler at v2.1.4`
 
 ## `v2020_06_03_1`
 * `from now on for brew core brew cask and cask-versions we use are own fork`

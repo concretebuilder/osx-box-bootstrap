@@ -1,8 +1,0 @@
----
-gem_packages:
-  - name: "cocoapods"
-    version: "1.9.1"
-  - name: "nomad-cli"
-    version: "0.0.2"
-  - name: "xcpretty"
-    version: "0.3.0"

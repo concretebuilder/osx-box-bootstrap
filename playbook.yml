@@ -10,9 +10,9 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - default_ruby: 2.6.5
   roles:
     - ssh-setup
     - profiles
+    - ruby
     - intermediate-setup
     - node

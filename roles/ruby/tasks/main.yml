@@ -1,0 +1,14 @@
+# Ruby
+- name: brew install rbenv
+  homebrew:
+    name: rbenv
+    state: latest # noqa 403 Package installs should not use latest
+    update_homebrew: yes
+
+- name: unlink openssl
+  homebrew:
+    name: openssl
+    state: unlinked
+
+- name: Install rubys and gems
+  import_tasks: ruby.yml
