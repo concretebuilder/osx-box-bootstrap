@@ -47,30 +47,6 @@
   shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
   become: yes
 
-# Ruby
-- name: brew install rbenv
-  homebrew:
-    name: rbenv
-    state: latest # noqa 403 Package installs should not use latest
-- name: Install ruby {{ default_ruby }}
-  shell: bash -l -c "rbenv install --skip-existing {{ default_ruby }}"
-  when: is_incremental_setup|default(false) == false
-- name: Set ruby {{ default_ruby }} to global
-  shell: bash -l -c "rbenv global {{ default_ruby }}"
-  when: is_incremental_setup|default(false) == false
-
-# Default ruby version (brew installed ruby)
-- name: update rubygems
-  shell: bash -l -c "gem update --system --no-document"
-  when: is_incremental_setup|default(false) == false
-- name: Install fastlane
-  gem: # noqa 502 All tasks should be named
-    name: "fastlane"
-    state: latest # noqa 403 Package installs should not use latest
-    executable: "/Users/{{ param_user }}/.rbenv/shims/gem"
-    user_install: no
-
-
 #
 # Install cmd-bridge
 - name: "cmd-bridge: download"

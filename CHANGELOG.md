@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2020_06_10_1`
+* `explicitly install bundler at v2.1.4`
 
 ## `v2020_06_09_1`
 * `added missing flutter installs to path`

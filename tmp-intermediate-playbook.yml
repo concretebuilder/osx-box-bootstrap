@@ -11,10 +11,10 @@
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
-    - default_ruby: 2.6.5
     - bitrise_cli_version: "{{ lookup('file', '/Users/vagrant/git/cli_version.txt') }}"
   roles:
     - role: ssh-setup
     - role: profiles
     - role: brew
     - role: tmp-setup
+    - role: ruby

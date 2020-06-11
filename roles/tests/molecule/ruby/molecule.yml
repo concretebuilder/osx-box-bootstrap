@@ -20,4 +20,4 @@ provisioner:
 verifier:
   name: testinfra
   additional_files_or_dirs:
-    - ../../../../node/tests/*
+    - ../../../../ruby/tests/*
