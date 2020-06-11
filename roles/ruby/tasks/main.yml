@@ -8,7 +8,7 @@
   homebrew:
     name: openssl
     state: unlinked
-  when: ansible_distribution == ‘Ubuntu’
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Install rubys and gems
   import_tasks: ruby.yml
