@@ -8,6 +8,7 @@
   homebrew:
     name: openssl
     state: unlinked
+  ignore_errors: yes
 
 - name: Install rubys and gems
   import_tasks: ruby.yml
