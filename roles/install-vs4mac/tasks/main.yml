@@ -1,0 +1,9 @@
+- name: Install cask vs4mac
+  homebrew_cask:
+    name: visual-studio
+    state: present
+
+- name: Install Android NDK
+  homebrew_cask:
+    name: android-ndk
+    state: present
