@@ -47,6 +47,11 @@
   shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
   become: yes
 
+# Turn off Gatekeeper
+- name: "Turn off gatekeeper - it will disable the popup of the not appstore downloaded warning"
+  shell: sudo spctl --master-disable
+  become: yes
+
 #
 # Install cmd-bridge
 - name: "cmd-bridge: download"
