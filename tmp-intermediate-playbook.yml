@@ -18,3 +18,4 @@
     - role: brew
     - role: tmp-setup
     - role: ruby
+    - role: install-xcode

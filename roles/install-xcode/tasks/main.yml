@@ -1,0 +1,6 @@
+---
+- name: Install xcode-install
+  gem:
+    name: xcode-install
+    user_install: no
+
