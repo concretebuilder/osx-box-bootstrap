@@ -20,7 +20,6 @@
   register: brew_installed
   changed_when: false
   ignore_errors: true
-  when: ansible_distribution == 'Ubuntu'
 
 - name: Download brew installer
   get_url:
