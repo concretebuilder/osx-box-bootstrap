@@ -4,13 +4,13 @@
     src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip
     dest: "{{ flutter_home }}"
     mode: "0770"
-    remote_src: yes
+    remote_src: true
     owner: vagrant
     group: admin
-  become: yes
+  become: true
 
 - name: Generate script to profile.d
-  become: yes
+  become: true
   template:
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/flutter.sh

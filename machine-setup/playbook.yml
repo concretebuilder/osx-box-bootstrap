@@ -2,13 +2,13 @@
 - hosts: all
   remote_user: vagrant
   become_method: sudo
-  any_errors_fatal: True
+  any_errors_fatal: true
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant
     - ansible_ssh_private_key_file: "~/.ssh/build_id_ed25519"
   tasks:
-# vs4mac update
+    # vs4mac update
     - name: Copy applescript to machine
       copy: src=files/setup.applescript
         dest="/Users/{{ param_user }}/setup.applescript"

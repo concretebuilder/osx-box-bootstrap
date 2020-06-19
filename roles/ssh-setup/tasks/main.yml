@@ -8,7 +8,7 @@
 # Disable every non SSH key based setup option
 # allow only SSH key based SSH login
 - name: sshd_config settings
-  become: yes
+  become: true
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "{{ item.regexp }}"

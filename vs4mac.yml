@@ -7,7 +7,7 @@
   # accelerate: true
   remote_user: vagrant
   become_method: sudo
-  any_errors_fatal: True
+  any_errors_fatal: true
   vars:
     - ansible_sudo_pass: vagrant
     - param_user: vagrant

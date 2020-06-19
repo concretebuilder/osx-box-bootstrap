@@ -1,45 +1,45 @@
 ---
-    # Yamllint rules
-    # For details consult the offical documentation at https://yamllint.readthedocs.io/en/stable/
+# Yamllint rules
+# For details consult the offical documentation at https://yamllint.readthedocs.io/en/stable/
 
-    rules:
-      braces:
-        max-spaces-inside: 1
-      brackets:
-        max-spaces-inside: 1
-        level: warning
-      colons: enable
-      commas: enable
-      comments:
-        level: warning
-      comments-indentation:
-        level: warning
-      document-end: disable
-      document-start:
-        level: warning
-      empty-lines: enable
-      empty-values:
-        level: error
-        forbid-in-block-mappings: true
-        forbid-in-flow-mappings: true
-        ignore: |
-          /roles/deploy/defaults/main.yml
-      hyphens: enable
-      indentation:
-        level: warning
-        indent-sequences: whatever
-      key-duplicates: enable
-      key-ordering: disable
-      line-length:
-        max: 120
-        level: warning
-        allow-non-breakable-words: true
-      new-line-at-end-of-file: enable
-      new-lines: enable
-      octal-values:
-        forbid-implicit-octal: false
-      quoted-strings: disable
-      trailing-spaces: enable
-      truthy:
-        level: warning
+rules:
+  braces:
+    max-spaces-inside: 1
+  brackets:
+    max-spaces-inside: 1
+    level: warning
+  colons: enable
+  commas: enable
+  comments:
+    level: warning
+  comments-indentation:
+    level: warning
+  document-end: disable
+  document-start:
+    level: warning
+  empty-lines: enable
+  empty-values:
+    level: error
+    forbid-in-block-mappings: true
+    forbid-in-flow-mappings: true
+    ignore: |
+      /roles/deploy/defaults/main.yml
+  hyphens: enable
+  indentation:
+    level: warning
+    indent-sequences: whatever
+  key-duplicates: enable
+  key-ordering: disable
+  line-length:
+    max: 120
+    level: warning
+    allow-non-breakable-words: true
+  new-line-at-end-of-file: enable
+  new-lines: enable
+  octal-values:
+    forbid-implicit-octal: false
+  quoted-strings: disable
+  trailing-spaces: enable
+  truthy:
+    level: warning
 ...

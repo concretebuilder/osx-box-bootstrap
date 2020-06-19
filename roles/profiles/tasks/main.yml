@@ -47,7 +47,7 @@
     mode: "0600"
 
 - name: Creates profile.d directory
-  become: yes
+  become: true
   file:
     path: /Users/{{ param_user }}/profile.d
     state: directory

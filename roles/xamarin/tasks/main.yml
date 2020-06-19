@@ -1,3 +1,4 @@
+---
 # Cleaning up non Xamarin installed sdks and ndks
 - name: Remove brew android-sdk
   homebrew_cask:
@@ -5,30 +6,30 @@
     state: absent
 
 - name: Remove manually installed android ndk
-  become: yes
+  become: true
   file:
     path: "/opt/android-ndk"
     state: absent
 
 - name: Remove brew-installed android sdk tools
-  become: yes
+  become: true
   file:
     path: "/usr/local/share/android-sdk"
     state: absent
 
 - name: Remove non-Xamarin android profile settings
-  become: yes
+  become: true
   file:
     path: "/Users/{{ param_user }}/profile.d/android.sh"
     state: absent
 
 # Permission setup
 - name: Recursively change ownership of ANDROID_HOME
-  become: yes
+  become: true
   file:
     path: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx"
     state: directory
-    recurse: yes
+    recurse: true
     owner: "{{ param_user }}"
     group: staff
 
