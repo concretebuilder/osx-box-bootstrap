@@ -97,7 +97,10 @@
 # ----------------------------------------
 
 - name: "brew update"
-  shell: bash -l -c "brew update || brew update || brew update"  # 7.3 succeeds after two calls but exit non-zero code
+  shell: bash -l -c "brew update"
+  register: result
+  until: result.rc == 0
+  retries: 3
 - name: brew install screen (for older images)
   homebrew:
     name: screen
@@ -141,12 +144,10 @@
     state: absent
 
 - name: "bitrise CLI: download"
-  # Lines should be no longer than 160 chars
-  shell: bash -l -c "curl -fL https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise"  # noqa 204
-- name: "Make the bitrise CLI executable"
-  file:
-    path: /usr/local/bin/bitrise
-    mode: "u=rwx,g=rx,o=rx"
+  get_url:
+    url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-Darwin-x86_64
+    dest: /usr/local/bin/bitrise
+    mode: '0755'
 - name: "Bitrise CLI test -version"
   shell: bash -l -c "bitrise --version"
 - name: "Bitrise CLI - setup"
