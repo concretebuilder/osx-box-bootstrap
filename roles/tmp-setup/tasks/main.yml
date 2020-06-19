@@ -20,7 +20,7 @@
 # Add user to sudoers-no-password
 #  don't require password for running sudo with this user
 - name: "Add user {{ param_user }} to sudoers with no password"
-  become: yes
+  become: true
   lineinfile:
     dest: /etc/sudoers
     regexp: '^{{ param_user }} ALL'
@@ -35,17 +35,17 @@
 # but running this command will.
 - name: "Enable Developer Mode"
   shell: DevToolsSecurity -enable
-  become: yes
+  become: true
 
 # Turn off automatic update
 - name: Turn off macos automatic software updates
   shell: softwareupdate --schedule off
-  become: yes
+  become: true
 
 # Turn off APSD
 - name: "Turn off apsd - can be a CPU hog"
   shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
-  become: yes
+  become: true
 
 # Turn off Gatekeeper
 - name: "Turn off gatekeeper - it will disable the popup of the not appstore downloaded warning"

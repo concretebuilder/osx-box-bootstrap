@@ -3,7 +3,7 @@
   package:
     name: curl
     state: present
-    update_cache: yes
+    update_cache: true
   become: true
   when: ansible_distribution == 'Ubuntu'
 
@@ -11,7 +11,7 @@
   package:
     name: git
     state: present
-    update_cache: yes
+    update_cache: true
   become: true
   when: ansible_distribution == 'Ubuntu'
 
@@ -20,7 +20,6 @@
   register: brew_installed
   changed_when: false
   ignore_errors: true
-  when: ansible_distribution == 'Ubuntu'
 
 - name: Download brew installer
   get_url:

@@ -1,17 +1,17 @@
 ---
 - name: Create apktools_path directory
-  become: yes
+  become: true
   file:
     path: "{{ apktools_path }}"
     state: directory
     owner: "{{ param_user }}"
     mode: 0770
-    recurse: yes
+    recurse: true
   tags:
     - apktools
 
 - name: Download aapt2
-  become: yes
+  become: true
   get_url:
     url: "{{ aapt2_source }}"
     dest: /opt/aapt2.zip
@@ -20,18 +20,18 @@
     - apktools
 
 - name: Unzip aapt2
-  become: yes
+  become: true
   unarchive:
     src: /opt/aapt2.zip
     dest: "{{ apktools_path }}"
     owner: "{{ param_user }}"
     mode: 0770
-    remote_src: yes
+    remote_src: true
   tags:
     - apktools
 
 - name: Remove aapt2 zip file
-  become: yes
+  become: true
   file:
     state: absent
     path: /opt/aapt2.zip

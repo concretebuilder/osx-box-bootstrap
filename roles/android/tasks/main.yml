@@ -10,38 +10,38 @@
 # Install Android NDK
 
 - name: Create ANDROID_NDK_HOME directory
-  become: yes
+  become: true
   file:
     path: "{{ android_ndk_home }}"
     state: directory
     owner: "{{ param_user }}"
     mode: 0770
-    recurse: yes
+    recurse: true
 
 - name: Download Android NDK
-  become: yes
+  become: true
   get_url:
     url: "{{ android_ndk_source }}"
     dest: /opt/android-ndk-darwin.zip
     mode: 0660
 
 - name: Unzip Android NDK
-  become: yes
+  become: true
   unarchive:
     src: /opt/android-ndk-darwin.zip
     dest: "{{ android_ndk_home }}"
     owner: "{{ param_user }}"
     mode: 0770
-    remote_src: yes
+    remote_src: true
 
 - name: Remove Android NDK zip file
-  become: yes
+  become: true
   file:
     state: absent
     path: /opt/android-ndk-darwin.zip
 
 - name: Generate script to profile.d
-  become: yes
+  become: true
   template:
     src: patch.j2
     dest: /Users/{{ param_user }}/profile.d/android.sh
