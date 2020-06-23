@@ -5,7 +5,7 @@
     state: directory
 - name: Download and extract command-line tools for Android
   unarchive:
-    src: https://dl.google.com/android/repository/commandlinetools-mac-6514223_latest.zip
+    src: https://dl.google.com/android/repository/commandlinetools-mac-{{ android_cmdline_tools_version }}_latest.zip
     dest: "{{ android_home }}/cmdline-tools/latest"
     remote_src: true
 - name: Add command-line tools to PATH
@@ -16,7 +16,7 @@
 - name: Install Android packages with SDK Manager
   become: true
   environment:
-    PATH: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx/tools/bin:{{ android_home }}/tools/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ android_home }}/tools/bin:{{ android_home }}/cmdline-tools/latest/tools/bin:{{ ansible_env.PATH }}"
   shell: "(echo y | sdkmanager --verbose '{{ item }}') || (echo y | sdkmanager --verbose '{{ item }}')"  # noqa 204 306
   loop:
     - "emulator"
