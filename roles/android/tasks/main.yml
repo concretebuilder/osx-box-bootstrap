@@ -1,12 +1,5 @@
 ---
 
-# Install Android SDKs and other build packages
-
-- name: brew install android-sdk
-  homebrew_cask:
-    name: android-sdk
-    state: present
-
 # Install Android NDK
 
 - name: Create ANDROID_NDK_HOME directory
