@@ -1,17 +1,18 @@
 ---
-- name: Make .android folder
-  become: true
+- name: ensure android directory exists
   file:
-    path: /var/root/.android
+    dest: "{{ android_home }}/cmdline-tools/latest"
     state: directory
-
-- name: Touch repositories.cfg
-  become: true
-  file:
-    path: /var/root/.android/repositories.cfg
-    state: touch
-    mode: "0777"
-
+- name: Download and extract command-line tools for Android
+  unarchive:
+    src: https://dl.google.com/android/repository/commandlinetools-mac-6514223_latest.zip
+    dest: "{{ android_home }}/cmdline-tools/latest"
+    remote_src: true
+- name: Add command-line tools to PATH
+  lineinfile:
+    path: /Users/{{ param_user }}/profile.d/command-line-tools.sh
+    line: "export PATH=${PATH}:{{ android_home }}/cmdline-tools/latest/tools/bin"
+    create: true
 - name: Install Android packages with SDK Manager
   become: true
   environment:
