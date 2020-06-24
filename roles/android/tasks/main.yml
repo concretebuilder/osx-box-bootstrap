@@ -17,20 +17,28 @@
     mode: 0770
     remote_src: true
 
+- name: Create profile.d directory
+  file:
+    path: "{{ ansible_env.HOME }}/profile.d"
+    state: directory
+    owner: "{{ param_user }}"
+
 - name: Generate script to profile.d
   become: true
   template:
     src: patch.j2
-    dest: {{ ansible_env.HOME }}/profile.d/android.sh
+    dest: "{{ ansible_env.HOME }}/profile.d/android.sh"
     owner: "{{ param_user }}"
     mode: 0755
 
 - name: ensure android directory exists
+  become: true
   file:
     dest: "{{ android_home }}/cmdline-tools/latest"
     state: directory
 
 - name: Download and extract command-line tools for Android
+  become: true
   unarchive:
     src: https://dl.google.com/android/repository/commandlinetools-mac-{{ android_cmdline_tools_version }}_latest.zip
     dest: "{{ android_home }}/cmdline-tools/latest"
@@ -100,7 +108,7 @@
   file:
     path: "/usr/local/Caskroom/android-sdk"
     recurse: true
-    owner: {{ param_user }}
+    owner: "{{ param_user }}"
     group: staff
     mode: '0755'
 
@@ -109,7 +117,7 @@
   file:
     path: "{{ansible_env.HOME}}/Library/Developer/Xamarin/android-sdk-macosx"
     recurse: true
-    owner: {{ param_user }}
+    owner: "{{ param_user }}"
     group: staff
     mode: '0755'
 ...

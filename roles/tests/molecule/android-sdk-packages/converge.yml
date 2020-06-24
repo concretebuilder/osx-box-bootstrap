@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: "Include android-sdk-packages"
-      include_role:
-        name: "android-sdk-packages"
