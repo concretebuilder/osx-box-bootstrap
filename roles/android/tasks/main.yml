@@ -46,7 +46,7 @@
 
 - name: Touch repositories.cfg
   file:
-    path: "{{ ansible_env.HOME }}.android/repositories.cfg"
+    path: "{{ ansible_env.HOME }}/.android/repositories.cfg"
     state: touch
     mode: "0777"
 
