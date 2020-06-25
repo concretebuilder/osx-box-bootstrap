@@ -40,7 +40,7 @@
 - name: Download and extract command-line tools for Android
   become: true
   unarchive:
-    src: https://dl.google.com/android/repository/commandlinetools-mac-{{ android_cmdline_tools_version }}_latest.zip
+    src: "{{ android_cmdline_tools_source }}"
     dest: "{{ android_home }}/cmdline-tools/"
     remote_src: true
 
