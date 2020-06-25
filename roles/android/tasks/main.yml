@@ -65,5 +65,4 @@
     - "{{ sdkmanagerpackages }}"
   args:
     creates: "{{ android_home }}/add-ons/addon-google_apis-google-21/package.xml"
-
 ...
