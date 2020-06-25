@@ -98,21 +98,4 @@
     - "add-ons;addon-google_apis-google-22"
     - "add-ons;addon-google_apis-google-21"
 
-- name: Recursively change ownership of ANDROID_HOME on Xcode
-  become: true
-  file:
-    path: "/usr/local/Caskroom/android-sdk"
-    recurse: true
-    owner: "{{ param_user }}"
-    group: staff
-    mode: '0755'
-
-- name: Recursively change ownership of ANDROID_HOME on vs4mac
-  become: true
-  file:
-    path: "{{ansible_env.HOME}}/Library/Developer/Xamarin/android-sdk-macosx"
-    recurse: true
-    owner: "{{ param_user }}"
-    group: staff
-    mode: '0755'
 ...
