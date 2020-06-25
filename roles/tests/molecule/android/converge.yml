@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include android"
-      include_role:
-        name: "android"
+  roles:
+    - role: android
+      param_user: "linuxbrew"

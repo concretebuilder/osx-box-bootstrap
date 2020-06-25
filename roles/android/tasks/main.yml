@@ -45,9 +45,10 @@
     remote_src: true
 
 - name: Touch repositories.cfg
-  file:
-    path: "{{ ansible_env.HOME }}/.android/repositories.cfg"
-    state: touch
+  copy:
+    content: ""
+    dest: "{{ ansible_env.HOME }}/.android/repositories.cfg"
+    force: false
     mode: "0777"
 
 - name: Install Android packages with SDK Manager
