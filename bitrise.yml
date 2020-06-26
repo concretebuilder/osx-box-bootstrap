@@ -15,7 +15,51 @@ trigger_map:
 - push_branch: step/xamarin
   workflow: provision-xamarin-vm
 workflows:
+  _pod_remove_master:
+    steps:
+       - script:
+          title: pod repo remove master
+          run_if: .IsCI
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -e
+                #Originally the command was pod repo remove master, it just erased the dir under .cocoapods/repos/master.
+                #It is huge. Not by size, but the number of files. Instead just moved to /var/tmp it is way faster and it runs only during ci.
+                mv ~/.cocoapods/repos/master /var/tmp/
 
+  _ansible-play:
+    steps:
+      - script:
+          title: Add ansible config
+          run_if: .IsCI
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                echo -e "[defaults]\ncallback_whitelist=profile_tasks\n[ssh_connection]\npipeline=True" > ansible.cfg
+      - script:
+          title: Run Ansible Playbook on CI's build VM
+          run_if: .IsCI
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+
+                set -e
+                ansible-playbook -e xcode_path="$(xcode-select -p)" ${ADDITIONAL_VARIABLES_TO_ANSIBLE} --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
+
+  _cli-version:
+    steps:
+      - script:
+          title: get latest bitrise cli version
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                echo $GITHUB_TOKEN
+                echo $(curl -H "Authorization: token $GITHUB_TOKEN" --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
+
+  #######################
+  #####Main wrkflows#####
+  #######################
   ci:
     steps:
     - script:
@@ -37,7 +81,7 @@ workflows:
         inputs:
         - content: |-
             #!/usr/bin/env bash
-            set -ex
+            set -e
             pip3 install "ansible-lint==${ANSIBLE_LINT_VER}" --force-reinstall
             ansible-lint --version
     - script:
@@ -46,7 +90,7 @@ workflows:
         inputs:
         - content: |-
             #!/usr/bin/env bash
-            set -ex
+            set -e
             pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
             yamllint --version
     - script:
@@ -61,7 +105,7 @@ workflows:
         inputs:
         - content: |-
             #!/usr/bin/env bash
-            set -ex
+            set -e
             for f in $(find . -name '*playbook.yml'); do
               ansible-lint -c ansible-lint.yaml "$f"
             done
@@ -70,7 +114,7 @@ workflows:
         inputs:
         - content: |-
             #!/usr/bin/env bash
-            set -ex
+            set -e
             yamllint -c ./yamllint.yaml .
     - build-router-start@0.11.3:
         run_if: .IsCI
@@ -82,27 +126,21 @@ workflows:
         - access_token: $BITRISE_ACCESS_TOKEN
 
   perform-weekly-cache-update:
-    steps:
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-            ansible-playbook -v --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./weekly-cache-update-playbook.yml"
+    after_run:
+    - _ansible-play
+    envs:
+    - LOCAL_PLAYBOOK_PATH: ./weekly-cache-update-playbook.yml
+    - ADDITIONAL_VARIABLES_TO_ANSIBLE: '-i "${VM_BULD_IP}"'
 
   perform-weekly-cache-update-with-inventory:
     description: |-
       Runs `ansible` with the `weekly-cache-update-playbook.yml` playbook,
       to update the pre-installed tools' caches
+    after_run:
+    - _ansible-play
     envs:
-    - INVENTORY_PTH: ./_tmp/weekly-update-inventory
-    steps:
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-            ansible-playbook -i "$INVENTORY_PTH" --private-key ./vagrant-insecure_private_key "./weekly-cache-update-playbook.yml"
+    - LOCAL_PLAYBOOK_PATH: ./weekly-cache-update-playbook.yml
+    - ADDITIONAL_VARIABLES_TO_ANSIBLE: '-i "./_tmp/weekly-update-inventory"'
 
   provision-vm:
     description: |-
@@ -115,7 +153,6 @@ workflows:
         - content: |-
             #!/bin/bash
             set -e
-            set -x
             ansible-playbook -v -e xcode_path="${XCODE_PATH}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
 
   provision-xamarin-vm:
@@ -123,67 +160,32 @@ workflows:
       Runs `ansible` with the `xamarin-playbook.yml` playbook, to provision the
       Virtual Machine. After this the VM should be completely ready,
       you just have to save it / package it / distribute it.
-    steps:
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -e
-            set -x
-            ansible-playbook -v --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./xamarin-playbook.yml"
-
-  _ansible-play:
-    steps:
-      - script:
-          title: pod repo remove master
-          run_if: .IsCI
-          inputs:
-            - content: |-
-                #!/usr/bin/env bash
-                set -ex
-                #Originally the command was pod repo remove master, it just erased the dir under .cocoapods/repos/master.
-                #It is huge. Not by size, but the number of files. Instead just moved to /var/tmp it is way faster and it runs only during ci.
-                mv ~/.cocoapods/repos/master /var/tmp/
-      - script:
-          title: Add ansible config
-          run_if: .IsCI
-          inputs:
-            - content: |-
-                #!/usr/bin/env bash
-                echo -e "[defaults]\ncallback_whitelist=profile_tasks\n[ssh_connection]\npipeline=True" > ansible.cfg
-      - script:
-          title: Run Ansible Playbook on CI's build VM
-          run_if: .IsCI
-          inputs:
-            - content: |-
-                #!/usr/bin/env bash
-
-                set -ex
-                ansible-playbook -e xcode_path="$(xcode-select -p)" --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
-  _cli-version:
-    steps:
-      - script:
-          title: get latest bitrise cli version
-          inputs:
-            - content: |-
-                #!/usr/bin/env bash
-                echo $GITHUB_TOKEN
-                echo $(curl -H "Authorization: token $GITHUB_TOKEN" --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
+    after_run:
+    - _ansible-play
+    envs:
+    - LOCAL_PLAYBOOK_PATH: ./xamarin-playbook.yml
+    - ADDITIONAL_VARIABLES_TO_ANSIBLE: '-i "${VM_BUILD_IP}",'
 
   weekly-cache-update-test:
     before_run:
-      - _cli-version
+    - _cli-version
+    - _pod_remove_master
     after_run:
     - _ansible-play
     envs:
     - LOCAL_PLAYBOOK_PATH: ./weekly-cache-update-playbook.yml
 
   intermediate-setup-test:
+    before_run:
+    - _pod_remove_master
     after_run:
-      - _ansible-play
+    - _ansible-play
     envs:
       - LOCAL_PLAYBOOK_PATH: ./playbook.yml
 
+  ##############################
+  #####Utility workflows########
+  ##############################
   send_lead_time:
     steps:
       - script-runner:
@@ -200,7 +202,6 @@ workflows:
             - webhook_url: $SLACK_WEBHOOK_URL
             - channel: $SLACK_CHANNEL
             - message: "$PR_CREATE_TIME - $PR_CLOSED_TIME"
-
 
   run_ansible_tests:
     steps:
