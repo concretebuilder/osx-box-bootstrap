@@ -45,7 +45,13 @@ workflows:
                 #!/usr/bin/env bash
 
                 set -e
-                ansible-playbook -e xcode_path="$(xcode-select -p)" ${ADDITIONAL_VARIABLES_TO_ANSIBLE} --connection=local --inventory 127.0.0.1, --limit 127.0.0.1 "${LOCAL_PLAYBOOK_PATH}"
+                ansible-playbook \
+                -e xcode_path="$(xcode-select -p)" \
+                ${ADDITIONAL_VARIABLES_TO_ANSIBLE} \
+                --connection=local \
+                --inventory 127.0.0.1, \
+                --limit 127.0.0.1 \
+                "${LOCAL_PLAYBOOK_PATH}"
 
   _cli-version:
     steps:
@@ -55,7 +61,9 @@ workflows:
             - content: |-
                 #!/usr/bin/env bash
                 echo $GITHUB_TOKEN
-                echo $(curl -H "Authorization: token $GITHUB_TOKEN" --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
+                echo $(curl -H "Authorization: token $GITHUB_TOKEN" \
+                --silent https://api.github.com/repos/bitrise-io/bitrise/releases/latest |\
+                grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
 
   #######################
   #####Main wrkflows#####
@@ -153,7 +161,11 @@ workflows:
         - content: |-
             #!/bin/bash
             set -e
-            ansible-playbook -v -e xcode_path="${XCODE_PATH}" --private-key ./vagrant-insecure_private_key -i "${VM_BUILD_IP}", "./playbook.yml"
+            ansible-playbook -v \
+            -e xcode_path="${XCODE_PATH}" \
+            --private-key ./vagrant-insecure_private_key \
+            -i "${VM_BUILD_IP}", \
+            "./playbook.yml"
 
   provision-xamarin-vm:
     description: |-
