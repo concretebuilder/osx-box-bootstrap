@@ -1,14 +1,4 @@
 ---
-
-# Install Android SDKs and other build packages
-
-- name: brew install android-sdk
-  homebrew_cask:
-    name: android-sdk
-    state: present
-
-# Install Android NDK
-
 - name: Create ANDROID_NDK_HOME directory
   become: true
   file:
@@ -18,34 +8,61 @@
     mode: 0770
     recurse: true
 
-- name: Download Android NDK
-  become: true
-  get_url:
-    url: "{{ android_ndk_source }}"
-    dest: /opt/android-ndk-darwin.zip
-    mode: 0660
-
-- name: Unzip Android NDK
+- name: Download and unzip Android NDK
   become: true
   unarchive:
-    src: /opt/android-ndk-darwin.zip
+    src: "{{ android_ndk_source }}"
     dest: "{{ android_ndk_home }}"
     owner: "{{ param_user }}"
     mode: 0770
     remote_src: true
 
-- name: Remove Android NDK zip file
-  become: true
+- name: Create profile.d directory
   file:
-    state: absent
-    path: /opt/android-ndk-darwin.zip
+    path: "{{ ansible_env.HOME }}/profile.d"
+    state: directory
+    owner: "{{ param_user }}"
 
 - name: Generate script to profile.d
   become: true
   template:
     src: patch.j2
-    dest: /Users/{{ param_user }}/profile.d/android.sh
+    dest: "{{ ansible_env.HOME }}/profile.d/android.sh"
     owner: "{{ param_user }}"
     mode: 0755
 
+- name: ensure android directory exists
+  become: true
+  file:
+    dest: "{{ android_home }}/cmdline-tools/"
+    state: directory
+
+- name: Download and extract command-line tools for Android
+  become: true
+  unarchive:
+    src: "{{ android_cmdline_tools_source }}"
+    dest: "{{ android_home }}/cmdline-tools/"
+    remote_src: true
+
+- name: Ensure .android directory exists
+  file:
+    dest: "{{ ansible_env.HOME }}/.android/"
+    state: directory
+
+- name: Touch repositories.cfg
+  copy:
+    content: ""
+    dest: "{{ ansible_env.HOME }}/.android/repositories.cfg"
+    force: false
+    mode: "0777"
+
+- name: Install Android packages with SDK Manager
+  become: true
+  environment:
+    PATH: "{{ android_home }}/tools/bin:{{ android_home }}/cmdline-tools/tools/bin:{{ ansible_env.PATH }}"
+  shell: "(echo y | sdkmanager --verbose '{{ item }}') || (echo y | sdkmanager --verbose '{{ item }}')"  # noqa 204 306
+  with_items:
+    - "{{ sdkmanagerpackages }}"
+  args:
+    creates: "{{ android_home }}/add-ons/addon-google_apis-google-21/package.xml"
 ...

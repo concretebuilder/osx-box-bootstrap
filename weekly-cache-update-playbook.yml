@@ -20,7 +20,7 @@
     - role: jenv
     - role: android
       tags: java-android
-    - role: android-sdk-packages
+    - role: android
     - role: android-apk-tools
     - role: xamarin
       when: is_allow_weekly_xamarin_provision | default("no") | string  == "yes"
