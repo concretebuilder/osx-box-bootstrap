@@ -38,6 +38,7 @@ workflows:
                 #!/usr/bin/env bash
 
                 set -e
+
                 ansible-playbook \
                 -e xcode_path="$(xcode-select -p)" \
                 ${ADDITIONAL_VARIABLES_TO_ANSIBLE} \
@@ -153,7 +154,9 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
+
             set -e
+
             ansible-playbook -v \
             -e xcode_path="${XCODE_PATH}" \
             --private-key ./vagrant-insecure_private_key \
