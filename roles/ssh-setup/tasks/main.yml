@@ -1,6 +1,13 @@
 ---
+- name: load distribution specific variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+      - '{{ ansible_os_family }}.yml'
+      - default.yml
+
 - name: ensure .ssh folder is ok
-  file: path=/Users/{{ param_user }}/.ssh
+  file: path=/{{ home.path }}/{{ param_user }}/.ssh
     state=directory
     owner="{{ param_user }}"
     mode=0700
@@ -8,39 +15,18 @@
 # Disable every non SSH key based setup option
 # allow only SSH key based SSH login
 - name: sshd_config settings
-  become: true
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
-    state: "{{ item.state }}"
-  with_items:
-    # PasswordAuthentication no
-    - { regexp: '^PasswordAuthentication yes', line: '', state: "absent" }
-    - { regexp: '^PasswordAuthentication no', line: 'PasswordAuthentication no', state: "present" }
-    # PermitEmptyPasswords no
-    - { regexp: '^PermitEmptyPasswords yes', line: '', state: "absent" }
-    - { regexp: '^PermitEmptyPasswords no', line: 'PermitEmptyPasswords no', state: "present" }
-    # # LoginGraceTime 1m
-    - { regexp: '^LoginGraceTime', line: 'LoginGraceTime 1m', state: "present" }
-    # PermitRootLogin no
-    - { regexp: '^PermitRootLogin yes', line: '', state: "absent" }
-    - { regexp: '^PermitRootLogin no', line: 'PermitRootLogin no', state: "present" }
-    # # LogLevel 1m
-    - { regexp: '^LogLevel', line: 'LogLevel VERBOSE', state: "present" }
-    # UsePAM no -> if this is not set to 'no' then password authentication still possible!
-    - { regexp: '^UsePAM yes', line: '', state: "absent" }
-    - { regexp: '^UsePAM no', line: 'UsePAM no', state: "present" }
-    # ChallengeResponseAuthentication
-    - { regexp: '^ChallengeResponseAuthentication yes', line: '', state: "absent" }
-    - { regexp: '^ChallengeResponseAuthentication no', line: 'ChallengeResponseAuthentication no', state: "present" }
-    # UseDNS no -> for better speed
-    - { regexp: '^UseDNS yes', line: '', state: "absent" }
-    - { regexp: '^UseDNS no', line: 'UseDNS no', state: "present" }
+  become: yes
+  template:
+    src: templates/etc/ssh/sshd_config.j2
+    dest: "/etc/ssh/sshd_config"
+    owner: root
+    mode: "0644"
+    validate: '/usr/sbin/sshd -t -f %s'
+    backup: yes
 
 - name: ssh connection config (user specific)
   copy:
     src: files/ssh-config
-    dest: "/Users/{{ param_user }}/.ssh/config"
+    dest: "/{{ home.path }}/{{ param_user }}/.ssh/config"
     owner: "{{ param_user }}"
     mode: "0600"

@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+
+# the sshd_config originally contains the default values
+# these commented out values were removed from here
+
+# macOS default sshd_config overrides and their values
+AuthorizedKeysFile      .ssh/authorized_keys
+# UsePAM yes
+AcceptEnv LANG LC_*
+Subsystem       sftp    /usr/libexec/sftp-server
+
+# bitrise overrides
+PasswordAuthentication              {{ ssh.password_authentication }}
+PermitEmptyPasswords                {{ ssh.permit_empty_passwords }}
+LoginGraceTime                      {{ ssh.login_grace_time }}
+PermitRootLogin                     {{ ssh.permit_root_login }}
+LogLevel                            {{ ssh.log_level }}
+UsePAM                              {{ ssh.use_pam }}
+ChallengeResponseAuthentication     {{ ssh.challenge_response_authentication }}
+UseDNS                              {{ ssh.use_dns }}

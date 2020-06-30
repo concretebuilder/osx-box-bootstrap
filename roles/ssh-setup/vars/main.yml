@@ -1,0 +1,9 @@
+ssh:
+  password_authentication: "no"
+  permit_empty_passwords: "no"
+  login_grace_time: "1m"
+  permit_root_login: "no"
+  log_level: "VERBOSE"
+  use_pam: "no"
+  challenge_response_authentication: "no"
+  use_dns: "no"
