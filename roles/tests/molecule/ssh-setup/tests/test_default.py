@@ -1,0 +1,1 @@
+# tests are at ../../../../ssh-setup/tests/*

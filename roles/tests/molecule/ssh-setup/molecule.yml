@@ -1,0 +1,24 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: linuxbrew/linuxbrew
+    dockerfile: ../Dockerfile.j2
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  env:
+    IS_CI: "true"
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: linuxbrew
+        param_user: linuxbrew
+verifier:
+  name: testinfra
+  additional_files_or_dirs:
+    - ../../../../ssh-setup/tests/*
