@@ -20,6 +20,8 @@ RUN sudo apt-get update && \
     git \
     libcurl4-openssl-dev \
     openjdk-8-jdk \
-    unzip
+    unzip \
+    openssh-server \
+    && mkdir /var/run/sshd
 
 USER linuxbrew
