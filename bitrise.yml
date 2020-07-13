@@ -119,7 +119,7 @@ workflows:
         - content: |-
             #!/usr/bin/env bash
             set -e
-            yamllint -c ./yamllint.yaml .
+            yamllint -s -c ./yamllint.yaml .
     - build-router-start@0.11.3:
         run_if: .IsCI
         inputs:
