@@ -17,15 +17,17 @@ trigger_map:
 workflows:
   _pod_remove_master:
     steps:
-       - script:
+      - script:
           title: pod repo remove master
           run_if: .IsCI
           inputs:
             - content: |-
                 #!/usr/bin/env bash
                 set -e
-                #Originally the command was pod repo remove master, it just erased the dir under .cocoapods/repos/master.
-                #It is huge. Not by size, but the number of files. Instead just moved to /var/tmp it is way faster and it runs only during ci.
+                # Originally the command was pod repo remove master
+                # it just erased the dir under .cocoapods/repos/master.
+                # It is huge. Not by size, but the number of files.
+                # Instead just moved to /var/tmp it is way faster and it runs only during ci.
                 mv ~/.cocoapods/repos/master /var/tmp/
 
   _ansible-play:
@@ -60,7 +62,7 @@ workflows:
                 grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') > cli_version.txt
 
   #######################
-  #####Main wrkflows#####
+  #### Main wrkflows ####
   #######################
   ci:
     steps:
@@ -192,7 +194,7 @@ workflows:
       - LOCAL_PLAYBOOK_PATH: ./playbook.yml
 
   ##############################
-  #####Utility workflows########
+  #### Utility workflows #######
   ##############################
   send_lead_time:
     steps:

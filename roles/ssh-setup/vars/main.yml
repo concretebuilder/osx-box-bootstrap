@@ -1,3 +1,4 @@
+---
 ssh:
   password_authentication: "no"
   permit_empty_passwords: "no"

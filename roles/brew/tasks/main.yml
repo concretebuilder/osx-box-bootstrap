@@ -49,7 +49,7 @@
   when: ansible_distribution == 'Ubuntu' and bash_profile is failed
 
 - name: Check if repository for brew core is correct
-  shell: ". ~/.bash_profile && grep github.com/bitrise-io/homebrew-core $(brew --repository)/Library/Taps/homebrew/homebrew-core/.git/config"
+  shell: ". ~/.bash_profile && grep github.com/bitrise-io/homebrew-core $(brew --repository)/Library/Taps/homebrew/homebrew-core/.git/config"  # yamllint disable-line rule:line-length
   changed_when: false
   ignore_errors: true
   register: brew_repository_core_set
@@ -59,7 +59,7 @@
   when: brew_repository_core_set is failed
 
 - name: Check if repository for brew cask is correct
-  shell: ". ~/.bash_profile && grep github.com/bitrise-io/homebrew-cask $(brew --repository)/Library/Taps/homebrew/homebrew-cask/.git/config"
+  shell: ". ~/.bash_profile && grep github.com/bitrise-io/homebrew-cask $(brew --repository)/Library/Taps/homebrew/homebrew-cask/.git/config"  # yamllint disable-line rule:line-length
   changed_when: false
   ignore_errors: true
   register: brew_repository_cask_set

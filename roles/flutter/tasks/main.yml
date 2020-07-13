@@ -1,7 +1,7 @@
 ---
 - name: Download flutter from stable channel
   unarchive:
-    src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip
+    src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip  # yamllint disable-line rule:line-length
     dest: "{{ flutter_home }}"
     mode: "0770"
     remote_src: true

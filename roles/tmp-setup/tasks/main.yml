@@ -50,17 +50,16 @@
 # Turn off Gatekeeper
 - name: "Turn off gatekeeper - it will disable the popup of the not appstore downloaded warning"
   shell: sudo spctl --master-disable
-  become: yes
+  become: true
 
 #
 # Install cmd-bridge
 - name: "cmd-bridge: download"
-  shell: bash -l -c "curl -fL https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-$(uname -s)-$(uname -m) > /usr/local/bin/cmd-bridge"
-
-- name: "Make the cmd-bridge executable"
-  file:
-    path: /usr/local/bin/cmd-bridge
-    mode: "u=rwx,g=rx,o=rx"
+  get_url:
+    url: https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-Darwin-x86_64
+    dest: /usr/local/bin/cmd-bridge
+    mode: '0755'
+  become: true
 
 - name: "cmd-bridge -version"
   shell: bash -l -c "cmd-bridge --version"

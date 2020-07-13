@@ -15,14 +15,14 @@
 # Disable every non SSH key based setup option
 # allow only SSH key based SSH login
 - name: sshd_config settings
-  become: yes
+  become: true
   template:
     src: templates/etc/ssh/sshd_config.j2
     dest: "/etc/ssh/sshd_config"
     owner: root
     mode: "0644"
     validate: '/usr/sbin/sshd -t -f %s'
-    backup: yes
+    backup: true
 
 - name: ssh connection config (user specific)
   copy:
