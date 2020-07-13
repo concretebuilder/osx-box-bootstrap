@@ -86,7 +86,7 @@ workflows:
         - content: |-
             #!/usr/bin/env bash
             set -e
-            pip3 install "ansible-lint==${ANSIBLE_LINT_VER}" --force-reinstall
+            sudo pip3 install "ansible-lint==${ANSIBLE_LINT_VER}" --force-reinstall
             ansible-lint --version
     - script:
         title: Install yamllint ver = YAML_LINT_VER
@@ -95,7 +95,7 @@ workflows:
         - content: |-
             #!/usr/bin/env bash
             set -e
-            pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
+            sudo pip3 install "yamllint==${YAML_LINT_VER}" --force-reinstall
             yamllint --version
     - script:
         title: Validate bitrise.yml
