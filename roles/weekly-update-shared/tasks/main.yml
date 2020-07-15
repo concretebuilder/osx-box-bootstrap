@@ -106,6 +106,10 @@
     name: screen
     state: present
 
+#  https://github.com/Homebrew/homebrew-core/issues/57651
+- name: brew upgrade python
+  shell: bash -l -c "brew upgrade python -f"
+
 - name: "CocoaPods: pod setup"
   shell: bash -l -c "pod setup || pod setup"
 - name: "CocoaPods: pod repo update"
