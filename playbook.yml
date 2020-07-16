@@ -13,6 +13,5 @@
   roles:
     - ssh-setup
     - profiles
-    - ruby
     - intermediate-setup
     - node

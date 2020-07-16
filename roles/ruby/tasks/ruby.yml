@@ -29,9 +29,6 @@
 - name: CocoaPods specs install with pod
   shell: bash -l -c "pod repo add master https://github.com/CocoaPods/Specs.git"
   when: is_incremental_setup|default(false) == false and not lookup('env', 'IS_CI')
-  ignore_errors: true
-  # on base builder creation this fails because it is already there.
-  # we can remove this role from base builder creation when the new stable xcode comes out.
 
 # The pod repo add just clone the repository.
 # Cocopods master is huge, and we need the HEAD only so we clone that during CI run.
