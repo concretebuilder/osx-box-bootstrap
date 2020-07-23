@@ -6,8 +6,8 @@
   become: true
 
 - name: Install xcode version based on xcode_version variable, it could take a while. About an hour, so be patient.
-  shell: bash -l -c "xcversion install {{ xcode_version }}"
+  shell: bash -l -c "xcversion install '{{ xcode_version }}'"
   become: true
   environment:
-    XCODE_INSTALL_USER: "{{ ansible_env.XCODE_INSTALL_USER }}"
-    XCODE_INSTALL_PASSWORD: "{{ ansible_env.XCODE_INSTALL_PASSWORD }}"
+    XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
+    XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
