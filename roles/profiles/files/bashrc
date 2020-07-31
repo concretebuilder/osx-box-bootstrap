@@ -38,7 +38,7 @@ if [ -s "$HOME/.profiles/xamarin_profile" ] ; then
   source "$HOME/.profiles/xamarin_profile"
 fi
 
-for PROFILE_SCRIPT in $( ls $HOME/profile.d/*.sh ); do
+for PROFILE_SCRIPT in $( ls $HOME/profile.d/* ); do
   . $PROFILE_SCRIPT
 done
 
