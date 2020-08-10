@@ -42,6 +42,7 @@ workflows:
                 set -e
 
                 ansible-playbook \
+                -vv \
                 -e xcode_path="$(xcode-select -p)" \
                 ${ADDITIONAL_VARIABLES_TO_ANSIBLE} \
                 --connection=local \
