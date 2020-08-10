@@ -106,12 +106,6 @@
     name: screen
     state: present
 
-#  https://github.com/Homebrew/homebrew-core/issues/57651
-- name: brew upgrade python
-  shell: bash -l -c "brew upgrade python -f"
-  ignore_errors: true
-# It fails but upgrades ignore for now
-
 - name: Check pip installs
   shell: bash -l -c "pip3 install requests"
 
