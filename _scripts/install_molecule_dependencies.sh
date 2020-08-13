@@ -8,14 +8,14 @@ if [[ "$os" == "Darwin" ]]; then
     echo "Successfully installed $molecule_version"
 else
     echo "Updating apt..."
-    apt-get update > /dev/null
+    apt-get update &>/dev/null
 
     echo "Install apt dependencies..."
     apt-get install -y build-essential libssl-dev libffi-dev python-dev | tee "$BITRISE_DEPLOY_DIR"/apt_install.log
 
     echo "Install pip3..."
-    apt install -y python3-pip > /dev/null
-    pip install --upgrade pip > /dev/null
+    apt install -y python3-pip &>/dev/null
+    pip install --upgrade pip &>/dev/null
     pip_version="$(pip --version | awk '{print $1, $2}')"
     echo "Installed $pip_version"
 
