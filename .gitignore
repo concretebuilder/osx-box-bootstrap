@@ -2,4 +2,4 @@
 _tmp
 .DS_Store
 roles/**/tests/__pycache__/*
-roles/tests/molecule/default/pytestdebug.log
+roles/tests/molecule/**/pytestdebug.log
