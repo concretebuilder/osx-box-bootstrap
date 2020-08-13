@@ -254,5 +254,5 @@ workflows:
       - script-runner:
           title: molecule test
           inputs:
-            - file_path: _scripts/molecule_test.sh
+            - file_path: ../../_scripts/molecule_test.sh
       - deploy-to-bitrise-io@1: {}
