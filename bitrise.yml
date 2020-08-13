@@ -252,16 +252,13 @@ workflows:
   _run_molecule_test:
     steps:
       - script:
-          deps:
-            apt_get:
-            - name: python3
-            - name: python3-pip
           title: Install pip3 packages
           inputs:
             - content: |-
                 #!/bin/bash
                 set -x
-
+                sudo apt update
+                sudo apt install -y python3-pip
                 pip3 install molecule testinfra docker pytest
       - change-workdir@1:
           inputs:
