@@ -262,7 +262,6 @@ workflows:
                 #!/bin/bash
                 set -x
 
-                pip install --upgrade pip
                 pip3 install molecule testinfra docker pytest
       - change-workdir@1:
           inputs:
