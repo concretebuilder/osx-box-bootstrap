@@ -28,17 +28,3 @@ Example Playbook
 ----------------
 
 See brew role
-
-molecule create -s ruby
- |
-\/
-molecule converge -s ruby
- |
-\/
-role change 
- |
-\/
-molecule converge -s ruby
- |
-\/
-molecule verify -s ruby

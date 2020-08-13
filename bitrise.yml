@@ -251,15 +251,10 @@ workflows:
 
   _run_molecule_test:
     steps:
-      - script:
-          title: Install pip3 packages
+      - script-runner:
+          title: Install dependencies
           inputs:
-            - content: |-
-                #!/bin/bash
-                set -x
-                sudo apt update
-                sudo apt install -y python3-pip
-                pip3 install molecule testinfra docker pytest
+            - file_path: _scripts/install_molecule_dependencies.sh
       - change-workdir@1:
           inputs:
             - path: roles/tests
