@@ -7,7 +7,7 @@
       - default.yml
 
 - name: ensure .ssh folder is ok
-  file: 
+  file:
     path: /{{ home.path }}/{{ param_user }}/.ssh
     state: directory
     owner: "{{ param_user }}"
