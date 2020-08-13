@@ -263,7 +263,7 @@ workflows:
           inputs:
             - content: |-
                 #!/bin/bash
-                set -x
+                set -e
 
                 molecule test -s "${ROLE}" | tee "$BITRISE_DEPLOY_DIR/molecule.log"
       - deploy-to-bitrise-io@1: {}
