@@ -242,13 +242,6 @@ workflows:
             - channel: $SLACK_CHANNEL
             - message: "$PR_CREATE_TIME - $PR_CLOSED_TIME"
 
-  run_ansible_tests:
-    steps:
-      - script-runner:
-          title: Ansible role tests
-          inputs:
-          - file_path: _scripts/run_ansible_tests.sh
-
   _run_molecule_test:
     steps:
       - script-runner:
@@ -261,5 +254,5 @@ workflows:
       - script-runner:
           title: molecule test
           inputs:
-            - file_path: _scripts/run_molecule_test.sh
+            - file_path: _scripts/molecule_test.sh
       - deploy-to-bitrise-io@1: {}
