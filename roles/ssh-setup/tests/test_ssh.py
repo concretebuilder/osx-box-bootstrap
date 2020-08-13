@@ -1,5 +1,5 @@
 def test_ssh_config_exists(host):
-    home_path = "home"
+    home_path = "Users"
     param_user = "linuxbrew"
     ssh_config = host.file("/{}/{}/.ssh/config".format(home_path, param_user))
     assert ssh_config.exists
@@ -7,7 +7,7 @@ def test_ssh_config_exists(host):
     assert ssh_config.contains("UserKnownHostsFile")
 
 def test_ssh_folder(host):
-    home_path = "home"
+    home_path = "Users"
     param_user = "linuxbrew"
     ssh_config_folder = host.file("/{}/{}/.ssh".format(home_path, param_user))
     assert ssh_config_folder.is_directory
