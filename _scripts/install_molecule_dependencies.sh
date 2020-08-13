@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eo pipefail
 
 os="$(uname -s)"
 if [[ "$os" == "Darwin" ]]; then

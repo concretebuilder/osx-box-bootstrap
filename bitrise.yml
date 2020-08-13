@@ -258,12 +258,8 @@ workflows:
       - change-workdir@1:
           inputs:
             - path: roles/tests
-      - script:
+      - script-runner:
           title: molecule test
           inputs:
-            - content: |-
-                #!/bin/bash
-                set -e
-
-                molecule test -s "${ROLE}" | tee "$BITRISE_DEPLOY_DIR/molecule.log"
+            - file_path: _scripts/run_molecule_test.sh
       - deploy-to-bitrise-io@1: {}
