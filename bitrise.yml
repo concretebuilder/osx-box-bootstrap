@@ -250,12 +250,12 @@ workflows:
           - file_path: _scripts/run_ansible_tests.sh
 
   _run_molecule_test:
-    deps:
-      apt_get:
-      - name: python3
-      - name: python3-pip
     steps:
       - script:
+          deps:
+            apt_get:
+            - name: python3
+            - name: python3-pip
           title: Install pip3 packages
           inputs:
             - content: |-
@@ -271,4 +271,4 @@ workflows:
             - content: |-
                 #!/bin/bash
 
-                molecule test -s "${ROLE}"
+                molecule test -s "${ROLE}" | tee "$BITRISE_DEPLOY_DIR/molecule.log"
