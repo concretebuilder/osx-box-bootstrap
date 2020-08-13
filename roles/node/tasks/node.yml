@@ -1,6 +1,10 @@
 ---
 - name: update homebrew
   shell: brew update
+  args:
+    executable: /bin/bash
+  tags:
+    - molecule-idempotence-notest
 
 - name: brew install node
   homebrew:
