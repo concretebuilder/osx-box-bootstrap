@@ -261,7 +261,8 @@ workflows:
             - content: |-
                 #!/bin/bash
                 set -x
-                
+
+                pip install --upgrade pip
                 pip3 install molecule testinfra docker pytest
       - change-workdir@1:
           inputs:
@@ -274,3 +275,4 @@ workflows:
                 set -x
 
                 molecule test -s "${ROLE}" | tee "$BITRISE_DEPLOY_DIR/molecule.log"
+      - deploy-to-bitrise-io@1: {}
