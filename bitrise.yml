@@ -249,6 +249,7 @@ workflows:
           inputs:
             - file_path: _scripts/install_molecule_dependencies.sh
       - change-workdir@1:
+          title: hopp into the test folder
           inputs:
             - path: roles/tests
       - script-runner:
