@@ -3,4 +3,4 @@
   hosts: all
   roles:
     - role: android
-      param_user: "linuxbrew"
+      param_user: "vagrant"

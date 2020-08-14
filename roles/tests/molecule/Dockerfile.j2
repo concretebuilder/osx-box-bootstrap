@@ -10,7 +10,7 @@ RUN set -xe \
   && usermod -aG ${DEPLOY_GROUP} ${ANSIBLE_USER} \
   && sed -i "/^%${SUDO_GROUP}/s/ALL\$/NOPASSWD:ALL/g" /etc/sudoers
 # Install developer tools
-ENV PATH="${PATH}:/home/linuxbrew/.rbenv/versions/2.6.5/bin/:/home/linuxbrew/.rbenv/shims/"
+ENV PATH="${PATH}:/home/vagrant/.rbenv/versions/2.6.5/bin/:/home/vagrant/.rbenv/shims/"
 RUN sudo apt-get update && \
     sudo apt-get install -y \
     libssl-dev \
@@ -24,4 +24,4 @@ RUN sudo apt-get update && \
     openssh-server \
     && mkdir /var/run/sshd
 
-USER linuxbrew
+USER vagrant
