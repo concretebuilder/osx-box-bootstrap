@@ -21,7 +21,7 @@ else
     pip_version="$(pip --version | awk '{print $1, $2}')"
     echo "Installed $pip_version"
 
-    pip install virtualenv molecule testinfra docker pytest &>"$BITRISE_DEPLOY_DIR"/pip_install.log
+    pip install molecule testinfra docker pytest &>"$BITRISE_DEPLOY_DIR"/pip_install.log
     molecule_version="$(molecule --version | sed -n 1p)"
     echo "Successfully installed $molecule_version"
 fi
