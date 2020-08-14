@@ -1,9 +1,9 @@
 ---
 default_ruby:
   - version: "2.6.5"
-# ruby_versions:
-#   - version: "2.5.3"
-#   - version: "2.4.5"
+ruby_versions:
+  - version: "2.5.3"
+  - version: "2.4.5"
 gem_packages:
   - name: "cocoapods"
     version: "1.9.1"
