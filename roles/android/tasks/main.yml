@@ -43,8 +43,6 @@
     src: "{{ android_cmdline_tools_source }}"
     dest: "{{ android_home }}/cmdline-tools/"
     remote_src: true
-  tags:
-    - molecule-idempotence-notest
 
 - name: Ensure .android directory exists
   file:
@@ -76,8 +74,6 @@
     owner: "{{ param_user }}"
     group: staff
     mode: '0755'
-  tags:
-    - molecule-idempotence-notest
 
 - name: Recursively change ownership of ANDROID_HOME on vs4mac
   become: true
