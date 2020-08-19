@@ -23,7 +23,7 @@
   debug:
     msg: "{{ result.stdout }}"
 
-- name: set Java 9 as Global in jEnv
+- name: set Java 11 as Global in jEnv
   shell: bash -l -c "jenv global 11"
 
 ...

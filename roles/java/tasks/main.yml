@@ -48,7 +48,7 @@
     name: bitrise-io/cask-versions
     state: present
 
-- name: brew tap openjdk ;ibrary
+- name: brew tap openjdk library
   homebrew_tap:
     name: AdoptOpenJDK/openjdk
     state: present
