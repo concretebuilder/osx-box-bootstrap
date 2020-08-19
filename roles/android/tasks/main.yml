@@ -5,7 +5,7 @@
     path: "{{ android_ndk_home }}"
     state: directory
     owner: "{{ param_user }}"
-    mode: 0770
+    mode: "0770"
     recurse: true
 
 - name: Download and unzip Android NDK
@@ -14,7 +14,7 @@
     src: "{{ android_ndk_source }}"
     dest: "{{ android_ndk_home }}"
     owner: "{{ param_user }}"
-    mode: 0770
+    mode: "0770"
     remote_src: true
 
 - name: Create profile.d directory
@@ -29,7 +29,7 @@
     src: patch.j2
     dest: "{{ ansible_env.HOME }}/profile.d/android.sh"
     owner: "{{ param_user }}"
-    mode: 0755
+    mode: "0755"
 
 - name: ensure android directory exists
   become: true
@@ -60,7 +60,7 @@
   become: true
   environment:
     PATH: "{{ android_home }}/tools/bin:{{ android_home }}/cmdline-tools/tools/bin:{{ ansible_env.PATH }}"
-  shell: "(echo y | sdkmanager --verbose '{{ item }}') || (echo y | sdkmanager --verbose '{{ item }}')"  # noqa 204 306
+  shell: "(echo y | /usr/local/share/android-sdk/cmdline-tools/tools/bin/sdkmanager --verbose '{{ item }}') || (echo y | sdkmanager --verbose '{{ item }}')"  # noqa 204 306
   with_items:
     - "{{ sdkmanagerpackages }}"
   args:
