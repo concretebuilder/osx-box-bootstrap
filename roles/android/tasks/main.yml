@@ -66,7 +66,7 @@
 - name: Install Android packages with SDK Manager
   become: true
   environment:
-    PATH: "{{ android_home }}/tools/bin:{{ android_home }}/cmdline-tools/tools/bin:{{ ansible_env.PATH }}"
+    PATH: "{{ android_home }}/cmdline-tools/tools/bin:{{ ansible_env.PATH }}"
   shell: "(echo y | sdkmanager --verbose '{{ item }}')"  # noqa 204 306
   with_items:
     - "{{ sdkmanagerpackages }}"
