@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_08_20_1`
+* `flutter`: `1.20.2`
+
 ## `v2020_06_10_1`
 * `explicitly install bundler at v2.1.4`
 
