@@ -49,6 +49,7 @@
     src: "{{ android_cmdline_tools_source }}"
     dest: "{{ android_home }}/cmdline-tools/"
     remote_src: true
+    mode: "0755"
 
 - name: Ensure .android directory exists
   file:
