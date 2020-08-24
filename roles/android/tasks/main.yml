@@ -31,12 +31,6 @@
     owner: "{{ param_user }}"
     mode: "0755"
 
-- name: ensure deprecated tools path is absend
-  become: true
-  file:
-    dest: "{{ android_home }}/tools"
-    state: absent
-
 - name: ensure android directory exists
   become: true
   file:
