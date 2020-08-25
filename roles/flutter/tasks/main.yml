@@ -1,47 +1,54 @@
 ---
-- name: Download flutter from stable channel macos
-  unarchive:
-    src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip  # yamllint disable-line rule:line-length
-    dest: "{{ flutter_home }}"
-    mode: "0770"
-    remote_src: true
-    owner: "{{ param_user }}"
-    group: "{{ param_group }}"
-  become: true
-  when:
-    ansible_distribution == "MacOSX"
+- name: Is flutter available with given version?
+  shell: "{{ flutter_home }}/flutter/bin/flutter --version"
+  ignore_errors: true
+  register: flutter_version_check
+  changed_when: "'Flutter 1.20.2' not in flutter_version_check.stdout"
 
-- name: Download flutter from stable channel ubuntu
-  unarchive:
-    src: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_{{ flutter_version }}-stable.tar.xz  # yamllint disable-line rule:line-length
-    dest: "{{ flutter_home }}"
-    mode: "0770"
-    remote_src: true
-    owner: "{{ param_user }}"
-    group: "{{ param_group }}"
-  become: true
-  when:
-    ansible_distribution == "Ubuntu"
+- name: Install, configure and warmup flutter
+  block:
+  - name: Download flutter from stable channel macos
+    unarchive:
+      src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip  # yamllint disable-line rule:line-length
+      dest: "{{ flutter_home }}"
+      mode: "0770"
+      remote_src: true
+      owner: "{{ param_user }}"
+      group: "{{ param_group }}"
+    become: true
+    when: ansible_distribution == "MacOSX"
 
-- name: Creates profile.d directory
-  become: true
-  file:
-    path: "~{{ param_user }}/profile.d"
-    state: directory
-    owner: "{{ param_user }}"
-    mode: 0755
+  - name: Download flutter from stable channel ubuntu
+    unarchive:
+      src: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_{{ flutter_version }}-stable.tar.xz  # yamllint disable-line rule:line-length
+      dest: "{{ flutter_home }}"
+      mode: "0770"
+      remote_src: true
+      owner: "{{ param_user }}"
+      group: "{{ param_group }}"
+    become: true
+    when: ansible_distribution == "Ubuntu"
 
-- name: Generate script to profile.d
-  become: true
-  template:
-    src: patch.j2
-    dest: "~{{ param_user }}/profile.d/flutter.sh"
-    owner: "{{ param_user }}"
-    mode: "0755"
+  - name: Creates profile.d directory
+    become: true
+    file:
+      path: "~{{ param_user }}/profile.d"
+      state: directory
+      owner: "{{ param_user }}"
+      mode: 0755
 
-- name: Run flutter precache
-  shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
+  - name: Generate script to profile.d
+    become: true
+    template:
+      src: patch.j2
+      dest: "~{{ param_user }}/profile.d/flutter.sh"
+      owner: "{{ param_user }}"
+      mode: "0755"
 
-- name: Run flutter doctor
-  shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter doctor"
+  - name: Run flutter precache
+    shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
+
+  - name: Run flutter doctor
+    shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter doctor"
+  when: "'Flutter 1.20.2' not in flutter_version_check.stdout"
 ...
