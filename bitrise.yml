@@ -128,6 +128,10 @@ workflows:
         - workflows: |-
             intermediate-setup-test
             weekly-cache-update-test
+            test_ruby
+            test_node
+            test_android
+            test_ssh-setup
         - access_token: $BITRISE_ACCESS_TOKEN
 
   perform-weekly-cache-update:
@@ -194,6 +198,30 @@ workflows:
     envs:
       - LOCAL_PLAYBOOK_PATH: ./playbook.yml
 
+  test_ruby:
+    envs:
+    - ROLE: "ruby"
+    after_run:
+    - _run_molecule_test
+
+  test_node:
+    envs:
+    - ROLE: "node"
+    after_run:
+    - _run_molecule_test
+
+  test_ssh-setup:
+    envs:
+    - ROLE: "ssh-setup"
+    after_run:
+    - _run_molecule_test
+
+  test_android:
+    envs:
+    - ROLE: "android"
+    after_run:
+    - _run_molecule_test
+
   ##############################
   #### Utility workflows #######
   ##############################
@@ -214,9 +242,18 @@ workflows:
             - channel: $SLACK_CHANNEL
             - message: "$PR_CREATE_TIME - $PR_CLOSED_TIME"
 
-  run_ansible_tests:
+  _run_molecule_test:
     steps:
       - script-runner:
-          title: Ansible role tests
+          title: Install dependencies
           inputs:
-          - file_path: _scripts/run_ansible_tests.sh
+            - file_path: _scripts/install_molecule_dependencies.sh
+      - change-workdir@1:
+          title: hopp into the test folder
+          inputs:
+            - path: roles/tests
+      - script-runner:
+          title: molecule test
+          inputs:
+            - file_path: ../../_scripts/molecule_test.sh
+      - deploy-to-bitrise-io@1: {}

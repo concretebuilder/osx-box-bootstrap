@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include ruby"
-      include_role:
-        name: "ruby"
+  roles:
+    - role: ruby
+      param_user: "linuxbrew"

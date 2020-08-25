@@ -7,10 +7,12 @@
       - default.yml
 
 - name: ensure .ssh folder is ok
-  file: path=/{{ home.path }}/{{ param_user }}/.ssh
-    state=directory
-    owner="{{ param_user }}"
-    mode=0700
+  become: true
+  file:
+    path: /{{ home.path }}/{{ param_user }}/.ssh
+    state: directory
+    owner: "{{ param_user }}"
+    mode: "0700"
 
 # Disable every non SSH key based setup option
 # allow only SSH key based SSH login
