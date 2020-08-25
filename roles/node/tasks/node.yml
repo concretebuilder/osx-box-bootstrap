@@ -3,7 +3,7 @@
   homebrew:
     name: node@12
     state: present
-    update_homebrew: false
+    update_homebrew: true
 
 - name: Check if node already linked to node@12
   shell: "node --version"
