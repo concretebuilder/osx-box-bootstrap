@@ -48,18 +48,13 @@
     name: bitrise-io/cask-versions
     state: present
 
-- name: brew tap openjdk library
-  homebrew_tap:
-    name: AdoptOpenJDK/openjdk
-    state: present
-
-- name: brew cask install adoptopenjdk11
+- name: brew cask install adoptopenjdk8
   homebrew_cask:
-    name: adoptopenjdk11
+    name: adoptopenjdk8
     state: present
 
 - name: Detect JAVA_HOME
-  shell: /usr/libexec/java_home -v 11
+  shell: /usr/libexec/java_home -v 1.8
   register: detect_java_home
   ignore_errors: true
 
