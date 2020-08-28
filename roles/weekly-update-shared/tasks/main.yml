@@ -25,7 +25,7 @@
 - name: "Setup open-file limit"
   copy:
     src: limit.maxfiles.plist
-    dest: /Library/LaunchDaemons/imit.maxfiles.plist
+    dest: /Library/LaunchDaemons/limit.maxfiles.plist
     owner: root
     group: wheel
     mode: "0644"
@@ -34,7 +34,7 @@
 - name: "Setup max-process limit"
   copy:
     src: limit.maxproc.plist
-    dest: /Library/LaunchDaemons/imit.maxproc.plist
+    dest: /Library/LaunchDaemons/limit.maxproc.plist
     owner: root
     group: wheel
     mode: "0644"
