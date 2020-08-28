@@ -195,7 +195,7 @@
     - "{{ gem_packages }}"
 
 - name: brew tap xcbeautify
-  gomebrew_tap:
+  homebrew_tap:
     name: thii/xcbeautify
     url: 'https://github.com/thii/xcbeautify.git'
 
