@@ -120,9 +120,6 @@
     name: screen
     state: present
 
-- name: Check pip installs
-  shell: bash -l -c "pip3 install requests"
-
 - name: "CocoaPods: pod setup"
   shell: bash -l -c "pod setup || pod setup"
 - name: "CocoaPods: pod repo update"
