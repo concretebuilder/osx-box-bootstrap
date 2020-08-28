@@ -12,6 +12,15 @@
     scope: global
     value: "please-set-your-email@bitrise.io"
 
+- name: Ensure /Library/LaunchDaemons/ exists
+  file:
+    path: /Library/LaunchDaemons/
+    state: directory
+    owner: root
+    group: wheel
+    mode: "0644"
+  become: true
+
 # Copy these two plist file to incrase Open File Descriptos
 - name: "Setup open-file limit"
   copy:
@@ -171,6 +180,27 @@
 - name: "firebase (CLI)"  # noqa 303 306
   shell: bash -l -c "curl -sL firebase.tools | bash"
 
+# ---------------------------------
+# --- Community requested tools ---
+# ---------------------------------
+
+# Gems
+- name: Install additional gems
+  gem:
+    name: "{{ item.name }}"
+    version: "{{ item.version }}"
+    executable: "$HOME/.rbenv/shims/gem"
+    user_install: false
+  with_items:
+    - "{{ gem_packages }}"
+
+# Kegs
+- name: Install additional brew kegs
+  homebrew:
+    name: "{{ item.name }}"
+    state: present
+  with_items:
+    - "{{ brew_packages }}"
 
 # ----------------------------------------
 # --- Cleanup ---

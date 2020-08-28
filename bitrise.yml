@@ -229,6 +229,12 @@ workflows:
     after_run:
     - _run_molecule_test
 
+  test_weekly-update-shared:
+    envs:
+    - ROLE: "weekly-update-shared"
+    after_run:
+    - _run_molecule_test
+
   ##############################
   #### Utility workflows #######
   ##############################

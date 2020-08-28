@@ -1,0 +1,6 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: weekly-update-shared
+      param_user: "linuxbrew"
