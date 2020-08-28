@@ -40,6 +40,14 @@
     mode: "0644"
   become: true
 
+# brew update
+
+- name: "brew update"
+  shell: bash -l -c "brew update"
+  register: result
+  until: result.rc == 0
+  retries: 3
+
 ## Go
 # Gopath is $HOME/go
 - name: brew install go
@@ -105,11 +113,6 @@
 # --- pre-installed tool cache updates ---
 # ----------------------------------------
 
-- name: "brew update"
-  shell: bash -l -c "brew update"
-  register: result
-  until: result.rc == 0
-  retries: 3
 - name: brew install screen (for older images)
   homebrew:
     name: screen
