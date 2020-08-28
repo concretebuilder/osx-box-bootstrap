@@ -56,7 +56,7 @@
     state: present
 - name: prepare GOPATH dirs
   file:
-    path: "/Users/{{ param_user }}/go/{{ item.fold_path }}"
+    path: "$HOME/go/{{ item.fold_path }}"
     state: directory
     owner: "{{ param_user }}"
   with_items:
@@ -71,7 +71,7 @@
   file:
     path: /opt/bitrise
     state: directory
-    owner: vagrant
+    owner: "{{ param_user }}"
     group: wheel
     mode: "0755"
   become: true
@@ -89,7 +89,7 @@
   copy:
     src: files/bootstrap_remote_access.sh.tmpl
     dest: /opt/bitrise/bootstrap_remote_access.sh.tmpl
-    owner: vagrant
+    owner: "{{ param_user }}"
     mode: "0777"
 
 # ----------------------------------------
@@ -103,8 +103,10 @@
   unarchive:
     src: /tmp/ngrok-link-stable-darwin-amd64.zip
     dest: /usr/local/bin
+    owner: "{{ param_user }}"
     copy: false
     mode: 0700
+  become: true
 - name: "ngrok-binary: remove temp file"
   file:
     path: /tmp/ngrok-link-stable-darwin-amd64.zip
@@ -168,15 +170,15 @@
 - name: "Bitrise CLI - setup"
   shell: bash -l -c "bitrise setup"
 - name: "Bitrise CLI - envman -version"
-  shell: bash -l -c "/Users/vagrant/.bitrise/tools/envman -version"
+  shell: bash -l -c "$HOME/.bitrise/tools/envman -version"
 - name: "Bitrise CLI - stepman -version"
-  shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman -version"
+  shell: bash -l -c "$HOME/.bitrise/tools/stepman -version"
 # setup the default StepLib collection to stepman, for a pre-warmed
 #  cache for the StepLib
 - name: "stepman: init"
-  shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
+  shell: bash -l -c "$HOME/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
 - name: "stepman: update"
-  shell: bash -l -c "/Users/vagrant/.bitrise/tools/stepman update"
+  shell: bash -l -c "$HOME/.bitrise/tools/stepman update"
 
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
@@ -222,7 +224,7 @@
 #     Xcode stores the simulator installers here, and it never cleans them up for some reason.
 - name: Remove tmp and test dirs inside the HOME directory
   file:
-    path: "/Users/{{ param_user }}/{{ item.fold_path }}"
+    path: "$HOME/{{ item.fold_path }}"
     state: absent
   with_items:
     - { fold_path: 'Library/Developer/Xcode/DerivedData' }
