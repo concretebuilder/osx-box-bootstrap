@@ -194,6 +194,11 @@
   with_items:
     - "{{ gem_packages }}"
 
+- name: brew tap xcbeautify
+  gomebrew_tap:
+    name: thii/xcbeautify
+    url: 'https://github.com/thii/xcbeautify.git'
+
 # Kegs
 - name: Install additional brew kegs
   homebrew:

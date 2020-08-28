@@ -4,8 +4,6 @@ gem_packages:
     version: "0.1.1"
   - name: "xcbeautify"
     version: "0.8.1"
-  - name: "xcbeautify"
-    version: "0.8.1"
   - name: "trainer"
     version: "0.9.1"
   - name: "slather"
@@ -13,4 +11,5 @@ gem_packages:
 brew_packages:
   - name: "xclogparser"
   - name: "jq"
+  - name: "xcbeautify"
 ...
