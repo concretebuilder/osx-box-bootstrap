@@ -10,4 +10,6 @@ brew_packages:
   - name: "xclogparser"
   - name: "jq"
   - name: "xcbeautify"
+  - name: "screen"
+  - name: "applesimutils"
 ...

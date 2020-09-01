@@ -41,85 +41,13 @@
   become: true
 
 # ----------------------------------------
-# --- remote access script install ---
-# ----------------------------------------
-- name: "Ensure /opt/bitrise exists"
-  file:
-    path: /opt/bitrise
-    state: directory  # yamllint disable-line rule:truthy
-    owner: "{{ param_user }}"
-    group: wheel
-    mode: "0755"
-  become: true
-
-- name: "Ensure /etc/ngrok exists"
-  file:
-    path: /etc/ngrok
-    state: directory
-    owner: root
-    group: wheel
-    mode: "0755"
-  become: true
-
-- name: "copy remote access config script"
-  copy:
-    src: files/bootstrap_remote_access.sh.tmpl
-    dest: /opt/bitrise/bootstrap_remote_access.sh.tmpl
-    owner: "{{ param_user }}"
-    mode: "0777"
-
-# ----------------------------------------
-# --- ngrok install ---
-# ----------------------------------------
-- name: "ngrok-binary: download"
-  get_url:
-    url: https://bin.equinox.io/c/gDfFGFRN2Jh/ngrok-link-stable-darwin-amd64.zip
-    dest: /tmp/ngrok-link-stable-darwin-amd64.zip
-- name: "ngrok-binary: install"
-  unarchive:
-    src: /tmp/ngrok-link-stable-darwin-amd64.zip
-    dest: /usr/local/bin
-    owner: "{{ param_user }}"
-    copy: false
-    mode: 0700
-  become: true
-- name: "ngrok-binary: remove temp file"
-  file:
-    path: /tmp/ngrok-link-stable-darwin-amd64.zip
-    state: absent
-# ----------------------------------------
 # --- pre-installed tool cache updates ---
 # ----------------------------------------
-
-- name: brew install screen (for older images)
-  homebrew:
-    name: screen
-    state: present
 
 - name: "CocoaPods: pod setup"
   shell: bash -l -c "pod setup || pod setup"
 - name: "CocoaPods: pod repo update"
   shell: bash -l -c "pod repo update"
-
-# ----------------------------------------
-# --- applesimutils install ---
-# ----------------------------------------
-
-- name: "Set up wix/brew"
-  homebrew_tap:
-    name: wix/brew
-    state: present
-- name: "Install applesimutils"
-  homebrew:
-    name: applesimutils
-    state: present
-
-# setup the default StepLib collection to stepman, for a pre-warmed
-#  cache for the StepLib
-- name: "stepman: init"
-  shell: bash -l -c "$HOME/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
-- name: "stepman: update"
-  shell: bash -l -c "$HOME/.bitrise/tools/stepman update"
 
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
@@ -140,10 +68,16 @@
   with_items:
     - "{{ gem_packages }}"
 
+#brew taps
 - name: brew tap xcbeautify
   homebrew_tap:
     name: thii/xcbeautify
     url: 'https://github.com/thii/xcbeautify.git'
+
+- name: "Set up wix/brew"
+  homebrew_tap:
+    name: wix/brew
+    state: present
 
 # Kegs
 - name: Install additional brew kegs

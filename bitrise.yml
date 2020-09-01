@@ -135,6 +135,7 @@ workflows:
             test_flutter
             test_go
             test_bitrise-cli
+            test_remote-access
         - access_token: $BITRISE_ACCESS_TOKEN
 
   perform-weekly-cache-update:
@@ -231,12 +232,6 @@ workflows:
     after_run:
     - _run_molecule_test
 
-  test_weekly-update-shared:
-    envs:
-    - ROLE: "weekly-update-shared"
-    after_run:
-    - _run_molecule_test
-
   test_bitrise-cli:
     envs:
     - ROLE: "bitrise-cli"
@@ -246,6 +241,12 @@ workflows:
   test_go:
     envs:
     - ROLE: "go"
+    after_run:
+    - _run_molecule_test
+
+  test_remote-access:
+    envs:
+    - ROLE: "remote-access"
     after_run:
     - _run_molecule_test
 
