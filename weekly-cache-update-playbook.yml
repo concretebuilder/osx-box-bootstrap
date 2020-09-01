@@ -16,6 +16,7 @@
     - role: profiles
     - role: ssh-setup
     - role: weekly-update-shared
+    - role: bitrise-cli
     - role: java
     - role: jenv
     - role: android

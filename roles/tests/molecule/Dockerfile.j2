@@ -12,7 +12,7 @@ RUN set -xe \
   && usermod -aG ${DEPLOY_GROUP} ${ANSIBLE_USER} \
   && sed -i "/^%${SUDO_GROUP}/s/ALL\$/NOPASSWD:ALL/g" /etc/sudoers
 # Install developer tools
-ENV PATH="${PATH}:/home/linuxbrew/.rbenv/versions/2.6.5/bin/:/home/linuxbrew/.rbenv/shims/"
+ENV PATH="${PATH}:/home/linuxbrew/.rbenv/versions/2.6.5/bin/:/home/linuxbrew/.rbenv/shims/:/usr/local/bin"
 RUN sudo apt-get update && \
     sudo apt-get install -y \
     libssl-dev \
@@ -27,5 +27,29 @@ RUN sudo apt-get update && \
     tar \
     xz-utils \
     && mkdir /var/run/sshd
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    # Requiered for Bitrise CLI
+    git \
+    mercurial \
+    curl \
+    wget \
+    rsync \
+    sudo \
+    expect \
+    # Python
+    python \
+    python-dev \
+    python-pip \
+    # Common, useful
+    build-essential \
+    zip \
+    unzip \
+    tree \
+    clang \
+    imagemagick \
+    groff \
+    # For PPAs
+    software-properties-common
 
 USER linuxbrew

@@ -40,20 +40,13 @@
     mode: "0644"
   become: true
 
-# brew update
-
-- name: "brew update"
-  shell: bash -l -c "brew update"
-  register: result
-  until: result.rc == 0
-  retries: 3
-
 ## Go
 # Gopath is $HOME/go
 - name: brew install go
   homebrew:
     name: go
     state: present
+    update_homebrew: yes
 - name: prepare GOPATH dirs
   file:
     path: "$HOME/go/{{ item.fold_path }}"
@@ -138,38 +131,6 @@
     name: applesimutils
     state: present
 
-# ----------------------------------------
-# --- Bitrise CLI tools ---
-# ----------------------------------------
-# bitrise CLI: cleanup previous tool versions
-- name: clean up previous 'bitrise'
-  file:
-    path: /usr/local/bin/bitrise
-    state: absent
-
-- name: clean up previous 'stepman'
-  file:
-    path: /usr/local/bin/stepman
-    state: absent
-
-- name: clean up previous 'envman'
-  file:
-    path: /usr/local/bin/envman
-    state: absent
-
-- name: "bitrise CLI: download"
-  get_url:
-    url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-Darwin-x86_64
-    dest: /usr/local/bin/bitrise
-    mode: '0755'
-- name: "Bitrise CLI test -version"
-  shell: bash -l -c "bitrise --version"
-- name: "Bitrise CLI - setup"
-  shell: bash -l -c "bitrise setup"
-- name: "Bitrise CLI - envman -version"
-  shell: bash -l -c "$HOME/.bitrise/tools/envman -version"
-- name: "Bitrise CLI - stepman -version"
-  shell: bash -l -c "$HOME/.bitrise/tools/stepman -version"
 # setup the default StepLib collection to stepman, for a pre-warmed
 #  cache for the StepLib
 - name: "stepman: init"
