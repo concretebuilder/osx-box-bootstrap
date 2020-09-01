@@ -24,7 +24,7 @@
 
 - name: "bitrise CLI: download"
   get_url:
-    url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-{{ os_type.stdout }}-x86_64
+    url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-{{ os_type.stdout }}-x86_64  # yamllint disable-line rule:line-length
     dest: /usr/local/bin/bitrise
     mode: '0755'
     owner: "{{ param_user }}"

@@ -12,22 +12,6 @@ def test_maxproc_exists(host):
     assert maxproc.group == "wheel"
     assert maxproc.mode == 644
 
-# Go tests
-def test_if_go_exists(host):
-    assert host.exists("go")
-
-def test_go_src_exists(host):
-    bitrise = host.directory("/Users/vagrant/go/src")
-    assert bitrise.user == "vagrant"
-
-def test_go_bin_exists(host):
-    bitrise = host.directory("/Users/vagrant/go/bin")
-    assert bitrise.user == "vagrant"
-
-def test_go_pkg_exists(host):
-    bitrise = host.directory("/Users/vagrant/go/pkg")
-    assert bitrise.user == "vagrant"
-
 # Remote access scripts
 def test_bitrise_folder_exists(host):
     bitrise = host.directory("/opt/bitrise")
