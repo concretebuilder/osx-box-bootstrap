@@ -68,7 +68,7 @@
   with_items:
     - "{{ gem_packages }}"
 
-#brew taps
+# brew taps
 - name: brew tap xcbeautify
   homebrew_tap:
     name: thii/xcbeautify
