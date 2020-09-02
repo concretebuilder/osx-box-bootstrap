@@ -202,7 +202,7 @@ Once installed:
     you will need to run this from your dev machine, because the setting needs manual interaction, so the automation would time out.
     
 * Add SSH key to authorized keys
-* Add `vagrant` user ad passwordless sudoer
+* Add `vagrant` user as passwordless sudoer
 
 ## Provisioning
 
