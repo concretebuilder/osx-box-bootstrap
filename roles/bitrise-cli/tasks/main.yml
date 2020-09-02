@@ -2,29 +2,9 @@
 # ----------------------------------------
 # --- Bitrise CLI tools ---
 # ----------------------------------------
-# bitrise CLI: cleanup previous tool versions
-- name: clean up previous 'bitrise'
-  file:
-    path: /usr/local/bin/bitrise
-    state: absent
-
-- name: clean up previous 'stepman'
-  file:
-    path: /usr/local/bin/stepman
-    state: absent
-
-- name: clean up previous 'envman'
-  file:
-    path: /usr/local/bin/envman
-    state: absent
-
-- name: Lookup ansible_distribution
-  shell: bash -l -c "uname -s"
-  register: os_type
-
 - name: "bitrise CLI: download"
   get_url:
-    url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-{{ os_type.stdout }}-x86_64  # yamllint disable-line rule:line-length
+    url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-{{ ansible_system }}-x86_64  # yamllint disable-line rule:line-length
     dest: /usr/local/bin/bitrise
     mode: '0755'
     owner: "{{ param_user }}"

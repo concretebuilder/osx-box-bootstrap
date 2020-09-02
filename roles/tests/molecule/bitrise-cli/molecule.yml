@@ -18,7 +18,7 @@ provisioner:
     host_vars:
       instance:
         ansible_user: linuxbrew
-        bitrise_cli_version: 1.39.1
+        bitrise_cli_version: 1.42.0
 verifier:
   name: testinfra
   s: true
