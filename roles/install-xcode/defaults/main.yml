@@ -1,2 +1,11 @@
----
 xcode_version: "11.7"
+simulators:
+  - 'iOS 13.5'
+  - 'iOS 13.4'
+  - 'iOS 13.3'
+  - 'iOS 13.2'
+  - 'iOS 13.0'
+  - 'iOS 12.4'
+  - 'iOS 12.2'
+  - 'iOS 12.1'
+  - 'iOS 12.0'
