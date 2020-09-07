@@ -5,6 +5,7 @@
   homebrew:
     name: git
     state: present
+    update_homebrew: true
 - name: brew install wget
   homebrew:
     name: wget
@@ -61,7 +62,7 @@
 - name: Add ansible.cfg to add some settings
   copy:
     src: ansible.cfg
-    dest: "/Users/{{ param_user }}/ansible.cfg"
+    dest: "$HOME/ansible.cfg"
 
 - name: brew install java
   homebrew_cask:
@@ -89,7 +90,7 @@
 # These folders will be created in the HOME directory.
 - name: Setup Bitrise specific folders
   file:
-    path: "/Users/{{ param_user }}/{{ item.fold_path }}"
+    path: "$HOME/{{ item.fold_path }}"
     state: directory
     owner: "{{ param_user }}"
   with_items:
@@ -118,11 +119,11 @@
 - name: Sync the tools dir
   synchronize:
     src: tools/
-    dest: "/Users/{{ param_user }}/bitrise/tools/"
+    dest: "$HOME/bitrise/tools/"
 
 - name: make cmd-bridge executable
   file:
-    path: $HOME/bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh
+    path: "$HOME/bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
     owner: vagrant
     group: staff
     mode: '0755'
