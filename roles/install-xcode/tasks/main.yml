@@ -20,4 +20,3 @@
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
   with_items:
     - "{{ simulators }}"
-
