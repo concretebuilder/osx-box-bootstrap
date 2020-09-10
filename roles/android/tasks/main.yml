@@ -62,6 +62,8 @@
   environment:
     PATH: "{{ android_home }}/cmdline-tools/tools/bin:{{ ansible_env.PATH }}"
   shell: "(echo y | sdkmanager --verbose '{{ item }}')"  # noqa 204 306
+  retries: 3
+  delay: 3
   with_items:
     - "{{ sdkmanagerpackages }}"
   args:
