@@ -14,7 +14,7 @@
     src: "{{ android_ndk_source }}"
     dest: "{{ android_ndk_home }}"
     owner: "{{ param_user }}"
-    mode: 0770
+    mode: "0770"
     remote_src: true
 
 - name: Create profile.d directory
@@ -36,6 +36,7 @@
   file:
     dest: "{{ android_home }}/cmdline-tools/"
     state: directory
+    mode: "0755"
 
 - name: Download and extract command-line tools for Android
   become: true
