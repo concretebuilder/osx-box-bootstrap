@@ -67,5 +67,4 @@
   shell: /usr/libexec/java_home -v 1.8
   register: detect_java_home
   ignore_errors: true
-
 ...
