@@ -1,53 +1,14 @@
 ---
-- name: brew install git
+- name: brew install formulas
   homebrew:
-    name: git
+    name: "{{ item.name }}"
     state: present
     update_homebrew: true
-- name: brew install wget
-  homebrew:
-    name: wget
-    state: present
-- name: brew install mercurial
-  homebrew:
-    name: mercurial
-    state: present
-- name: brew install ansible
-  homebrew:
-    name: ansible
-    state: present
-- name: brew install coreutils
-  homebrew:
-    name: coreutils
-    state: present
-- name: brew install watchman
-  homebrew:
-    name: watchman
-    state: present
-- name: brew install flow
-  homebrew:
-    name: flow
-    state: present
-- name: brew install tree
-  homebrew:
-    name: tree
-    state: present
-- name: brew install imagemagick
-  homebrew:
-    name: imagemagick
-    state: present
-- name: brew install ghostscript
-  homebrew:
-    name: ghostscript
-    state: present
-- name: brew install yarn
-  homebrew:
-    name: yarn
-    state: present
-- name: brew install screen
-  homebrew:
-    name: screen
-    state: present
+  with_items:
+    - "{{ brew_packages }}"
+
+- name: "run git lfs install"
+  shell: bash -l -c 'git lfs install'
 
 - name: Add ansible.cfg to add some settings
   copy:
@@ -60,17 +21,7 @@
   shell: bash -l -c "curl -sL firebase.tools | bash"
   become: true
 
-# Git LFS
-- name: "brew install git lfs"
-  homebrew:
-    name: git-lfs
-    state: present
-- name: "run git lfs install"
-  shell: bash -l -c 'git lfs install'
-
-#
-# Setup Bitrise specific folders
-#
+# Setup Bitrise specific folders:
 # Setup the base folders / paths, referenced by ~/.profiles/bitrise_profile
 # These folders will be created in the HOME directory.
 - name: Setup Bitrise specific folders
@@ -105,11 +56,6 @@
     src: tools/
     dest: "$HOME/bitrise/tools/"
     owner: "{{ param_user }}"
-
-- name: Install python@3
-  homebrew:
-    name: python@3
-    state: present
 
 - name: Check pip installs
   shell: bash -l -c "pip3 install requests"

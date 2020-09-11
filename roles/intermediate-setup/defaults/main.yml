@@ -1,0 +1,17 @@
+---
+brew_packages:
+  - name: git
+  - name: wget
+  - name: python@3
+  - name: mercurial
+  - name: ansible
+  - name: coreutils
+  - name: watchman
+  - name: flow
+  - name: tree
+  - name: imagemagick
+  - name: ghostscript
+  - name: yarn
+  - name: screen
+  - name: git-lfs
+...
