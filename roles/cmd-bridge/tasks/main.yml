@@ -3,7 +3,7 @@
 - name: Sync the tools dir
   synchronize:
     src: tools/
-    dest: "$HOME/bitrise/tools/"
+    dest: "Users/vagrant/bitrise/tools"
 
 - name: make cmd-bridge executable
   file:
