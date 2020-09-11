@@ -1,18 +1,7 @@
 def test_brew_packages_exist(host):
-    assert host.exists("git")
-    assert host.exists("wget")
-    assert host.exists("hg")
-    assert host.exists("ansible")
-    #checking coreutils
-    assert host.exists("gdate")
-    assert host.exists("watchman")
-    assert host.exists("flow")
-    assert host.exists("tree")
-    assert host.exists("magick")
-    assert host.exists("gs")
-    assert host.exists("yarn")
-    assert host.exists("screen")
-    assert host.exists("python3")
+    packages = ['git', 'wget', 'hg', 'ansible', 'gdate', 'watchman', 'flow', 'tree', 'magick', 'gs', 'yarn', 'screen', 'python3']
+    for package in packages:
+      assert host.exists(package)
 
 def test_ansible_cfg_exists(host):
     ansible_cfg = host.file("/home/linuxbrew/ansible.cfg")
