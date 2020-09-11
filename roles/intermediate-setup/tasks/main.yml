@@ -13,7 +13,7 @@
 - name: Add ansible.cfg to add some settings
   copy:
     src: ansible.cfg
-    dest: "$HOME/ansible.cfg"
+    dest: "{{ ansible_dest }}"
 
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
@@ -26,7 +26,7 @@
 # These folders will be created in the HOME directory.
 - name: Setup Bitrise specific folders
   file:
-    path: "$HOME/{{ item.fold_path }}"
+    path: "{{ bitrise_specific_folder_path }}"
     state: directory
     owner: "{{ param_user }}"
   with_items:
@@ -54,7 +54,7 @@
 - name: Update the tools folder
   copy:
     src: tools/
-    dest: "$HOME/bitrise/tools/"
+    dest: "{{ tools_folder_dest }}"
     owner: "{{ param_user }}"
 
 - name: Check pip installs

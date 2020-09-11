@@ -1,4 +1,7 @@
 ---
+ansible_dest: $HOME/ansible.cfg
+bitrise_specific_folder_path: $HOME/{{ item.fold_path }}
+tools_folder_dest: $HOME/bitrise/tools/
 brew_packages:
   - name: git
   - name: wget

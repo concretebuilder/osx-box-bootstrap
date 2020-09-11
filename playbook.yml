@@ -15,6 +15,6 @@
     - profiles
     - intermediate-setup
     - xcode-setup
-    - cmd-setup
+    - cmd-bridge
     - misc-setup
     - node
