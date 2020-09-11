@@ -1,6 +1,4 @@
 ---
-
-# brew some commands
 - name: brew install git
   homebrew:
     name: git
@@ -34,10 +32,6 @@
   homebrew:
     name: tree
     state: present
-- name: brew install carthage
-  homebrew:
-    name: carthage
-    state: present
 - name: brew install imagemagick
   homebrew:
     name: imagemagick
@@ -54,20 +48,11 @@
   homebrew:
     name: screen
     state: present
-- name: brew install readline
-  homebrew:
-    name: readline
-    state: present
 
 - name: Add ansible.cfg to add some settings
   copy:
     src: ansible.cfg
     dest: "$HOME/ansible.cfg"
-
-- name: brew install java
-  homebrew_cask:
-    name: java
-    state: present
 
 # curl used in place of get_url or uri module
 # Shells that use pipes should set the pipefail option
@@ -115,25 +100,12 @@
     #
     - { fold_path: 'bitrise/tools' }
 
-# Sync the tools/ dir
-- name: Sync the tools dir
-  synchronize:
+- name: Update the tools folder
+  copy:
     src: tools/
     dest: "$HOME/bitrise/tools/"
+    owner: "{{ param_user }}"
 
-- name: make cmd-bridge executable
-  file:
-    path: "$HOME/bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
-    owner: vagrant
-    group: staff
-    mode: '0755'
-- name: set up cmd-bridge
-  shell: bash -l -c "$HOME/bitrise/tools/cmd-bridge/_scripts/install_launchctl_plist_for_current_user.sh"
-- name: load plist
-  shell: bash -l -c "launchctl load /Users/vagrant/Library/LaunchAgents/bitrise.io.tools.cmd-bridge.plist"
-
-#
-# Install python3
 - name: Install python@3
   homebrew:
     name: python@3
@@ -141,17 +113,3 @@
 
 - name: Check pip installs
   shell: bash -l -c "pip3 install requests"
-
-# Switch to Xcode stable, the default Xcode for building
-- name: Switch to Xcode stable, the default Xcode for building
-  shell: bash -l -c "xcode-select --switch {{ xcode_path }}"
-  become: true
-
-# iOS Simulator list. Call it at least once to initialize these.
-# It seems since Xcode 8.3 only the first run
-# initializes the Simulator UDIDs, if we don't call it
-# during provisioning the UDIDs will change for every boot
-# and `xcrun simctl list` will take quite some time (~60 seconds).
-- name: xcrun simctl list
-  shell: bash -l -c "xcrun simctl list"
-  become: true
