@@ -3,7 +3,7 @@
 (
 	echo
 	echo "---> [install] Homebrew"
-	echo '' | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	echo '' | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 	res_code=$?
 	echo "---> [install] Homebrew [done]"
 
