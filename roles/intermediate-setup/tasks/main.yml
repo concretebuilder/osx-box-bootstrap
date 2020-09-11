@@ -30,32 +30,7 @@
     state: directory
     owner: "{{ param_user }}"
   with_items:
-    # BITRISE_SOURCE_DIR
-    - { fold_path: 'git' }
-    # BITRISE_STEP_DIR
-    - { fold_path: 'stepdir' }
-    # BITRISE_DEPLOY_DIR
-    - { fold_path: 'deploy' }
-    # BITRISE_LIBRARY_DIR
-    - { fold_path: 'Library/MobileDevice/Provisioning Profiles' }
-    # BITRISE_PROFILE_DIR
-    - { fold_path: 'profiles' }
-    # BITRISE_SYM_ROOT
-    - { fold_path: 'build' }
-    # BITRISE_OBJ_ROOT
-    - { fold_path: 'bin' }
-    # BITRISE_FOLDER_PATH
-    - { fold_path: 'bitrise' }
-    # BITRISE_STEP_DATA_FOLDER_PATH
-    - { fold_path: 'bitrise/stepdata' }
-    #
-    - { fold_path: 'bitrise/tools' }
-
-- name: Update the tools folder
-  copy:
-    src: tools/
-    dest: "{{ tools_folder_dest }}"
-    owner: "{{ param_user }}"
+    - "{{ bitrise_specific_folders }}"
 
 - name: Check pip installs
   shell: bash -l -c "pip3 install requests"
