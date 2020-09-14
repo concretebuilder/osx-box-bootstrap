@@ -11,16 +11,16 @@ def test_firebase_cli_exists(host):
     assert host.exists("firebase")
 
 def test_bitrise_specific_folder(host):
-    assert host.file("/home/linuxbrew/git").exists
-    assert host.file("/home/linuxbrew/stepdir").exists
-    assert host.file("/home/linuxbrew/deploy").exists
-    assert host.file("Library/MobileDevice/Provisioning Profiles").exists
-    assert host.file("/home/linuxbrew/profiles").exists
-    assert host.file("/home/linuxbrew/build").exists
-    assert host.file("/home/linuxbrew/bin").exists
-    assert host.file("/home/linuxbrew/bitrise").exists
-    assert host.file("/home/linuxbrew/bitrise/stepdata").exists
-    assert host.file("/home/linuxbrew/bitrise/tools").exists
-
+    folders = ["/home/linuxbrew/git",
+    "/home/linuxbrew/stepdir","/home/linuxbrew/deploy",
+    "Library/MobileDevice/Provisioning Profiles",
+    "/home/linuxbrew/profiles",
+    "/home/linuxbrew/build",
+    "/home/linuxbrew/bin",
+    "/home/linuxbrew/bitrise",
+    "/home/linuxbrew/bitrise/stepdata",
+    "/home/linuxbrew/bitrise/tools"]
+    for folder in folders:
+        assert host.file(folder).exists
 def test_pip_exists(host):
     assert host.exists("pip3")
