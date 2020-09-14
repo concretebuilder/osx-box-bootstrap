@@ -21,7 +21,8 @@ def test_bitrise_specific_folder(host):
     "/home/linuxbrew/git",
     "/home/linuxbrew/profiles",
     "Library/MobileDevice/Provisioning Profiles",
-    "/home/linuxbrew/stepdir"]
+    "/home/linuxbrew/stepdir"
+    ]
     for folder in folders:
         assert host.file(folder).exists
 
