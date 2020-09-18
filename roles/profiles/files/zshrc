@@ -1,0 +1,44 @@
+export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
+# Homebrew
+#  Don't do auto update
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_ANALYTICS=1
+
+# Go
+export PATH="$PATH:/usr/local/opt/go/libexec/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+# Ruby - force brew installed Ruby
+if [ -d "/usr/local/lib/ruby/gems/2.5.0/bin" ] ; then
+  export PATH="$PATH:/usr/local/lib/ruby/gems/2.5.0/bin"
+fi
+if [ -x "$(command -v rbenv)" ] ; then
+  eval "$(rbenv init -)"
+  RUBY_CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline`
+fi
+
+# Bitrise environments
+if [ -s "$HOME/.profiles/bitrise_profile" ] ; then
+  source "$HOME/.profiles/bitrise_profile"
+fi
+
+# (3rd party) Tools environments
+if [ -s "$HOME/.profiles/tools_profile" ] ; then
+  source "$HOME/.profiles/tools_profile"
+fi
+
+# Xamarin environments, if exists
+if [ -s "$HOME/.profiles/xamarin_profile" ] ; then
+  source "$HOME/.profiles/xamarin_profile"
+fi
+
+for PROFILE_SCRIPT in $( ls $HOME/profile.d/* ); do
+  . $PROFILE_SCRIPT
+done
+
+# keep a newline at the end of this file
