@@ -41,4 +41,6 @@ for PROFILE_SCRIPT in $( ls $HOME/profile.d/* ); do
   . $PROFILE_SCRIPT
 done
 
+export JAVA_HOME="$(jenv prefix)"
+
 # keep a newline at the end of this file
