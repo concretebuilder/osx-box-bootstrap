@@ -112,7 +112,7 @@ workflows:
             #!/usr/bin/env bash
             set -e
             for f in $(find . -name '*playbook.yml'); do
-              ansible-lint -c ansible-lint.yaml "$f"
+              ansible-lint -c ansible-lint.yaml --exclude machine-setup/playbook.yml "$f"
             done
     - script:
         title: Run Yamllint
