@@ -1,0 +1,8 @@
+---
+
+- name: Apple certificate download
+  shell: bash -l -c "curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output apple_cert.cer"
+
+- name: Add Apple certificate
+  shell: bash -l -c "sudo security add-certificates -k /Library/Keychains/System.keychain apple_cert.cer"
+
