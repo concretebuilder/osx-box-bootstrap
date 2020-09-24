@@ -8,14 +8,13 @@
     - param_user: vagrant
     - ansible_ssh_private_key_file: "~/.ssh/build_id_ed25519"
   tasks:
-    # vs4mac update
     - name: Copy applescript to machine
       copy:
         src: files/setup.applescript
         dest: "/Users/{{ param_user }}/setup.applescript"
         owner: "{{ param_user }}"
         mode: "0600"
-    - name: Run setup script
+    - name: Run setup script # noqa 301 305
       shell: bash -l -c "osascript /Users/{{ param_user }}/setup.applescript"
     - name: Remove file (delete file)
       file:
