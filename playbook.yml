@@ -12,7 +12,6 @@
     - param_user: vagrant
   roles:
     - ssh-setup
-    - profiles
     - intermediate-setup
     - xcode-setup
     - cmd-bridge
