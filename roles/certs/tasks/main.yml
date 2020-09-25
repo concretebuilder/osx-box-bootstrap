@@ -12,6 +12,7 @@
     checksum: md5:08a45128fa238443623421dd2c9887ab
   when: apple_cert.stat.exists == False
 
+#Check the file if the add-certificates command ran successfully or not
 - name: Check if flag file exists
   stat:
     path: /root/apple_cert_2030_added
