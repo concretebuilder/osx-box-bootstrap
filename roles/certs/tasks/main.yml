@@ -15,4 +15,3 @@
 
 - name: Add Apple certificate
   shell: bash -l -c "sudo security add-certificates -k /Library/Keychains/System.keychain $HOME/apple_cert.cer"
-
