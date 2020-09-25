@@ -19,6 +19,7 @@
   register: apple_flag
 
 - name: Add Apple certificate
-  shell: bash -l -c "sudo security add-certificates -k /Library/Keychains/System.keychain $HOME/apple_cert.cer && \
+  shell: |-
+          bash -l -c "sudo security add-certificates -k /Library/Keychains/System.keychain $HOME/apple_cert.cer && \
           touch /root/apple_cert_2030_added"
   when: apple_flag.stat.exists == False
