@@ -1,25 +1,10 @@
 ---
-
-- name: Check if cert exists
-  stat:
-    path: $HOME/apple.cer
-  register: apple_cert
-
 - name: Apple certificate download
   get_url:
     url: https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer
     dest: $HOME/apple_cert.cer
     checksum: md5:08a45128fa238443623421dd2c9887ab
-  when: apple_cert.stat.exists == False
-
-# Check the file if the add-certificates command ran successfully or not
-- name: Check if flag file exists
-  stat:
-    path: /root/apple_cert_2030_added
-  register: apple_flag
 
 - name: Add Apple certificate
-  shell: |-
-          bash -l -c "sudo security add-certificates -k /Library/Keychains/System.keychain $HOME/apple_cert.cer && \
-          touch /root/apple_cert_2030_added"
+  shell: bash -l -c "sudo security add-certificates -k /Library/Keychains/System.keychain $HOME/apple_cert.cer
   when: apple_flag.stat.exists == False
