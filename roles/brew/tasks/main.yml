@@ -36,7 +36,7 @@
   file:
     path: /tmp/brew_installer.sh
     state: absent
-  when: brew_installed is failed
+  when: is_brew_installed is failed
 
 - name: Is brew in bash_profile
   shell: "grep brew ~/.bash_profile"
