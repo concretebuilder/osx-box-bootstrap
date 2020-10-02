@@ -43,7 +43,7 @@
     name: homebrew/cask-versions
     state: absent
 
-- name: Use our own version of cas-versions  # noqa 302
+- name: Use our own mirror of cask-versions  # noqa 302
   shell: |
     mkdir -p `brew --repository`/bitrise-io
     git clone https://github.com/bitrise-io/homebrew-cask-versions ~/mirrors/github.com/bitrise-io/cask-versions
