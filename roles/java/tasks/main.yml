@@ -45,6 +45,7 @@
 
 - name: Use our own mirror of cask-versions  # noqa 302
   shell: |
+    rm -rf ~/mirrors/github.com/bitrise-io/cask-versions
     mkdir -p /usr/local/Homebrew/bitrise-io
     git clone https://github.com/bitrise-io/homebrew-cask-versions ~/mirrors/github.com/bitrise-io/cask-versions
     git clone ~/mirrors/github.com/bitrise-io/cask-versions /usr/local/Homebrew/bitrise-io/cask-versions
