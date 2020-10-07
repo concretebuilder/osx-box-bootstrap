@@ -12,7 +12,6 @@ rm -rf ~/mirrors/github.com/bitrise-io/homebrew-core
 
 mkdir -p ~/mirrors/github.com/bitrise-io/
 
-
 git clone --bare https://github.com/bitrise-io/homebrew-core ~/mirrors/github.com/bitrise-io/homebrew-core
 
 export HOMEBREW_CORE_GIT_REMOTE="~/mirrors/github.com/bitrise-io/homebrew-core"
