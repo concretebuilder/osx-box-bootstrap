@@ -110,3 +110,8 @@
   with_items:
     - { fold_path: 'Library/Developer/Xcode/DerivedData' }
     - { fold_path: 'Library/Caches/com.apple.dt.Xcode/Downloads' }
+
+- name: Brew cleanup weekly
+  include_role:
+    name: brew-cleanup-weekly
+    tasks_from: main
