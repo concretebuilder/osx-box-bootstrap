@@ -102,6 +102,16 @@
 #     (built during Stack prepare, to validate the Xcode setup)
 #  * Xcode "components" (simulators) installer Download Cache dir:
 #     Xcode stores the simulator installers here, and it never cleans them up for some reason.
+
+- name: Disable homebrew install cleanup in zshrc
+  lineinfile:
+    path: ~/.zshrc
+    line: export HOMEBREW_NO_INSTALL_CLEANUP=1
+- name: Disable homebrew install cleanup in bashrc
+  lineinfile:
+    path: ~/.bashrc
+    line: export HOMEBREW_NO_INSTALL_CLEANUP=1
+
 - name: Remove tmp and test dirs inside the HOME directory
   file:
     path: "$HOME/{{ item.fold_path }}"
