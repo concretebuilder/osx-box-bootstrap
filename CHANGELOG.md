@@ -1,7 +1,7 @@
 ## UPCOMING
 
 ## `v2020_11_03_1`
-* `disable homebrew install cleanup`
+* `disable the execution of brew cleanup during install`
 
 ## `v2020_10_27_1`
 * `install cocoapods to the latest`
