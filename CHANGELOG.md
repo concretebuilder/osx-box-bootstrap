@@ -1,5 +1,17 @@
 ## UPCOMING
 
+## `v2020_11_03`
+* `switch Xcode to 12.1.1 Release Candidate`
+
+## `v2020_10_27_1`
+* `install cocoapods to the latest`
+
+## `v2020_10_14_1`
+* `install ionic to latest`
+
+## `v2020_10_10_1`
+* `flutter`: `1.22.1`
+
 ## `v2020_10_07`
 * `include certs role in weekly update as well`
 * `certs role now can run multiple times`
