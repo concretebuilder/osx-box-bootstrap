@@ -129,6 +129,7 @@ workflows:
             intermediate-setup-test
             weekly-cache-update-test
             test_ruby
+            test_ruby_gems
             test_node
             test_android
             test_ssh-setup
@@ -206,6 +207,12 @@ workflows:
   test_ruby:
     envs:
     - ROLE: "ruby"
+    after_run:
+    - _run_molecule_test
+
+  test_ruby_gems:
+    envs:
+    - ROLE: "ruby-gems"
     after_run:
     - _run_molecule_test
 

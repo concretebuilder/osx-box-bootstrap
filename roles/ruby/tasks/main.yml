@@ -11,5 +11,5 @@
     state: unlinked
   when: ansible_distribution == 'Ubuntu'
 
-- name: Install rubys and gems
+- name: Install ruby
   import_tasks: ruby.yml
