@@ -2,5 +2,7 @@
 - name: Converge
   hosts: all
   roles:
+    - role: ruby
+      param_user: "linuxbrew"
     - role: ruby-gems
       param_user: "linuxbrew"
