@@ -13,8 +13,8 @@
     - param_user: vagrant
     - bitrise_cli_version: "{{ lookup('file', '/Users/vagrant/git/cli_version.txt') }}"
   roles:
-    - role: ruby-gems
     - role: profiles
+    - role: ruby-gems
     - role: certs
     - role: ssh-setup
     - role: brew-repos-fix
