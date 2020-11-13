@@ -1,6 +1,6 @@
 ---
 - name: Remove all (non default) gems
-  script: ../../../_scripts/ruby_cleanup.sh
+  script: ruby_cleanup.sh
   register: rubycleanupout
   ignore_errors: yes
   changed_when: "'Clean up complete' in rubycleanupout.stdout"
