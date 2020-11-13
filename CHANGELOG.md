@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_11_13`
+* `cleanup gems before install to prevent dependency issues - fixes fastlane install failures`
+
 ## `v2020_11_10`
 * `separate ruby-gems role to install gems and pods - reinstall gems in the weekly update`
 
