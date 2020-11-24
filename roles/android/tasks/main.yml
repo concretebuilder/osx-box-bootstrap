@@ -58,7 +58,8 @@
     mode: "0777"
 
 - name: Install SDKs
-  include_tasks: roles/android/tasks/sdk-install.yml
+  include_tasks:
+    file: sdk-install.yml
   with_items:
     - "{{ sdkmanagerpackages }}"
   loop_control:
