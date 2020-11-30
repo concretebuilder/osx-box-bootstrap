@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_11_30`
+* `Sample ios and macos automated tests`
+
 ## `v2020_11_16`
 * `switch Xcode to 12.2 Release`
 
