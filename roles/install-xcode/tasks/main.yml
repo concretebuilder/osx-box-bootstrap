@@ -34,6 +34,15 @@
     group: staff
     mode: '0755'
 
+# Based on the manual approach experience, sometimes xcrun xctrace won't list devices on the first run
+# this task is here to make sure it is executed at least once before we are trying to read its output
+- name: Initalize xcrun xctrace device list
+  shell: >
+    bash -l -c "xcrun xctrace list devices"
+  environment:
+    XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
+    XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
+
 # instruments is deprecated -> xcrun used instead, but it writes to stderr for some reason hence: 2>&1 >/dev/null
 - name: Get iOS simulator ID
   shell: >
