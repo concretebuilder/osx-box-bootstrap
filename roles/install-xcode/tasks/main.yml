@@ -44,9 +44,9 @@
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
 
 # instruments is deprecated -> xcrun used instead, but it writes to stderr for some reason hence: 2>&1 >/dev/null
-- name: Get iOS simulator ID
+- name: Get iOS simulator ID  # noqa 306
   shell: >
-    bash -l -c "xcrun xctrace list devices 2>&1 >/dev/null | grep iPhone | head -1 | awk -F '[: ]' '{print \$4}' | awk -F'[()]' '{print \$2}'"
+    bash -l -c "set -o pipefail && xcrun xctrace list devices 2>&1 >/dev/null | grep iPhone | head -1 | awk -F '[: ]' '{print \$4}' | awk -F'[()]' '{print \$2}'"
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
