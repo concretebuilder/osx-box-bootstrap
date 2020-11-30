@@ -25,21 +25,36 @@
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
 
-# TODO: This causes permission issues + the hardcoded simulator version could be a problem
-# Needs to be solved in an upcoming sprint, commenting out so that the builds won't fail meanwhile
+- name: Prepare testapps directories
+  become: true
+  file:
+    path: /opt/bitrise/testapps
+    state: directory
+    owner: "{{ param_user }}"
+    group: staff
+    mode: '0755'
 
-# - name: Git checkout
-#   git:
-#     repo: 'https://github.com/bitrise-io/xcode-test-apps'
-#     dest: "/opt/bitrise/testapps"
-#     version: 1.0
+# instruments is deprecated -> xcrun used instead, but it writes to stderr for some reason hence: 2>&1 >/dev/null
+- name: Get iOS simulator ID
+  shell: >
+    bash -l -c "xcrun xctrace list devices 2>&1 >/dev/null | grep iPhone | head -1 | awk -F '[: ]' '{print \$4}' | awk -F'[()]' '{print \$2}'"
+  environment:
+    XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
+    XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
+  register: ios_simulator_id
 
-# - name: Xcodebuild iOS
-#   shell: xcodebuild test -project bitrise.xcodeproj -scheme bitrise -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.2'
-#   args:
-#     chdir: "/opt/bitrise/testapps/bitrise"
+- name: Git checkout
+  git:
+    repo: "https://github.com/bitrise-io/xcode-test-apps"
+    dest: "/opt/bitrise/testapps"
+    version: "1.0"
 
-# - name: Xcodebuild macOS
-#   shell: xcodebuild test -project bitrise-mac.xcodeproj -scheme bitrise-mac -destination 'platform=macOS,arch=x86_64,id=420E1727-1771-77C5-658D-E41EAF10AE6C'
-#   args:
-#     chdir: "/opt/bitrise/testapps/bitrise-mac"
+- name: Xcodebuild iOS
+  shell: xcodebuild test -project bitrise.xcodeproj -scheme bitrise -destination 'platform=iOS Simulator,id={{ ios_simulator_id.stdout }}'
+  args:
+    chdir: "/opt/bitrise/testapps/bitrise"
+
+- name: Xcodebuild macOS
+  shell: xcodebuild test -project bitrise-mac.xcodeproj -scheme bitrise-mac -destination 'platform=macOS,arch=x86_64'
+  args:
+    chdir: "/opt/bitrise/testapps/bitrise-mac"
