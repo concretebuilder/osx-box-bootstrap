@@ -34,27 +34,27 @@
     group: staff
     mode: '0755'
 
-# instruments is deprecated -> xcrun used instead, but it writes to stderr for some reason hence: 2>&1 >/dev/null
-# Sometimes on the first run xcrun xctrace list devices will not report the devices (experience from doing it manually), hence the retry.
-- name: Get iOS simulator ID  # noqa 306
-  shell: >
-    bash -l -c "set -o pipefail && xcrun xctrace list devices 2>&1 >/dev/null | grep iPhone | head -1 | awk -F '[: ]' '{print \$4}' | awk -F'[()]' '{print \$2}'"
-  environment:
-    XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
-    XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
-  register: ios_simulator_id
-  retries: 3
-  delay: 3
-  until: ios_simulator_id is not failed
-
 - name: Git checkout
   git:
     repo: "https://github.com/bitrise-io/xcode-test-apps"
     dest: "/opt/bitrise/testapps"
     version: "1.0"
 
+- name: Get simulator for latest iOS version
+  script: get_latest_simulator.py
+  environment:
+    XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
+    XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
+  register: ios_simulator
+  retries: 3
+  delay: 3
+  until: ios_simulator is not failed
+
+- name: Update target iOS version
+  shell: bash -l -c "sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = .*;/IPHONEOS_DEPLOYMENT_TARGET = {{ ios_simulator.stdout.split()[0] }};/g' /opt/bitrise/testapps/bitrise/bitrise.xcodeproj/project.pbxproj"
+
 - name: Xcodebuild iOS
-  shell: xcodebuild test -project bitrise.xcodeproj -scheme bitrise -destination 'platform=iOS Simulator,id={{ ios_simulator_id.stdout }}'
+  shell: xcodebuild test -project bitrise.xcodeproj -scheme bitrise -destination 'platform=iOS Simulator,id={{ ios_simulator.stdout.split()[1] }}'
   args:
     chdir: "/opt/bitrise/testapps/bitrise"
 
