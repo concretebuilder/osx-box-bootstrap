@@ -53,4 +53,3 @@
 - name: Enable accessibility to xcode
   script: install_accessibility.sh
   become: true
-
