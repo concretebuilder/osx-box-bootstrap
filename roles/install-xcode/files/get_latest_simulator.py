@@ -4,13 +4,12 @@ import re
 import os
 import sys
 
-bashCommand = "xcrun xctrace list devices 2>&1 >/dev/null | grep iPhone"
+# Some devices contain both iOS and watchOS for some reason + ignoring SE simulators
+bashCommand = "xcrun xctrace list devices 2>&1 >/dev/null | grep iPhone | grep -v Watch | grep -v 'iPhone SE'"
 process = subprocess.Popen(bashCommand, stdout=subprocess.PIPE, shell=True, env=os.environ.copy())
 output, error = process.communicate()
 
-lines = output.decode("utf-8").split("\n")
-# Some devices contain both iOS and watchOS for some reason + ignoring SE simulators + removing empty lines
-lines = [line for line in lines if "Watch" not in line and "iPhone SE" not in line and line]
+lines = [line for line in output.decode("utf-8").split("\n") if line]
 
 if not lines:
   sys.exit(1)
