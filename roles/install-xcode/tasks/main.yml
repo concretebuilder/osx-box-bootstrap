@@ -49,6 +49,7 @@
     dest: "/opt/bitrise/testapps"
     version: "1.0"
 
+# Sometimes on the first run the simulator list could be empty (based on experience doing this manually), hence the retries.
 - name: Get simulator for latest iOS version
   script: get_latest_simulator.py
   environment:
