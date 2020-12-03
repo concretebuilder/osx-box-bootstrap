@@ -1,4 +1,9 @@
 ---
+- name: Fail if we are not on Catalina
+  fail:
+    msg: "Looks like you are trying to enable accessibility on not Catalina version of MacOS. It is not allowed because the syntax of TCC might be changed."
+  when: ansible_facts['ansible_distribution'] == 'MacOSX' and ansible_facts['distribution_major_version'] == "10"
+
 - name: Install xcode-install
   gem:
     name: xcode-install
@@ -44,11 +49,8 @@
 #   args:
 #     chdir: "/opt/bitrise/testapps/bitrise-mac"
 # TODO: We should use profiles for enable accessibility but it needs more time and investigation, will happen in the upcoming sprint
+
 - name: Enable accessibility to xcode
   script: install_accessibility.sh
   become: true
 
-- name: Fail if we are not on Catalina
-  fail:
-    msg: "Looks like you are trying to enable accessibility on not Catalina version of MacOS. It is not allowed because the syntax of TCC might be changed."
-  when: ansible_facts['ansible_distribution'] == 'MacOSX' and ansible_facts['distribution_major_version'] == "10"
