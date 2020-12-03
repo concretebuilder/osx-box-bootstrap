@@ -11,7 +11,7 @@ output, error = process.communicate()
 
 lines = [line for line in output.decode("utf-8").split("\n") if line]
 
-if not lines:
+if not lines or error:
   sys.exit(1)
 
 r = re.compile("\(\d{1,2}\.\d{1,2}(\.\d{1,2})?\)")
