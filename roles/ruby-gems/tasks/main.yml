@@ -19,3 +19,6 @@
   shell: bash -l -c "pod setup"
   retries: 3
   when: is_incremental_setup|default(false) == false
+
+- name: "CocoaPods: pod repo update"
+  shell: bash -l -c "pod repo update"
