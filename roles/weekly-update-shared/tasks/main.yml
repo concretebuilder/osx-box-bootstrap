@@ -45,7 +45,8 @@
 # ----------------------------------------
 
 - name: "CocoaPods: pod setup"
-  shell: bash -l -c "pod setup || pod setup"
+  shell: bash -l -c "pod setup"
+  retries: 3
 - name: "CocoaPods: pod repo update"
   shell: bash -l -c "pod repo update"
 
