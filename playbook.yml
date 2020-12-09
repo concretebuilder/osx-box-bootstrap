@@ -17,3 +17,5 @@
     - xcode-setup
     - cmd-bridge
     - misc-setup
+    - node
+    - certs
