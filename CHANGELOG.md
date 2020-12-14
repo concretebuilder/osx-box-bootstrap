@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2020_12_14`
+* split out simulators and test projects from xcode install
+
 ## `v2020_12_09`
 * `appcenter-cli updated to 2.7.3`
 
