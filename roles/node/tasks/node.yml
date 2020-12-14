@@ -22,5 +22,6 @@
     name: "{{ item.name }}"
     global: true
     version: "{{ item.version }}"
+    state: present
   with_items:
     - "{{ npm_packages }}"
