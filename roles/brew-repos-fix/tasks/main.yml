@@ -25,7 +25,7 @@
       mode: "0755"
 
   - name: Setup brew to use our own fork of homebrew core to ensure versions
-    script: /opt/bitrise/setup_brew_core.s.sh
+    script: /opt/bitrise/setup_brew_core.sh
 
   when: brew_repository_core_set is failed
 
