@@ -2,14 +2,14 @@
 
 set -e
 
-source ~/.bash_profile
+source {{ ansible_env.HOME }}/.bash_profile
 
 brew_repository=$(brew --repository)
 
-rm -rf ~/mirrors/github.com/bitrise-io/homebrew-cask
+rm -rf {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-cask
 
-mkdir -p ~/mirrors/github.com/bitrise-io/
+mkdir -p {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/
 
-git clone --bare https://github.com/bitrise-io/homebrew-cask ~/mirrors/github.com/bitrise-io/homebrew-cask
+git clone --bare https://github.com/bitrise-io/homebrew-cask {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-cask
 
-git clone ~/mirrors/github.com/bitrise-io/homebrew-cask "${brew_repository}/Library/Taps/homebrew/homebrew-cask"
+git clone {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-cask "${brew_repository}/Library/Taps/homebrew/homebrew-cask"
