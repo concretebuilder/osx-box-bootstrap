@@ -26,6 +26,7 @@
 
   - name: Setup brew to use our own fork of homebrew core to ensure versions
     script: /opt/bitrise/setup_brew_core.sh
+    remote_src: yes
 
   when: brew_repository_core_set is failed
 
@@ -46,5 +47,6 @@
 
   - name: Setup brew to use our own fork of homebrew cask to ensure versions
     script: /opt/bitrise/setup_brew_cask.sh
+    remote_src: yes
 
   when: brew_repository_cask_set is failed
