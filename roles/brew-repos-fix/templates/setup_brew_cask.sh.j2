@@ -12,4 +12,6 @@ mkdir -p {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/
 
 git clone --bare https://github.com/bitrise-io/homebrew-cask {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-cask
 
+rm -rf "${brew_repository}/Library/Taps/homebrew/homebrew-cask"
+
 git clone {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-cask "${brew_repository}/Library/Taps/homebrew/homebrew-cask"
