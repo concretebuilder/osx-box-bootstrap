@@ -4,6 +4,15 @@
   changed_when: false
   ignore_errors: true
 
+- name: "Ensure /opt/bitrise exists"
+  file:
+    path: /opt/bitrise
+    state: directory  # yamllint disable-line rule:truthy
+    owner: "{{ param_user }}"
+    group: wheel
+    mode: "0755"
+  become: true
+
 - name: Update brew
   shell: . ~/.bash_profile && brew update
   changed_when: false
