@@ -38,8 +38,6 @@ workflows:
             - file_path: _scripts/molecule/install_dependencies.sh
 
   _ansible-play:
-    before-run:
-      - _install-dependencies
     steps:
       - script:
           title: Run Ansible Playbook on CI's build VM
@@ -50,7 +48,7 @@ workflows:
 
                 set -e
 
-                pip install ansible==2.10.4
+                _scripts/molecule/install_dependencies.sh
 
                 ansible-playbook \
                 -vv \
