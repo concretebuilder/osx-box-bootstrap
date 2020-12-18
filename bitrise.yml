@@ -50,6 +50,8 @@ workflows:
 
                 set -e
 
+                pip install ansible==2.10.4
+
                 ansible-playbook \
                 -vv \
                 -e xcode_path="$(xcode-select -p)" \
