@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exo pipefail
+set -eo pipefail
 
 script_full_path=$(dirname "$0")
 os="$(uname -s)"

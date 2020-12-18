@@ -3,4 +3,3 @@
   shell: /usr/local/bin/brew cleanup
   changed_when: false
   ignore_errors: true
-  register: brew_cleanup
