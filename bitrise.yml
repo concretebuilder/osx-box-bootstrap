@@ -48,7 +48,7 @@ workflows:
 
                 set -e
 
-                pip install -r _scripts/molecule/requirements.txt
+                pip install -r _scripts/molecule/requirements.txt --log requirements_install.log
 
                 ansible-playbook \
                 -vv \
