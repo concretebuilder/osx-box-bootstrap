@@ -34,9 +34,10 @@
   when: result.rc == 0
 
 - name: brew uninstall latest java
-  homebrew_cask:
+  homebrew:
     name: java
     state: absent
+    install_options: --cask
 
 - name: brew untap homebrew/cask-versions if it is there
   homebrew_tap:
@@ -55,15 +56,17 @@
     name: AdoptOpenJDK/openjdk
     state: present
 
-- name: brew cask install adoptopenjdk8
-  homebrew_cask:
+- name: brew install adoptopenjdk8
+  homebrew:
     name: adoptopenjdk/openjdk/adoptopenjdk8
     state: present
+    install_options: --cask
 
-- name: brew cask install adoptopenjdk11
-  homebrew_cask:
+- name: brew install adoptopenjdk11
+  homebrew:
     name: adoptopenjdk11
     state: present
+    install_options: --cask
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8
