@@ -33,13 +33,10 @@
   ignore_errors: true
   when: result.rc == 0
 
-# - name: brew uninstall latest java
-#   homebrew:
-#     name: java
-#     state: absent
-#     install_options: --cask
 - name: brew uninstall latest java
-  shell: bash -l -c "brew uninstall java --cask"
+  homebrew_cask:
+    name: java
+    state: absent
 
 - name: brew untap homebrew/cask-versions if it is there
   homebrew_tap:
@@ -65,10 +62,9 @@
     install_options: --cask
 
 - name: brew install adoptopenjdk11
-  homebrew:
+  homebrew_cask:
     name: adoptopenjdk11
     state: present
-    install_options: --cask
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8
