@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_01_08`
+* `brew install fixes`
+
 ## `v2020_12_16`
 * `brew local mirror fixes`
 
