@@ -37,6 +37,7 @@
   homebrew:
     name: java
     state: absent
+    install_options: ignore-dependencies
 
 - name: brew untap homebrew/cask-versions if it is there
   homebrew_tap:
