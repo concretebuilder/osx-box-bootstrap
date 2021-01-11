@@ -58,13 +58,15 @@
 
 - name: brew install openjdk8
   homebrew:
-    name: openjdk@8
+    name: adoptopenjdk8
     state: present
+    install_options: cask
 
 - name: brew install openjdk11
   homebrew:
-    name: openjdk@11
+    name: adoptopenjdk11
     state: present
+    install_options: cask
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8
