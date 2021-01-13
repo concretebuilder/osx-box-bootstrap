@@ -57,13 +57,13 @@
     state: present
 
 - name: brew install openjdk8
-  homebrew:
-    name: openjdk@8
+  homebrew_cask:
+    name: adoptopenjdk8
     state: present
 
 - name: brew install openjdk11
-  homebrew:
-    name: openjdk@11
+  homebrew_cask:
+    name: adoptopenjdk11
     state: present
 
 - name: Detect JAVA_HOME
