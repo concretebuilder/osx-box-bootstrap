@@ -8,8 +8,8 @@
   any_errors_fatal: true
   vars:
     - param_user: vagrant
-    - XCODE_INSTALL_USER: # define this
-    - XCODE_INSTALL_PASSWORD: # define this
+    - XCODE_INSTALL_USER: <DEFINE THIS>
+    - XCODE_INSTALL_PASSWORD: <DEFINE THIS>
   roles:
     - role: profiles
     - role: simulators
