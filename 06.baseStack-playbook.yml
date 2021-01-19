@@ -9,6 +9,7 @@
   vars:
     - param_user: vagrant
     - param_group: staff
+    - xcode_path: "/Applications/Xcode.app"
     - bitrise_cli_version: "1.43.0"
   environment:
     - GITHUB_ACCESS_TOKEN: <DEFINE THIS>
