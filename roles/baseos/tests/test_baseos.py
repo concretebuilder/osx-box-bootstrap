@@ -23,7 +23,7 @@ class TestBaseOS(unittest.TestCase):
         self.assertEqual(self.host.run('sudo defaults -currentHost read com.apple.screensaver | grep "idleTime = 0;"').rc, 0)
 
     def test_if_auto_login_user_is_set_to_vagrant(self):
-        self.assertEqual(self.host.run('defaults read /Library/Preferences/com.apple.loginwindow.plist | autoLoginUser = vagrant;').rc, 0)
+        self.assertEqual(self.host.run('defaults read /Library/Preferences/com.apple.loginwindow.plist | grep "autoLoginUser = vagrant;"').rc, 0)
 
     def test_if_hibernate_turned_off(self):
         self.assertEqual(self.host.run('pmset -g | grep "hibernatemode.*\ 0$"').rc, 0)

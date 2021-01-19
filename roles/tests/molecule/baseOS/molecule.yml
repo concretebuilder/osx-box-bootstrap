@@ -22,6 +22,7 @@ provisioner:
         ansible_ssh_pass: vagrant
         param_user: vagrant
   playbooks:
+    converge: ../../../../01.baseOS-playbook.yml
     create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
     destroy: ${MOLECULE_DESTROY_PLAYBOOK:-"../common-playbooks/destroy.anka.yml"}
 verifier:
