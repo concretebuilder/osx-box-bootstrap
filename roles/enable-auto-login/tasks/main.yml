@@ -19,9 +19,11 @@
         name: kcpassword
         state: present
 
-    - git:
+    - name: Git clone kcpasswd
+      git:
         repo: 'https://github.com/veertuinc/kcpassword.git'
         dest: /tmp/enable_autologin
+        version: HEAD
 
     - name: Enable auto-login for {{ param_user }}
       become: true
