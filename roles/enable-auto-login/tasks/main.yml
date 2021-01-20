@@ -1,0 +1,32 @@
+---
+- name: Check if Auto Login user is Administrator
+  become: true
+  shell: defaults read /Library/Preferences/com.apple.loginwindow | grep "autoLoginUser = {{ param_user }};"
+  register: autologinuser_state
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+
+- name: Setup and enable auto-login
+  block:
+    - name: Tap for kcpassword
+      homebrew_tap:
+        name: xfreebird/utils
+        state: present
+
+    - name: Install kcpassword
+      homebrew:
+        name: kcpassword
+        state: present
+
+    - name: Git clone kcpasswd
+      git:  # noqa 401
+        repo: 'https://github.com/veertuinc/kcpassword.git'
+        dest: /tmp/enable_autologin
+
+    - name: Enable auto-login for {{ param_user }}
+      become: true
+      shell: "/tmp/enable_autologin/enable_autologin '{{ param_user }}' '{{ password_of_param_user }}'"
+      environment:
+        PATH: /usr/local/bin/:{{ ansible_env.PATH }}
+  when: autologinuser_state.rc == 1

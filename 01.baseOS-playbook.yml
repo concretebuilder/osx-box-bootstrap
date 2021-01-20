@@ -1,0 +1,13 @@
+---
+#
+# Ansible playbook to prepare a Bitrise OS X VM/box, used through vagrant
+#
+
+- hosts: all
+  become_method: sudo
+  any_errors_fatal: true
+  vars:
+    - param_user: vagrant
+  roles:
+    - role: baseos
+    - role: enable-auto-login

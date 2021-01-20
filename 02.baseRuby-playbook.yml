@@ -1,0 +1,16 @@
+---
+#
+# Ansible playbook to prepare a Bitrise OS X VM/box, used through vagrant
+#
+
+- hosts: all
+  become_method: sudo
+  any_errors_fatal: true
+  vars:
+    - param_user: vagrant
+  roles:
+    - role: profiles
+    - role: brew
+    - role: brew-repos-fix
+    - role: tmp-setup
+    - role: ruby

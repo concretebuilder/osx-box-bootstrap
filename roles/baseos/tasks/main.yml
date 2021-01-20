@@ -1,0 +1,102 @@
+---
+- name: Let {{ param_user }} to execute sudo commands without password
+  become: true
+  copy:
+    content: '{{ param_user }} ALL=(ALL) NOPASSWD:ALL'
+    dest: /etc/sudoers.d/{{ param_user }}
+    mode: 0440
+
+- name: Check if auto updates are disabled
+  become: true
+  shell: softwareupdate --schedule | grep -q 'off'
+  register: is_softwareupdates_disabled
+  changed_when: false
+  ignore_errors: true
+
+- name: Disable auto-updates
+  become: true
+  shell: softwareupdate --schedule off
+  when: is_softwareupdates_disabled.rc == 1
+
+- name: Check if spotlight is disabled
+  become: true
+  shell: launchctl list | grep -q com.apple.metadata.mds
+  register: spotlight_state
+  changed_when: false
+  ignore_errors: true
+
+- name: Disable spotlight
+  become: true
+  shell:
+    cmd: |
+      defaults write $HOME/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array "/Volumes"
+      defaults write $HOME/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array "/Network"
+  when: spotlight_state.rc == 1
+
+- name: Get mds running processes
+  shell: "ps auxww | grep mds | grep -v grep | awk '{print $2}'"
+  register: running_processes
+  changed_when: false
+  ignore_errors: true
+  when: spotlight_state.rc == 1
+
+- name: Kill running processes
+  shell: "kill {{ item }}"
+  with_items: "{{ running_processes.stdout_lines }}"
+  when: spotlight_state.rc == 1
+
+- name: Make sure indexing is DISABLED for the main volume
+  become: true
+  shell:
+    cmd: |
+      mdutil -a -i off /
+      mdutil -a -i off
+  when: spotlight_state.rc == 1
+
+- name: Check if computer sleep is enabled
+  become: true
+  shell: systemsetup -getcomputersleep | grep -q Never
+  register: computer_sleep_state
+  changed_when: false
+  ignore_errors: true
+
+- name: Disable computer sleep
+  become: true
+  shell: systemsetup -setcomputersleep Never
+  when: computer_sleep_state.rc == 1
+
+- name: Check if display sleep is enabled
+  become: true
+  shell: systemsetup -getdisplaysleep | grep -q Never
+  register: display_sleep_state
+  changed_when: false
+  ignore_errors: true
+
+- name: Disable display sleep
+  become: true
+  shell: systemsetup -setdisplaysleep Never
+  when: display_sleep_state.rc == 1
+
+- name: Check is screensaver is disabled
+  become: true
+  shell: defaults -currentHost read com.apple.screensaver | grep "idleTime = 0;"
+  register: screensaver_state
+  changed_when: false
+  ignore_errors: true
+
+- name: Disable screensaver
+  become: true
+  shell: defaults -currentHost write com.apple.screensaver idleTime 0
+  when: screensaver_state.rc == 1
+
+- name: Check if hibernate is disabled
+  become: true
+  shell: pmset -g | grep "hibernatemode.*\ 0$"
+  register: hibernate_state
+  changed_when: false
+  ignore_errors: true
+
+- name: Disable hibernate
+  become: true
+  command: pmset -a hibernatemode 0
+  when: hibernate_state.rc == 1

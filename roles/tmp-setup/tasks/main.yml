@@ -44,22 +44,10 @@
 
 # Turn off APSD
 - name: "Turn off apsd - can be a CPU hog"
-  shell: sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
+  shell: launchctl unload -w /System/Library/LaunchDaemons/com.apple.apsd.plist
   become: true
 
 # Turn off Gatekeeper
 - name: "Turn off gatekeeper - it will disable the popup of the not appstore downloaded warning"
-  shell: sudo spctl --master-disable
+  shell: spctl --master-disable
   become: true
-
-#
-# Install cmd-bridge
-- name: "cmd-bridge: download"
-  get_url:
-    url: https://github.com/bitrise-io/cmd-bridge/releases/download/0.9.5/cmd-bridge-Darwin-x86_64
-    dest: /usr/local/bin/cmd-bridge
-    mode: '0755'
-  become: true
-
-- name: "cmd-bridge -version"
-  shell: bash -l -c "cmd-bridge --version"
