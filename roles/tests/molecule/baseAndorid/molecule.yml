@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+platforms:
+  - name: instance
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  env:
+    IS_CI: "true"
+  log: true
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks
+    ssh_connection:
+      pipeline: true
+  inventory:
+    host_vars:
+      instance:
+        param_user: vagrant
+        param_user_home: Users
+        ansible_user: vagrant
+        ansible_ssh_pass: vagrant
+  playbooks:
+    converge: ../../../../05.baseAndroid-playbook.yml
+    create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
+    destroy: ${MOLECULE_DESTROY_PLAYBOOK:-"../common-playbooks/destroy.anka.yml"}
+verifier:
+  name: testinfra
+  additional_files_or_dirs:
+    - ../../../../baseos/tests/*
+    - ../../../../brew/tests/*
+    - ../../../../brew-repos-fix/tests/*
+    - ../../../../ruby/tests/*
+    - ../../../../android/tests/*
+    - ../../../../flutter/tests/*
+    - ../tests/*
