@@ -11,7 +11,7 @@
           set_fact:
             instance_conf_dict: {
               'instance': "instance",
-              'address': "127.0.0.1",
+              'address': "{{ lookup('env', 'MOLECULE_INSTANCE_IP') | default('localhost', True) }}",
               'user': "vagrant",
               'port': "10000",
               'password': "vagrant",

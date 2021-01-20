@@ -21,12 +21,18 @@ provisioner:
     host_vars:
       instance:
         param_user: vagrant
+        param_user_home: Users
+        ansible_user: vagrant
         ansible_ssh_pass: vagrant
   playbooks:
+    converge: ../../../../03.baseXcode-playbook.yml
     create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
     destroy: ${MOLECULE_DESTROY_PLAYBOOK:-"../common-playbooks/destroy.anka.yml"}
 verifier:
   name: testinfra
   additional_files_or_dirs:
-    - ../tests/*
+    - ../../../../baseos/tests/*
+    - ../../../../brew/tests/*
     - ../../../../brew-repos-fix/tests/*
+    - ../../../../ruby/tests/*
+    - ../tests/*
