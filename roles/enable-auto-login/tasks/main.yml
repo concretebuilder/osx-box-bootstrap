@@ -19,7 +19,8 @@
         name: kcpassword
         state: present
 
-    - git:
+    - name: Git clone kcpasswd
+      git:  # noqa 401
         repo: 'https://github.com/veertuinc/kcpassword.git'
         dest: /tmp/enable_autologin
 
