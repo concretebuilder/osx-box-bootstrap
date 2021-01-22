@@ -8,6 +8,7 @@
   any_errors_fatal: true
   vars:
     - param_user: vagrant
+    - password_of_param_user: vagrant
   roles:
     - role: baseos
     - role: enable-auto-login
