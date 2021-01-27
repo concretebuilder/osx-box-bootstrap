@@ -7,6 +7,8 @@
 
 - name: "bitrise DEN: download"
   script: download_den.sh
+  environment:
+    GITHUB_ACCESS_TOKEN: "{{ github_access_token }}"
 
 - name: "bitrise DEN: extract"
   unarchive:
