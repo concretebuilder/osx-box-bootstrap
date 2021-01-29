@@ -20,8 +20,8 @@
   git:
     repo: 'https://github.com/CocoaPods/Specs.git'
     dest: ~/.cocoapods/repos/master
-    clone: no
-    update: no
+    clone: 'no'
+    update: 'no'
   register: cocoapods_specs_repo
 
 - name: pod setup
@@ -36,8 +36,8 @@
   git:
     repo: 'https://github.com/CocoaPods/Specs.git'
     dest: ~/.cocoapods/repos/master
-    clone: yes
-    update: yes
+    clone: 'yes'
+    update: 'yes'
     depth: 1
   when: (cocoapods_specs_repo.before == None) and (lookup('env', 'IS_CI'))
 
