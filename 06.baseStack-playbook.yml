@@ -12,7 +12,6 @@
     - xcode_path: "/Applications/Xcode.app"
     - bitrise_cli_version: "1.43.0"
   environment:
-    - GITHUB_ACCESS_TOKEN: <DEFINE THIS>
     - BITRISE_DEN_VERSION: "32305174"  # 1.15.1
   roles:
     - role: profiles
