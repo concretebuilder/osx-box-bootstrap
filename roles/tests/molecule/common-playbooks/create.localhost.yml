@@ -13,7 +13,7 @@
               'instance': "instance",
               'address': "{{ lookup('env', 'MOLECULE_INSTANCE_IP') | default('localhost', True) }}",
               'user': "vagrant",
-              'port': "10000",
+              'port': "22",
               'password': "vagrant",
               'connection': "ssh",
               'become_method': 'sudo' }
