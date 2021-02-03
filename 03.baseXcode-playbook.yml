@@ -9,8 +9,6 @@
   vars:
     param_user: vagrant
     xcode_path: "/Applications/Xcode.app"
-    # - XCODE_INSTALL_USER: <DEFINE THIS>
-    # - XCODE_INSTALL_PASSWORD: <DEFINE THIS>
   roles:
     - role: profiles
     - role: brew
