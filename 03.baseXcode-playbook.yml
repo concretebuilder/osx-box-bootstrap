@@ -7,9 +7,8 @@
   become_method: sudo
   any_errors_fatal: true
   vars:
-    - param_user: vagrant
-    - XCODE_INSTALL_USER: <DEFINE THIS>
-    - XCODE_INSTALL_PASSWORD: <DEFINE THIS>
+    param_user: vagrant
+    xcode_path: "/Applications/Xcode.app"
   roles:
     - role: profiles
     - role: brew
