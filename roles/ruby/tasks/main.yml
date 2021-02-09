@@ -19,5 +19,5 @@
     - "{{ ruby_versions }}"
 
 - name: Set ruby latest to global
-  shell: bash -l -c "rbenv global {{ default_ruby }}"
+  shell: bash -l -c "rbenv global {{ default_ruby.0.version }}"
   when: is_incremental_setup|default(false) == false
