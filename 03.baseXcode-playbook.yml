@@ -5,7 +5,7 @@
 ## Required Environment Variables
 ## XCODE_INSTALL_USER
 ## XCODE_INSTALL_PASSWORD
-## FASTLANE_SESSION
+## FASTLANE_SESSION b4encode!
 
 - hosts: all
   become_method: sudo

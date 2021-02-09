@@ -10,5 +10,5 @@
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
-    FASTLANE_SESSION: "{{ FASTLANE_SESSION }}"
+    FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
   when: simulator_installed.rc == 1
