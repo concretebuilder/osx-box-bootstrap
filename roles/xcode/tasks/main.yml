@@ -1,9 +1,4 @@
 ---
-- name: Fail if we are not on Catalina
-  fail:
-    msg: "Looks like you are trying to enable accessibility on not Catalina version of MacOS. It is not allowed because the syntax of TCC might be changed."
-  when: ansible_distribution == 'MacOSX' and ansible_distribution_major_version > "10"
-
 - name: Install xcode-install
   gem:
     name: xcode-install
@@ -21,5 +16,5 @@
   become: true
 
 - name: Enable accessibility to xcode
-  script: enable_accessibility.sh
+  script: enable_accessibility.sh '{{ ansible_distribution_version }}'
   become: true
