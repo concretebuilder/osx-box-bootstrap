@@ -55,12 +55,26 @@
     name: adoptopenjdk8
     state: present
     install_options: cask
+  register: openjdk8_installed
+  until: openjdk8_installed.msg.find("already installed") != -1
+  retries: 2
+  ignore_errors: true
+
+- name: Check openjdk8 installed
+  shell: brew list --cask adoptopenjdk8
 
 - name: brew install openjdk11
   homebrew:
     name: adoptopenjdk11
     state: present
     install_options: cask
+  register: openjdk11_installed
+  until: openjdk11_installed.msg.find("already installed") != -1
+  retries: 2
+  ignore_errors: true
+
+- name: Check openjdk11 installed
+  shell: brew list --cask adoptopenjdk11
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8
