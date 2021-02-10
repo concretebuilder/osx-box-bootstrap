@@ -20,6 +20,7 @@
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
+    FASTLANE_SESSION: "{{ FASTLANE_SESSION }}"
   register: ios_simulator
   retries: 3
   delay: 3
