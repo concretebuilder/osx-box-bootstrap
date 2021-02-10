@@ -1,0 +1,28 @@
+---
+- name: brew untap homebrew/cask-versions if it is there
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: absent
+
+# Use our own mirror of cask-versions
+- name: Remove existing cask-versions
+  file:
+    path: /usr/local/Homebrew/bitrise-io/cask-versions
+    state: absent
+
+- name: Create location for cask-versions mirror
+  file:
+    path: ~/mirrors/github.com/bitrise-io
+    state: directory
+    owner: vagrant
+    group: staff
+
+- name: Git clone our mirror of cask-version
+  git:
+    repo: https://github.com/bitrise-io/homebrew-cask-versions
+    dest: ~/mirrors/github.com/bitrise-io/cask-versions
+
+- name: Git clone cask-versions mirror to homebrew location
+  git:
+    repo: ~/mirrors/github.com/bitrise-io/cask-versions
+    dest: /usr/local/Homebrew/bitrise-io/cask-versions
