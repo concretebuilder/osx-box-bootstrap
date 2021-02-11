@@ -22,12 +22,27 @@ provisioner:
       instance:
         param_user: vagrant
         ansible_ssh_pass: vagrant
+        github_access_token: "{{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
   playbooks:
+    converge: ../../../../06.baseStack-playbook.yml
     create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
     destroy: ${MOLECULE_DESTROY_PLAYBOOK:-"../common-playbooks/destroy.anka.yml"}
 verifier:
   name: testinfra
   additional_files_or_dirs:
-    - ../tests/*
+    - ../../../../baseos/tests/*
+    - ../../../../brew/tests/*
+    - ../../../../brew-repos-fix/tests/*
+    - ../../../../ruby/tests/*
+    - ../../../../android/tests/*
+    - ../../../../flutter/tests/*
+    - ../../../../go/tests/*
+    - ../../../../bitrise-cli/tests/*
+    - ../../../../bitrise-den/tests/*
+    - ../../../../remote-access/tests/*
+    - ../../../../ssh-setup/tests/*
     - ../../../../intermediate-setup/tests/*.py
     - ../../../../cmd-bridge/tests/*.py
+    - ../../../../node/tests/*.py
+    - ../../../../ruby-gems/tests/*.py
+    - ../tests/*

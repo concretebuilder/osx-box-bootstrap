@@ -7,13 +7,11 @@
   become_method: sudo
   any_errors_fatal: true
   vars:
-    - param_user: vagrant
-    - param_group: staff
-    - xcode_path: "/Applications/Xcode.app"
-    - bitrise_cli_version: "1.43.0"
+    param_user: vagrant
+    param_group: staff
+    bitrise_cli_version: "1.43.0"
   environment:
-    - GITHUB_ACCESS_TOKEN: <DEFINE THIS>
-    - BITRISE_DEN_VERSION: "32305174"  # 1.15.1
+    BITRISE_DEN_VERSION: "32305174"  # 1.15.1
   roles:
     - role: profiles
     - role: certs
@@ -25,7 +23,6 @@
     - role: remote-access
     - role: ssh-setup
     - role: intermediate-setup
-    - role: xcode-setup
     - role: cmd-bridge
     - role: misc-setup
     - role: node

@@ -9,25 +9,26 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
-  env:
-    IS_CI: "true"
   log: true
   config_options:
     defaults:
       callback_whitelist: profile_tasks
-    ssh_connection:
-      pipelining: true
+  env:
+    IS_CI: "true"
   inventory:
     host_vars:
       instance:
-        param_user: vagrant
+        ansible_user: vagrant
         ansible_ssh_pass: vagrant
-        ansible_ssh_common_args: '-o ProxyCommand="ssh -i ~/id_rsa -W %h:%p -q administrator@10.87.54.115"'
+        param_user: vagrant
   playbooks:
-    create: ../common-playbooks/create.remote.yml
-    destroy: ../common-playbooks/destroy.remote.yml
+    converge: ../../../../02.baseRuby-playbook.yml
+    create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
+    destroy: ${MOLECULE_DESTROY_PLAYBOOK:-"../common-playbooks/destroy.anka.yml"}
 verifier:
   name: testinfra
   additional_files_or_dirs:
-    - ../../baseXcode/tests/*
+    - ../../../../baseos/tests/*
+    - ../../../../brew/tests/*
     - ../../../../brew-repos-fix/tests/*
+    - ../../../../ruby/tests/*

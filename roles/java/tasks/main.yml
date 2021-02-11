@@ -8,6 +8,7 @@
   register: result
   ignore_errors: true
   no_log: true
+
 - name: Display Java helper tools
   debug:
     msg: "com.oracle.java.Helper-Tool present {{ result.rc == 0 }}"
@@ -23,6 +24,7 @@
   register: result
   ignore_errors: true
   no_log: true
+
 - name: Display Java updater
   debug:
     msg: "com.oracle.java.Java-Updater present {{ result.rc == 0 }}"
@@ -39,17 +41,9 @@
     state: absent
     install_options: ignore-dependencies
 
-- name: brew untap homebrew/cask-versions if it is there
-  homebrew_tap:
-    name: homebrew/cask-versions
-    state: absent
-
-- name: Use our own mirror of cask-versions  # noqa 302
-  shell: |
-    rm -rf /usr/local/Homebrew/bitrise-io/cask-versions
-    mkdir -p ~/mirrors/github.com/bitrise-io
-    git clone https://github.com/bitrise-io/homebrew-cask-versions ~/mirrors/github.com/bitrise-io/cask-versions
-    git clone ~/mirrors/github.com/bitrise-io/cask-versions /usr/local/Homebrew/bitrise-io/cask-versions
+- name: Homebrew cask versions
+  include_tasks:
+    file: cask-versions-repo.yml
 
 - name: brew tap openjdk library
   homebrew_tap:
@@ -57,14 +51,30 @@
     state: present
 
 - name: brew install openjdk8
-  homebrew_cask:
+  homebrew:
     name: adoptopenjdk8
     state: present
+    install_options: cask
+  register: openjdk8_installed
+  until: openjdk8_installed.msg.find("already installed") != -1
+  retries: 2
+  ignore_errors: true
+
+- name: Check openjdk8 installed
+  shell: brew list --cask adoptopenjdk8
 
 - name: brew install openjdk11
-  homebrew_cask:
+  homebrew:
     name: adoptopenjdk11
     state: present
+    install_options: cask
+  register: openjdk11_installed
+  until: openjdk11_installed.msg.find("already installed") != -1
+  retries: 2
+  ignore_errors: true
+
+- name: Check openjdk11 installed
+  shell: brew list --cask adoptopenjdk11
 
 - name: Detect JAVA_HOME
   shell: /usr/libexec/java_home -v 1.8

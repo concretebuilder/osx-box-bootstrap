@@ -22,8 +22,8 @@ provisioner:
         ansible_user: vagrant
         ansible_ssh_pass: vagrant
   playbooks:
-    create: ../common-playbooks/create.remote.yml
-    destroy: ../common-playbooks/destroy.remote.yml
+    create: ../common-playbooks/create.localhost.yml
+    destroy: ../common-playbooks/destroy.localhost.yml
 verifier:
   name: testinfra
   s: true
