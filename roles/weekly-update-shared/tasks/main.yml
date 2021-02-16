@@ -85,7 +85,7 @@
     dest: /usr/local/bin/xclogparser
     owner: vagrant
     mode: "0644"
-    remote_src: True
+    remote_src: true
   become: true
   when: xclogparser_is_present.rc != 0
 
