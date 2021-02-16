@@ -22,4 +22,4 @@
     - role: ruby-gems
     - role: xcode
     - role: simulators
-    - role: simulator-test
+    - role: simulator-tests
