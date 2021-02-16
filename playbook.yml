@@ -17,7 +17,7 @@
     - intermediate-setup
     - xcode
     - simulators
-    - simulator-test
+    - simulator-tests
     - cmd-bridge
     - misc-setup
     - node
