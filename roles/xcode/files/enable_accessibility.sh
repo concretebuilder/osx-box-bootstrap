@@ -7,7 +7,7 @@ if test z$1 = z ; then
   exit 1
 fi
 
-if test "z$1" = "z10.15.6" ; then
+if test "z$1" = "z10.15.6" || test "z$1" = "z10.15.7" ; then
   #schema of the table on Catalina 10.15.6
   #
   #CREATE TABLE access (
