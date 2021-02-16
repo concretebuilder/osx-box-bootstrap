@@ -68,26 +68,27 @@
     - "{{ gem_packages }}"
 
 - name: Check if Xclogparser is present
-  shell: which xclogparser
-  register: xclogparser_is_present
+  shell: xclogparser version | awk '{print $2}'
+  register: xclogparser_version
   ignore_errors: true
   no_log: true
 
 - name: get Xclogparser 0.2.21
   get_url:
     url: https://github.com/spotify/XCLogParser/releases/download/v0.2.21/XCLogParser-macOS-x86_64-v0.2.21.zip
-    dest: /tmp/xclogpraser.zip
-  when: xclogparser_is_present.rc != 0
+    checksum: sha256:f74caec7c8710dcdb0f4089001fd62d14daa5d3922b9b69626d7b9ce7b8e33e9
+    dest: /tmp/xclogparser.zip
+  when: xclogparser_is_present.rc != 0 or xclogparser_is_present != 0.2.21
 
-- name: unarchive xclogpraser binary
+- name: unarchive xclogparser binary
   unarchive:
-    src: /tmp/xclogpraser.zip
+    src: /tmp/xclogparser.zip
     dest: /usr/local/bin/xclogparser
     owner: vagrant
     mode: "0644"
     remote_src: true
   become: true
-  when: xclogparser_is_present.rc != 0
+  when: xclogparser_is_present.rc != 0 or xclogparser_is_present != 0.2.21
 
 - name: "Set up wix/brew"
   homebrew_tap:
