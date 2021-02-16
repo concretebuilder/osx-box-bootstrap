@@ -7,7 +7,6 @@ gem_packages:
   - name: "slather"
     version: "2.5.0"
 brew_packages:
-  - name: "xclogparser"
   - name: "jq"
   - name: "xcbeautify"
   - name: "screen"
