@@ -68,7 +68,7 @@
     - "{{ gem_packages }}"
 
 - name: Check if Xclogparser is present
-  shell: xclogparser version | awk '{print $2}'
+  shell: /usr/local/bin/xclogparser version | awk '{print $2}'
   register: xclogparser_version
   ignore_errors: true
   no_log: true
