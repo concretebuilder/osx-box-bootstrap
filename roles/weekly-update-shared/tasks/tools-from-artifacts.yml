@@ -1,3 +1,4 @@
+---
 # XCBeautify
 - name: Check if XCBeautify is present
   shell: /usr/local/bin/xcbeautify version | awk '{print $2}'
@@ -21,3 +22,4 @@
     remote_src: true
   become: true
   when: xcbeautify_version.rc != 0 or xcbeautify_version.stdout != "0.8.1"
+...
