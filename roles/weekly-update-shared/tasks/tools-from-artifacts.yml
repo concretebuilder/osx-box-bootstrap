@@ -1,0 +1,23 @@
+# XCBeautify
+- name: Check if XCBeautify is present
+  shell: /usr/local/bin/xcbeautify version | awk '{print $2}'
+  register: xcbeautify_version
+  ignore_errors: true
+  no_log: true
+
+- name: get XCBeautify 0.8.1
+  get_url:
+    url: https://github.com/thii/xcbeautify/releases/download/0.8.1/xcbeautify-0.8.1-x86_64-apple-macosx.zip
+    checksum: sha256:75e9d345a68a759ab268f0ecef4373a0ae590b07939096a076bdb25f20e69143
+    dest: /tmp/xcbeautify.zip
+  when: xcbeautify_version.rc != 0 or xcbeautify_version.stdout != "0.8.1"
+
+- name: unarchive XCBeautify binary
+  unarchive:
+    src: /tmp/xcbeautify.zip
+    dest: /usr/local/bin/
+    owner: "{{ param_user }}"
+    mode: "0644"
+    remote_src: true
+  become: true
+  when: xcbeautify_version.rc != 0 or xcbeautify_version.stdout != "0.2.21"

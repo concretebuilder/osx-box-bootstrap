@@ -93,6 +93,10 @@
   become: true
   when: xclogparser_is_present.rc != 0 or xclogparser_is_present.stdout != "0.2.21"
 
+- name: Install tools from artifacts
+  include_tasks:
+    file: tools-from-artifacts.yml
+
 # Taps
 - name: "Set up wix/brew"
   homebrew_tap:
