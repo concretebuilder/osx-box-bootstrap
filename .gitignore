@@ -4,3 +4,4 @@ _tmp
 roles/**/tests/__pycache__/*
 **/pytestdebug.log
 **/__pycache__
+.vscode/*
