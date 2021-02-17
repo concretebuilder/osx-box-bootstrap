@@ -67,6 +67,9 @@
   with_items:
     - "{{ gem_packages }}"
 
+# Tools installed from artifacts
+
+## XCLogParser
 - name: Check if Xclogparser is present
   shell: /usr/local/bin/xclogparser version | awk '{print $2}'
   register: xclogparser_version
@@ -90,6 +93,11 @@
   become: true
   when: xclogparser_is_present.rc != 0 or xclogparser_is_present.stdout != "0.2.21"
 
+- name: Install tools from artifacts
+  include_tasks:
+    file: tools-from-artifacts.yml
+
+# Taps
 - name: "Set up wix/brew"
   homebrew_tap:
     name: wix/brew
