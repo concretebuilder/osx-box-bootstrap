@@ -111,7 +111,7 @@ workflows:
             yamllint -s -c ./yamllint.yaml .
     - build-router-start@0.11.3:
         run_if: |-
-          {{enveq "ROLE_CHANGED" "true"}}
+          {{enveq "TEST_IS_AVAILABLE" "true"}}
         inputs:
         - wait_for_builds: "true"
         - workflows: $WORKFLOW_TO_TRIGGER
