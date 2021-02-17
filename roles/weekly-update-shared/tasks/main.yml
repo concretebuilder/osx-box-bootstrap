@@ -83,7 +83,7 @@
 - name: unarchive xclogparser binary
   unarchive:
     src: /tmp/xclogparser.zip
-    dest: /usr/local/bin/xclogparser
+    dest: /usr/local/bin/
     owner: vagrant
     mode: "0644"
     remote_src: true
