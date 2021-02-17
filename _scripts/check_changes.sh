@@ -8,7 +8,19 @@ ansible_roles="$(ls ./roles)"
 
 echo "Files changed: ${file_list}"
 
-if [[ $file_list == *"roles"* ]]; then
+number_of_changed_roles="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH" | grep "roles" | cut -f1-2 -d"/" | uniq | grep -c roles)" || true # Do not exit with 1 if we don't change anything under roles
+if [[ ${number_of_changed_roles} -gt 1 ]]; then
+echo "
+ _______________________________________
+/ please don't change multiple roles in \
+\ one PR - Thanks Build-Infra team      /
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||"
+elif [[ $file_list == *"roles"* ]]; then
   echo "You changed a role, we will run molecule tests."
   envman add --key DANGER_OUTPUT --value "You changed a role, we will run molecule tests."
   for role in ${ansible_roles}; do
