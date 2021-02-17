@@ -100,3 +100,12 @@
   become: true
   command: pmset -a hibernatemode 0
   when: hibernate_state.rc == 1
+
+# This key must exists on the executing ansible server
+# For CI, it is placed from bitrise secrets in the workflow
+# For local, you must install it from lastpass
+- name: install the build SSH key
+  ansible.posix.authorized_key:
+    user: vagrant
+    state: present
+    key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519-bitrise.pub') }}"
