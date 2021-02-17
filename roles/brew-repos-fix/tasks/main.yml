@@ -18,8 +18,16 @@
   changed_when: false
   ignore_errors: true
 
-- name: Check if repository for brew core is correct
-  shell: ". ~/.bash_profile && grep mirrors/github.com/bitrise-io $(brew --repository)/Library/Taps/homebrew/homebrew-core/.git/config"  # yamllint disable-line rule:line-length
+- name: Check if repository for brew core is correct and on the commit we need
+  shell: |
+    . ~/.bash_profile &&\
+    grep \
+     mirrors/github.com/bitrise-io \
+     $(brew --repository)/Library/Taps/homebrew/homebrew-core/.git/config &&\
+    git \
+     -C {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core \
+     rev-parse HEAD |\
+    grep {{ homebrew_core.sha }}
   changed_when: false
   ignore_errors: true
   register: brew_repository_core_set
@@ -39,7 +47,15 @@
   when: brew_repository_core_set is failed
 
 - name: Check if repository for brew cask is correct
-  shell: ". ~/.bash_profile && grep mirrors/github.com/bitrise-io $(brew --repository)/Library/Taps/homebrew/homebrew-cask/.git/config"  # yamllint disable-line rule:line-length
+  shell: |
+    . ~/.bash_profile &&\
+    grep \
+      mirrors/github.com/bitrise-io \
+      $(brew --repository)/Library/Taps/homebrew/homebrew-cask/.git/config &&\
+    git \
+      -C {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-cask \
+      rev-parse HEAD |\
+    grep {{ homebrew_cask.sha }}
   changed_when: false
   ignore_errors: true
   register: brew_repository_cask_set
