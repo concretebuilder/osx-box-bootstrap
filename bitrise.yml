@@ -76,6 +76,11 @@ workflows:
   #######################
   ci:
     steps:
+    - script-runner:
+        title: Check changes
+        # run_if: .IsCI
+        inputs:
+        - file_path: _scripts/check_changes.sh
     - script:
         title: Setup pip3
         run_if: .IsCI
@@ -114,15 +119,15 @@ workflows:
             #!/usr/bin/env bash
             set -ex
             bitrise validate -c ./bitrise.yml
-    - script:
-        title: Lint Ansible playbooks
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            set -e
-            for f in $(find . -name '*playbook.yml'); do
-              ansible-lint -c ansible-lint.yaml "$f"
-            done
+    # - script:
+    #     title: Lint Ansible playbooks
+    #     inputs:
+    #     - content: |-
+    #         #!/usr/bin/env bash
+    #         set -e
+    #         for f in $(find . -name '*playbook.yml'); do
+    #           ansible-lint -c ansible-lint.yaml "$f"
+    #         done
     - script:
         title: Run Yamllint
         inputs:
