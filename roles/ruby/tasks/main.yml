@@ -8,7 +8,7 @@
 - name: unlink openssl
   homebrew:
     name: openssl
-    state: unlinked
+    state: absent
   when: ansible_distribution == 'Ubuntu'
 
 - name: Install ruby versions
