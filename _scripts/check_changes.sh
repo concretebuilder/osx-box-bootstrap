@@ -6,8 +6,7 @@ set -euo pipefail
 file_list="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH" | uniq)"
 ansible_roles="$(ls ./roles)"
 molecule_contents="$(ls ./roles/tests/molecule)"
-# shellcheck disable=SC2207
-available_tests=($(comm -12 <(printf '%s\n' "${ansible_roles[@]}" | LC_ALL=C sort) <(printf '%s\n' "${molecule_contents[@]}" | LC_ALL=C sort)))
+available_tests=$(comm -12 <(printf '%s\n' "${ansible_roles[@]}" | LC_ALL=C sort) <(printf '%s\n' "${molecule_contents[@]}" | LC_ALL=C sort))
 
 echo "Files changed: ${file_list}"
 
