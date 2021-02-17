@@ -33,5 +33,3 @@
     owner: "{{ param_user }}"
     group: "{{ param_group }}"
     mode: "0600"
-
-# test comment

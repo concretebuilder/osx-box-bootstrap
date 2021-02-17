@@ -78,43 +78,53 @@ workflows:
     steps:
     - script-runner:
         title: Check changes
-        # run_if: .IsCI
+        run_if: .IsCI
         inputs:
         - file_path: _scripts/check_changes.sh
-    # - script:
-    #     title: Install ansible-lint and yamllint
-    #     run_if: .IsCI
-    #     inputs:
-    #     - file_path: _scripts/install_linters.sh
-    # - script:
-    #     title: Validate bitrise.yml
-    #     inputs:
-    #     - content: |-
-    #         #!/usr/bin/env bash
-    #         set -ex
-    #         bitrise validate -c ./bitrise.yml
-    # - script:
-    #     title: Lint Ansible playbooks
-    #     inputs:
-    #     - content: |-
-    #         #!/usr/bin/env bash
-    #         set -e
-    #         for f in $(find . -name '*playbook.yml'); do
-    #           ansible-lint -c ansible-lint.yaml "$f"
-    #         done
-    # - script:
-    #     title: Run Yamllint
-    #     inputs:
-    #     - content: |-
-    #         #!/usr/bin/env bash
-    #         set -e
-    #         yamllint -s -c ./yamllint.yaml .
-    # - build-router-start@0.11.3:
-    #     run_if: .IsCI
-    #     inputs:
-    #     - wait_for_builds: "true"
-    #     - workflows: $WORKFLOW_TO_TRIGGER
-    #     - access_token: $BITRISE_ACCESS_TOKEN
+    - script:
+        title: Install ansible-lint and yamllint
+        run_if: .IsCI
+        inputs:
+        - file_path: _scripts/install_linters.sh
+    - script:
+        title: Validate bitrise.yml
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+            bitrise validate -c ./bitrise.yml
+    - script:
+        title: Lint Ansible playbooks
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            for f in $(find . -name '*playbook.yml'); do
+              ansible-lint -c ansible-lint.yaml "$f"
+            done
+    - script:
+        title: Run Yamllint
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            yamllint -s -c ./yamllint.yaml .
+    - build-router-start@0.11.3:
+        run_if: .IsCI
+        inputs:
+        - wait_for_builds: "true"
+        - workflows: $WORKFLOW_TO_TRIGGER
+        - access_token: $BITRISE_ACCESS_TOKEN
+    - script:
+        title: Run danger
+        is_always_run: true
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -euxo pipefail
+            gem install danger
+            danger
 
   perform-weekly-cache-update:
     after_run:
