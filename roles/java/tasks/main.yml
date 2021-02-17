@@ -60,9 +60,14 @@
     name: adoptopenjdk11
     state: present
 
-- name: Detect JAVA_HOME
+- name: Register JAVA_HOME for java 8
   shell: /usr/libexec/java_home -v 1.8
-  register: detect_java_home
+  register: detect_java_8_home
+  ignore_errors: true
+
+- name: Register JAVA_HOME for java 11
+  shell: /usr/libexec/java_home -v 11
+  register: detect_java_11_home
   ignore_errors: true
 
 ...

@@ -15,9 +15,12 @@
     owner: "{{ param_user }}"
     mode: "0755"
 
-- name: setup jEnv  # noqa 306 Shells that use pipes should set the pipefail option
-  shell: . /Users/{{ param_user }}/.bashrc && (yes | jenv add {{ detect_java_home.stdout }})
+- name: jEnv add Java 8  # noqa 306 Shells that use pipes should set the pipefail option
+  shell: . /Users/{{ param_user }}/.bashrc && (yes | jenv add {{ detect_java_8_home.stdout }})
   register: result
+
+- name: jEnv add Java 11  # noqa 306 Shells that use pipes should set the pipefail option
+  shell: . /Users/{{ param_user }}/.bashrc && (yes | jenv add {{ detect_java_11_home.stdout }})
 
 - name: Display jEnv home
   debug:
