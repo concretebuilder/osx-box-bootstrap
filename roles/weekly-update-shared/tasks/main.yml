@@ -87,7 +87,7 @@
   unarchive:
     src: /tmp/xclogparser.zip
     dest: /usr/local/bin/
-    owner: vagrant
+    owner: "{{ param_user }}"
     mode: "0644"
     remote_src: true
   become: true
