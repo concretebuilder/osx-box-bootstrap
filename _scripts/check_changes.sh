@@ -15,6 +15,7 @@ if [[ ${number_of_changed_roles} -gt 1 ]]; then
 elif [[ $file_list == *"roles"* ]]; then
   echo "You changed a role, we will run molecule tests."
   envman add --key DANGER_OUTPUT --value "You changed a role, we will run molecule tests."
+  envman add --key ROLE_CHANGED --value true
   for role in ${ansible_roles}; do
     if [[ $file_list == *$role* ]]; then
       echo "WORKFLOW_TO_TRIGGER: test_${role}"
