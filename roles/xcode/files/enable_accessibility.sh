@@ -49,6 +49,7 @@ elif test "z$1" = "z11.2" ; then
 else
   echo -e "\n********************************************************************************"
   echo -e "\n                Unsupported macOS version to enable accessibility"
+  echo -e "\n                $1"
   echo -e "\n********************************************************************************"
   exit 1
 fi
