@@ -81,7 +81,7 @@ workflows:
         run_if: .IsCI
         inputs:
         - file_path: _scripts/check_changes.sh
-    - script:
+    - script-runner:
         title: Install ansible-lint and yamllint
         run_if: .IsCI
         inputs:
