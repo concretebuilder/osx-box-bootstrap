@@ -16,7 +16,7 @@ elif [[ $file_list == *"roles"* ]]; then
   for role in "${available_tests[@]}"; do
     if [[ $file_list == *$role* ]]; then
       envman add --key WORKFLOW_TO_TRIGGER --value "test_${role}"
-      envman add --key ROLE_CHANGED --value true
+      envman add --key TEST_IS_AVAILABLE --value true
     fi
   done
 else
