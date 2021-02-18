@@ -8,7 +8,7 @@ ansible_roles="$(ls ./roles)"
 molecule_contents="$(ls ./roles/tests/molecule)"
 available_tests=$(comm -12 <(printf '%s\n' "${ansible_roles[@]}" | LC_ALL=C sort) <(printf '%s\n' "${molecule_contents[@]}" | LC_ALL=C sort))
 
-available_workflows=()
+available_workflows=("")
 bitrise_readable_list=""
 
 for file in $file_list; do
