@@ -45,7 +45,7 @@
     dest: "{{ android_home }}/cmdline-tools/"
     remote_src: true
 
-    
+# comment
 
 - name: Ensure .android directory exists
   file:
