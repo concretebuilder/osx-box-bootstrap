@@ -1,6 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
+  roles:
     - role: "brew-repos-fix"
       param_user: "linuxbrew"
