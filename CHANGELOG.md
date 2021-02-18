@@ -1,6 +1,7 @@
 ## UPCOMING
 
 ## `v2021_02_18`
+* `Only trigger said tests once`
 * `Only run those tests that has config changes`
 
 ## `v2021_02_17`
