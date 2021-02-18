@@ -3,7 +3,7 @@ set -euo pipefail
 #
 ## Check what changed in the current commit/PR
 
-file_list="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH" | uniq)"
+file_list="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH")"
 ansible_roles="$(ls ./roles)"
 molecule_contents="$(ls ./roles/tests/molecule)"
 available_tests=$(comm -12 <(printf '%s\n' "${ansible_roles[@]}" | LC_ALL=C sort) <(printf '%s\n' "${molecule_contents[@]}" | LC_ALL=C sort))
