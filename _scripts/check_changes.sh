@@ -20,4 +20,6 @@ for file in $file_list; do
     done
   fi
 done
-envman add --key WORKFLOW_TO_TRIGGER --value "${available_workflows[@]}"
+
+bitrise_readable_list=$(sh -c 'IFS=$'\''\n'\'';echo "$*"' '' "${available_workflows[@]}")
+envman add --key WORKFLOW_TO_TRIGGER --value "${bitrise_readable_list}"
