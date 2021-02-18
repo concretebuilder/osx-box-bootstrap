@@ -8,7 +8,7 @@ ansible_roles="$(ls ./roles)"
 molecule_contents="$(ls ./roles/tests/molecule)"
 available_tests=$(comm -12 <(printf '%s\n' "${ansible_roles[@]}" | LC_ALL=C sort) <(printf '%s\n' "${molecule_contents[@]}" | LC_ALL=C sort))
 
-declare -a available_workflows
+available_workflows=()
 bitrise_readable_list=""
 
 for file in $file_list; do
@@ -24,5 +24,5 @@ for file in $file_list; do
   fi
 done
 
-bitrise_readable_list=$(sh -c 'IFS=$'\''\n'\'';echo "$*"' '' "${available_workflows[@]}")
+bitrise_readable_list=$(sh -c 'IFS=$'\''\n'\'';echo "$*"' '' "${available_workflows[@]}") || true
 envman add --key WORKFLOW_TO_TRIGGER --value "${bitrise_readable_list}"
