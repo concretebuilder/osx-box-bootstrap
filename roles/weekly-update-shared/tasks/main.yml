@@ -67,12 +67,12 @@
   with_items:
     - "{{ gem_packages }}"
 
-# brew taps
-- name: brew tap xcbeautify
-  homebrew_tap:
-    name: thii/xcbeautify
-    url: 'https://github.com/thii/xcbeautify.git'
+# Tools installed from artifacts
+- name: Install tools from artifacts
+  include_tasks:
+    file: tools-from-artifacts.yml
 
+# Taps
 - name: "Set up wix/brew"
   homebrew_tap:
     name: wix/brew
