@@ -82,5 +82,4 @@
     owner: "{{ param_user }}"
     group: staff
     mode: '0755'
-
 ...
