@@ -3,7 +3,7 @@ set -euo pipefail
 #
 ## Check what changed in the current commit/PR
 
-file_list="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH" | sort | uniq)"
+file_list="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH")"
 sorted_file_list="$(echo "${file_list}" | grep "roles" | cut -f1-2 -d"/" | sort | uniq)"
 ansible_roles="$(ls ./roles)"
 molecule_contents="$(ls ./roles/tests/molecule)"
@@ -27,6 +27,5 @@ done
 
 if [[ -n "${available_workflows[*]}" ]]; then
   bitrise_readable_list=$(sh -c 'IFS=$'\''\n'\'';echo "$*"' '' "${available_workflows[@]}")
-  echo "${bitrise_readable_list}"
   envman add --key WORKFLOW_TO_TRIGGER --value "${bitrise_readable_list}"
 fi
