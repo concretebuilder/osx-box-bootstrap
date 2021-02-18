@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_17`
+* `XCBeautify is now hardcoded`
+
 ## `v2021_01_12`
 * `Revert: Removed Specs repo master, for it is not necessary from 1.8 and up`
 ## `v2021_01_08`
