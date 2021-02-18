@@ -3,5 +3,5 @@
   hosts: all
   tasks:
     - name: "Include test"
-      include_role:
-        name: "brew-repos-fix"
+      role: "brew-repos-fix"
+      param_user: "linuxbrew"
