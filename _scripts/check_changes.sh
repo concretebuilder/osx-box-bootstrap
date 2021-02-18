@@ -26,5 +26,6 @@ done
 
 if [[ -n "${available_workflows[*]}" ]]; then
   bitrise_readable_list=$(sh -c 'IFS=$'\''\n'\'';echo "$*"' '' "${available_workflows[@]}")
+  echo "${bitrise_readable_list}"
   envman add --key WORKFLOW_TO_TRIGGER --value "${bitrise_readable_list}"
 fi
