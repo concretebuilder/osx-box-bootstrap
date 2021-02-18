@@ -16,5 +16,4 @@
     - { fold_path: 'src' }
     - { fold_path: 'bin' }
     - { fold_path: 'pkg' }
-
 ...
