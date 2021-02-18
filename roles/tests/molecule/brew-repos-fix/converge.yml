@@ -2,6 +2,5 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include test"
-      role: "brew-repos-fix"
+    - role: "brew-repos-fix"
       param_user: "linuxbrew"
