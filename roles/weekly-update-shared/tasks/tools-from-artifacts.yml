@@ -1,4 +1,28 @@
 ---
+## XCLogParser
+- name: Check if Xclogparser is present
+  shell: /usr/local/bin/xclogparser version | awk '{print $2}'
+  register: xclogparser_version
+  ignore_errors: true
+  no_log: true
+
+- name: get Xclogparser 0.2.21
+  get_url:
+    url: https://github.com/spotify/XCLogParser/releases/download/v0.2.21/XCLogParser-macOS-x86_64-v0.2.21.zip
+    checksum: sha256:f74caec7c8710dcdb0f4089001fd62d14daa5d3922b9b69626d7b9ce7b8e33e9
+    dest: /tmp/xclogparser.zip
+  when: xclogparser_version.rc != 0 or xclogparser_version.stdout != "0.2.21"
+
+- name: unarchive xclogparser binary
+  unarchive:
+    src: /tmp/xclogparser.zip
+    dest: /usr/local/bin/
+    owner: "{{ param_user }}"
+    mode: "0755"
+    remote_src: true
+  become: true
+  when: xclogparser_version.rc != 0 or xclogparser_version.stdout != "0.2.21"
+
 # XCBeautify
 - name: Check if XCBeautify is present
   shell: /usr/local/bin/xcbeautify version | awk '{print $2}'
