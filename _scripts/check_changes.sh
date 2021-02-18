@@ -8,6 +8,9 @@ ansible_roles="$(ls ./roles)"
 molecule_contents="$(ls ./roles/tests/molecule)"
 available_tests=$(comm -12 <(printf '%s\n' "${ansible_roles[@]}" | LC_ALL=C sort) <(printf '%s\n' "${molecule_contents[@]}" | LC_ALL=C sort))
 
+declare -a available_workflows
+bitrise_readable_list=""
+
 for file in $file_list; do
   if [[ $file == *"roles"* ]]; then
     envman add --key DANGER_OUTPUT --value "You changed a role, we will attempt to run molecule tests."
