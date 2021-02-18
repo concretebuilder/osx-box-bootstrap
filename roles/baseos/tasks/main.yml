@@ -101,7 +101,7 @@
   command: pmset -a hibernatemode 0
   when: hibernate_state.rc == 1
 
-# This key must exists on the executing ansible server
+# This key must exist on the executing ansible server
 # For CI, it is placed from bitrise secrets in the workflow
 # For local, you must install it from lastpass
 - name: install the build SSH key
