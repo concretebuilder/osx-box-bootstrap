@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_19_6`
+* `Remove roles from playbook.yml that are not meant to be there`
+
 ## `v2021_02_19_5`
 * `Add Peter Nagy to codeowners`
 
