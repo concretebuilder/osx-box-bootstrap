@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_19_4`
+* `Include cmake`
+
 ## `v2021_02_19`
 * `Update gitignore file to not include editor configs`
 
