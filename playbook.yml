@@ -15,9 +15,6 @@
     - profiles
     - brew-repos-fix
     - intermediate-setup
-    - xcode
-    - simulators
-    - simulator-tests
     - cmd-bridge
     - misc-setup
     - node
