@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_19_5`
+* `Add Peter Nagy to codeowners`
+
 ## `v2021_02_19_2`
 * `Fix brew-repos-fix test`
 
