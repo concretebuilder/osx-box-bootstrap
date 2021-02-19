@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_19`
+* `Update gitignore file to not include editor configs`
+
 ## `v2021_02_18_3`
 * `Only trigger said tests once`
 
