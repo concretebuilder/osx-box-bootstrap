@@ -13,4 +13,5 @@ brew_packages:
   - name: "applesimutils"
   - name: "openconnect"
   - name: "awscli"
+  - name: "cmake"
 ...
