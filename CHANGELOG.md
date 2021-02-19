@@ -3,6 +3,12 @@
 ## `v2021_02_19_5`
 * `Add Peter Nagy to codeowners`
 
+## `v2021_02_19_4`
+* `Include cmake`
+
+## `v2021_02_19_3`
+* `Make sure brew-repos-fix updates the repos if they are not the correct SHA`
+
 ## `v2021_02_19_2`
 * `Fix brew-repos-fix test`
 
