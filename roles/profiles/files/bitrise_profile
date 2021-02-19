@@ -1,7 +1,7 @@
 # for debug
 export DOT_BITRISE_PROFILE_LOADED=1
 
-export BITRISE_OSX_STACK_REV_ID=v2021_02_19
+export BITRISE_OSX_STACK_REV_ID=v2021_02_19_3
 
 # Bitrise Environment Variables
 export BITRISE_SOURCE_DIR="${HOME}/git"

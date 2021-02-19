@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_19_3`
+* `Make sure brew-repos-fix updates the repos if they are not the correct SHA`
+
 ## `v2021_02_19`
 * `Update gitignore file to not include editor configs`
 
