@@ -19,6 +19,7 @@ provisioner:
     host_vars:
       instance:
         ansible_user: vagrant
+        param_user: vagrant
         ansible_ssh_pass: vagrant
   playbooks:
     create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
