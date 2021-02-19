@@ -1,7 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include test"
-      include_role:
-        name: "brew-repos-fix"
+  roles:
+    - role: "brew-repos-fix"

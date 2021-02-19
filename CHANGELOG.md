@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_19_2`
+* `Fix brew-repos-fix test`
+
 ## `v2021_02_19`
 * `Update gitignore file to not include editor configs`
 
