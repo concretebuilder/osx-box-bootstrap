@@ -16,6 +16,7 @@ git clone --bare https://github.com/bitrise-io/homebrew-core {{ ansible_env.HOME
 
 export HOMEBREW_CORE_GIT_REMOTE="{{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core"
 
+brew update
 brew install a || true
 
 # Unshallowing the homebrew-core, just in case. Unshallow repo is required for some use-cases.
