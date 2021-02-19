@@ -12,10 +12,19 @@ rm -rf {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core
 
 mkdir -p {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/
 
-git clone --bare https://github.com/bitrise-io/homebrew-core {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core
+git clone \
+    --bare https://github.com/bitrise-io/homebrew-core \
+    {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core
+
+# Ensure we checked out the correct SHA
+git \
+    -C {{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core \
+    rev-parse HEAD |\
+grep {{ homebrew_core.sha }}
 
 export HOMEBREW_CORE_GIT_REMOTE="{{ ansible_env.HOME }}/mirrors/github.com/bitrise-io/homebrew-core"
 
+brew update
 brew install a || true
 
 # Unshallowing the homebrew-core, just in case. Unshallow repo is required for some use-cases.
