@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_02_26_1`
+* `flutter`: `1.22.6`
+
 ## `v2021_02_24`
 * `Fix checks in android install`
 

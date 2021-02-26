@@ -1,5 +1,5 @@
 ---
 param_user: vagrant
 param_group: admin
-flutter_version: 1.22.1
+flutter_version: 1.22.6
 flutter_home: /usr/local
