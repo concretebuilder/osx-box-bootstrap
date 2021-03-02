@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_02`
+* `Fix python brew linking, so python3 and pip3 are both the brew installed ones`
+
 ## `v2021_02_24`
 * `Fix checks in android install`
 
