@@ -1,5 +1,11 @@
 ## UPCOMING
 
+## `v2021_03_02`
+* `Fix python brew linking, so python3 and pip3 are both the brew installed ones`
+
+## `v2021_02_24`
+* `Fix checks in android install`
+
 ## `v2021_02_19_6`
 * `Remove roles from playbook.yml that are not meant to be there`
 
