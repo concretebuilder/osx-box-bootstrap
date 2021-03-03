@@ -1,35 +1,10 @@
 ---
-# vs4mac update
-- name: Copy applescript to machine
-  copy:
-    src: files/vs4mac-update.applescript
-    dest: "/Users/{{ param_user }}/vs4mac-update.applescript"
-    owner: "{{ param_user }}"
-    mode: '0777'
+- name: Install cask vs4mac
+  homebrew_cask:
+    name: visual-studio
+    state: present
 
-- name: Update Visual Studio
-  shell: bash -l -c "osascript /Users/{{ param_user }}/vs4mac-update.applescript"
-
-- name: Get running processes list from remote host
-  ignore_errors: true
-  shell: "ps -few | grep -i visualstudio | awk '{print $2}'"
-  register: running_processes
-
-- name: Kill running processes
-  ignore_errors: true
-  shell: "kill {{ item }}"
-  with_items: "{{ running_processes.stdout_lines }}"
-
-- name: Wait for status
-  wait_for:
-    path: "/proc/{{ item }}/status"
-    state: absent
-  with_items: "{{ running_processes.stdout_lines }}"
-  ignore_errors: true
-  register: crunchify_processes
-
-- name: Force kill stuck processes
-  ignore_errors: true
-  shell: "kill -9 {{ item }}"
-  with_items: "{{ crunchify_processes.results | select('failed') | map(attribute='item') | list }}"
-...
+- name: Install Android NDK
+  homebrew_cask:
+    name: android-ndk
+    state: present
