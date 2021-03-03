@@ -1,32 +1,21 @@
 ---
-- name: Check if Auto Login user is Administrator
+# kcpassword from https://github.com/veertuinc/kcpassword.git
+- name: kcpassword python file
+  copy:
+    src: kcpassword
+    dest: /usr/local/bin/kcpassword
+    owner: "{{ param_user }}"
+    group: staff
+    mode: '0700'
+
+- name: run kcpassword
   become: true
-  shell: defaults read /Library/Preferences/com.apple.loginwindow | grep "autoLoginUser = {{ param_user }};"
-  register: autologinuser_state
-  changed_when: false
-  ignore_errors: true
-  check_mode: false
+  command: /usr/bin/python /usr/local/bin/kcpassword "{{ password_of_param_user }}"
 
-- name: Setup and enable auto-login
-  block:
-    - name: Tap for kcpassword
-      homebrew_tap:
-        name: xfreebird/utils
-        state: present
+- name: add "{{ param_user }}" to defaults autologin
+  become: true
+  command: /usr/bin/defaults write /Library/Preferences/com.apple.loginwindow autoLoginUser "{{ param_user }}"
 
-    - name: Install kcpassword
-      homebrew:
-        name: kcpassword
-        state: present
-
-    - name: Git clone kcpasswd
-      git:  # noqa 401
-        repo: 'https://github.com/veertuinc/kcpassword.git'
-        dest: /tmp/enable_autologin
-
-    - name: Enable auto-login for {{ param_user }}
-      become: true
-      shell: "/tmp/enable_autologin/enable_autologin '{{ param_user }}' '{{ password_of_param_user }}'"
-      environment:
-        PATH: /usr/local/bin/:{{ ansible_env.PATH }}
-  when: autologinuser_state.rc == 1
+- name: Fail if kcpasswd fails
+  become: true
+  shell: "ls -al /etc/kcpassword"
