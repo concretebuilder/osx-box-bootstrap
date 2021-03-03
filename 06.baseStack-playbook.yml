@@ -17,6 +17,7 @@
     - role: certs
     - role: brew
     - role: brew-repos-fix
+    - role: enable-auto-login
     - role: go
     - role: bitrise-cli
     - role: bitrise-den
