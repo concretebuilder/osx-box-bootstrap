@@ -254,22 +254,6 @@ workflows:
   ##############################
   #### Utility workflows #######
   ##############################
-  send_lead_time:
-    steps:
-      - script-runner:
-          title: Lead Time KPI
-          deps:
-            apt_get:
-            - name: jq
-            brew:
-            - name: jq
-          inputs:
-          - file_path: _scripts/lead_time.sh
-      - slack:
-          inputs:
-            - webhook_url: $SLACK_WEBHOOK_URL
-            - channel: $SLACK_CHANNEL
-            - message: "$PR_CREATE_TIME - $PR_CLOSED_TIME"
 
   _run_molecule_test:
     before_run:
