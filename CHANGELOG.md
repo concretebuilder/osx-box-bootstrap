@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_03_3`
+* `param user password for autologin`
+
 ## `v2021_03_03_2`
 * `Fix for kcpassword enabling autologin`
 
