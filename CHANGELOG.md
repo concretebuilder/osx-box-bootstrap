@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_03`
+* `Fix Simulator list according to convention and add one for 12.0`
+
 ## `v2021_03_02`
 * `Fix python brew linking, so python3 and pip3 are both the brew installed ones`
 
