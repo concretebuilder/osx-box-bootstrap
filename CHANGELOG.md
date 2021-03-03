@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_03_4`
+* `Disable KPI lead time notification`
+
 ## `v2021_03_03_3`
 * `param user password for autologin`
 
