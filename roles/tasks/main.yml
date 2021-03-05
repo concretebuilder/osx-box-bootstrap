@@ -1,0 +1,12 @@
+---
+- name: Test if VIsual Studio is installed
+  shell: bash -l -c "/usr/local/bin/brew list | grep visual-studio"
+  register: vs4mac_is_installed
+  changed_when: false
+  ignore_errors: true
+
+- name: Install cask vs4mac
+  homebrew_cask:
+    name: visual-studio
+    state: present
+  when: vs4mac_is_installed.rc != 0

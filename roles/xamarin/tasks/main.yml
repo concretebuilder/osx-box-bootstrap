@@ -1,85 +1,34 @@
 ---
-# Cleaning up non Xamarin installed sdks and ndks
-- name: Remove brew android-sdk
-  homebrew_cask:
-    name: android-sdk
-    state: absent
-
-- name: Remove manually installed android ndk
+- name: Remove previous android installations
   become: true
   file:
-    path: "/opt/android-ndk"
+    path: "{{ item.path }}"
     state: absent
+  with_items:
+    - "{{ old_android_installs }}"
 
-- name: Remove brew-installed android sdk tools
-  become: true
+- name: Prepare Xamarin Android dirs
   file:
-    path: "/usr/local/share/android-sdk"
-    state: absent
-
-- name: Remove non-Xamarin android profile settings
-  become: true
-  file:
-    path: "/Users/{{ param_user }}/profile.d/android.sh"
-    state: absent
-
-# Permission setup
-- name: Recursively change ownership of ANDROID_HOME
-  become: true
-  file:
-    path: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx"
+    path: "$HOME/{{ item.path }}"
     state: directory
     recurse: true
     owner: "{{ param_user }}"
-    group: staff
-
-# Check if Android NDK is in the correct directory
-- name: Check NDK directory
-  stat:
-    path: "/Users/{{ param_user }}/Library/Developer/Xamarin/android-sdk-macosx/ndk-bundle"
-  register: android_ndk_dir
-  failed_when: not android_ndk_dir.stat.exists or not android_ndk_dir.stat.isdir
-
-# The main Xamarin profile, includes
-#  the Xamarin specific environments
-- name: setup xamarin_profile
-  copy:
-    src: files/xamarin_profile
-    dest: "/Users/{{ param_user }}/.profiles/xamarin_profile"
-    owner: "{{ param_user }}"
-    mode: "0600"
-
-#
-# Install debug.keystore
-# $HOME/.local/share/Xamarin/Mono for Android/debug.keystore
-- name: "ensure Xamarin debug.keystore dir exists"
-  file:
-    path: "/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android"
-    state: directory
-    owner: "{{ param_user }}"
     mode: "0755"
-- name: install debug.keystore
-  copy:
-    src: xamarin/debug.keystore
-    dest: "/Users/{{ param_user }}/.local/share/Xamarin/Mono for Android/debug.keystore"
-    owner: "{{ param_user }}"
-    mode: "0644"
-
-#
-# Setup Bitrise specific folders
-#
-# Setup the base folders / paths, referenced by ~/.profiles/xamarin_profile
-# These folders will be created in the HOME directory.
-- name: Create bitrise xamarin specific dirs
-  file:
-    path: "/Users/{{ param_user }}/{{ item.fold_path }}"
-    state: directory
-    owner: "{{ param_user }}"
   with_items:
-    # Xamarin tools
-    - { fold_path: 'bitrise/xamarin' }
+    - "{{ xamarin_folders }}"
 
-- name: sync xamarin tools from the provisioning repo
-  synchronize:
-    src: xamarin/
-    dest: "/Users/{{ param_user }}/bitrise/xamarin/"
+- name: Install Xamarin files
+  copy:
+    src: "{{ item.name }}"
+    dest: "$HOME/{{ item.dest }}"
+    owner: "{{ param_user }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - "{{ xamarin_files }}"
+
+- name: unarchive xamarin tools
+  unarchive:
+    src: bitrise/xamarin/xamarin.zip
+    dest: "$HOME/bitrise/xamarin/"
+    owner: "{{ param_user }}"
+    remote_src: true

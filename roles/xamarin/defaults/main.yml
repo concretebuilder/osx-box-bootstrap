@@ -1,0 +1,22 @@
+---
+old_android_installs:
+  - path: '/opt/android-ndk'
+  - path: '/usr/local/share/android-sdk'
+  - path: '$HOME/profile.d/android.sh'
+xamarin_folders:
+  - path: 'Library/Developer/Xamarin'
+  - path: 'Library/Developer/Xamarin/android-sdk-macosx'
+  - path: 'Library/Developer/Xamarin/android-sdk-macosx/ndk-bundle'
+  - path: 'bitrise/xamarin'
+  - path: '.local/share/Xamarin/Mono for Android'
+  - path: '.profiles'
+xamarin_files:
+  - name: 'xamarin_profile'
+    dest: '.profiles/xamarin_profile'
+    mode: '0600'
+  - name: 'debug.keystore'
+    dest: '.local/share/Xamarin/Mono for Android/debug.keystore'
+    mode: '0644'
+  - name: 'xamarin.zip'
+    dest: 'bitrise/xamarin'
+    mode: '0755'

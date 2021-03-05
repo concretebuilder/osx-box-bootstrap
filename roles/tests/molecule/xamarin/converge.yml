@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "test xamarin"
+      include_role:
+        name: "xamarin"
