@@ -1,6 +1,6 @@
 ---
-- name: Test if VIsual Studio is installed
-  shell: bash -l -c "/usr/local/bin/brew list | grep visual-studio"
+- name: Test if Visual Studio is installed
+  shell: bash -l -c "ls /Applications | grep 'Visual Studio'"
   register: vs4mac_is_installed
   changed_when: false
   ignore_errors: true
