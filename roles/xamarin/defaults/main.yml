@@ -7,7 +7,7 @@ xamarin_folders:
   - path: 'Library/Developer/Xamarin'
   - path: 'Library/Developer/Xamarin/android-sdk-macosx'
   - path: 'Library/Developer/Xamarin/android-sdk-macosx/ndk-bundle'
-  - path: 'bitrise/xamarin'
+  - path: 'bitrise'
   - path: '.local/share/Xamarin/Mono for Android'
   - path: '.profiles'
 xamarin_files:
@@ -18,5 +18,5 @@ xamarin_files:
     dest: '.local/share/Xamarin/Mono for Android/debug.keystore'
     mode: '0644'
   - name: 'xamarin.zip'
-    dest: 'bitrise/xamarin'
+    dest: 'bitrise/xamarin.zip'
     mode: '0755'
