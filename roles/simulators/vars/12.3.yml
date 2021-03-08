@@ -11,3 +11,4 @@ simulators:
   - 'iOS 14.2'
   - 'iOS 14.1'
   - 'iOS 14.0'
+  - 'iOS 13.7'
