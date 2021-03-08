@@ -12,8 +12,7 @@
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
 
-# noqa 306 Shells that use pipes should set the pipefail option
-- name: Switch to Xcode stable, the default Xcode for building
+- name: Switch to Xcode stable, the default Xcode for building  # noqa 306 Shells that use pipes should set the pipefail option
   shell: bash -l -c 'xcode-select --switch "/Applications/$(ls /Applications | grep Xcode)"'
   become: true
 
