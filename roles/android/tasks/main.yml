@@ -73,13 +73,4 @@
     owner: "{{ param_user }}"
     group: staff
     mode: '0755'
-
-- name: Recursively change ownership of ANDROID_HOME on vs4mac
-  become: true
-  file:
-    path: "$HOME/Library/Developer/Xamarin/android-sdk-macosx"
-    recurse: true
-    owner: "{{ param_user }}"
-    group: staff
-    mode: '0755'
 ...
