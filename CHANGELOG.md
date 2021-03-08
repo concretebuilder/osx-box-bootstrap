@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_08_3`
+* `Remove Xamarin folder setup from android role`
+
 ## `v2021_03_08_2`
 * `Install java tools every time`
 
