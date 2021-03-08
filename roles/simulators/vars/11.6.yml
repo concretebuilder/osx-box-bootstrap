@@ -8,3 +8,6 @@ simulators:
   - 'iOS 13.5'
   - 'iOS 13.4'
   - 'iOS 13.3'
+  - 'iOS 13.2'
+  - 'iOS 13.1'
+  - 'iOS 13.0'
