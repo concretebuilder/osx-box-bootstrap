@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_08_1`
+* `Dinamically look up Xcode path, xcode-install suffixes the .app file with the version number so the hardcoded /Applications/Xcode.app is not working`
+
 ## `v2021_03_04`
 * `Re-work vs4mac layer`
 
