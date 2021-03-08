@@ -19,5 +19,4 @@
     - role: android
     - role: android-apk-tools
     - role: java-tools
-      tags: java-android
     - role: flutter
