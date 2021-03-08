@@ -29,6 +29,4 @@
     - role: xamarin
       when: is_allow_weekly_xamarin_provision | default("no") | string  == "yes"
     - role: java-tools
-      tags:
-        - java-android
     - role: flutter
