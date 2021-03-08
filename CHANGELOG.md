@@ -1,7 +1,11 @@
 ## UPCOMING
 
+
 ## `v2021_03_08_2`
 * `Install java tools every time`
+
+## `v2021_03_08`
+* `Fix NUNIT_PATH and test it`
 
 ## `v2021_03_04`
 * `Re-work vs4mac layer`

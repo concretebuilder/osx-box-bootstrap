@@ -25,3 +25,10 @@ def test_config_files_exist(host):
         assert bitrise.is_file
         assert bitrise.exists
         assert bitrise.user == "linuxbrew"
+
+def test_nunit_exist(host):
+    folder_path_base = "/home/linuxbrew/"
+    bitrise = host.file(folder_path_base + "bitrise/xamarin/nunit/3.4.1/bin/nunit3-console.exe")
+    assert bitrise.is_file
+    assert bitrise.exists
+    assert bitrise.user == "linuxbrew"

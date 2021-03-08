@@ -28,7 +28,7 @@
 
 - name: unarchive xamarin tools
   unarchive:
-    src: bitrise/xamarin/xamarin.zip
-    dest: "$HOME/bitrise/xamarin/"
+    src: bitrise/xamarin.zip
+    dest: "$HOME/bitrise"
     owner: "{{ param_user }}"
     remote_src: true
