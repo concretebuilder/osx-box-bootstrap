@@ -1,4 +1,4 @@
-export BITRISE_XAMARIN_FOLDER_PATH="${HOME}/xamarin"
+export BITRISE_XAMARIN_FOLDER_PATH="${HOME}/bitrise/xamarin"
 
 # Android Environment Variables
 export ANDROID_HOME=$HOME/Library/Developer/Xamarin/android-sdk-macosx
