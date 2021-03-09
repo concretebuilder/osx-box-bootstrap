@@ -257,6 +257,12 @@ workflows:
     after_run:
     - _run_molecule_test
 
+  test_profiles:
+    envs:
+    - ROLE: "profiles"
+    after_run:
+    - _run_molecule_test
+
   ##############################
   #### Utility workflows #######
   ##############################
