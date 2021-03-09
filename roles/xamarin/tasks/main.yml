@@ -32,3 +32,6 @@
     dest: "$HOME/bitrise"
     owner: "{{ param_user }}"
     remote_src: true
+
+- name: Source xamarin_profile
+  shell: bash -l -c "source $HOME/.profiles/xamarin_profile"
