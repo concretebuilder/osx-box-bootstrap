@@ -34,4 +34,6 @@
     remote_src: true
 
 - name: Source xamarin_profile
-  shell: bash -l -c "source $HOME/.profiles/xamarin_profile"
+  shell: "source $HOME/.profiles/xamarin_profile"
+  args:
+    executable: /bin/bash
