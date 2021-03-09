@@ -7,4 +7,5 @@ simulators:
   - 'tvOS 13.4'
   - 'iOS 14.4'
   - 'iOS 14.3'
+  - 'iOS 14.2'
   - 'iOS 13.7'
