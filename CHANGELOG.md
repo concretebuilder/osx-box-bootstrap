@@ -3,6 +3,15 @@
 ## `v2021_03_09_3`
 * `Refactor profiles role and create molecule tests`
 
+## `v2021_03_09_2`
+* `Re run xamarin and make sure it is sourced`
+
+## `v2021_03_09_1`
+* `Update CODEOWNERS`
+
+## `v2021_03_09`
+* `Use xcversion instead of xcode-select, and with full path`
+
 ## `v2021_03_08_4`
 * `Create and update simulator files for 11.6-7`
 
