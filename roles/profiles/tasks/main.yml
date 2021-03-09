@@ -1,11 +1,12 @@
 ---
-- name: ensure profile directories are ok
-  include_tasks:
-    file: directories.yml
+- name: create profile directories
+  file:
+    path: "$HOME/{{ item.path }}"
+    state: directory
+    owner: "{{ param_user }}"
+    mode: "{{ item.mode }}"
   with_items:
     - "{{ directories }}"
-  loop_control:
-    loop_var: dir
 
 - name: install profiles
   copy:
