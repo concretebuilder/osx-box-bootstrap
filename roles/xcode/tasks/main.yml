@@ -6,14 +6,14 @@
     executable: "$HOME/.rbenv/shims/gem"
 
 - name: Install xcode version based on xcode_version variable, it could take a while. About an hour, so be patient.
-  shell: bash -l -c "xcversion install '{{ xcode_version }}'"
+  shell: bash -l -c "$HOME/.rbenv/shims/xcversion install '{{ xcode_version }}'"
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
 
 - name: Switch to Xcode stable, the default Xcode for building
-  shell: bash -l -c "xcversion select '{{ xcode_version }}'"
+  shell: bash -l -c "$HOME/.rbenv/shims/xcversion select '{{ xcode_version }}'"
   become: true
 
 - name: Enable accessibility to xcode
