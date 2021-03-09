@@ -16,7 +16,7 @@
   roles:
     - role: profiles
     - role: xamarin
-      when: is_xamarin | default("false") | string  == "true"
+      when: is_xamarin == true
     - role: certs
     - role: brew
     - role: brew-repos-fix
