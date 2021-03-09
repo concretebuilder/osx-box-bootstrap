@@ -1,0 +1,25 @@
+---
+directories:
+  - path: ".profiles"
+    mode: "0700"
+  - path: "profile.d"
+    mode: "0755"
+profiles:
+  - name: 'bitrise_profile'
+    dest: '.profiles/bitrise_profile'
+    mode: "0600"
+  - name: 'tools_profile'
+    dest: '.profiles/tools_profile'
+    mode: "0600"
+  - name: 'bashrc'
+    dest: '.bashrc'
+    mode: "0600"
+  - name: 'profile'
+    dest: '.profile'
+    mode: "0600"
+  - name: 'bash_profile'
+    dest: '.bash_profile'
+    mode: "0600"
+  - name: 'zshrc'
+    dest: '.zshrc'
+    mode: "0644"

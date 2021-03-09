@@ -1,66 +1,17 @@
 ---
-# Setup profiles
-#  we'll create a ~/.profiles folder and add bitrise specific
-#  profiles there.
-- name: ensure .profiles folder is ok
-  file:
-    path: /Users/{{ param_user }}/.profiles
-    state: directory
-    owner: "{{ param_user }}"
-    mode: "0700"
-# this is the main Bitrise profile, includes
-#  the bitrise specific environments
-- name: setup bitrise_profile
-  copy:
-    src: bitrise_profile
-    dest: "/Users/{{ param_user }}/.profiles/bitrise_profile"
-    owner: "{{ param_user }}"
-    mode: "0600"
-# Includes 3thd party tools specific environments
-- name: setup tools_profile
-  copy:
-    src: tools_profile
-    dest: "/Users/{{ param_user }}/.profiles/tools_profile"
-    owner: "{{ param_user }}"
-    mode: "0600"
-# ~/.bashrc will load ~/.profiles/bitrise_profile
-#  and the other profiles (~/.profile and ~/.bash_profile) will
-#  load ~/.bashrc, so no matter how the shell is initialized
-#  it'll load all the required Environment Variables
-- name: setup .bashrc
-  copy:
-    src: bashrc
-    dest: "/Users/{{ param_user }}/.bashrc"
-    owner: "{{ param_user }}"
-    mode: "0600"
-- name: setup .profile
-  copy:
-    src: profile
-    dest: "/Users/{{ param_user }}/.profile"
-    owner: "{{ param_user }}"
-    mode: "0600"
-- name: setup .bash_profile
-  copy:
-    src: bash_profile
-    dest: "/Users/{{ param_user }}/.bash_profile"
-    owner: "{{ param_user }}"
-    mode: "0600"
+- name: ensure profile directories are ok
+  include_tasks:
+    file: directories.yml
+  with_items:
+    - "{{ directories }}"
+  loop_control:
+    loop_var: dir
 
-- name: Creates profile.d directory
-  become: true
-  file:
-    path: /Users/{{ param_user }}/profile.d
-    state: directory
-    owner: "{{ param_user }}"
-    mode: 0755
-
-# zsh is now the default shell on macos.
-# when users use the remote access feature, they are dropped to
-# a zsh. He we need to load all the bash env vars to make them
-# accessible to the user
-- name: setup .zshrc
+- name: install profiles
   copy:
-    src: zshrc
-    dest: "/Users/{{ param_user }}/.zshrc"
+    src: "{{ item.name }}"
+    dest: "$HOME/{{ item.dest }}"
     owner: "{{ param_user }}"
-    mode: "0644"
+    mode: "{{ item.mode }}"
+  with_items:
+    - "{{ profiles }}"
