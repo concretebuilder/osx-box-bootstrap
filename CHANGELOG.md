@@ -3,6 +3,9 @@
 ## `v2021_03_09_2`
 * `Re run xamarin and make sure it is sourced`
 
+## `v2021_03_09_1`
+* `Update CODEOWNERS`
+
 ## `v2021_03_09`
 * `Use xcversion instead of xcode-select, and with full path`
 
