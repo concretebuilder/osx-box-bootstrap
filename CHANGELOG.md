@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_10`
+* `Upgrade DEN agent to v1.20.0`
+
 ## `v2021_03_09_3`
 * `Refactor profiles role and create molecule tests`
 
