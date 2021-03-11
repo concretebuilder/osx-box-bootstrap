@@ -3,6 +3,9 @@
 ## `v2021_03_11_2`
 * `Revert DEN version, it fails to install`
 
+## `v2021_03_11_1`
+* `Hardcode Go version`
+
 ## `v2021_03_11`
 * `fix the cocoapods update logic`
 
