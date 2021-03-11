@@ -9,20 +9,24 @@
   file:
     path: "{{ ansible_env.HOME }}/go"
     state: absent
-  when: go_installation.stdout != "{{ go_version }}"
+  when: go_installation.stdout != go_version|string
 
 - name: Download Go
   get_url:
     url: https://golang.org/dl/{{ go_version }}.{{ ansible_system | lower }}-amd64.tar.gz
     dest: /tmp/go{{ go_version }}.zip
-  when: go_installation.rc != 0 or go_installation.stdout != "{{ go_version }}"
+  when: >
+    go_installation.rc != 0 or
+    go_installation.stdout != go_version|string
 
 - name: unarchive Go
   unarchive:
     src: /tmp/go{{ go_version }}.zip
     dest: "{{ ansible_env.HOME }}"
     remote_src: true
-  when: go_installation.rc != 0 or go_installation.stdout != "{{ go_version }}"
+  when: >
+    go_installation.rc != 0 or
+    go_installation.stdout != go_version|string
 
 - name: install Go
   file:
@@ -32,11 +36,13 @@
     mode: "0755"
     state: link
   become: true
-  when: go_installation.rc != 0 or go_installation.stdout != "{{ go_version }}"
+  when: >
+    go_installation.rc != 0 or
+    go_installation.stdout != go_version|string
 
 - name: prepare GOPATH dirs
   file:
-    path: "$HOME/go/{{ item.fold_path }}"
+    path: "{{ ansible_env.HOME }}/go/{{ item.fold_path }}"
     state: directory
     owner: "{{ param_user }}"
   with_items:
