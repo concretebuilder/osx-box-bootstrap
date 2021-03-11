@@ -30,7 +30,9 @@
 
 - name: CocoaPods specs install with pod NOT FOR CI
   shell: bash -l -c "pod repo add master https://github.com/CocoaPods/Specs.git"
-  when: (cocoapods_specs_repo.before == None) and (not lookup('env', 'IS_CI'))
+  when: >
+    cocoapods_specs_repo.before == None and
+    not lookup('env', 'IS_CI')
 
 - name: Shallow checkout Cocoapds Specs repo FOR CI TEST
   git:
@@ -39,8 +41,10 @@
     clone: 'yes'
     update: 'yes'
     depth: 1
-  when: (cocoapods_specs_repo.before == None) and (lookup('env', 'IS_CI'))
+  when: >
+    cocoapods_specs_repo.before == None
+    and lookup('env', 'IS_CI')
 
 - name: "CocoaPods: pod repo update"
   shell: bash -l -c "pod repo update"
-  when: (cocoapods_specs_repo.before != cocoapods_specs_repo.after) and (cocoapods_specs_repo.before != None)
+  when: not lookup('env', 'IS_CI')
