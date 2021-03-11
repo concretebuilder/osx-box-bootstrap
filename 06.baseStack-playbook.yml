@@ -11,8 +11,6 @@
     param_group: staff
     password_of_param_user: vagrant
     bitrise_cli_version: "1.43.0"
-  environment:
-    BITRISE_DEN_VERSION: "33253745"  # 1.20.0
   roles:
     - role: profiles
     - role: xamarin
