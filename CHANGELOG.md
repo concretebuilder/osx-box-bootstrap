@@ -1,7 +1,11 @@
 ## UPCOMING
 
+
 ## `v2021_03_11_1`
 * `Hardcode Go version`
+
+## `v2021_03_11`
+* `fix the cocoapods update logic`
 
 ## `v2021_03_10`
 * `Upgrade DEN agent to v1.20.0`
