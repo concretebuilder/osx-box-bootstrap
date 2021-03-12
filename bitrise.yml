@@ -263,6 +263,12 @@ workflows:
     after_run:
     - _run_molecule_test
 
+  test_bitrise-den:
+    envs:
+    - ROLE: "bitrise-den"
+    after_run:
+    - _run_molecule_test
+
   ##############################
   #### Utility workflows #######
   ##############################

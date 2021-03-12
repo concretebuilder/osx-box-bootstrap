@@ -1,24 +1,21 @@
 ---
-# ----------------------------------------
-- name: brew install jq
-  homebrew:
-    name: jq
-    state: present
-
-- name: "bitrise DEN: download"
-  script: download_den.sh
-  environment:
-    GITHUB_ACCESS_TOKEN: "{{ github_access_token }}"
-
+- name: Download den agent
+  get_url:
+    url: "https://api.github.com/repos/bitrise-io/den/releases/assets/{{ bitrise_den_version }}"
+    dest: /var/tmp/bitrise-den-darwin-amd64.zip
+    headers:
+      Authorization: "token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
+      Accept: "application/octet-stream"
 - name: "bitrise DEN: extract"
   unarchive:
     src: /var/tmp/bitrise-den-darwin-amd64.zip
-    dest: "$HOME/"
+    dest: "{{ ansible_env.HOME }}"
+    creates: "{{ ansible_env.HOME }}/bitrise-den-agent"
     exclude:
       - bitrise-den-cli
       - bitrise-den-server
-    mode: '0755'
-    remote_src: true
-    creates: $HOME/bitrise-den-agent
     owner: "{{ param_user }}"
+    mode: '0755'
     group: staff
+    remote_src: true
+  become: true

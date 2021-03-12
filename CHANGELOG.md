@@ -1,6 +1,9 @@
 ## UPCOMING
 
 
+## `v2021_03_12`
+* `Refactor and update den agent role`
+
 ## `v2021_03_11_1`
 * `Hardcode Go version`
 
