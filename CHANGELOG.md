@@ -1,6 +1,9 @@
 ## UPCOMING
 
 
+## `v2021_03_16_2`
+* `Revert go install to brew`
+
 ## `v2021_03_16`
 * `Install Go under /usr/local/go`
 
