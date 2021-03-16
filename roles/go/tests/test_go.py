@@ -1,7 +1,7 @@
 # Go tests
 def test_if_go_exists(host):
-    assert host.exists("/usr/local/bin/go")
-    assert host.run("go version").stdout.startswith('go version go1.15.7')
+    assert host.exists("/usr/local/go")
+    assert host.run("/usr/local/go/bin/go version").stdout.startswith('go version go1.15.7')
 
 def test_go_src_exists(host):
     bitrise = host.file("/home/linuxbrew/go/src")

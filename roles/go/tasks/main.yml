@@ -1,40 +1,31 @@
 ---
 - name: Check if Go is installed
-  shell: /usr/local/bin/go version | awk '{print $3}'
+  shell: /usr/local/go/bin/go version | awk '{print $3}'
   register: go_installation
   ignore_errors: true
   changed_when: false
 
 - name: Clean up old version if necesary
   file:
-    path: "{{ ansible_env.HOME }}/go"
+    path: /usr/local/go
     state: absent
+  become: true
   when: go_installation.stdout != go_version|string
 
 - name: Download Go
   get_url:
     url: https://golang.org/dl/{{ go_version }}.{{ ansible_system | lower }}-amd64.tar.gz
-    dest: /tmp/go{{ go_version }}.zip
+    dest: /tmp/{{ go_version }}.zip
   when: >
     go_installation.rc != 0 or
     go_installation.stdout != go_version|string
 
 - name: unarchive Go
   unarchive:
-    src: /tmp/go{{ go_version }}.zip
-    dest: "{{ ansible_env.HOME }}"
+    src: /tmp/{{ go_version }}.zip
+    dest: /usr/local/
     remote_src: true
-  when: >
-    go_installation.rc != 0 or
-    go_installation.stdout != go_version|string
-
-- name: install Go
-  file:
-    src: "{{ ansible_env.HOME }}/go/bin/go"
-    dest: /usr/local/bin/go
     owner: "{{ param_user }}"
-    mode: "0755"
-    state: link
   become: true
   when: >
     go_installation.rc != 0 or
