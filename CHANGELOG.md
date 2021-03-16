@@ -1,6 +1,9 @@
 ## UPCOMING
 
 
+## `v2021_03_16`
+* `Install Go under /usr/local/go`
+
 ## `v2021_03_12`
 * `Refactor and update den agent role`
 
