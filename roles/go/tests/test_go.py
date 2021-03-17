@@ -1,7 +1,7 @@
 # Go tests
 def test_if_go_exists(host):
-    assert host.exists("/usr/local/bin/go")
-    assert host.run("/usr/local/bin/go version").stdout.startswith('go version go1.15')
+    assert host.exists("/home/linuxbrew/.linuxbrew/bin/go")
+    assert host.run("/home/linuxbrew/.linuxbrew/bin/go version").stdout.startswith('go version go1.15')
 
 def test_go_src_exists(host):
     folder_base_path = "/home/linuxbrew/go/"

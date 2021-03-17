@@ -5,8 +5,22 @@
     state: present
     update_homebrew: true
 
-- name: Link brew repo
-  shell: brew unlink go && brew link go@1.15
+- name: Test if there is a latest go installed
+  shell: brew list | grep -x "go"
+  args:
+    executable: /bin/bash
+  changed_when: false
+  ignore_errors: true
+  register: latest_is_installed
+
+- name: unlink latest go
+  shell: brew unlink go
+  args:
+    executable: /bin/bash
+  when: latest_is_installed.rc == 0
+
+- name: Link go 1.15
+  shell: brew link go@1.15
   args:
     executable: /bin/bash
 
