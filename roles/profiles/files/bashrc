@@ -34,17 +34,17 @@ if [ -s "$HOME/.profiles/tools_profile" ] ; then
   source "$HOME/.profiles/tools_profile"
 fi
 
-# Xamarin environments, if exists
-if [ -s "$HOME/.profiles/xamarin_profile" ] ; then
-  source "$HOME/.profiles/xamarin_profile"
-fi
-
 for PROFILE_SCRIPT in $( ls $HOME/profile.d/* ); do
   . $PROFILE_SCRIPT
 done
 
 if [ -f $HOME/profile.d/jenv.sh ]; then
   export JAVA_HOME="$(jenv prefix)"
+fi
+
+# Xamarin environments, if exists
+if [ -s "$HOME/.profiles/xamarin_profile" ] ; then
+  source "$HOME/.profiles/xamarin_profile"
 fi
 
 # keep a newline at the end of this file
