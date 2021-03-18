@@ -1,7 +1,10 @@
 ## UPCOMING
 
-## `v2021_03_18`
+## `v2021_03_18_1`
 * `(xcode) debug logs and robust xcode selection`
+
+## `v2021_03_18`
+* `Refactor and update Bitrise CLI`
 
 ## `v2021_03_17`
 * `Change order of source so java does not override xamarin`
