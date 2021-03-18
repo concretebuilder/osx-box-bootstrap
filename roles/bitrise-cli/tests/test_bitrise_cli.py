@@ -5,7 +5,7 @@ def test_bitrise_cli_exists(host):
     assert bitrise_cli.mode == 0o755
 
 def test_bitrise_cli_version(host):
-    assert host.run("bitrise --version").stdout.startswith('1.42.0')
+    assert host.run("bitrise --version").stdout.startswith('1.45.1')
 
 def test_envman_is_installed(host):
     assert host.exists("/home/linuxbrew/.bitrise/tools/envman")
