@@ -1,4 +1,9 @@
 ---
+- name: Make sure jq is installed
+  homebrew:
+    name: "jq"
+    state: present
+    update_homebrew: true
 - name: Get asset id for selected version
   shell: "curl -s -n --header \"Authorization: token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}\" https://api.github.com/repos/bitrise-io/den/releases | /usr/local/bin/jq \". | map(select(.tag_name == \\\"{{ bitrise_den_version }}\\\"))[0].assets | map(select(.name | contains(\\\"darwin\\\")))[0].id\""
   register: asset_id
