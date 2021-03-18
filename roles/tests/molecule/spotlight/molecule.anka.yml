@@ -2,11 +2,9 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: delegated
 platforms:
   - name: instance
-    image: molecule-test
-    dockerfile: ../Dockerfile.j2
 provisioner:
   name: ansible
   lint:
@@ -21,10 +19,13 @@ provisioner:
   inventory:
     host_vars:
       instance:
-        ansible_user: linuxbrew
-        ansible_ssh_pass: linuxbrew
+        ansible_user: vagrant
+        ansible_ssh_pass: vagrant
+  playbooks:
+    create: ${MOLECULE_CREATE_PLAYBOOK:-"../common-playbooks/create.anka.yml"}
+    destroy: ${MOLECULE_DESTROY_PLAYBOOK:-"../common-playbooks/destroy.anka.yml"}
 verifier:
   name: testinfra
   s: true
   additional_files_or_dirs:
-    - ../../../../baseOS/tests/*
+    - ../../../../spotlight/tests/*

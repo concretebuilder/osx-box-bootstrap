@@ -27,4 +27,4 @@ verifier:
   name: testinfra
   s: true
   additional_files_or_dirs:
-    - ../../../../baseOS/tests/*
+    - ../../../../spotlight/tests/*
