@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2021_03_18`
+* `DEN agent downloaded by version from GitHub`
 
 ## `v2021_03_16`
 * `Install Go under /usr/local/go`
