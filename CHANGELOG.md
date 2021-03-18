@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_18`
+* `(xcode) debug logs and robust xcode selection`
+
 ## `v2021_03_17`
 * `Change order of source so java does not override xamarin`
 
