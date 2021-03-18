@@ -27,7 +27,7 @@ if test "z$1" = "z10.15.6" || test "z$1" = "z10.15.7" ; then
   #  FOREIGN KEY (policy_id) REFERENCES policies(id) ON DELETE CASCADE ON UPDATE CASCADE);
   sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode',0,1,1,'','','','UNUSED','',0,'1606910422');"
 
-elif test "z$1" = "z11.2" ; then
+elif test "z$1" = "z11.2" || test "z$1" = "z11.2.3" ; then
   # schema on Big Sur 11.2
   # CREATE TABLE access (
   # service        TEXT        NOT NULL,

@@ -5,17 +5,49 @@
     user_install: false
     executable: "$HOME/.rbenv/shims/gem"
 
-- name: Install xcode version based on xcode_version variable, it could take a while. About an hour, so be patient.
+- name: Install xcode '{{ xcode_version }}', it could take a while. About an hour, so be patient.
   shell: bash -l -c "$HOME/.rbenv/shims/xcversion install '{{ xcode_version }}'"
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
 
-- name: Switch to Xcode stable, the default Xcode for building
-  shell: bash -l -c "$HOME/.rbenv/shims/xcversion select '{{ xcode_version }}'"
+- name: Get the installed Xcode version
+  shell: bash -l -c "xcversion selected; xcode-select -p"
+  register: install_xcode_versions
+  changed_when: false
+  ignore_errors: true
+
+- name: Display the installed xcoder versions
+  debug:
+    msg: "{{ install_xcode_versions.stdout }}"
+
+- name: Check which Xcode is symlinked
+  shell: bash -l -c "xcode-select -p | grep {{ xcode_version.split(' ')[0] }}"
+  register: xcode_select_selected
+  changed_when: false
+  ignore_errors: true
+
+- name: Fix the Xcode.app symlink if not selected
   become: true
+  shell: bash -l -c "/usr/bin/xcode-select --switch /Applications/Xcode-{{ xcode_version|replace(' ','.')}}.app"
+  when: xcode_select_selected.rc != 0
+
+- name: Check xcversion selected Xcode version
+  shell: bash -l -c "$HOME/.rbenv/shims/xcversion selected | grep Xcode | grep {{ xcode_version.split(' ')[0] }}"
+  register: xcversion_selected
+  changed_when: false
+  ignore_errors: true
+
+- name: Switch to Xcode stable with xcversion
+  become: true
+  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion select {{ xcode_version.split(' ')[0] }}"
+  when: xcversion_selected.rc !=0
+
+- name: Clean up Xcode install caches
+  become: true
+  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion cleanup"
 
 - name: Enable accessibility to xcode
-  script: enable_accessibility.sh '{{ ansible_distribution_version }}'
   become: true
+  script: enable_accessibility.sh '{{ ansible_distribution_version }}'
