@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_18_2`
+* `Set up SDK ROOT for xamarin`
+
 ## `v2021_03_18`
 * `Refactor and update Bitrise CLI`
 
