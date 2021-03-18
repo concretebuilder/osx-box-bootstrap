@@ -24,6 +24,10 @@
     headers:
       Authorization: "token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
       Accept: "application/octet-stream"
+- name: Clean bitrise-den-agent before extraction
+  file:
+    path: "{{ ansible_env.HOME }}/bitrise-den-agent"
+    state: absent
 - name: "bitrise DEN: extract"
   unarchive:
     src: /var/tmp/bitrise-den-darwin-amd64.zip
