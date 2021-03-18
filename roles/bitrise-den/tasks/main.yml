@@ -4,8 +4,18 @@
     name: "jq"
     state: present
     update_homebrew: true
+- name: Get asset id list
+  get_url:
+    url: "https://api.github.com/repos/bitrise-io/den/releases"
+    dest: /var/tmp/bitrise-den-releases.json
+    headers:
+      Authorization: "token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
 - name: Get asset id for selected version
-  shell: "curl -s -n --header \"Authorization: token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}\" https://api.github.com/repos/bitrise-io/den/releases | /usr/local/bin/jq \". | map(select(.tag_name == \\\"{{ bitrise_den_version }}\\\"))[0].assets | map(select(.name | contains(\\\"darwin\\\")))[0].id\""
+  shell: |
+    "set -o pipefail"
+    "cat /var/tmp/bitrise-den-releases.json | /usr/local/bin/jq \". | map(select(.tag_name == \\\"{{ bitrise_den_version }}\\\"))[0].assets | map(select(.name | contains(\\\"darwin\\\")))[0].id\""
+  args:
+    executable: /bin/bash
   register: asset_id
 - name: Download den agent
   get_url:
