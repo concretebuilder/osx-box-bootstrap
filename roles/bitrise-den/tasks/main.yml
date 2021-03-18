@@ -11,9 +11,9 @@
     headers:
       Authorization: "token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
 - name: Get asset id for selected version
-  shell: |
-    "set -o pipefail"
-    "cat /var/tmp/bitrise-den-releases.json | /usr/local/bin/jq \". | map(select(.tag_name == \\\"{{ bitrise_den_version }}\\\"))[0].assets | map(select(.name | contains(\\\"darwin\\\")))[0].id\""
+  shell: >
+    set -o pipefail && \
+      cat /var/tmp/bitrise-den-releases.json | /usr/local/bin/jq ". | map(select(.tag_name == \"{{ bitrise_den_version }}\"))[0].assets | map(select(.name | contains(\"darwin\")))[0].id"
   args:
     executable: /bin/bash
   register: asset_id
