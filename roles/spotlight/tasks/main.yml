@@ -1,22 +1,13 @@
 ---
-- name: Check if spotlight is disabled on Catalina or older
+- name: Check if spotlight is disabled
   become: true
   shell: launchctl list | grep -q com.apple.metadata.mds
   register: spotlight_state_catalina
   changed_when: false
   ignore_errors: true
 
-- name: Check if spotlight is disabled Big Sur
-  become: true
-  shell: launchctl list | grep -q com.apple.corespotlightd
-  register: spotlight_state_big_sur
-  changed_when: false
-  ignore_errors: true
-
 - name: Disable spotlight
   include_tasks:
     file: disable-spotlight.yml
-  when: >
-    spotlight_state_catalina.rc == 1 or
-    spotlight_state_big_sur.rc == 1
+  when: spotlight_state.rc == 1 or
 ...
