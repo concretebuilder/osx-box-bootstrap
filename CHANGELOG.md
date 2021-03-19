@@ -1,7 +1,10 @@
 ## UPCOMING
 
-## `v2021_03_18_1`
+## `v2021_03_19_1`
 * `(xcode) debug logs and robust xcode selection`
+
+## `v2021_03_18_2`
+* `Set up SDK ROOT for xamarin`
 
 ## `v2021_03_18`
 * `Refactor and update Bitrise CLI`
