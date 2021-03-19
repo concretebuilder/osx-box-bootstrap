@@ -22,7 +22,6 @@ provisioner:
     host_vars:
       instance:
         ansible_user: linuxbrew
-        bitrise_cli_version: 1.42.0
         ansible_ssh_pass: linuxbrew
 verifier:
   name: testinfra

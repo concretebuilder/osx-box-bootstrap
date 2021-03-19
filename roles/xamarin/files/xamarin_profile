@@ -9,6 +9,7 @@ else
   # Xamarin Studio
   export ANDROID_NDK_HOME=$HOME/Library/Developer/Xamarin/android-ndk/android-ndk-r11c
 fi
+export ANDROID_SDK_ROOT=$ANDROID_HOME
 export COMPONENT_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/xamarin-component"
 export NUNIT_3_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/3.4.1/bin"
 export NUNIT_2_PATH="${BITRISE_XAMARIN_FOLDER_PATH}/nunit/2.6.4/bin"
