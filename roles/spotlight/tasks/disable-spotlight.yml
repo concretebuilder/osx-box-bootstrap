@@ -1,0 +1,25 @@
+---
+- name: Disable spotlight
+  become: true
+  shell:
+    cmd: |
+      defaults write $HOME/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array "/Volumes"
+      defaults write $HOME/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array "/Network"
+
+- name: Get mds running processes
+  shell: "ps auxww | grep mds | grep -v grep | awk '{print $2}'"
+  register: running_processes
+  changed_when: false
+  ignore_errors: true
+
+- name: Kill running processes
+  shell: "kill {{ item }}"
+  with_items: "{{ running_processes.stdout_lines }}"
+
+- name: Make sure indexing is DISABLED for the main volume
+  become: true
+  shell:
+    cmd: |
+      mdutil -a -i off /
+      mdutil -a -i off
+...
