@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_19_3`
+* `Spotlight variable fix`
+
 ## `v2021_03_19`
 * `DEN agent downloaded by version from GitHub`
 
