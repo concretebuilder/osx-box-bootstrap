@@ -2,7 +2,7 @@
 - name: Check if spotlight is disabled
   become: true
   shell: launchctl list | grep -q com.apple.metadata.mds
-  register: spotlight_state_catalina
+  register: spotlight_state
   changed_when: false
   ignore_errors: true
 
