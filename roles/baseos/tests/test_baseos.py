@@ -10,6 +10,9 @@ class TestBaseOS(unittest.TestCase):
     def test_autoupdates_are_disabled(self):
         self.assertEqual(self.host.run("sudo softwareupdate --schedule | grep -q 'off'").rc, 0)
 
+    def test_spotlight_is_disabled(self):
+        self.assertEqual(self.host.run("sudo launchctl list | grep -q com.apple.metadata.mds").rc, 0)
+
     def test_screenlock_is_disabled(self):
         self.assertIn("idleTime = 0;", self.host.run("sudo defaults -currentHost read com.apple.screensaver").stdout)
 
