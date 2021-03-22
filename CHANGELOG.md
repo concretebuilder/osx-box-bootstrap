@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_22_2`
+* `Fix brew commit sha`
+
 ## `v2021_03_22`
 * `W11 weekly fixes * Go, Bitrise CLI, DEN Agent`
 
