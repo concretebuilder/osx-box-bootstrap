@@ -3,7 +3,7 @@
   get_url:
     url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-{{ ansible_system }}-x86_64  # yamllint disable-line rule:line-length
     dest: /usr/local/bin/bitrise
-    force: yes  # always overwrite
+    force: true  # always overwrite
     mode: '0755'
     owner: "{{ param_user }}"
     group: wheel
