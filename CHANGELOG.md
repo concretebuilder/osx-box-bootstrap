@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_22`
+* `W11 weekly fixes * Go, Bitrise CLI, DEN Agent`
+
 ## `v2021_03_19_3`
 * `Spotlight variable fix`
 
