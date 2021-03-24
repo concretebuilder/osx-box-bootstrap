@@ -1,5 +1,11 @@
 ## UPCOMING
 
+## `v2021_03_23`
+* `Fix home in xcode role`
+
+## `v2021_03_22_3`
+* `Force the download of bitrise-cli`
+
 ## `v2021_03_22_2`
 * `Fix brew commit sha`
 
