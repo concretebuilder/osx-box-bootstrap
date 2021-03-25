@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_24`
+* `Upgrade DEN agent to v1.22.1`
+
 ## `v2021_03_23`
 * `Fix home in xcode role`
 
