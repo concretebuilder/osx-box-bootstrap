@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_25`
+* `Added simulator variable files for legacy stacks`
+
 ## `v2021_03_23`
 * `Fix home in xcode role`
 
