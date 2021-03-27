@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_27`
+* `flutter`: `2.0.3`
+
 ## `v2021_03_25`
 * `Added simulator variable files for legacy stacks`
 
