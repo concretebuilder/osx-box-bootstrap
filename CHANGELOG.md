@@ -29,7 +29,6 @@
 
 ## `v2021_03_18_3`
 * `separate Spotlight and rerun in baseStack`
->>>>>>> master
 
 ## `v2021_03_18_2`
 * `Set up SDK ROOT for xamarin`
