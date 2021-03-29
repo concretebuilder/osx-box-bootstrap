@@ -15,6 +15,7 @@
     - role: xamarin
       when: is_xamarin == true
     - role: certs
+    - role: spotlight
     - role: brew
     - role: brew-repos-fix
     - role: enable-auto-login

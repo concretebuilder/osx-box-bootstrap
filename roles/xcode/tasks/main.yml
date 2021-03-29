@@ -3,10 +3,10 @@
   gem:
     name: xcode-install
     user_install: false
-    executable: "$HOME/.rbenv/shims/gem"
+    executable: "{{ ansible_env.HOME }}/.rbenv/shims/gem"
 
-- name: Install xcode '{{ xcode_version }}', it could take a while. About an hour, so be patient.
-  shell: bash -l -c "$HOME/.rbenv/shims/xcversion install '{{ xcode_version }}'"
+- name: Install xcode version based on xcode_version variable, it could take a while. About an hour, so be patient.
+  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion install '{{ xcode_version }}'"
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"

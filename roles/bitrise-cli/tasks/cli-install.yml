@@ -1,27 +1,22 @@
 ---
-- name: "bitrise CLI: download"
+- name: "bitrise CLI: download {{ bitrise_cli_version }}"
   get_url:
     url: https://github.com/bitrise-io/bitrise/releases/download/{{ bitrise_cli_version }}/bitrise-{{ ansible_system }}-x86_64  # yamllint disable-line rule:line-length
     dest: /usr/local/bin/bitrise
+    force: true  # always overwrite
     mode: '0755'
     owner: "{{ param_user }}"
     group: wheel
   become: true
 
 - name: "Bitrise CLI - setup"
-  shell: bitrise setup
-  args:
-    executable: /bin/bash
+  shell: bash -l -c "bitrise setup"
 
 # setup the default StepLib collection to stepman, for a pre-warmed
 #  cache for the StepLib
 - name: "stepman: init"
-  shell: $HOME/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git
-  args:
-    executable: /bin/bash
+  shell: bash -l -c "$HOME/.bitrise/tools/stepman setup -c https://github.com/bitrise-io/bitrise-steplib.git"
 
 - name: "stepman: update"
-  shell: $HOME/.bitrise/tools/stepman update
-  args:
-    executable: /bin/bash
+  shell: bash -l -c "$HOME/.bitrise/tools/stepman update"
 ...

@@ -1,8 +1,6 @@
 ---
 - name: Test if CLI is installed
-  shell: bitrise --version
-  args:
-    executable: /bin/bash
+  shell: bash -l -c "bitrise --version"
   changed_when: false
   ignore_errors: true
   register: cli_is_installed

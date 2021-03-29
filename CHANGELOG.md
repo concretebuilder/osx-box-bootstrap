@@ -1,7 +1,35 @@
 ## UPCOMING
 
-## `v2021_03_19_1`
+## `v2021_03_29_1`
 * `(xcode) debug logs and robust xcode selection`
+
+## `v2021_03_25`
+* `Added simulator variable files for legacy stacks`
+
+## `v2021_03_24`
+* `Upgrade DEN agent to v1.22.1`
+
+## `v2021_03_23`
+* `Fix home in xcode role`
+
+## `v2021_03_22_3`
+* `Force the download of bitrise-cli`
+
+## `v2021_03_22_2`
+* `Fix brew commit sha`
+
+## `v2021_03_22`
+* `W11 weekly fixes * Go, Bitrise CLI, DEN Agent`
+
+## `v2021_03_19_3`
+* `Spotlight variable fix`
+
+## `v2021_03_19`
+* `DEN agent downloaded by version from GitHub`
+
+## `v2021_03_18_3`
+* `separate Spotlight and rerun in baseStack`
+>>>>>>> master
 
 ## `v2021_03_18_2`
 * `Set up SDK ROOT for xamarin`

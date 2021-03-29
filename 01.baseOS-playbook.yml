@@ -11,4 +11,5 @@
     - password_of_param_user: vagrant
   roles:
     - role: baseos
+    - role: spotlight
     - role: enable-auto-login
