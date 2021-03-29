@@ -34,19 +34,19 @@ name: Install xcode '{{ xcode_version }}', it could take a while. About an hour,
   when: xcode_select_selected.rc != 0
 
 - name: Check xcversion selected Xcode version
-  shell: bash -l -c "$HOME/.rbenv/shims/xcversion selected | grep Xcode | grep {{ xcode_version.split(' ')[0] }}"
+  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion selected | grep Xcode | grep {{ xcode_version.split(' ')[0] }}"
   register: xcversion_selected
   changed_when: false
   ignore_errors: true
 
 - name: Switch to Xcode stable with xcversion
   become: true
-  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion select {{ xcode_version.split(' ')[0] }}"
+  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion select {{ xcode_version.split(' ')[0] }}"
   when: xcversion_selected.rc !=0
 
 - name: Clean up Xcode install caches
   become: true
-  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion cleanup"
+  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion cleanup"
 
 - name: Enable accessibility to xcode
   become: true
