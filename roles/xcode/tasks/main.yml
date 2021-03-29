@@ -1,7 +1,8 @@
 ---
-- name: Extract Xcode major version
+# When installing betas, they install from a string e.g `12.5 beta 3`
+- name: Extract Xcode version
   set_fact:
-    xcode_major_version: "{{ xcode_version.split(' ')[0] }}"
+    xcode_numeric_version: "{{ xcode_version.split(' ')[0] }}"
 
 - name: Install xcode-install
   gem:
@@ -16,43 +17,37 @@ name: Install xcode '{{ xcode_version }}', it could take a while. About an hour,
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
 
-- name: Display the installed Xcode version
+- name: Get and display the current Xcode version
   block:
+    - name: get the xcode versions from xcversion
+      shell: bash -l -c "xcversion selected"
+      register: xcversion_selected
+      changed_when: false
+      ignore_errors: true
+
     - name: get the xcode versions from xcversion and xcode-select
-      shell: bash -l -c "xcversion selected; xcode-select -p"
-      register: install_xcode_versions
+      shell: bash -l -c "xcode-select -p"
+      register: xcode_select_path
       changed_when: false
       ignore_errors: true
 
    - name: Display the installed xcode versions
      debug:
-       msg: "{{ install_xcode_versions.stdout }}"
-
-- name: Check which Xcode is symlinked
-  shell: bash -l -c "xcode-select -p | grep {{ xcode_major_version }}"
-  register: xcode_select_selected
-  changed_when: false
-  ignore_errors: true
+       msg: "xcversion: {{ xcversion_selected.stdout }}" "xcode-select: {{ xcode_select_path.stdout }}"
 
 - name: Fix the Xcode.app symlink if not selected
   become: true
   shell: bash -l -c "/usr/bin/xcode-select --switch /Applications/Xcode-{{ xcode_version|replace(' ','.')}}.app"
-  when: xcode_select_selected.rc != 0
-
-- name: Check xcversion selected Xcode version
-  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion selected | grep Xcode | grep {{ xcode_major_version }}"
-  register: xcversion_selected
-  changed_when: false
-  ignore_errors: true
+  when: xcode_select_path.stdout is search("{{xcode_numeric_version}}")
 
 - name: Switch to Xcode stable with xcversion
   become: true
-  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion select {{ xcode_major_version }}"
-  when: xcversion_selected.rc !=0
+  shell: bash -l -c "xcversion select {{ xcode_numeric_version }}"
+  when: xcversion_selected.stdout is search("{{xcode_numeric_version}}"
 
 - name: Clean up Xcode install caches
   become: true
-  shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion cleanup"
+  shell: bash -l -c "xcversion cleanup"
 
 - name: Enable accessibility to xcode
   become: true
