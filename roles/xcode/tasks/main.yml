@@ -16,15 +16,17 @@ name: Install xcode '{{ xcode_version }}', it could take a while. About an hour,
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
 
-- name: Get the installed Xcode version
-  shell: bash -l -c "xcversion selected; xcode-select -p"
-  register: install_xcode_versions
-  changed_when: false
-  ignore_errors: true
+- name: Display the installed Xcode version
+  block:
+    - name: get the xcode versions from xcversion and xcode-select
+      shell: bash -l -c "xcversion selected; xcode-select -p"
+      register: install_xcode_versions
+      changed_when: false
+      ignore_errors: true
 
-- name: Display the installed xcode versions
-  debug:
-    msg: "{{ install_xcode_versions.stdout }}"
+   - name: Display the installed xcode versions
+     debug:
+       msg: "{{ install_xcode_versions.stdout }}"
 
 - name: Check which Xcode is symlinked
   shell: bash -l -c "xcode-select -p | grep {{ xcode_major_version }}"
