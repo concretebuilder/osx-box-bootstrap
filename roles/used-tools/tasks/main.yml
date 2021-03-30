@@ -1,0 +1,38 @@
+---
+- name: Make sure jq is installed
+  homebrew:
+    name: "jq"
+    state: present
+    update_homebrew: false
+
+- name: Get asset id
+  get_url:
+    url: "https://api.github.com/repos/bitrise-io/used-tools-monitor/releases"
+    dest: /var/tmp/bitrise-used-tools-monitor-releases.json
+    headers:
+      Authorization: "token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
+
+- name: Get asset id for selected version
+  shell: >
+    set -o pipefail && \
+      cat /var/tmp/bitrise-used-tools-monitor-releases.json \
+      | /usr/local/bin/jq ". | map(select(.tag_name == \"{{ used_tools_monitor_version }}\"))[0].assets | map(select(.name | contains(\"Darwin\")))[0].id"
+  args:
+    executable: /bin/bash
+  register: asset_id
+
+- name: Download used-tools-monitor
+  get_url:
+    url: "https://api.github.com/repos/bitrise-io/used-tools-monitor/releases/assets/{{ asset_id.stdout }}"
+    dest: "{{ ansible_env.HOME }}/used-tools-monitor"
+    owner: "{{ param_user }}"
+    mode: '0755'
+    group: staff
+    headers:
+      Authorization: "token {{ lookup('env', 'GITHUB_ACCESS_TOKEN') }}"
+      Accept: "application/octet-stream"
+
+# Here we are calling the binary to initialise it,
+# the arguments true true false were provided by the Core Steps
+- name: set up bin
+  shell: bash -l -c "{{ ansible_env.HOME }}/used-tools-monitor true true false"
