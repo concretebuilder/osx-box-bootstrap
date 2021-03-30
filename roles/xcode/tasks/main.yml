@@ -39,6 +39,7 @@
 
 - name: Fix the Xcode.app symlink if not selected
   become: true
+  # Beta xcode versions require dots not spaces in the symlink
   shell: bash -l -c "/usr/bin/xcode-select --switch /Applications/Xcode-{{ xcode_version|replace(' ','.')}}.app"
 
 - name: Switch to Xcode stable with xcversion
