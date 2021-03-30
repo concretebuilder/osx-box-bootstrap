@@ -1,2 +1,5 @@
 ---
 used_tools_monitor_version: "0.0.5"
+dist_path:
+  MacOSX: '/usr/local/bin/jq'
+  Ubuntu: 'jq'

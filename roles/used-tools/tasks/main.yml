@@ -16,7 +16,7 @@
   shell: >
     set -o pipefail && \
       cat /var/tmp/bitrise-used-tools-monitor-releases.json \
-      | /usr/local/bin/jq ". | map(select(.tag_name == \"{{ used_tools_monitor_version }}\"))[0].assets | map(select(.name | contains(\"Darwin\")))[0].id"
+      | "{{ dist_path['%s' | format(ansible_distribution)] }}" ". | map(select(.tag_name == \"{{ used_tools_monitor_version }}\"))[0].assets | map(select(.name | contains(\"Darwin\")))[0].id"
   args:
     executable: /bin/bash
   register: asset_id
