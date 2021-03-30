@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_30`
+* `(simulators) install iOS 14.5 on Xcode 12.5`
+
 ## `v2021_03_29_1`
 * `(xcode) debug logs and robust xcode selection`
 
