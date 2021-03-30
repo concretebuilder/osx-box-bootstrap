@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_29_1`
+* `(xcode) debug logs and robust xcode selection`
+
 ## `v2021_03_29`
 * `Generate missing SSH host keys`
 

@@ -7,7 +7,9 @@ if test z$1 = z ; then
   exit 1
 fi
 
-if test "z$1" = "z10.15.6" || test "z$1" = "z10.15.7" ; then
+OS_MAJOR_VERSION="$(echo "$1" | cut -d. -f1)"
+
+if test "z$OS_MAJOR_VERSION" = z10; then
   #schema of the table on Catalina 10.15.6
   #
   #CREATE TABLE access (
@@ -27,7 +29,7 @@ if test "z$1" = "z10.15.6" || test "z$1" = "z10.15.7" ; then
   #  FOREIGN KEY (policy_id) REFERENCES policies(id) ON DELETE CASCADE ON UPDATE CASCADE);
   sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode',0,1,1,'','','','UNUSED','',0,'1606910422');"
 
-elif test "z$1" = "z11.2" ; then
+elif test "z$OS_MAJOR_VERSION" = z11; then
   # schema on Big Sur 11.2
   # CREATE TABLE access (
   # service        TEXT        NOT NULL,
