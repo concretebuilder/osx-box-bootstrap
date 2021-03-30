@@ -10,7 +10,7 @@
     user_install: false
     executable: "{{ ansible_env.HOME }}/.rbenv/shims/gem"
 
-name: Install xcode '{{ xcode_version }}', it could take a while. About an hour, so be patient.
+- name: Install xcode "{{ xcode_version }}", it could take a while. About an hour, so be patient.
   shell: bash -l -c "{{ ansible_env.HOME }}/.rbenv/shims/xcversion install '{{ xcode_version }}'"
   environment:
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
@@ -31,23 +31,25 @@ name: Install xcode '{{ xcode_version }}', it could take a while. About an hour,
       changed_when: false
       ignore_errors: true
 
-   - name: Display the installed xcode versions
-     debug:
-       msg: "xcversion: {{ xcversion_selected.stdout }}" "xcode-select: {{ xcode_select_path.stdout }}"
+    - name: Display the installed xcode versions
+      debug:
+        msg:
+        - "xcversion: {{ xcversion_selected.stdout }}"
+        - "xcode-select: {{ xcode_select_path.stdout }}"
 
 - name: Fix the Xcode.app symlink if not selected
   become: true
   shell: bash -l -c "/usr/bin/xcode-select --switch /Applications/Xcode-{{ xcode_version|replace(' ','.')}}.app"
-  when: xcode_select_path.stdout is search("{{xcode_numeric_version}}")
 
 - name: Switch to Xcode stable with xcversion
   become: true
-  shell: bash -l -c "xcversion select {{ xcode_numeric_version }}"
-  when: xcversion_selected.stdout is search("{{xcode_numeric_version}}"
+  # Full path required here because of the 'become:true'
+  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion select {{ xcode_numeric_version }}"
 
 - name: Clean up Xcode install caches
+  # Full path required here because of the 'become:true'
   become: true
-  shell: bash -l -c "xcversion cleanup"
+  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion cleanup"
 
 - name: Enable accessibility to xcode
   become: true
