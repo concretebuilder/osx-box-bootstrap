@@ -109,3 +109,9 @@
 - name: Brew cleanup weekly
   include_role:
     name: brew-cleanup-weekly
+
+- name: Brew upgrade cache
+  shell: bash -l -c "brew upgrade --force -q"
+  # even if the upgrades are installed,
+  # if we get a warning, the exit code is not 0
+  ignore_errors: true

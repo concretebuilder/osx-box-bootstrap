@@ -5,6 +5,7 @@ simulators:
   - 'watchOS 6.2.1'
   - 'tvOS 14.4'
   - 'tvOS 13.4'
+  - 'iOS 14.5'
   - 'iOS 14.4'
   - 'iOS 14.3'
   - 'iOS 14.2'
