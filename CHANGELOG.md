@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_03_31`
+* `upgrade brew cache during weekly update`
+
 ## `v2021_03_30_2`
 * `jq bin fix for den`
 
