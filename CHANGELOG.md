@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_07_1`
+* `added export GO111MODULE=auto to profiles`
+
 ## `v2021_04_07`
 * `initialise simulators as vagrant, not root`
 
