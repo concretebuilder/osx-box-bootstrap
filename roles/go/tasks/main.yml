@@ -27,4 +27,7 @@
     - { fold_path: 'src' }
     - { fold_path: 'bin' }
     - { fold_path: 'pkg' }
+
+- name: Set up GO111MODULE
+  shell: bash -l -c "go env -w GO111MODULE=auto"
 ...
