@@ -1,5 +1,9 @@
 ## UPCOMING
 
+## `v2021_04_09`
+* `add baseos to basestack`
+* `force spotlight disable to always run`
+
 ## `v2021_04_07_1`
 * `added export GO111MODULE=auto to profiles`
 
