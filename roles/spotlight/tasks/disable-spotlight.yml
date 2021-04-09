@@ -14,6 +14,8 @@
 
 - name: Kill running processes
   become: true
+  changed_when: false
+  ignore_errors: true
   shell: "kill {{ item }}"
   with_items: "{{ running_processes.stdout_lines }}"
 
