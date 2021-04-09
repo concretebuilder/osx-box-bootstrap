@@ -9,5 +9,5 @@
 - name: Disable spotlight
   include_tasks:
     file: disable-spotlight.yml
-  when: spotlight_state.rc == 1
+#   when: spotlight_state.rc == 1
 ...
