@@ -12,6 +12,7 @@
     password_of_param_user: vagrant
   roles:
     - role: profiles
+    - role: baseos
     - role: xamarin
       when: is_xamarin == true
     - role: certs
