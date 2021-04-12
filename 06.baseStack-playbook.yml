@@ -17,6 +17,7 @@
       when: is_xamarin == true
     - role: certs
     - role: spotlight
+    - role: keychain
     - role: brew
     - role: brew-repos-fix
     - role: enable-auto-login

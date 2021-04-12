@@ -1,0 +1,3 @@
+---
+- name: Unlock login.keychain
+  command: "security unlock-keychain -p {{ password_of_param_user }} login-keychain"

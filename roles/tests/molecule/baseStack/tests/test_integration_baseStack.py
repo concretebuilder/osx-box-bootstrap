@@ -70,3 +70,9 @@ class TestBaseStack(unittest.TestCase):
         'xcrun simctl list')
     def test_xcode_related_packages(self, tool):
         self.assertEqual(self.host.run(tool).rc, 0, tool)
+
+    @data(
+        'security show-keychain-info login.keychain'
+    )
+    def test_keychain_is_unlocked(self, tool):
+        self.assertEqual(self.host.run(tool).rc, 0, tool)
