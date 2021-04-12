@@ -269,12 +269,6 @@ workflows:
     after_run:
     - _run_molecule_test
 
-  test_keychain:
-    envs:
-    - ROLE: "keychain"
-    after_run:
-    - _run_molecule_test
-
   ##############################
   #### Utility workflows #######
   ##############################

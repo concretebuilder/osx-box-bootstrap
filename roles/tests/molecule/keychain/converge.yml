@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: "test keychain"
-      include_role:
-        name: "keychain"
