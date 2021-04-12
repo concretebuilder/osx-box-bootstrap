@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_12`
+* `add LaunchAgent to unlock login.keychain on startup`
+
 ## `v2021_04_09`
 * `add baseos to basestack`
 * `force spotlight disable to always run`
