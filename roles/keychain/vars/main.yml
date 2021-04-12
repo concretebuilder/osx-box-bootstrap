@@ -1,0 +1,7 @@
+---
+keychain_agent_label: "bitrise.io.tools.keychain-unlocker"
+curr_user_lib_launch_agents_dir: "{{ ansible_env.HOME }}/Library/LaunchAgents"
+script_plist_path: "{{ curr_user_lib_launch_agents_dir }}/{{ keychain_agent_label }}.plist"
+script_full_path: "/opt/bitrise/unlock_keychain.sh"
+script_logs_dir_path: "{{ ansible_env.HOME }}/logs"
+script_log_file_path: "{{ script_logs_dir_path }}/{{ keychain_agent_label }}.log"

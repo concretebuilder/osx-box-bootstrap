@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>{{keychain_agent_label}}</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>{{script_full_path}}</string>
+    </array>
+    <key>StandardOutPath</key>
+    <string>{{script_log_file_path}}</string>
+    <key>StandardErrorPath</key>
+    <string>{{script_log_file_path}}</string>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

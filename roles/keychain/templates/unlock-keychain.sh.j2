@@ -1,0 +1,3 @@
+#!/bin/bash
+
+security unlock-keychain -p {{ password_of_param_user }} login.keychain && echo "Successfully unlocked login.keychain"
