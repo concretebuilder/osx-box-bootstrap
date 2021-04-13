@@ -1,5 +1,36 @@
 ## UPCOMING
 
+## `v2021_04_12`
+* `add LaunchAgent to unlock login.keychain on startup`
+
+## `v2021_04_09`
+* `add baseos to basestack`
+* `force spotlight disable to always run`
+
+## `v2021_04_07_1`
+* `added export GO111MODULE=auto to profiles`
+
+## `v2021_04_07`
+* `initialise simulators as vagrant, not root`
+
+## `v2021_03_31`
+* `upgrade brew cache during weekly update`
+
+## `v2021_03_30_2`
+* `jq bin fix for den`
+
+## `v2021_03_30_1`
+* `(simulators) install iOS 14.5 on Xcode 12.5`
+
+## `v2021_03_30`
+* `Integrate bin monitoring tool`
+
+## `v2021_03_29_1`
+* `(xcode) debug logs and robust xcode selection`
+
+## `v2021_03_29`
+* `Generate missing SSH host keys`
+
 ## `v2021_03_25`
 * `Added simulator variable files for legacy stacks`
 

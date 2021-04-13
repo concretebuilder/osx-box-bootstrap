@@ -1,0 +1,37 @@
+---
+- name: Create directory for keychain-unlocker logs
+  file:
+    path: "{{ script_logs_dir_path }}"
+    state: directory
+
+- name: Create directory for plist
+  file:
+    path: "{{ curr_user_lib_launch_agents_dir }}"
+    state: directory
+
+- name: Add keychain-unlocker plist file
+  template:
+    src: unlock-keychain.plist.j2
+    dest: "{{ script_plist_path }}"
+    owner: "{{ param_user }}"
+    mode: "0755"
+
+- name: "Ensure /opt/bitrise exists"
+  file:
+    path: /opt/bitrise
+    state: directory
+    owner: "{{ param_user }}"
+    group: wheel
+    mode: "0755"
+  become: true
+  ignore_errors: true
+
+- name: add script to /opt/bitrise
+  template:
+    src: unlock-keychain.sh.j2
+    dest: "{{ script_full_path }}"
+    owner: "{{ param_user }}"
+    mode: "0755"
+
+- name: Load keychain-unlocker plist
+  shell: "launchctl load -w {{ script_plist_path }}"

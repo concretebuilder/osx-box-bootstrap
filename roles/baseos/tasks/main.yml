@@ -43,14 +43,12 @@
   when: display_sleep_state.rc == 1
 
 - name: Check is screensaver is disabled
-  become: true
   shell: defaults -currentHost read com.apple.screensaver | grep "idleTime = 0;"
   register: screensaver_state
   changed_when: false
   ignore_errors: true
 
 - name: Disable screensaver
-  become: true
   shell: defaults -currentHost write com.apple.screensaver idleTime 0
   when: screensaver_state.rc == 1
 

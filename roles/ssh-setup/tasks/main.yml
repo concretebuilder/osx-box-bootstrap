@@ -14,6 +14,10 @@
     owner: "{{ param_user }}"
     mode: "0700"
 
+- name: Generate all absent ssh host keys
+  become: true
+  shell: ssh-keygen -A
+
 # Disable every non SSH key based setup option
 # allow only SSH key based SSH login
 - name: sshd_config settings
