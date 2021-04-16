@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_16`
+* `add danger-swift`
+
 ## `v2021_04_13`
 * `Update homebrew cask/core commit sha`
 
