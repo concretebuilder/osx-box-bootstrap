@@ -13,4 +13,5 @@ brew_packages:
   - name: "openconnect"
   - name: "awscli"
   - name: "cmake"
+  - name: "danger/tap/danger-swift"
 ...
