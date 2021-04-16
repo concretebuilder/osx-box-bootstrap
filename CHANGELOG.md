@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_22`
+* `add danger-swift`
+
 ## `v2021_04_21_2`
 * `Revert installing force brew updating`
 
