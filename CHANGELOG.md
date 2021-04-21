@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_21_1`
+* `Revert installing iOS 14.5 from 12.5.x`
+
 ## `v2021_04_21`
 * `Update xcode_version to 12.5 RC1`
 
