@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_21`
+* `Update xcode_version to 12.5 RC1`
+
 ## `v2021_04_13`
 * `Update homebrew cask/core commit sha`
 
