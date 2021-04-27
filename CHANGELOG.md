@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_27`
+* `fix edge simulator install nicely`
+
 ## `v2021_04_22`
 * `add danger-swift`
 
