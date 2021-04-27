@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_27_2`
+* `add brew upgrade to fix updates fix`
+
 ## `v2021_04_27_1`
 * `add brew upgrade to fix updates`
 
