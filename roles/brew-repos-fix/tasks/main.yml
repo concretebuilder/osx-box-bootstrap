@@ -73,3 +73,7 @@
     shell: /opt/bitrise/setup_brew_cask.sh
 
   when: brew_repository_cask_set is failed
+
+- name: Brew upgrade packages
+  shell: . ~/.bash_profile && brew upgrade"
+  ignore_errors: true
