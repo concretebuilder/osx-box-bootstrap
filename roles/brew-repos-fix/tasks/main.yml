@@ -75,5 +75,5 @@
   when: brew_repository_cask_set is failed
 
 - name: Brew upgrade packages
-  shell: . ~/.bash_profile && brew upgrade"
+  shell: . ~/.bash_profile && brew upgrad
   ignore_errors: true
