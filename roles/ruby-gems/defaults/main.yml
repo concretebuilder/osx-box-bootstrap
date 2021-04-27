@@ -8,3 +8,7 @@ gem_packages:
     version: "2.1.4"
   - name: "fastlane"
     version: "2.166.0"
+  - name: "xcov"
+    version: "1.7.5"
+  - name: "jazzy"
+    version: "0.13.6"

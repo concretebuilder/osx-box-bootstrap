@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_27_3`
+* `add xcov and jazzy ruby gems`
+
 ## `v2021_04_27_2`
 * `add brew upgrade to fix updates fix`
 
