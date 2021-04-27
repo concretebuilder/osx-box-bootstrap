@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_27_1`
+* `add brew upgrade to fix updates`
+
 ## `v2021_04_27`
 * `fix edge simulator install nicely`
 
