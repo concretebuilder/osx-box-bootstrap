@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_28`
+* `update cocoapods to 1.10.1`
+
 ## `v2021_04_27_3`
 * `add xcov and jazzy ruby gems`
 
