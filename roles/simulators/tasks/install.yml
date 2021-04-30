@@ -1,4 +1,10 @@
 ---
+- name: Make sure xcversion / xcode-install is installed
+  gem:
+    name: xcode-install
+    user_install: false
+    executable: "{{ ansible_env.HOME }}/.rbenv/shims/gem"
+
 - name: Test Simulator installed - {{ item }}
   shell: bash -l -c "xcversion simulators | grep '(installed)' | grep '{{ item }}'"
   register: simulator_installed
