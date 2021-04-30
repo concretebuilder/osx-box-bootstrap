@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_30`
+* `fix vs4mac simulator installs nicely`
+
 ## `v2021_04_28`
 * `update cocoapods to 1.10.1`
 
