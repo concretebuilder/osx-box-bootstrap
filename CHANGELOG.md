@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_04_30_1`
+* `make sure xcode-install is there for simulators`
+
 ## `v2021_04_30`
 * `fix vs4mac simulator installs nicely`
 
