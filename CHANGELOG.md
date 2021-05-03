@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_05_03_1`
+* `exclude danger-swift on old stack`
+
 ## `v2021_05_03`
 * `update DEN agent to v1.24.3`
 
