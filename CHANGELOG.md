@@ -1,6 +1,9 @@
 ## UPCOMING
 
 ## `v2021_05_03`
+* `update flutter to v2.0.3`
+
+## `v2021_05_03`
 * `update DEN agent to v1.24.3`
 
 ## `v2021_04_30_1`
