@@ -13,5 +13,9 @@ brew_packages:
   - name: "openconnect"
   - name: "awscli"
   - name: "cmake"
-  - name: "danger/tap/danger-swift"
+
+danger_swift_unsupported_versions:
+  - '10.3'
+  - '11.1'
+  - '11.3'
 ...

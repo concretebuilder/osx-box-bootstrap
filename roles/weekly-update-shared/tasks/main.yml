@@ -87,6 +87,13 @@
   with_items:
     - "{{ brew_packages }}"
 
+- name: Install danger-swift below 11.4.x
+  homebrew:
+    name: "danger/tap/danger-swift"
+    state: present
+    update_homebrew: false
+  when: xcode_version not in danger_swift_unsupported_versions
+
 # ----------------------------------------
 # --- Cleanup ---
 # ----------------------------------------
