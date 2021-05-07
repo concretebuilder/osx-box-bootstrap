@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_05_07_1`
+* `fix python and pip permissions`
+
 ## `v2021_05_07`
 * `rerun flutter role on last layer`
 
