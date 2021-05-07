@@ -15,6 +15,7 @@
     - role: baseos
     - role: xamarin
       when: is_xamarin == true
+    - role: flutter
     - role: certs
     - role: spotlight
     - role: keychain
