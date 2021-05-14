@@ -45,7 +45,7 @@ sudo "${KICKSTART_PATH}" -activat -quiet
 
 OS_MAJOR_VERSION=`sw_vers | sed -n 2p | awk '{ print $2 }' | cut -c1-2`
 
-if test "z$OS_MAJOR_VERSION" = z11; then
+if [ "$OS_MAJOR_VERSION" = "11" ]; then
   # For some reason VNC on Big Sur renders a "black screen" without
   # resetting ScreenCapture first
   tccutil reset ScreenCapture
