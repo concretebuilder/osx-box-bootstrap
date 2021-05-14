@@ -36,3 +36,17 @@ echo "$NGROK_CONF" | sudo tee /etc/ngrok/ngrok.yml
 # install and start ngrok as a service
 sudo ngrok service install -config /etc/ngrok/ngrok.yml
 sudo ngrok service start
+
+# Enabling RemoteManagement access
+KICKSTART_PATH="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
+sudo "${KICKSTART_PATH}" -configure -allowAccessFor -specifiedUsers -quiet
+sudo "${KICKSTART_PATH}" -configure -allowAccessFor -allUsers -privs -all -quiet
+sudo "${KICKSTART_PATH}" -activat -quiet
+
+OS_MAJOR_VERSION=`sw_vers | sed -n 2p | awk '{ print $2 }' | cut -c1-2`
+
+if test "z$OS_MAJOR_VERSION" = z11; then
+  # For some reason VNC on Big Sur renders a "black screen" without
+  # resetting ScreenCapture first
+  tccutil reset ScreenCapture
+fi
