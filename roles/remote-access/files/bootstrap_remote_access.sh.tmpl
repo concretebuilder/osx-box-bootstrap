@@ -41,7 +41,7 @@ sudo ngrok service start
 KICKSTART_PATH="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
 sudo "${KICKSTART_PATH}" -configure -allowAccessFor -specifiedUsers -quiet
 sudo "${KICKSTART_PATH}" -configure -allowAccessFor -allUsers -privs -all -quiet
-sudo "${KICKSTART_PATH}" -activat -quiet
+sudo "${KICKSTART_PATH}" -activate -quiet
 
 OS_MAJOR_VERSION=`sw_vers | sed -n 2p | awk '{ print $2 }' | cut -c1-2`
 
