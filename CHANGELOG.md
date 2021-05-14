@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2021_05_14`
+* `enable remote management when needed`
 ## `v2021_05_07_1`
 * `fix python and pip permissions`
 
