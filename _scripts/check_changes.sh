@@ -3,6 +3,8 @@ set -euo pipefail
 #
 ## Check what changed in the current commit/PR
 
+env
+
 file_list="$(git diff --name-only origin/master.."$BITRISE_GIT_BRANCH")"
 sorted_file_list="$(echo "${file_list}" | grep "roles" | cut -f1-2 -d"/" | sort | uniq)"
 ansible_roles="$(ls ./roles)"
