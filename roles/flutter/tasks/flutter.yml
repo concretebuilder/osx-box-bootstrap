@@ -9,5 +9,5 @@
 - name: Install Flutter version with fvm - {{ flutter_version }}
   become: true
   shell: "/home/linuxbrew/.linuxbrew/bin/fvm install '{{ flutter_version }}'"
-  when: is_flutter_version_installed
+  when: is_flutter_version_installed.rc != 0
   retries: 3

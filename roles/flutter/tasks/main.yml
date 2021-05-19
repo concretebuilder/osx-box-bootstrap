@@ -83,7 +83,7 @@
     loop_var: flutter_version
 
 - name: Set Flutter 1 as default
-  shell: bash -l -c "fvm global 1.27.0-8.0.pre" # complete version is required
+  shell: bash -l -c "/home/linuxbrew/.linuxbrew/bin/fvm global {{ flutter_versions[0] }}" # complete version is required
 
 - name: Warmup flutter
   block:
