@@ -1,34 +1,6 @@
 ---
-- name: Is flutter available with given version?
-  shell: "{{ flutter_home }}/flutter/bin/flutter --version"
-  ignore_errors: true
-  register: flutter_version_check
-  changed_when: "'Flutter 1.22.6' not in flutter_version_check.stdout"
-
-- name: Install, configure and warmup flutter
+- name: Configure flutter
   block:
-  - name: Download flutter from stable channel macos
-    unarchive:
-      src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip  # yamllint disable-line rule:line-length
-      dest: "{{ flutter_home }}"
-      mode: "0770"
-      remote_src: true
-      owner: "{{ param_user }}"
-      group: "{{ param_group }}"
-    become: true
-    when: ansible_distribution == "MacOSX"
-
-  - name: Download flutter from stable channel ubuntu
-    unarchive:
-      src: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_{{ flutter_version }}-stable.tar.xz  # yamllint disable-line rule:line-length
-      dest: "{{ flutter_home }}"
-      mode: "0770"
-      remote_src: true
-      owner: "{{ param_user }}"
-      group: "{{ param_group }}"
-    become: true
-    when: ansible_distribution == "Ubuntu"
-
   - name: Creates profile.d directory
     become: true
     file:
@@ -37,18 +9,87 @@
       owner: "{{ param_user }}"
       mode: 0755
 
-  - name: Generate script to profile.d
+  - name: Copy script to profile.d
     become: true
-    template:
-      src: patch.j2
+    copy:
+      src: flutter.sh
       dest: "~{{ param_user }}/profile.d/flutter.sh"
       owner: "{{ param_user }}"
       mode: "0755"
 
+  - name: Import PATH
+    script:
+      cmd: "flutter.sh"
+
+- name: Is flutter available?
+  shell: bash -l -c "flutter --version"
+  ignore_errors: true
+  register: is_flutter_available
+  changed_when: false
+
+- name: Remove old flutter
+  become: true
+  file: 
+    path: "/usr/local/flutter"
+    state: absent
+
+- name: Is dart available?
+  shell: bash -l -c "dart --version"
+  ignore_errors: true
+  register: is_dart_available
+  changed_when: false
+
+- name: Tap and install dart
+  block:
+  - name: Tap Dart
+    homebrew_tap:
+      name: dart-lang/dart
+      state: present
+
+  - name: Install Dart
+    homebrew:
+      name: dart
+      state: present
+  when: is_dart_available.rc != 0
+
+- name: Is FVM available?
+  shell: bash -l -c "fvm --version"
+  ignore_errors: true
+  register: is_fvm_available
+  changed_when: false
+
+# - name: Install fvm
+#   shell: bash -l -c "dart pub global activate fvm"
+#   when: is_fvm_available.rc != 0
+
+- name: Install fvm
+  when: is_fvm_available.rc != 0
+  block:
+  - name: Tap
+    homebrew_tap:
+      name: leoafarias/fvm
+      state: present
+  - name: Install
+    homebrew:
+      name: fvm
+      state: present
+
+- name: Install Flutter versions
+  include_tasks:
+    file: flutter.yml
+  with_items:
+    - "{{ flutter_versions }}"
+  loop_control:
+    loop_var: flutter_version
+
+- name: Set Flutter 1 as default
+  shell: bash -l -c "fvm global 1.27.0-8.0.pre" # complete version is required
+
+- name: Warmup flutter
+  block:
   - name: Run flutter precache
-    shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
+    shell: bash -l -c "flutter precache"
 
   - name: Run flutter doctor
-    shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter doctor"
-  when: "'Flutter 1.22.6' not in flutter_version_check.stdout"
+    shell: bash -l -c "flutter doctor"
 ...
