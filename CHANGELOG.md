@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_05_19`
+* `Update DEN agent to v1.26.0`
+
 ## `v2021_05_14`
 * `enable remote management when needed`
 ## `v2021_05_07_1`
