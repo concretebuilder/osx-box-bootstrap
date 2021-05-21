@@ -2,7 +2,7 @@
 - name: ENV setup for Molecule tests
   include_tasks:
     file: container-setup.yml
-  when:  ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "Ubuntu"
 
 - name: install python3
   homebrew:
