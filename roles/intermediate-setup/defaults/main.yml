@@ -22,7 +22,6 @@ brew_packages:
   - name: git-lfs
   - name: imagemagick
   - name: mercurial
-  - name: python@3
   - name: screen
   - name: tree
   - name: watchman

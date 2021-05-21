@@ -16,6 +16,7 @@
     - role: xamarin
       when: is_xamarin == true
     - role: flutter
+    - role: python
     - role: certs
     - role: spotlight
     - role: keychain

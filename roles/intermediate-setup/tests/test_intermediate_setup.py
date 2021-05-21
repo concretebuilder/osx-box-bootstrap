@@ -21,7 +21,6 @@ class TestIntermediateSetup(unittest.TestCase):
         'gs',
         'hg',
         'magick',
-        'python3',
         'screen',
         'tree',
         'watchman',

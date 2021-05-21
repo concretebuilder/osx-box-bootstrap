@@ -1,9 +1,4 @@
 ---
-- name: Fix python@3.9
-  shell: . ~/.bash_profile && brew link --overwrite python@3.9
-  changed_when: false
-  ignore_errors: true
-
 - name: "Ensure /opt/bitrise exists"
   file:
     path: /opt/bitrise
