@@ -31,6 +31,3 @@
     owner: "{{ param_user }}"
   with_items:
     - "{{ bitrise_specific_folders }}"
-
-- name: Check pip installs
-  shell: bash -l -c "pip3 install requests"

@@ -24,3 +24,7 @@
 - name: Fix pip permission issue  # noqa 306
   shell: bash -l -c "yes | sudo -H python3 -m pip uninstall pip"
   when: is_pip_available.rc == 0
+
+- name: Install requests pip package
+  pip:
+    name: requests
