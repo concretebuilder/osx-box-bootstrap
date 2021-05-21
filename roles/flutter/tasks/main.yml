@@ -17,10 +17,7 @@
       owner: "{{ param_user }}"
       mode: "0755"
 
-  - name: Import PATH
-    script:
-      cmd: "flutter.sh"
-
+# these 2 steps might be erroneous anyways due to lack of proper paths
 - name: Is flutter available?
   shell: bash -l -c "flutter --version"
   ignore_errors: true
@@ -53,7 +50,7 @@
   when: is_dart_available.rc != 0
 
 - name: Is FVM available?
-  shell: bash -l -c "fvm --version"
+  shell: bash -l -c "{{ BREW_HOME }}/fvm --version"
   ignore_errors: true
   register: is_fvm_available
   changed_when: false
@@ -83,13 +80,13 @@
     loop_var: flutter_version
 
 - name: Set Flutter 1 as default
-  shell: bash -l -c "/home/linuxbrew/.linuxbrew/bin/fvm global {{ flutter_versions[0] }}" # complete version is required
+  shell: bash -l -c "{{ BREW_HOME }}/fvm global {{ flutter_versions[0] }}" # complete version is required
 
 - name: Warmup flutter
   block:
   - name: Run flutter precache
-    shell: bash -l -c "flutter precache"
+    shell: bash -l -c "{{ BREW_HOME }}/fvm flutter precache"
 
   - name: Run flutter doctor
-    shell: bash -l -c "flutter doctor"
+    shell: bash -l -c "{{ BREW_HOME }}/fvm flutter doctor"
 ...
