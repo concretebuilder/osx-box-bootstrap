@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_05_21_1`
+* `Created a separate role for python`
+
 ## `v2021_05_21`
 * `Update Homebrew Core and Cask`
 
