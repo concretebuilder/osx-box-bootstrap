@@ -6,24 +6,13 @@
 
 - name: install python3
   homebrew:
-    name: python3
+    name: python@3.9
     state: present
 
 - name: overwrite python3 brew link
   shell: bash -l -c "brew link --overwrite python3"
   changed_when: false
   ignore_errors: true
-
-- name: check if pip is available
-  shell: bash -l -c "pip --version"
-  changed_when: false
-  ignore_errors: true
-  register: is_pip_available
-
-# Remove root permission pip
-- name: Fix pip permission issue  # noqa 306
-  shell: bash -l -c "yes | sudo -H python3 -m pip uninstall pip"
-  when: is_pip_available.rc == 0
 
 - name: Install pip packages
   pip:
