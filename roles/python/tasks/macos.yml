@@ -1,0 +1,16 @@
+---
+- name: install python3
+  homebrew:
+    name: python@3.9
+    state: present
+
+- name: overwrite python3 brew link
+  shell: bash -l -c "brew link --overwrite python3"
+  changed_when: false
+  ignore_errors: true
+
+- name: Install pip packages
+  pip:
+    name: "{{ pip_packages }}"
+    state: present
+    executable: /usr/local/bin/pip3
