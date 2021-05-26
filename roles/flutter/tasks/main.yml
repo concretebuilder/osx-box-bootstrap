@@ -25,7 +25,7 @@
   changed_when: false
 
 - name: Remove old flutter
-  file: 
+  file:
     path: "/usr/local/flutter"
     state: absent
 
