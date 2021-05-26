@@ -30,34 +30,11 @@
     path: "/usr/local/flutter"
     state: absent
 
-- name: Is dart available?
-  shell: bash -l -c "dart --version"
-  ignore_errors: true
-  register: is_dart_available
-  changed_when: false
-
-- name: Tap and install dart
-  block:
-  - name: Tap Dart
-    homebrew_tap:
-      name: dart-lang/dart
-      state: present
-
-  - name: Install Dart
-    homebrew:
-      name: dart
-      state: present
-  when: is_dart_available.rc != 0
-
 - name: Is FVM available?
   shell: bash -l -c "{{ BREW_HOME }}/fvm --version"
   ignore_errors: true
   register: is_fvm_available
   changed_when: false
-
-# - name: Install fvm
-#   shell: bash -l -c "dart pub global activate fvm"
-#   when: is_fvm_available.rc != 0
 
 - name: Install fvm
   when: is_fvm_available.rc != 0
