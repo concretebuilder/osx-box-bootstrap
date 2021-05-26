@@ -4,7 +4,7 @@
   - name: Creates profile.d directory
     become: true
     file:
-      path: "~{{ param_user }}/profile.d"
+      path: "{{ ansible_env.HOME }}/profile.d"
       state: directory
       owner: "{{ param_user }}"
       mode: 0755
@@ -13,7 +13,7 @@
     become: true
     template:
       src: flutter.sh.j2
-      dest: "~{{ param_user }}/profile.d/flutter.sh"
+      dest: "{{ ansible_env.HOME }}/profile.d/flutter.sh"
       owner: "{{ param_user }}"
       mode: "0755"
 
