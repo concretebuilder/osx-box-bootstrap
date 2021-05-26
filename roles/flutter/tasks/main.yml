@@ -11,8 +11,8 @@
 
   - name: Copy script to profile.d
     become: true
-    copy:
-      src: flutter.sh
+    template:
+      src: flutter.sh.j2
       dest: "~{{ param_user }}/profile.d/flutter.sh"
       owner: "{{ param_user }}"
       mode: "0755"
