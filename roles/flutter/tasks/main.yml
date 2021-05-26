@@ -79,7 +79,7 @@
     loop_var: flutter_version
 
 - name: Set Flutter 1 as default
-  shell: bash -l -c "{{ BREW_HOME }}/fvm global {{ flutter_versions[0] }}" # complete version is required
+  shell: bash -l -c "{{ BREW_HOME }}/fvm global {{ flutter_versions[0] }}"  # complete version is required
 
 - name: Warmup flutter
   block:
