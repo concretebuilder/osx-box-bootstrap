@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2012_05_26`
+* `Use FVM to manage Flutter`
+
 ## `v2021_05_21`
 * `Update Homebrew Core and Cask`
 
