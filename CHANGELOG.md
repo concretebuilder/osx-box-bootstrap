@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2021_05_21`
+* `Update Homebrew Core and Cask`
+
 ## `v2021_05_19`
 * `Update DEN agent to v1.26.0`
 
