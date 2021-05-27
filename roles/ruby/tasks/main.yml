@@ -1,23 +1,10 @@
 ---
-- name: brew install rbenv
-  homebrew:
-    name: rbenv
-    state: latest  # noqa 403 Package installs should not use latest
-    update_homebrew: true
+- name: Run Ruby test
+  include_tasks:
+    file: ruby_test.yml
+  when: ansible_system == "Linux"
 
-- name: unlink openssl
-  homebrew:
-    name: openssl
-    state: absent
-  when: ansible_distribution == 'Ubuntu'
-
-- name: Install ruby versions
-  shell: bash -l -c "rbenv install --skip-existing {{ item.version }}"
-  when: is_incremental_setup|default(false) == false
-  with_items:
-    - "{{ default_ruby }}"
-    - "{{ ruby_versions }}"
-
-- name: Set ruby latest to global
-  shell: bash -l -c "rbenv global {{ default_ruby.0.version }}"
-  when: is_incremental_setup|default(false) == false
+- name: Run Ruby install
+  include_tasks:
+    file: ruby_prod.yml
+  when: ansible_system == "Darwin"

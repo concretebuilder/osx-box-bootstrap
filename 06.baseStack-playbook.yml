@@ -31,6 +31,7 @@
     - role: cmd-bridge
     - role: misc-setup
     - role: node
+    - role: ruby
     - role: ruby-gems
     - role: simulators
     - role: weekly-update-shared

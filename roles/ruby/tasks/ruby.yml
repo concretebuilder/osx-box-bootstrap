@@ -1,0 +1,11 @@
+---
+- name: Test if {{ ruby.version }} is installed
+  shell: bash -l -c "rbenv versions | grep {{ ruby.version }}"
+  register: ruby_version_is_installed
+  changed_when: false
+  ignore_errors: true
+
+- name: Install ruby {{ ruby.version }}
+  shell: bash -l -c "rbenv install -f {{ ruby.version }}"
+  when: ruby_version_is_installed.rc != 0
+  retries: 3

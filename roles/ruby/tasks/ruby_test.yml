@@ -1,0 +1,29 @@
+---
+- name: Unshallow brew
+  shell: bash -l -c "git -C /home/linuxbrew/.linuxbrew/Homebrew/Library/Taps/homebrew/homebrew-core fetch --unshallow"
+  when: is_incremental_setup|default(false) == false
+  ignore_errors: true
+
+- name: brew install rbenv
+  homebrew:
+    name: rbenv
+    state: latest  # noqa 403 Package installs should not use latest
+    update_homebrew: true
+
+- name: unlink openssl
+  homebrew:
+    name: openssl
+    state: absent
+    install_options: ignore-dependencies
+
+- name: Install Ruby versions
+  include_tasks:
+    file: ruby.yml
+  with_items:
+    - "{{ test_ruby_version }}"
+  loop_control:
+    loop_var: ruby
+
+- name: Set default ruby to global
+  shell: bash -l -c "rbenv global {{ test_ruby_version[0].version }}"
+  when: is_incremental_setup|default(false) == false
