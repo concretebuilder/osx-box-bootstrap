@@ -25,6 +25,7 @@ if [[ "$os" != "Darwin" ]]; then
     echo "Installed $pip_version"
 fi
 
+ansible-galaxy collection install community.general
 
 python3 -m venv ~/.venv/molecule
 source ~/.venv/molecule/bin/activate
