@@ -30,8 +30,5 @@ source ~/.venv/molecule/bin/activate
 
 pip install -r "${script_full_path}/requirements.txt" --log "$BITRISE_DEPLOY_DIR"/pip_install.log
 
-ansible-galaxy collection install community.general
-ansible-galaxy list
-
 molecule_version="$(molecule --version | sed -n 1p)"
 echo "Successfully installed $molecule_version"

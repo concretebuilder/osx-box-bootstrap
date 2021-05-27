@@ -33,10 +33,7 @@
   when: is_fvm_available.rc != 0
   block:
   - name: Tap
-    community.general.homebrew_tap:
-      name: leoafarias/fvm
-      state: present
-      path: "{{ BREW_HOME }}"
+    command: bash -l -c "{{linuxbrew if (ansible_os_family == 'Debian') else brew}} tap leoafarias/fvm"
   - name: Install
     homebrew:
       name: fvm
