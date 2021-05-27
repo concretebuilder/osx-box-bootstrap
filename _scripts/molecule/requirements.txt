@@ -1,5 +1,5 @@
-ansible==2.10.8
-ansible-base==2.10.4
+ansible==2.10.7
+ansible-base==2.10.10
 arrow==0.17.0
 attrs==20.2.0
 bcrypt==3.2.0
