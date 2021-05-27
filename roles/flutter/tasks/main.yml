@@ -1,21 +1,14 @@
 ---
-- name: Configure flutter
-  block:
-  - name: Creates profile.d directory
-    become: true
-    file:
-      path: "{{ ansible_env.HOME }}/profile.d"
-      state: directory
-      owner: "{{ param_user }}"
-      mode: 0755
-
-  - name: Copy script to profile.d
-    become: true
-    template:
-      src: flutter.sh.j2
-      dest: "{{ ansible_env.HOME }}/profile.d/flutter.sh"
-      owner: "{{ param_user }}"
-      mode: "0755"
+- name: Create .profile files
+  become: true
+  ansible.builtin.template:
+    src: .profile.j2
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ param_user }}"
+    mode: "0755"
+  with_items:
+    - '.profile'
+    - '.zprofile'
 
 # these 2 steps might be erroneous anyways due to lack of proper paths
 - name: Is flutter available?
@@ -43,10 +36,12 @@
     homebrew_tap:
       name: leoafarias/fvm
       state: present
+      path: "{{ BREW_HOME }}"
   - name: Install
     homebrew:
       name: fvm
       state: present
+      path: "{{ BREW_HOME }}"
 
 - name: Install Flutter versions
   include_tasks:
