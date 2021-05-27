@@ -33,7 +33,7 @@
   when: is_fvm_available.rc != 0
   block:
   - name: Tap
-    homebrew_tap:
+    community.general.homebrew_tap:
       name: leoafarias/fvm
       state: present
       path: "{{ BREW_HOME }}"
