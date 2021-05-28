@@ -1,16 +1,4 @@
 ---
-- name: Create .profile files
-  become: true
-  ansible.builtin.template:
-    src: .profile.j2
-    dest: "{{ ansible_env.HOME }}/{{ item }}"
-    owner: "{{ param_user }}"
-    mode: "0755"
-  with_items:
-    - '.profile'
-    - '.zprofile'
-
-# these 2 steps might be erroneous anyways due to lack of proper paths
 - name: Is flutter available?
   shell: bash -l -c "flutter --version"
   ignore_errors: true
