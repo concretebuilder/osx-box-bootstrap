@@ -215,12 +215,6 @@ workflows:
     after_run:
     - _run_molecule_test
 
-  test_flutter:
-    envs:
-    - ROLE: "flutter"
-    after_run:
-    - _run_molecule_test
-
   test_bitrise-cli:
     envs:
     - ROLE: "bitrise-cli"

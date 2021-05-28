@@ -23,6 +23,7 @@
   file:
     path: "/usr/local/flutter"
     state: absent
+  when: is_flutter_available.rc != 0
 
 - name: Is FVM available?
   shell: bash -l -c "{{ BREW_HOME }}/fvm --version"

@@ -36,6 +36,7 @@ ver_line="$(java -version 2>&1 >/dev/null)" ;     echo "* Java: $ver_line"
 # When we run it again it displays the current version only
 flutter --version > /dev/null 2>&1
 ver_line="$(flutter --version | head -n 1)" ;     echo "* Flutter: $ver_line"
+ver_line="$(fvm --version)";                      echo "* fvm: $ver_line"
 
 echo
 ver_line="$(git --version)" ;                     echo "* git: $ver_line"
