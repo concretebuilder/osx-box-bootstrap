@@ -1,0 +1,27 @@
+---
+- name: remove apt python packages
+  apt:
+    name: ['python', 'python-dev', 'python-pip']
+    state: absent
+  become: true
+
+- name: remove bin
+  file:
+    path: "/home/linuxbrew/.linuxbrew/bin/python3"
+    state: absent
+  become: true
+
+- name: install python3
+  homebrew:
+    name: python3
+    state: present
+
+- name: overwrite python3 brew link
+  shell: bash -l -c "brew link --overwrite python3"
+  changed_when: false
+  ignore_errors: true
+
+- name: Install pip packages
+  pip:
+    name: "{{ pip_packages }}"
+    state: present

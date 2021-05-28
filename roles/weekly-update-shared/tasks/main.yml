@@ -49,13 +49,6 @@
 - name: "firebase (CLI)"  # noqa 303 306
   shell: bash -l -c "curl -sL firebase.tools | bash"
 
-# Remove root permission pip
-- name: Fix pip permission issue  # noqa 306
-  shell: bash -l -c "yes | sudo -H python3 -m pip uninstall pip"
-
-- name: Fix up python@3.9 install
-  shell: bash -l -c "brew postinstall python@3.9"
-
 # ---------------------------------
 # --- Community requested tools ---
 # ---------------------------------

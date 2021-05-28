@@ -3,6 +3,9 @@
 ## `v2021_05_27`
 * `Add ruby 2.7.2 and 3.0.0 preinstalled`
 
+## `v2021_05_21_1`
+* `Created a separate role for python`
+
 ## `v2021_05_21`
 * `Update Homebrew Core and Cask`
 

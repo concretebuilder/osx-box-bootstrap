@@ -1,0 +1,10 @@
+---
+- name: ENV setup for Molecule tests
+  include_tasks:
+    file: molecule.yml
+  when: ansible_system == "Linux"
+
+- name: Python install on MacOS
+  include_tasks:
+    file: macos.yml
+  when: ansible_system == "Darwin"
