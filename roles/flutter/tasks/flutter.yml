@@ -1,5 +1,4 @@
 ---
-
 - name: Test Flutter version is installed - {{ flutter_version }}
   shell: "{{ BREW_HOME }}/fvm list | grep '{{ flutter_version }}'"
   register: is_flutter_version_installed
