@@ -6,5 +6,3 @@ ruby_versions:
   - version: "2.6.5"
   - version: "2.5.3"
   - version: "2.4.5"
-test_ruby_version:
-  - version: "2.6.5"
