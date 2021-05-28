@@ -32,8 +32,8 @@
 - name: Install fvm
   when: is_fvm_available.rc != 0
   block:
-  #- name: Tap
-  #  shell: bash -l -c "{{ BREW_HOME }}/brew tap leoafarias/fvm"
+  # - name: Tap
+  #   shell: bash -l -c "{{ BREW_HOME }}/brew tap leoafarias/fvm"
   - name: Tap
     homebrew_tap:
       name: leoafarias/fvm
