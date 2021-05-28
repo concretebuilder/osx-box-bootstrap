@@ -6,8 +6,9 @@
 
 - name: brew install rbenv
   homebrew:
-    name: rbenv
+    name: [rbenv, ruby-build]
     state: latest  # noqa 403 Package installs should not use latest
+    install_options: build-from-source
     update_homebrew: true
 
 - name: unlink openssl
