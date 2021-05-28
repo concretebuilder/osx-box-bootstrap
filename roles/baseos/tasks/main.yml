@@ -72,3 +72,7 @@
     user: vagrant
     state: present
     key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519-bitrise.pub') }}"
+
+- name: Set TZ to UTC
+  become: true
+  command: systemsetup -settimezone GMT
