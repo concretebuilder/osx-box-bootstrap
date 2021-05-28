@@ -1,5 +1,6 @@
 ---
 param_user: vagrant
 param_group: admin
-flutter_version: 1.22.6
-flutter_home: /usr/local
+flutter_versions:
+  - "1.26.0-17.8.pre"
+  - "2.0.5"

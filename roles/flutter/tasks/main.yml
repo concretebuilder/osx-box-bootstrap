@@ -1,54 +1,65 @@
+
 ---
-- name: Is flutter available with given version?
-  shell: "{{ flutter_home }}/flutter/bin/flutter --version"
+- name: Create .profile files
+  become: true
+  ansible.builtin.template:
+    src: .profile.j2
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ param_user }}"
+    mode: "0755"
+  with_items:
+    - '.profile'
+    - '.zprofile'
+
+# these 2 steps might be erroneous anyways due to lack of proper paths
+- name: Is flutter available?
+  shell: bash -l -c "flutter --version"
   ignore_errors: true
-  register: flutter_version_check
-  changed_when: "'Flutter 1.22.6' not in flutter_version_check.stdout"
+  register: is_flutter_available
+  changed_when: false
 
-- name: Install, configure and warmup flutter
+- name: Remove old flutter
+  become: true
+  file:
+    path: "/usr/local/flutter"
+    state: absent
+
+- name: Is FVM available?
+  shell: bash -l -c "{{ BREW_HOME }}/fvm --version"
+  ignore_errors: true
+  register: is_fvm_available
+  changed_when: false
+
+- name: Install fvm
+  when: is_fvm_available.rc != 0
   block:
-  - name: Download flutter from stable channel macos
-    unarchive:
-      src: https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_{{ flutter_version }}-stable.zip  # yamllint disable-line rule:line-length
-      dest: "{{ flutter_home }}"
-      mode: "0770"
-      remote_src: true
-      owner: "{{ param_user }}"
-      group: "{{ param_group }}"
-    become: true
-    when: ansible_distribution == "MacOSX"
+  - name: Tap
+    homebrew_tap:
+      name: leoafarias/fvm
+      state: present
+      path: "{{ BREW_HOME }}"
+  - name: Install
+    homebrew:
+      name: fvm
+      state: present
+      path: "{{ BREW_HOME }}"
 
-  - name: Download flutter from stable channel ubuntu
-    unarchive:
-      src: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_{{ flutter_version }}-stable.tar.xz  # yamllint disable-line rule:line-length
-      dest: "{{ flutter_home }}"
-      mode: "0770"
-      remote_src: true
-      owner: "{{ param_user }}"
-      group: "{{ param_group }}"
-    become: true
-    when: ansible_distribution == "Ubuntu"
+- name: Install Flutter versions
+  include_tasks:
+    file: flutter.yml
+  with_items:
+    - "{{ flutter_versions }}"
+  loop_control:
+    loop_var: flutter_version
 
-  - name: Creates profile.d directory
-    become: true
-    file:
-      path: "~{{ param_user }}/profile.d"
-      state: directory
-      owner: "{{ param_user }}"
-      mode: 0755
+- name: Set Flutter 1 as default
+  shell: bash -l -c "{{ BREW_HOME }}/fvm global {{ flutter_versions[0] }}"  # complete version is required
 
-  - name: Generate script to profile.d
-    become: true
-    template:
-      src: patch.j2
-      dest: "~{{ param_user }}/profile.d/flutter.sh"
-      owner: "{{ param_user }}"
-      mode: "0755"
-
+- name: Warmup flutter
+  block:
   - name: Run flutter precache
-    shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter precache"
+    shell: bash -l -c "{{ BREW_HOME }}/fvm flutter precache"
 
   - name: Run flutter doctor
-    shell: bash -l -c "{{ flutter_home }}/flutter/bin/flutter doctor"
-  when: "'Flutter 1.22.6' not in flutter_version_check.stdout"
+    shell: bash -l -c "{{ BREW_HOME }}/fvm flutter doctor"
 ...

@@ -1,0 +1,4 @@
+---
+BREW_HOME: "{{ \"/home/linuxbrew/.linuxbrew/bin\" if (ansible_os_family == 'Debian') else \"/usr/local/bin\" if (ansible_os_family == 'Darwin') else \"\" }}"
+FVM_HOME: "$HOME/fvm/default/bin"
+...

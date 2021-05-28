@@ -1,0 +1,12 @@
+---
+
+- name: Test Flutter version is installed - {{ flutter_version }}
+  shell: "{{ BREW_HOME }}/fvm list | grep '{{ flutter_version }}'"
+  register: is_flutter_version_installed
+  changed_when: false
+  ignore_errors: true
+
+- name: Install Flutter version with fvm - {{ flutter_version }}
+  shell: "{{ BREW_HOME }}/fvm install '{{ flutter_version }}'"
+  when: is_flutter_version_installed.rc != 0
+  retries: 3

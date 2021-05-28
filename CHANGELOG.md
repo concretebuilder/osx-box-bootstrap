@@ -1,4 +1,6 @@
 ## UPCOMING
+## `v2012_05_28`
+* `Use FVM to manage Flutter`
 
 ## `v2021_05_27`
 * `Add ruby 2.7.2 and 3.0.0 preinstalled`
