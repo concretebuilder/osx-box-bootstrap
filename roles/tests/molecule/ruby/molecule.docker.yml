@@ -28,4 +28,3 @@ verifier:
   s: true
   additional_files_or_dirs:
     - ../../../../ruby/tests/*
-    - ../../../../ruby-gems/tests/*
