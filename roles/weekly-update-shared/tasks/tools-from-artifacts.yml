@@ -25,7 +25,7 @@
 
 # XCBeautify
 - name: Check if XCBeautify is present
-  shell: /usr/local/bin/xcbeautify version | awk '{print $2}'
+  shell: /usr/local/bin/xcbeautify --version | awk '{print $2}'
   register: xcbeautify_version
   ignore_errors: true
   no_log: true
