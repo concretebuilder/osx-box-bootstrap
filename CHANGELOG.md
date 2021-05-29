@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2012_05_29`
+* `Fix xcbeautify version check`
+
 ## `v2012_05_28_3`
 * `Change rol order to set up brew before using it`
 
