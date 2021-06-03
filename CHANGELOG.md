@@ -1,5 +1,8 @@
 ## UPCOMING
 
+## `v2012_06_03`
+* `fix(ruby): remove .ruby-version file`
+
 ## `v2012_05_29`
 * `Fix xcbeautify version check`
 
