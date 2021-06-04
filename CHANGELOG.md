@@ -1,5 +1,7 @@
 ## UPCOMING
 
+## `v2012_06_04`
+* `fix(ruby): move task from ruby role to ruby-gems role`
 ## `v2012_06_03`
 * `fix(ruby): remove .ruby-version file`
 

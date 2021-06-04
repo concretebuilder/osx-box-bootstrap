@@ -48,3 +48,8 @@
 - name: "CocoaPods: pod repo update"
   shell: bash -l -c "pod repo update"
   when: not lookup('env', 'IS_CI')
+
+- name: remove .ruby-version
+  file:
+    path: "{{ ansible_env.HOME }}/.ruby-version"
+    state: absent

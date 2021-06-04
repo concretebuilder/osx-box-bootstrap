@@ -17,7 +17,3 @@
   shell: bash -l -c "rbenv global {{ default_ruby }}"
   when: is_incremental_setup|default(false) == false
 
-- name: remove .ruby-version
-  file:
-    path: "{{ ansible_env.HOME }}/.ruby-version"
-    state: absent
