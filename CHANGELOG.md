@@ -1,7 +1,16 @@
-## UPCOMING
+# Changelog
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+
+## `v2012_06_08`
+* `update bitrise cli to 1.47.0`
+
+## [Released]
 
 ## `v2012_06_04`
 * `fix(ruby): move task from ruby role to ruby-gems role`
+
 ## `v2012_06_03`
 * `fix(ruby): remove .ruby-version file`
 
