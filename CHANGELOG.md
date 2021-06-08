@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2012_06_08_3`
+* `Add accessibility privileges to Xcode-Helper`
+
 ## `v2012_06_08_2`
 * `update bitrise cli to 1.47.0`
 
