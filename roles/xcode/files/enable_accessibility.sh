@@ -30,7 +30,7 @@ if test "z$OS_MAJOR_VERSION" = z10; then
   sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode',0,1,1,'','','','UNUSED','',0,'1606910422');"
 
   # XCode-Helper
-  sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,1,1,'','','','UNUSED','',0,'1606910422');"
+  sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,1,1,'','','','UNUSED','',0,'1623158489');"
 
 elif test "z$OS_MAJOR_VERSION" = z11; then
   # schema on Big Sur 11.2
@@ -53,7 +53,7 @@ elif test "z$OS_MAJOR_VERSION" = z11; then
   sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode',0,2,4,1,NULL,NULL,0,'UNUSED',NULL,0,0);"
 
   # XCode-Helper
-  sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,2,4,1,NULL,NULL,0,'UNUSED',NULL,0,0);"
+  sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "INSERT INTO access VALUES('kTCCServiceAccessibility','com.apple.dt.Xcode-Helper',0,2,4,1,NULL,NULL,0,'UNUSED',NULL,0,1623157840);"
 else
   echo -e "\n********************************************************************************"
   echo -e "\n                Unsupported macOS version to enable accessibility"
