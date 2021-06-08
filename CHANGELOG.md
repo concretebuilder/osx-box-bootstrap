@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2012_06_08_4`
+* `place .ruby-version remove step after "rbenv local" calls (now for real)`
+
 ## `v2012_06_08_3`
 * `Add accessibility privileges to Xcode-Helper`
 

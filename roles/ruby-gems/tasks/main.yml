@@ -5,6 +5,12 @@
   ignore_errors: true
   changed_when: "'Clean up complete' in rubycleanupout.stdout"
 
+# Remove .ruby-version just after `rbenv local <version>` calls
+- name: remove .ruby-version
+  file:
+    path: "{{ ansible_env.HOME }}/.ruby-version"
+    state: absent
+
 - name: Install gem packages
   gem:
     name: "{{ item.name }}"
@@ -13,12 +19,6 @@
     user_install: false
   with_items:
     - "{{ gem_packages }}"
-
-# Remove .ruby-version just after `rbenv local <version>` calls
-- name: remove .ruby-version
-  file:
-    path: "{{ ansible_env.HOME }}/.ruby-version"
-    state: absent
 
 # GEMs: Cocoapods
 
