@@ -6,10 +6,11 @@ All notable changes to this project will be documented in this file.
 ## `v2012_06_08`
 * `update bitrise cli to 1.47.0`
 
-## [Released]
-
 ## `v2012_06_08_1`
 * `fix(ruby): place .ruby-version remove step after "rbenv local" calls`
+
+## [Released]
+
 ## `v2012_06_04`
 * `fix(ruby): move task from ruby role to ruby-gems role`
 
