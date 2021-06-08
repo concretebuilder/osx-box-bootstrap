@@ -3,8 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## `v2012_06_08`
+## `v2012_06_08_2`
 * `update bitrise cli to 1.47.0`
+
+## `v2012_06_08_1`
+* `fix(ruby): place .ruby-version remove step after "rbenv local" calls`
 
 ## [Released]
 
