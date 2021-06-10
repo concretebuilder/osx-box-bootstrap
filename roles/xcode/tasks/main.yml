@@ -25,6 +25,12 @@
       changed_when: false
       ignore_errors: true
 
+    - name: get the installed xcode string from xcversion
+      shell: bash -l -c "xcversion installed | cut -f1"
+      register: xcversion_installed
+      changed_when: false
+      ignore_errors: true
+
     - name: get the xcode versions from xcversion and xcode-select
       shell: bash -l -c "xcode-select -p"
       register: xcode_select_path
@@ -36,6 +42,7 @@
         msg:
         - "xcversion: {{ xcversion_selected.stdout }}"
         - "xcode-select: {{ xcode_select_path.stdout }}"
+        - "xcversion installed: {{ xcversion_installed.stdout }}"
 
 - name: Fix the Xcode.app symlink if not selected
   become: true
@@ -45,7 +52,7 @@
 - name: Switch to Xcode stable with xcversion
   become: true
   # Full path required here because of the 'become:true'
-  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion select {{ xcode_numeric_version }}"
+  shell: bash -l -c "/Users/{{ param_user }}/.rbenv/shims/xcversion select {{ xcversion_installed.stdout }}"
 
 - name: Clean up Xcode install caches
   # Full path required here because of the 'become:true'
