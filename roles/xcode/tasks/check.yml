@@ -8,25 +8,8 @@
     msg: xcodebuild version is unexpected
   when: xcode_numeric_version not in xcodebuild_version.stdout
 
-- name: is xcode path correct
-  shell: bash -l -c "xcode-select -p"
-  register: xcode_path
-
-- name: construct xcode path
-  set_fact:
-    expected_path: "/Applications/Xcode-{{ xcode_numeric_version }}.app/Contents/Developer"
-
-- name: xcode path is incorrect
-  fail:
-    msg: xcode path is incorrect
-  when: xcode_path.stdout != expected_path
-
-- name: check if /Library/Developer/CommandLineTools exists
-  stat:
-    path: /Library/Developer/CommandLineTools
-  register: cmd_directory_exists
-
-- name: /Library/Developer/CommandLineTools doesn't exist
-  fail:
-    msg: /Library/Developer/CommandLineTools doesn't exist
-  when: not (cmd_directory_exists.stat.exists and cmd_directory_exists.stat.isdir)
+- name: Check if directories exist
+  include: "dir_check.yml path={{item}}"
+  with_items: 
+    - /Applications/Xcode.app
+    - /Library/Developer/CommandLineTools
