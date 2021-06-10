@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 ## `v2021_06_10`
 * `add xcode install correctness checks`
 
+## `v2021_06_09`
+* `update sql query in enable_accessibility.sh`
+
 ## `v2012_06_08_4`
 * `place .ruby-version remove step after "rbenv local" calls (now for real)`
 
