@@ -9,7 +9,7 @@
   when: xcode_numeric_version not in xcodebuild_version.stdout
 
 - name: Check if directories exist
-  include: "dir_check.yml path={{item}}"
-  with_items: 
+  include: "dir_check.yml path={{ item }}"
+  with_items:
     - /Applications/Xcode.app
     - /Library/Developer/CommandLineTools
