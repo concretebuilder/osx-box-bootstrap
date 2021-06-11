@@ -7,8 +7,8 @@
 - name: "{{ path }} doesn't exist"
   fail:
     msg: "{{ path }} doesn't exist"
-  when: > 
-        not 
-          (dir_exists.stat.exists 
-        and 
+  when: >
+        not
+          (dir_exists.stat.exists
+        and
           (dir_exists.stat.isdir or dir_exists.stat.islnk))
