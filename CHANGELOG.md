@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2021_06_14`
+* `update go to 1.16`
+
+## [Released]
+
 ## `v2021_06_10`
 * `add xcode install correctness checks`
 
@@ -20,8 +25,6 @@ All notable changes to this project will be documented in this file.
 
 ## `v2012_06_08_1`
 * `fix(ruby): place .ruby-version remove step after "rbenv local" calls`
-
-## [Released]
 
 ## `v2012_06_04`
 * `fix(ruby): move task from ruby role to ruby-gems role`
