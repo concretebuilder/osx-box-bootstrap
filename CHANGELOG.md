@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2021_06_15_1`
+* `update hombrew core and homebrew cask`
+
 ## `v2021_06_15`
 * `update Bitrise CLI to 1.47.1`
 
