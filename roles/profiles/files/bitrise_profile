@@ -2,7 +2,7 @@
 export DOT_BITRISE_PROFILE_LOADED=1
 
 
-export BITRISE_OSX_STACK_REV_ID=v2021_06_14
+export BITRISE_OSX_STACK_REV_ID=v2021_06_15
 
 # Bitrise Environment Variables
 export BITRISE_SOURCE_DIR="${HOME}/git"
