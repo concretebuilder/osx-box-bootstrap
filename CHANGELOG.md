@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2021_06_17_1`
+* `fix simulator file for previous stable`
+
 ## `v2021_06_17`
 * `turn off disksleep on vms`
 
