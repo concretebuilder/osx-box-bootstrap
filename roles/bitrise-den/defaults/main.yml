@@ -1,5 +1,5 @@
 ---
-bitrise_den_version: "v1.26.0"
+bitrise_den_version: "v1.30.0"
 dist_path:
   MacOSX: '/usr/local/bin/jq'
   Ubuntu: 'jq'

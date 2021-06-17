@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## `v2021_06_17_1`
 * `fix simulator file for previous stable`
+* `Upgrade DEN agent to v1.30.0`
 
 ## `v2021_06_17`
 * `turn off disksleep on vms`
