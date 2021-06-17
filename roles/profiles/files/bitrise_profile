@@ -1,7 +1,6 @@
 # for debug
 export DOT_BITRISE_PROFILE_LOADED=1
 
-
 export BITRISE_OSX_STACK_REV_ID=v2021_06_17_3
 
 # Bitrise Environment Variables
