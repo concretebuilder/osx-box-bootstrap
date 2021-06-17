@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2021_06_17`
+* `turn off disksleep on vms`
+
 ## `v2021_06_15_1`
 * `update hombrew core and homebrew cask`
 
