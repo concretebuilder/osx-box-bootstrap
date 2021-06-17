@@ -3,8 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## `v2021_06_17_1`
+## `v2021_06_17_2`
 * `fix simulator file for previous stable`
+
+## `v2021_06_17_1`
 * `Upgrade DEN agent to v1.30.0`
 
 ## `v2021_06_17`
