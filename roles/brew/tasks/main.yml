@@ -47,3 +47,8 @@
 - name: Add brew to PATH. Brew officially supported on linux it is called linuxbrew and for test we use that
   shell: "echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bash_profile"
   when: ansible_distribution == 'Ubuntu' and bash_profile is failed
+
+- name: Install intel-haxm
+  homebrew_cask:
+    name: intel-haxm
+    state: present

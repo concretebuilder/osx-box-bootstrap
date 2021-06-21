@@ -62,3 +62,6 @@
 - name: Enable accessibility to xcode
   become: true
   script: enable_accessibility.sh '{{ ansible_distribution_version }}'
+
+- name: Xcode post-install check
+  include: check.yml

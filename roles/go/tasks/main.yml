@@ -1,7 +1,7 @@
 ---
 - name: Install go
   homebrew:
-    name: go@1.15
+    name: go@1.16
     state: present
     update_homebrew: true
 
@@ -15,8 +15,8 @@
   shell: bash -l -c "brew unlink go"
   when: latest_is_installed.rc == 0
 
-- name: Link go 1.15
-  shell: bash -l -c "brew link go@1.15"
+- name: Link go 1.16
+  shell: bash -l -c "brew link go@1.16"
 
 - name: prepare GOPATH dirs
   file:

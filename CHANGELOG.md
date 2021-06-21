@@ -3,8 +3,37 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## `v2021_06_10_1`
+## `v2021_06_21`
 * `scan installed Xcode as basis for selection`
+
+## `v2021_06_21`
+* `install haxm on every stack`
+
+## `v2021_06_17_3`
+* `install haxm on big sur (or later)`
+
+## `v2021_06_17_2`
+* `fix simulator file for previous stable`
+
+## `v2021_06_17_1`
+* `Upgrade DEN agent to v1.30.0`
+
+## `v2021_06_17`
+* `turn off disksleep on vms`
+
+## `v2021_06_15_1`
+* `update hombrew core and homebrew cask`
+
+## `v2021_06_15`
+* `update Bitrise CLI to 1.47.1`
+
+## `v2021_06_14`
+* `update go to 1.16`
+
+## [Released]
+
+## `v2021_06_10`
+* `add xcode install correctness checks`
 
 ## `v2021_06_09`
 * `update sql query in enable_accessibility.sh`
@@ -20,8 +49,6 @@ All notable changes to this project will be documented in this file.
 
 ## `v2012_06_08_1`
 * `fix(ruby): place .ruby-version remove step after "rbenv local" calls`
-
-## [Released]
 
 ## `v2012_06_04`
 * `fix(ruby): move task from ruby role to ruby-gems role`
