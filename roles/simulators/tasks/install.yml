@@ -19,6 +19,6 @@
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
   when: >
-    simulator_installed is defined 
+    simulator_installed is defined
     and
     simulator_installed.rc == 1
