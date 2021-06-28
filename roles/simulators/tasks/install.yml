@@ -10,6 +10,7 @@
   register: simulator_installed
   changed_when: false
   ignore_errors: true
+  when: simulators | length > 0
 
 - name: Install xcode simulators - {{ item }}
   shell: bash -l -c "xcversion simulators --install='{{ item }}'"
@@ -17,4 +18,7 @@
     XCODE_INSTALL_USER: "{{ XCODE_INSTALL_USER }}"
     XCODE_INSTALL_PASSWORD: "{{ XCODE_INSTALL_PASSWORD }}"
     FASTLANE_SESSION: "{{ FASTLANE_SESSION | b64decode }}"
-  when: simulator_installed.rc == 1
+  when: >
+    simulator_installed is defined 
+    and
+    simulator_installed.rc == 1
