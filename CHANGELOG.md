@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## `v2021_07_03`
+* `update Flutter to 2.2.3`
+* `update Android commandline tools to 7302050`
+* `update Android NDK 21e`
+* `add Android build tools 30.0.1 - 30.0.3`
+
 ## `v2021_06_30`
 * `update agent to 1.30.1`
 
