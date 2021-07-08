@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [Released]
+
+## `v2021_07_06`
+* `update brew repos`
+
 ## `v2021_06_30`
 * `update agent to 1.30.1`
 
@@ -38,8 +43,6 @@ All notable changes to this project will be documented in this file.
 
 ## `v2021_06_14`
 * `update go to 1.16`
-
-## [Released]
 
 ## `v2021_06_10`
 * `add xcode install correctness checks`
