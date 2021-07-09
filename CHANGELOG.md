@@ -3,11 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## `v2021_07_03`
+## `v2021_07_09`
 * `update Flutter to 2.2.3`
 * `update Android commandline tools to 7302050`
 * `update Android NDK 21e`
 * `add Android build tools 30.0.1 - 30.0.3`
+
+## [Released]
+
+## `v2021_07_06`
+* `update brew repos`
 
 ## `v2021_06_30`
 * `update agent to 1.30.1`
@@ -44,8 +49,6 @@ All notable changes to this project will be documented in this file.
 
 ## `v2021_06_14`
 * `update go to 1.16`
-
-## [Released]
 
 ## `v2021_06_10`
 * `add xcode install correctness checks`
